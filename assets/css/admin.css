@@ -1,0 +1,240 @@
+/* General Styles */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    overflow-x: hidden;
+}
+
+.top-bar {
+    height: 60px;
+    background-color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    z-index: 1000;
+}
+
+.top-bar.dark-mode {
+    background-color: #343a40;
+    color: #fff;
+}
+
+.left-section {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    width: 32px;
+    height: 32px;
+    margin-right: 10px;
+    object-fit: contain;
+}
+
+.company-name {
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 0;
+}
+
+.center-section .nav-link {
+    color: #000;
+    font-weight: 500;
+}
+
+.center-section .nav-link.active {
+    border-bottom: 2px solid #007bff;
+    color: #007bff;
+}
+
+.right-section {
+    display: flex;
+    align-items: center;
+    gap: 20px; /* Tăng khoảng cách giữa các phần tử */
+}
+
+.icon {
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.icon i {
+    vertical-align: middle;
+}
+
+.avatar-img {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    margin-right: 10px; /* Giữ khoảng cách với icon settings */
+    object-fit: cover;
+}
+
+.settings {
+    font-size: 1.2rem;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 240px;
+    height: calc(100vh - 60px);
+    background-color: #f8f9fa;
+    position: fixed;
+    top: 60px;
+    left: 0;
+    padding-top: 20px;
+    transition: transform 0.3s;
+}
+
+.sidebar-content .nav-link {
+    color: #000;
+    padding: 10px 20px;
+}
+
+.sidebar-content .nav-link.active {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.sidebar.collapsed {
+    transform: translateX(-240px);
+}
+
+/* Main Content */
+.main-content {
+    margin-left: 240px;
+    margin-top: 60px;
+    padding: 20px;
+    min-height: calc(100vh - 60px);
+}
+
+#loading {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#loading.active {
+    display: block;
+}
+
+/* Chat AI */
+.chat-ai {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 300px;
+    height: 400px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    display: none;
+    flex-direction: column;
+}
+
+.chat-ai.open {
+    display: flex;
+}
+
+.chat-header {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.close-chat {
+    cursor: pointer;
+    font-size: 1.5rem;
+}
+
+.chat-messages {
+    flex-grow: 1;
+    padding: 10px;
+    overflow-y: auto;
+}
+
+.message {
+    margin: 10px 0;
+    padding: 5px 10px;
+    border-radius: 5px;
+    max-width: 70%;
+}
+
+.message.user {
+    background-color: #e9ecef;
+    margin-left: auto;
+}
+
+.message.ai {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.chat-input {
+    padding: 10px;
+    display: flex;
+    gap: 5px;
+}
+
+.chat-input input {
+    flex-grow: 1;
+    padding: 5px;
+}
+
+.chat-input button {
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .sidebar {
+        transform: translateX(-240px);
+        z-index: 1001;
+    }
+
+    .sidebar.open {
+        transform: translateX(0);
+    }
+
+    .main-content {
+        margin-left: 0;
+    }
+
+    .top-bar .left-section .company-name {
+        display: none;
+    }
+
+    .top-bar .left-section {
+        flex-grow: 1;
+    }
+
+    .top-bar .hamburger {
+        display: block;
+        font-size: 1.5rem;
+        cursor: pointer;
+    }
+
+    .chat-ai {
+        width: 100%;
+        height: 100vh;
+        border-radius: 0;
+        bottom: 0;
+        right: 0;
+    }
+}

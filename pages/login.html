@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng Nhập</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="../assets/css/auth.css" rel="stylesheet">
+    <!-- Utils CSS -->
+    <link href="../assets/css/utils.css" rel="stylesheet">
+</head>
+<body>
+    <div class="auth-container">
+        <h3 class="text-center mb-4">Đăng Nhập</h3>
+        <form id="loginForm" onsubmit="Auth.login.handleLogin(event)" novalidate>
+            <div class="mb-3">
+                <label for="loginEmail" class="form-label">Email <span style="color: red;">*</span></label>
+                <input type="email" class="form-control" id="loginEmail" required>
+                <div id="emailError" class="text-danger"></div>
+            </div>
+            <div class="mb-3">
+                <label for="loginPassword" class="form-label">Mật khẩu <span style="color: red;">*</span></label>
+                <input type="password" class="form-control" id="loginPassword" required>
+                <div id="passwordError" class="text-danger"></div>
+            </div>
+            <div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input" id="rememberMe">
+                <label class="form-check-label" for="rememberMe">Ghi nhớ đăng nhập</label>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Đăng Nhập</button>
+        </form>
+        <div class="text-center mt-3">
+            <a href="./forgot-password.html">Quên mật khẩu?</a> | 
+            <a href="./register.html">Đăng ký</a>
+        </div>
+        <div class="divider"><span>HOẶC</span></div>
+        <button class="btn btn-danger social-btn" onclick="Auth.login.loginWithGoogle()">
+            <i class="fab fa-google me-2"></i>Đăng nhập bằng Google
+        </button>
+        <button class="btn btn-primary social-btn" onclick="Auth.login.loginWithFacebook()">
+            <i class="fab fa-facebook-f me-2"></i>Đăng nhập bằng Facebook
+        </button>
+        <button class="btn btn-info social-btn" onclick="Auth.login.loginWithZalo()">
+            <i class="fab fa-zalo me-2"></i>Đăng nhập bằng Zalo
+        </button>
+    </div>
+
+    <!-- Bootstrap JS and Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Utils JS -->
+    <script src="../assets/js/utils.js"></script>
+    <!-- Custom JS -->
+    <script src="../assets/js/auth.js"></script>
+</body>
+</html>
