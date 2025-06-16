@@ -64,9 +64,9 @@ const menuConfig = {
                 name: 'Gói dịch vụ', 
                 icon: 'fas fa-box',
                 files: {
-                    html: '', // Path to HTML file - to be filled later
-                    css: '',  // Path to CSS file - to be filled later
-                    js: ''    // Path to JS file - to be filled later
+                    html: '../../pages/admin/services/service-packages/list/index.html', // Path to HTML file - to be filled later
+                    css: '../../pages/admin/services/service-packages/list/style.css',  // Path to CSS file - to be filled later
+                    js: '../../pages/admin/services/service-packages/list/main.js'    // Path to JS file - to be filled later
                 }
             }
         ],
