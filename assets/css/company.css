@@ -1,133 +1,313 @@
-/* Default (Desktop ≥ 1200px) */
+:root {
+  --primary-color: #007bff;
+  --secondary-color: #6c757d;
+  --success-color: #28a745;
+  --info-color: #17a2b8;
+  --warning-color: #ffc107;
+  --danger-color: #dc3545;
+  --light-color: #f8f9fa;
+  --dark-color: #343a40;
+  --header-height: 70px;
+  --sidebar-width: 250px;
+}
+
+/* General Styles */
 body {
-    font-size: 1.125rem; /* 18px */
-    line-height: 1.6;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f5f6fa;
+  line-height: 1.6;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+/* Header Styles */
+.header-main {
+  height: var(--header-height);
+  border-bottom: 1px solid #e9ecef;
+  z-index: 1030;
+}
+
+.company-name {
+  color: var(--primary-color) !important;
+  transition: color 0.2s ease;
+}
+
+.company-name:hover {
+  color: var(--dark-color) !important;
+}
+
+/* Main Navigation */
+.main-nav .nav-link {
+  color: var(--dark-color);
+  font-weight: 500;
+  padding: 0.75rem 1.25rem;
+  border-radius: 0;
+  border-bottom: 3px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.main-nav .nav-link:hover {
+  color: var(--primary-color);
+  background-color: transparent;
+}
+
+.main-nav .nav-link.active {
+  color: var(--primary-color);
+  background-color: transparent;
+  border-bottom-color: var(--primary-color);
+}
+
+/* Desktop Sidebar */
+.sidebar-main {
+  position: fixed;
+  top: var(--header-height);
+  left: 0;
+  width: var(--sidebar-width);
+  height: calc(100vh - var(--header-height));
+  background-color: white;
+  border-right: 1px solid #e9ecef;
+  overflow-y: auto;
+  z-index: 1020;
+}
+
+.sidebar-content {
+  padding: 1rem 0;
+}
+
+.sidebar-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar-menu .nav-link {
+  color: var(--dark-color);
+  padding: 0.75rem 1.5rem;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  border-left: 3px solid transparent;
+}
+
+.sidebar-menu .nav-link:hover {
+  background-color: var(--light-color);
+  color: var(--primary-color);
+}
+
+.sidebar-menu .nav-link.active {
+  background-color: rgba(0, 123, 255, 0.1);
+  color: var(--primary-color);
+  border-left-color: var(--primary-color);
+}
+
+.sidebar-menu .nav-link i {
+  width: 20px;
+  margin-right: 0.75rem;
+}
+
+/* Mobile Sidebar */
+.mobile-nav .nav-link {
+  color: var(--dark-color);
+  padding: 0.875rem 1.5rem;
+  transition: all 0.2s ease;
+  border-left: 3px solid transparent;
+}
+
+.mobile-nav .nav-link:hover {
+  background-color: var(--light-color);
+  color: var(--primary-color);
+}
+
+.mobile-nav .nav-link.active {
+  background-color: rgba(0, 123, 255, 0.1);
+  color: var(--primary-color);
+  border-left-color: var(--primary-color);
+}
+
+.mobile-user-info {
+  position: sticky;
+  bottom: 0;
+  background-color: white;
+}
+
+/* Main Content */
+.main-content {
+  margin-top: var(--header-height);
+  padding: 2rem 0;
+  min-height: calc(100vh - var(--header-height));
+}
+
+@media (min-width: 992px) {
+  .main-content {
+      margin-left: var(--sidebar-width);
   }
-  
-  h1 {
-    font-size: 2.75rem; /* ~49.5px */
-  }
-  
-  h2 {
-    font-size: 2.25rem; /* ~40.5px */
-  }
-  
-  h3 {
-    font-size: 1.75rem; /* ~31.5px */
-  }
-  
-  h4 {
-    font-size: 1.375rem; /* ~24.75px */
-  }
-  
-  small {
-    font-size: 0.875rem; /* 15.75px */
-  }
-  
-  /* Tablet (width < 1200px) */
-  @media (max-width: 1199.98px) {
-    body {
-      font-size: 1.0625rem; /* 17px */
-    }
-  
-    h1 {
-      font-size: 2.5rem; /* 42.5px */
-    }
-  
-    h2 {
-      font-size: 2rem; /* 34px */
-    }
-  
-    h3 {
-      font-size: 1.625rem; /* ~27.6px */
-    }
-  
-    h4 {
-      font-size: 1.25rem; /* 21.25px */
-    }
-  
-    small {
-      font-size: 0.8125rem; /* 13.8px */
-    }
-  
-    /* Ẩn menu header trên tablet, dùng sidebar offcanvas */
-    .navbar {
-      display: none;
-    }
-  
-    /* Hiển thị icon trên header tablet */
-    header .d-none.d-md-inline {
-      display: inline-block !important;
-    }
-  }
-  
-  /* Mobile (width < 768px) */
-  @media (max-width: 767.98px) {
-    body {
-      font-size: 1rem; /* 16px */
-    }
-  
-    h1 {
-      font-size: 2.25rem; /* 36px */
-    }
-  
-    h2 {
-      font-size: 1.75rem; /* 28px */
-    }
-  
-    h3 {
-      font-size: 1.5rem; /* 24px */
-    }
-  
-    h4 {
-      font-size: 1.125rem; /* 18px */
-    }
-  
-    small {
-      font-size: 0.75rem; /* 12px */
-    }
-  
-    /* Chỉ hiển thị hamburger trên header mobile */
-    header .d-none.d-md-inline {
+}
+
+/* Content Card */
+.content-card {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Page Header */
+.page-header {
+  border-bottom: 1px solid #e9ecef;
+  padding-bottom: 1rem;
+  margin-bottom: 2rem;
+}
+
+.page-title {
+  color: var(--dark-color);
+  font-weight: 600;
+  margin: 0;
+}
+
+.page-breadcrumb {
+  color: var(--secondary-color);
+  font-size: 0.875rem;
+  margin: 0;
+}
+
+/* Stats Cards */
+.stats-card {
+  background: linear-gradient(135deg, var(--primary-color), #0056b3);
+  color: white;
+  border-radius: 10px;
+  padding: 1.5rem;
+  transition: transform 0.2s ease;
+}
+
+.stats-card:hover {
+  transform: translateY(-2px);
+}
+
+.stats-card .stats-icon {
+  font-size: 2.5rem;
+  opacity: 0.8;
+}
+
+.stats-card .stats-number {
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+.stats-card .stats-label {
+  font-size: 0.875rem;
+  opacity: 0.9;
+  margin: 0;
+}
+
+/* Table Styles */
+.table-responsive {
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.table {
+  margin-bottom: 0;
+}
+
+.table thead th {
+  background-color: var(--light-color);
+  border-bottom: 2px solid #dee2e6;
+  font-weight: 600;
+  color: var(--dark-color);
+}
+
+/* Buttons */
+.btn {
+  border-radius: 6px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+  border-color: #0056b3;
+  transform: translateY(-1px);
+}
+
+/* Loading States */
+.loading-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+/* Responsive adjustments */
+@media (max-width: 991.98px) {
+  .sidebar-main {
       display: none !important;
-    }
-  
-    header .d-flex align-items-center {
-      max-width: 150px;
-    }
   }
   
-  /* Style cho menu active */
-  .nav-link.active {
-    border-bottom: 2px solid #28a745 !important;
-    color: #28a745 !important;
+  .main-content {
+      margin-left: 0;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .main-content {
+      padding: 1rem 0;
   }
   
-  #sidebar .nav-link.active {
-    background-color: #28a745 !important;
-    color: #fff !important;
+  .content-card {
+      margin-bottom: 1rem;
+      padding: 1rem;
   }
   
-  /* Breadcrumb style */
-  .breadcrumb {
-    background-color: transparent;
-    padding: 0;
+  .stats-card {
+      margin-bottom: 1rem;
   }
-  
-  .breadcrumb-item.active {
-    color: #6c757d;
-  }
-  
-  /* Tăng kích thước icon và giữ khoảng cách UI/UX */
-  .fa-globe, .fa-bell, .fa-comment, .fa-cog {
-    font-size: 1.5rem; /* 24px tương đương với 1.5rem */
-  }
-  
-  header .me-3 {
-    margin-right: 1rem !important; /* Đảm bảo khoảng cách 16px giữa các icon */
-  }
-  
-  /* Màu nền cho sidebar */
-  #sidebar {
-    background-color: #f8f9fa;
-  }
+}
+
+/* Scrollbar Styling */
+.sidebar-main::-webkit-scrollbar,
+.offcanvas-body::-webkit-scrollbar {
+  width: 4px;
+}
+
+.sidebar-main::-webkit-scrollbar-track,
+.offcanvas-body::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.sidebar-main::-webkit-scrollbar-thumb,
+.offcanvas-body::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 2px;
+}
+
+.sidebar-main::-webkit-scrollbar-thumb:hover,
+.offcanvas-body::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+  animation: fadeIn 0.3s ease-out;
+}

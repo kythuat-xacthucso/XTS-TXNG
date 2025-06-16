@@ -3,112 +3,191 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Company - {{pageTitle}}</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome for icons -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
-    <!-- Custom CSS -->
+    <title>Company Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="../assets/css/company.css" rel="stylesheet">
-    <!-- Utils CSS -->
-    <link href="../assets/css/utils.css" rel="stylesheet">
 </head>
 <body>
     <!-- Header -->
-    <header class="bg-white shadow-sm py-2 fixed-top d-flex justify-content-between align-items-center px-4">
-        <button class="btn d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarOffcanvas" aria-controls="sidebarOffcanvas">
-            <i class="fas fa-bars"></i>
-        </button>
-        <div class="d-flex align-items-center" style="max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
-            <img src="https://xacthucso.s3.ap-southeast-1.amazonaws.com/e303274f-45da-11f0-9602-f2202b293748" alt="Logo" class="me-2" style="width: 32px; height: 32px; object-fit: contain;">
-            <h4 class="m-0 d-inline" style="max-width: 160px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Công ty Sản Xuất ABC</h4>
-        </div>
-        <nav class="navbar navbar-expand-lg ms-4 d-none d-md-block">
-            <div class="collapse navbar-collapse">
-                <ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link px-3" href="#" data-menu="overview"><i class="fas fa-home"></i> Tổng quan</a></li>
-                    <li class="nav-item"><a class="nav-link px-3" href="#" data-menu="traceability"><i class="fas fa-search"></i> Truy xuất</a></li>
-                    <li class="nav-item"><a class="nav-link px-3" href="#" data-menu="services"><i class="fas fa-concierge-bell"></i> Dịch vụ</a></li>
-                    <li class="nav-item"><a class="nav-link px-3" href="#" data-menu="logs"><i class="fas fa-book"></i> Nhật ký</a></li>
-                    <li class="nav-item"><a class="nav-link px-3" href="#" data-menu="admin"><i class="fas fa-cogs"></i> Quản trị</a></li>
-                </ul>
-            </div>
-        </nav>
-        <div class="d-flex align-items-center">
-            <span class="me-3 d-none d-md-inline"><i class="fas fa-globe"></i></span>
-            <span class="me-3 d-none d-md-inline"><i class="fas fa-bell"></i></span>
-            <span class="me-3 d-none d-md-inline"><i class="fas fa-comment"></i></span>
-            <div class="d-flex align-items-center">
-                <img src="https://test-upload-6cb06c7f-5200-4c62-963b-d17d711b61a0.s3.amazonaws.com/u2-d1254bcf-36fb-43e6-818d-293e26daff45.JPG" alt="Avatar" class="rounded-circle me-2" style="width: 24px; height: 24px; object-fit: cover;">
-                <span class="text-dark" data-bs-toggle="modal" data-bs-target="#settingsModal"><i class="fas fa-cog"></i></span>
+    <header class="header-main bg-white shadow-sm fixed-top">
+        <div class="container-fluid h-100">
+            <div class="row h-100 align-items-center">
+                <!-- Logo và tên công ty -->
+                <div class="col-lg-3 col-md-4 col-6">
+                    <div class="d-flex align-items-center">
+                        <button class="btn btn-link d-lg-none me-2 p-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileSidebar">
+                            <i class="fas fa-bars fs-5"></i>
+                        </button>
+                        <img src="https://xacthucso.s3.ap-southeast-1.amazonaws.com/e303274f-45da-11f0-9602-f2202b293748" width="32" height="32" alt="Logo" class="me-2">
+                        <span class="company-name fw-bold fs-5 text-dark cursor-pointer" onclick="loadContent('overview')">
+                            TechCorp
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Menu chính (chỉ hiển thị trên desktop) -->
+                <div class="col-lg-6 d-none d-lg-block">
+                    <nav class="main-nav">
+                        <ul class="nav nav-pills justify-content-center">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="#" data-menu="overview" onclick="switchMainMenu(this, 'overview')">
+                                    Tổng quan
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#" data-menu="traceability" onclick="switchMainMenu(this, 'traceability')">
+                                    Truy xuất
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#" data-menu="services" onclick="switchMainMenu(this, 'services')">
+                                    Dịch vụ
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#" data-menu="logs" onclick="switchMainMenu(this, 'logs')">
+                                    Nhật ký
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#" data-menu="admin" onclick="switchMainMenu(this, 'admin')">
+                                    Quản trị
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+
+                <!-- Header actions -->
+                <div class="col-lg-3 col-md-8 col-6">
+                    <div class="d-flex align-items-center justify-content-end">
+                        <div class="dropdown me-3 d-none d-md-block">
+                            <button class="btn btn-light btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                <i class="fas fa-globe"></i> VI
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Tiếng Việt</a></li>
+                                <li><a class="dropdown-item" href="#">English</a></li>
+                            </ul>
+                        </div>
+                        
+                        <button class="btn btn-light btn-sm me-2 position-relative d-none d-md-inline-block">
+                            <i class="fas fa-bell"></i>
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 0.6em;">
+                                3
+                            </span>
+                        </button>
+                        
+                        <button class="btn btn-light btn-sm me-2 d-none d-md-inline-block">
+                            <i class="fas fa-envelope"></i>
+                        </button>
+                        
+                        <div class="dropdown">
+                            <button class="btn btn-light btn-sm dropdown-toggle d-flex align-items-center" type="button" data-bs-toggle="dropdown">
+                                <img src="https://xacthucso.s3.ap-southeast-1.amazonaws.com/e303274f-45da-11f0-9602-f2202b293748" width="24" height="24" class="rounded-circle me-1" alt="Avatar">
+                                <span class="d-none d-sm-inline">Company Admin</span>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item" href="#"><i class="fas fa-user me-2"></i>Hồ sơ</a></li>
+                                <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2"></i>Cài đặt</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt me-2"></i>Đăng xuất</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </header>
 
-    <!-- Sidebar -->
-    <div class="d-none d-md-block" style="width: 240px; position: fixed; top: 60px; bottom: 0; overflow-y: auto;" id="sidebar">
-        <div class="p-3">
-            <ul class="nav flex-column" id="sidebar-menu"></ul>
+    <!-- Desktop Sidebar -->
+    <aside class="sidebar-main d-none d-lg-block">
+        <div class="sidebar-content" id="desktopSidebarContent">
+            <!-- Menu con sẽ được load động vào đây -->
         </div>
-    </div>
+    </aside>
 
-    <!-- Sidebar Offcanvas for Tablet and Mobile -->
-    <div class="offcanvas offcanvas-start" tabindex="-1" id="sidebarOffcanvas" aria-labelledby="sidebarLabel">
-        <div class="offcanvas-header">
-            <div class="d-flex align-items-center" style="max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
-                <img src="https://xacthucso.s3.ap-southeast-1.amazonaws.com/e303274f-45da-11f0-9602-f2202b293748" alt="Logo" class="me-2" style="width: 32px; height: 32px; object-fit: contain;">
-                <h4 class="m-0 d-inline" style="max-width: 160px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Công ty Sản Xuất ABC</h4>
+    <!-- Mobile Sidebar (Off-canvas) -->
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="mobileSidebar">
+        <div class="offcanvas-header border-bottom">
+            <div class="d-flex align-items-center justify-content-center w-100">
+                <img src="https://xacthucso.s3.ap-southeast-1.amazonaws.com/e303274f-45da-11f0-9602-f2202b293748" width="32" height="32" alt="Logo" class="me-2">
+                <span class="fw-bold fs-5">TechCorp</span>
             </div>
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
         </div>
-        <div class="offcanvas-body">
-            <ul class="nav flex-column" id="mobile-sidebar-menu"></ul>
-            <div class="text-center mt-3 d-none d-md-block">
-                <!-- Avatar and name for tablet -->
-            </div>
-            <div class="text-center mt-3 d-block d-md-none">
-                <div class="d-flex align-items-center justify-content-center">
-                    <img src="https://test-upload-6cb06c7f-5200-4c62-963b-d17d711b61a0.s3.amazonaws.com/u2-d1254bcf-36fb-43e6-818d-293e26daff45.JPG" alt="Avatar" class="rounded-circle me-2" style="width: 40px; height: 40px; object-fit: cover;">
-                    <span>Quang Goldfield</span>
+        <div class="offcanvas-body p-0">
+            <nav class="mobile-nav">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#" onclick="loadContent('overview')" data-bs-dismiss="offcanvas">
+                            <i class="fas fa-chart-line me-2"></i>Tổng quan
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="loadContent('activate')" data-bs-dismiss="offcanvas">
+                            <i class="fas fa-check-circle me-2"></i>Kích hoạt
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="loadContent('sell')" data-bs-dismiss="offcanvas">
+                            <i class="fas fa-shopping-cart me-2"></i>Bán
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="loadContent('cancel')" data-bs-dismiss="offcanvas">
+                            <i class="fas fa-ban me-2"></i>Hủy
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="loadContent('lookup')" data-bs-dismiss="offcanvas">
+                            <i class="fas fa-search me-2"></i>Tra cứu
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="loadContent('logs')" data-bs-dismiss="offcanvas">
+                            <i class="fas fa-book me-2"></i>Nhật ký
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            
+            <!-- User info at bottom -->
+            <div class="mobile-user-info mt-auto p-3 border-top">
+                <div class="d-flex align-items-center mb-3">
+                    <img src="https://xacthucso.s3.ap-southeast-1.amazonaws.com/e303274f-45da-11f0-9602-f2202b293748" width="40" height="40" class="rounded-circle me-3" alt="Avatar">
+                    <div>
+                        <div class="fw-semibold">Company Admin</div>
+                        <small class="text-muted">company@techcorp.vn</small>
+                    </div>
                 </div>
-                <a href="#" class="nav-link mt-3 text-danger" onclick="logout()">Đăng xuất</a>
+                <button class="btn btn-outline-danger btn-sm w-100">
+                    <i class="fas fa-sign-out-alt me-2"></i>Đăng xuất
+                </button>
             </div>
         </div>
     </div>
 
     <!-- Main Content -->
-    <main class="container-fluid pt-5" style="margin-left: 240px; width: calc(100vw - 240px); overflow-x: hidden; overflow-y: auto; height: calc(100vh - 60px);">
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item active" aria-current="page" id="breadcrumb-item"></li>
-            </ol>
-        </nav>
-        <div id="loading" class="spinner-border text-primary" role="status" style="display: none;">
-            <span class="visually-hidden">Loading...</span>
-        </div>
-        <div id="content" style="overflow-x: hidden; overflow-y: auto;"></div>
-    </main>
-
-    <!-- Settings Modal -->
-    <div class="modal fade" id="settingsModal" tabindex="-1" aria-labelledby="settingsModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="settingsModalLabel">Cài đặt</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <main class="main-content">
+        <div class="container-fluid">
+            <!-- Loading Spinner -->
+            <div id="loadingSpinner" class="text-center py-5 d-none">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Đang tải...</span>
                 </div>
-                <div class="modal-body">
-                    <p>Cài đặt cho vai trò Company sẽ được thêm vào đây.</p>
-                </div>
+                <div class="mt-2">Đang tải nội dung...</div>
+            </div>
+            
+            <!-- Content Area -->
+            <div id="contentArea">
+                <!-- Nội dung sẽ được load động vào đây -->
             </div>
         </div>
-    </div>
+    </main>
 
-    <!-- Bootstrap JS and Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Utils JS -->
-    <script src="../assets/js/utils.js"></script>
-    <!-- Company JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../assets/js/company.js"></script>
 </body>
 </html>

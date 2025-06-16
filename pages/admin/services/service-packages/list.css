@@ -1,0 +1,28 @@
+.card {
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.table th, .table td {
+    vertical-align: middle;
+}
+
+.badge {
+    font-size: 0.9em;
+}
+
+.btn-sm {
+    margin-right: 5px;
+}
+
+.rounded-circle {
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    font-size: 1.2em;
+}
+
+.modal-content {
+    border-radius: 10px;
+}

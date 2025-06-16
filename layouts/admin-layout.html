@@ -3,94 +3,216 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin - {{pageTitle}}</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome for icons -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
-    <!-- Custom CSS -->
+    <title>Admin Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="../assets/css/admin.css" rel="stylesheet">
-    <!-- Utils CSS -->
-    <link href="../assets/css/utils.css" rel="stylesheet">
 </head>
 <body>
     <!-- Header -->
-    <header class="top-bar fixed-top">
-        <div class="left-section">
-            <img src="https://xacthucso.s3.ap-southeast-1.amazonaws.com/e303274f-45da-11f0-9602-f2202b293748" alt="Logo" class="logo">
-            <h4 class="company-name" onclick="loadPage('dashboard.html')">Công ty XYZ</h4>
-        </div>
-        <nav class="center-section">
-            <ul class="nav justify-content-center">
-                <li class="nav-item"><a class="nav-link" href="#" data-menu="overview">Tổng quan</a></li>
-                <li class="nav-item"><a class="nav-link" href="#" data-menu="customers">Khách hàng</a></li>
-                <li class="nav-item"><a class="nav-link" href="#" data-menu="services">Dịch vụ</a></li>
-                <li class="nav-item"><a class="nav-link" href="#" data-menu="payments">Thanh toán</a></li>
-                <li class="nav-item"><a class="nav-link" href="#" data-menu="admin">Quản trị</a></li>
-            </ul>
-        </nav>
-        <div class="right-section">
-            <span class="icon"><i class="fas fa-globe"></i></span>
-            <span class="icon"><i class="fas fa-bell"></i></span>
-            <span class="icon"><i class="fas fa-comment"></i></span>
-            <div class="avatar">
-                <img src="https://test-upload-6cb06c7f-5200-4c62-963b-d17d711b61a0.s3.amazonaws.com/u2-d1254bcf-36fb-43e6-818d-293e26daff45.JPG" alt="Avatar" class="avatar-img">
-                <span class="icon settings" onclick="showSettingsModal()"><i class="fas fa-cog"></i></span>
+    <header class="header-main bg-white shadow-sm fixed-top">
+        <div class="container-fluid h-100">
+            <div class="row h-100 align-items-center">
+                <!-- Logo và tên công ty -->
+                <div class="col-lg-3 col-md-4 col-6">
+                    <div class="d-flex align-items-center">
+                        <button class="btn btn-link d-lg-none me-2 p-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileSidebar">
+                            <i class="fas fa-bars fs-5"></i>
+                        </button>
+                        <img src="https://xacthucso.s3.ap-southeast-1.amazonaws.com/e303274f-45da-11f0-9602-f2202b293748" width="32" height="32" alt="Logo" class="me-2">
+                        <span class="company-name fw-bold fs-5 text-dark cursor-pointer" onclick="loadContent('overview')">
+                            TechCorp
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Menu chính (chỉ hiển thị trên desktop) -->
+                <div class="col-lg-6 d-none d-lg-block">
+                    <nav class="main-nav">
+                        <ul class="nav nav-pills justify-content-center">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="#" data-menu="overview" onclick="switchMainMenu(this, 'overview')">
+                                    Tổng quan
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#" data-menu="customers" onclick="switchMainMenu(this, 'customers')">
+                                    Khách hàng
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#" data-menu="services" onclick="switchMainMenu(this, 'services')">
+                                    Dịch vụ
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#" data-menu="payments" onclick="switchMainMenu(this, 'payments')">
+                                    Thanh toán
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#" data-menu="admin" onclick="switchMainMenu(this, 'admin')">
+                                    Quản trị
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+
+                <!-- Header actions -->
+                <div class="col-lg-3 col-md-8 col-6">
+                    <div class="d-flex align-items-center justify-content-end">
+                        <div class="dropdown me-3 d-none d-md-block">
+                            <button class="btn btn-light btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                <i class="fas fa-globe"></i> VI
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Tiếng Việt</a></li>
+                                <li><a class="dropdown-item" href="#">English</a></li>
+                            </ul>
+                        </div>
+                        
+                        <button class="btn btn-light btn-sm me-2 position-relative d-none d-md-inline-block">
+                            <i class="fas fa-bell"></i>
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 0.6em;">
+                                3
+                            </span>
+                        </button>
+                        
+                        <button class="btn btn-light btn-sm me-2 d-none d-md-inline-block">
+                            <i class="fas fa-envelope"></i>
+                        </button>
+                        
+                        <div class="dropdown">
+                            <button class="btn btn-light btn-sm dropdown-toggle d-flex align-items-center" type="button" data-bs-toggle="dropdown">
+                                <img src="https://xacthucso.s3.ap-southeast-1.amazonaws.com/e303274f-45da-11f0-9602-f2202b293748" width="24" height="24" class="rounded-circle me-1" alt="Avatar">
+                                <span class="d-none d-sm-inline">Admin</span>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item" href="#"><i class="fas fa-user me-2"></i>Hồ sơ</a></li>
+                                <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2"></i>Cài đặt</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt me-2"></i>Đăng xuất</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </header>
 
-    <!-- Sidebar -->
-    <div class="sidebar fixed">
-        <div class="sidebar-content">
-            <ul class="nav flex-column" id="sidebar-menu"></ul>
+    <!-- Desktop Sidebar -->
+    <aside class="sidebar-main d-none d-lg-block">
+        <div class="sidebar-content" id="desktopSidebarContent">
+            <!-- Menu con sẽ được load động vào đây -->
+        </div>
+    </aside>
+
+    <!-- Mobile Sidebar (Off-canvas) -->
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="mobileSidebar">
+        <div class="offcanvas-header border-bottom">
+            <div class="d-flex align-items-center">
+                <img src="https://xacthucso.s3.ap-southeast-1.amazonaws.com/e303274f-45da-11f0-9602-f2202b293748" width="32" height="32" alt="Logo" class="me-2">
+                <span class="fw-bold fs-5">TechCorp</span>
+            </div>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+        </div>
+        <div class="offcanvas-body p-0">
+            <nav class="mobile-nav">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#" onclick="loadContent('overview')" data-bs-dismiss="offcanvas">
+                            <i class="fas fa-chart-line me-2"></i>Tổng quan
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="loadContent('pending-profiles')" data-bs-dismiss="offcanvas">
+                            <i class="fas fa-user-clock me-2"></i>Hồ sơ chờ duyệt
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="loadContent('manage-entities')" data-bs-dismiss="offcanvas">
+                            <i class="fas fa-building me-2"></i>Chủ thể quản lý
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="loadContent('production-entities')" data-bs-dismiss="offcanvas">
+                            <i class="fas fa-industry me-2"></i>Chủ thể sản xuất
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="loadContent('parameters')" data-bs-dismiss="offcanvas">
+                            <i class="fas fa-sliders-h me-2"></i>Tham số
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="loadContent('service-packages')" data-bs-dismiss="offcanvas">
+                            <i class="fas fa-box me-2"></i>Gói dịch vụ
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="loadContent('invoices')" data-bs-dismiss="offcanvas">
+                            <i class="fas fa-file-invoice me-2"></i>Hóa đơn
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="loadContent('payments')" data-bs-dismiss="offcanvas">
+                            <i class="fas fa-credit-card me-2"></i>Thanh toán
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="loadContent('company-info')" data-bs-dismiss="offcanvas">
+                            <i class="fas fa-info-circle me-2"></i>Thông tin
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="loadContent('user-groups')" data-bs-dismiss="offcanvas">
+                            <i class="fas fa-users-cog me-2"></i>Nhóm quyền
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="loadContent('employees')" data-bs-dismiss="offcanvas">
+                            <i class="fas fa-user-tie me-2"></i>Nhân viên
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            
+            <!-- User info at bottom -->
+            <div class="mobile-user-info mt-auto p-3 border-top">
+                <div class="d-flex align-items-center mb-3">
+                    <img src="https://xacthucso.s3.ap-southeast-1.amazonaws.com/e303274f-45da-11f0-9602-f2202b293748" width="40" height="40" class="rounded-circle me-3" alt="Avatar">
+                    <div>
+                        <div class="fw-semibold">Admin User</div>
+                        <small class="text-muted">admin@techcorp.vn</small>
+                    </div>
+                </div>
+                <button class="btn btn-outline-danger btn-sm w-100">
+                    <i class="fas fa-sign-out-alt me-2"></i>Đăng xuất
+                </button>
+            </div>
         </div>
     </div>
 
     <!-- Main Content -->
     <main class="main-content">
-        <div id="loading" class="spinner-border text-primary" role="status">
-            <span class="visually-hidden">Loading...</span>
-        </div>
-        <div id="content"></div>
-    </main>
-
-    <!-- Chat AI -->
-    <div class="chat-ai" id="chat-ai">
-        <div class="chat-header">
-            <span>Trợ lý AI</span>
-            <span class="close-chat" onclick="toggleChat()">×</span>
-        </div>
-        <div class="chat-messages" id="chat-messages">
-            <div class="message user">Xin chào!</div>
-            <div class="message ai">Xin chào, tôi là trợ lý AI của bạn!</div>
-        </div>
-        <div class="chat-input">
-            <input type="text" id="chat-input" placeholder="Nhập tin nhắn...">
-            <button onclick="sendMessage()">Gửi</button>
-        </div>
-    </div>
-
-    <!-- Settings Modal -->
-    <div class="modal" id="settingsModal" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Cài đặt</h5>
-                    <button type="button" class="btn-close" onclick="hideSettingsModal()"></button>
+        <div class="container-fluid">
+            <!-- Loading Spinner -->
+            <div id="loadingSpinner" class="text-center py-5 d-none">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Đang tải...</span>
                 </div>
-                <div class="modal-body">
-                    <p>Cài đặt người dùng sẽ được thêm vào đây.</p>
-                </div>
+                <div class="mt-2">Đang tải nội dung...</div>
+            </div>
+            
+            <!-- Content Area -->
+            <div id="contentArea">
+                <!-- Nội dung sẽ được load động vào đây -->
             </div>
         </div>
-    </div>
+    </main>
 
-    <!-- Bootstrap JS and Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Utils JS -->
-    <script src="../assets/js/utils.js"></script>
-    <!-- Admin JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../assets/js/admin.js"></script>
 </body>
 </html>
