@@ -1,0 +1,133 @@
+/* Custom CSS for TXNG Stamp Lookup - Minimal additions to Bootstrap 5 */
+
+/* Font and base styles */
+body {
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    background-color: #f8f9fa;
+    padding-top: 80px;
+    padding-bottom: 80px;
+}
+
+/* Header Sticky */
+.status-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1030;
+    background: white;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    padding: 15px 0;
+}
+
+.status-icon {
+    font-size: 2.5rem;
+    margin-right: 15px;
+}
+
+.status-text {
+    font-size: 1.4rem;
+    font-weight: 700;
+}
+
+/* Footer Sticky */
+.footer-actions {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1030;
+    background: white;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+    padding: 15px;
+}
+
+/* Product images */
+.product-image {
+    max-width: 150px;
+    height: auto;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.product-image:hover {
+    transform: scale(1.05);
+}
+
+.product-image-small {
+    max-width: 80px;
+    height: auto;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.product-image-small:hover {
+    transform: scale(1.05);
+}
+
+.product-image-medium {
+    max-width: 120px;
+    height: auto;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.product-image-medium:hover {
+    transform: scale(1.05);
+}
+
+/* Sidebar sticky positioning */
+.sidebar-sticky {
+    top: 100px;
+}
+
+/* Status color variations - using Bootstrap color classes primarily */
+.status-warning .status-icon {
+    color: #ffc107 !important;
+}
+
+.status-danger .status-icon {
+    color: #dc3545 !important;
+}
+
+.status-inactive .status-icon {
+    color: #6c757d !important;
+}
+
+/* Card border colors for different statuses */
+.border-warning {
+    border-color: #ffc107 !important;
+}
+
+.border-danger {
+    border-color: #dc3545 !important;
+}
+
+.border-secondary {
+    border-color: #6c757d !important;
+}
+
+/* Animation for fade in */
+.fade-in {
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from { 
+        opacity: 0; 
+        transform: translateY(20px); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0); 
+    }
+}
+
+/* Desktop responsive adjustments */
+@media (min-width: 992px) {
+    body {
+        padding-bottom: 20px;
+    }
+}

@@ -1,3 +1,4 @@
+// admin.js (layout)
 // Menu configuration with file paths
 const menuConfig = {
     overview: {
@@ -18,9 +19,9 @@ const menuConfig = {
                 name: 'Hồ sơ chờ duyệt', 
                 icon: 'fas fa-user-clock',
                 files: {
-                    html: '', // Path to HTML file - to be filled later
-                    css: '',  // Path to CSS file - to be filled later
-                    js: ''    // Path to JS file - to be filled later
+                    html: '../../pages/admin/customers/pending-profiles/index.html',
+                    css: '../../pages/admin/customers/pending-profiles/style.css',
+                    js: '../../pages/admin/customers/pending-profiles/main.js'
                 }
             },
             { 
@@ -28,9 +29,9 @@ const menuConfig = {
                 name: 'Chủ thể quản lý', 
                 icon: 'fas fa-building',
                 files: {
-                    html: '', // Path to HTML file - to be filled later
-                    css: '',  // Path to CSS file - to be filled later
-                    js: ''    // Path to JS file - to be filled later
+                    html: '../../pages/admin/customers/manage-entities/index.html',
+                    css: '../../pages/admin/customers/manage-entities/style.css',
+                    js: '../../pages/admin/customers/manage-entities/main.js'
                 }
             },
             { 
@@ -38,9 +39,9 @@ const menuConfig = {
                 name: 'Chủ thể sản xuất', 
                 icon: 'fas fa-industry',
                 files: {
-                    html: '', // Path to HTML file - to be filled later
-                    css: '',  // Path to CSS file - to be filled later
-                    js: ''    // Path to JS file - to be filled later
+                    html: '../../pages/admin/customers/production-entities/index.html',
+                    css: '../../pages/admin/customers/production-entities/style.css',
+                    js: '../../pages/admin/customers/production-entities/main.js'
                 }
             }
         ],
@@ -54,9 +55,9 @@ const menuConfig = {
                 name: 'Tham số', 
                 icon: 'fas fa-sliders-h',
                 files: {
-                    html: '', // Path to HTML file - to be filled later
-                    css: '',  // Path to CSS file - to be filled later
-                    js: ''    // Path to JS file - to be filled later
+                    html: '../../pages/admin/services/parameters/index.html',
+                    css: '../../pages/admin/services/parameters/style.css',
+                    js: '../../pages/admin/services/parameters/main.js'
                 }
             },
             { 
@@ -64,10 +65,43 @@ const menuConfig = {
                 name: 'Gói dịch vụ', 
                 icon: 'fas fa-box',
                 files: {
-                    html: '../../pages/admin/services/service-packages/list/index.html', // Path to HTML file - to be filled later
-                    css: '../../pages/admin/services/service-packages/list/style.css',  // Path to CSS file - to be filled later
-                    js: '../../pages/admin/services/service-packages/list/main.js'    // Path to JS file - to be filled later
-                }
+                    html: '../../pages/admin/services/service-packages/list/index.html',
+                    css: '../../pages/admin/services/service-packages/list/style.css',
+                    js: '../../pages/admin/services/service-packages/list/main.js'
+                },
+                submenu: [
+                    { 
+                        id: 'add-service-package', 
+                        name: 'Thêm gói dịch vụ', 
+                        icon: 'fas fa-plus',
+                        files: {
+                            html: '../../pages/admin/services/service-packages/add/index.html',
+                            css: '../../pages/admin/services/service-packages/add/style.css',
+                            js: '../../pages/admin/services/service-packages/add/main.js'
+                        }
+                    },
+                    { 
+                        id: 'view-service-package', 
+                        name: 'Xem chi tiết gói dịch vụ', 
+                        icon: 'fas fa-eye',
+                        files: {
+                            html: '../../pages/admin/services/service-packages/detail/index.html',
+                            css: '../../pages/admin/services/service-packages/detail/style.css',
+                            js: '../../pages/admin/services/service-packages/detail/main.js'
+                        }
+                    },
+                    { 
+                        id: 'edit-service-package', 
+                        name: 'Sửa gói dịch vụ', 
+                        icon: 'fas fa-edit',
+                        files: {
+                            html: '../../pages/admin/services/service-packages/edit/index.html',
+                            css: '../../pages/admin/services/service-packages/edit/style.css',
+                            js: '../../pages/admin/services/service-packages/edit/main.js'
+                        }
+                    }
+                ],
+                defaultContent: 'service-packages'
             }
         ],
         defaultContent: 'parameters'
@@ -80,9 +114,9 @@ const menuConfig = {
                 name: 'Hóa đơn', 
                 icon: 'fas fa-file-invoice',
                 files: {
-                    html: '', // Path to HTML file - to be filled later
-                    css: '',  // Path to CSS file - to be filled later
-                    js: ''    // Path to JS file - to be filled later
+                    html: '../../pages/admin/payments/invoices/index.html',
+                    css: '../../pages/admin/payments/invoices/style.css',
+                    js: '../../pages/admin/payments/invoices/main.js'
                 }
             },
             { 
@@ -90,9 +124,9 @@ const menuConfig = {
                 name: 'Thanh toán', 
                 icon: 'fas fa-credit-card',
                 files: {
-                    html: '', // Path to HTML file - to be filled later
-                    css: '',  // Path to CSS file - to be filled later
-                    js: ''    // Path to JS file - to be filled later
+                    html: '../../pages/admin/payments/payments/index.html',
+                    css: '../../pages/admin/payments/payments/style.css',
+                    js: '../../pages/admin/payments/payments/main.js'
                 }
             }
         ],
@@ -106,9 +140,9 @@ const menuConfig = {
                 name: 'Thông tin', 
                 icon: 'fas fa-info-circle',
                 files: {
-                    html: '', // Path to HTML file - to be filled later
-                    css: '',  // Path to CSS file - to be filled later
-                    js: ''    // Path to JS file - to be filled later
+                    html: '../../pages/admin/admin/company-info/index.html',
+                    css: '../../pages/admin/admin/company-info/style.css',
+                    js: '../../pages/admin/admin/company-info/main.js'
                 }
             },
             { 
@@ -116,9 +150,9 @@ const menuConfig = {
                 name: 'Nhóm quyền', 
                 icon: 'fas fa-users-cog',
                 files: {
-                    html: '', // Path to HTML file - to be filled later
-                    css: '',  // Path to CSS file - to be filled later
-                    js: ''    // Path to JS file - to be filled later
+                    html: '../../pages/admin/admin/user-groups/index.html',
+                    css: '../../pages/admin/admin/user-groups/style.css',
+                    js: '../../pages/admin/admin/user-groups/main.js'
                 }
             },
             { 
@@ -126,9 +160,9 @@ const menuConfig = {
                 name: 'Nhân viên', 
                 icon: 'fas fa-user-tie',
                 files: {
-                    html: '', // Path to HTML file - to be filled later
-                    css: '',  // Path to CSS file - to be filled later
-                    js: ''    // Path to JS file - to be filled later
+                    html: '../../pages/admin/admin/employees/index.html',
+                    css: '../../pages/admin/admin/employees/style.css',
+                    js: '../../pages/admin/admin/employees/main.js'
                 }
             }
         ],
@@ -206,7 +240,7 @@ function updateSidebar(menuData) {
 }
 
 // Load content dynamically from external files
-async function loadContent(contentId) {
+async function loadContent(contentId, options = {}) {
     try {
         // Show loading spinner
         showLoading(true);
@@ -224,18 +258,24 @@ async function loadContent(contentId) {
             throw new Error(`No file configuration found for content: ${contentId}`);
         }
         
+        // Clean up previously loaded scripts and styles
+        cleanupScripts();
+        cleanupStyles();
+        
         // Load HTML content
         let htmlContent = '';
-        if (filePaths.html) {
+        const htmlPath = options.html || filePaths.html;
+        if (htmlPath) {
             try {
-                const htmlResponse = await fetch(filePaths.html);
+                console.log(`Loading HTML: ${htmlPath}`); // Debug log
+                const htmlResponse = await fetch(htmlPath);
                 if (htmlResponse.ok) {
                     htmlContent = await htmlResponse.text();
                 } else {
-                    throw new Error(`HTML file not found: ${filePaths.html}`);
+                    throw new Error(`HTML file not found: ${htmlPath}`);
                 }
             } catch (error) {
-                console.warn(`Error loading HTML file: ${filePaths.html}`, error);
+                console.warn(`Error loading HTML file: ${htmlPath}`, error);
                 throw error;
             }
         } else {
@@ -245,6 +285,7 @@ async function loadContent(contentId) {
         // Load CSS file
         if (filePaths.css && !loadedStyles.has(filePaths.css)) {
             try {
+                console.log(`Loading CSS: ${filePaths.css}`); // Debug log
                 await loadCSS(filePaths.css);
                 loadedStyles.add(filePaths.css);
             } catch (error) {
@@ -259,6 +300,7 @@ async function loadContent(contentId) {
         // Load and execute JS file
         if (filePaths.js && !loadedScripts.has(filePaths.js)) {
             try {
+                console.log(`Loading JS: ${filePaths.js}`); // Debug log
                 await loadJS(filePaths.js);
                 loadedScripts.add(filePaths.js);
             } catch (error) {
@@ -272,6 +314,7 @@ async function loadContent(contentId) {
         currentSubMenu = contentId;
         
         // Trigger custom event for content loaded
+        console.log(`Triggering contentLoaded event for: ${contentId}`); // Debug log
         document.dispatchEvent(new CustomEvent('contentLoaded', { 
             detail: { contentId, filePaths } 
         }));
@@ -302,6 +345,17 @@ function getFilePaths(contentId) {
             const submenuItem = menuData.submenu.find(item => item.id === contentId);
             if (submenuItem && submenuItem.files) {
                 return submenuItem.files;
+            }
+            // Check nested submenu (e.g., service-packages submenu)
+            if (menuData.submenu.some(item => item.submenu)) {
+                for (const subItem of menuData.submenu) {
+                    if (subItem.submenu) {
+                        const nestedItem = subItem.submenu.find(nested => nested.id === contentId);
+                        if (nestedItem && nestedItem.files) {
+                            return nestedItem.files;
+                        }
+                    }
+                }
             }
         }
     }
@@ -345,11 +399,36 @@ function loadJS(jsPath) {
         script.type = 'text/javascript';
         script.src = jsPath;
         
-        script.onload = () => resolve();
+        script.onload = () => {
+            console.log(`JS loaded successfully: ${jsPath}`); // Debug log
+            resolve();
+        };
         script.onerror = () => reject(new Error(`Failed to load JS: ${jsPath}`));
         
         document.body.appendChild(script);
     });
+}
+
+// Clean up previously loaded scripts
+function cleanupScripts() {
+    loadedScripts.forEach(scriptPath => {
+        const script = document.querySelector(`script[src="${scriptPath}"]`);
+        if (script) {
+            script.remove();
+        }
+    });
+    loadedScripts.clear();
+}
+
+// Clean up previously loaded styles
+function cleanupStyles() {
+    loadedStyles.forEach(cssPath => {
+        const link = document.querySelector(`link[href="${cssPath}"]`);
+        if (link) {
+            link.remove();
+        }
+    });
+    loadedStyles.clear();
 }
 
 // Update sidebar active state
@@ -410,17 +489,9 @@ function showNotification(message, type = 'info') {
 
 // Clean up loaded resources when needed
 function cleanupResources() {
-    // Remove dynamically loaded CSS files
-    loadedStyles.forEach(cssPath => {
-        const link = document.querySelector(`link[href="${cssPath}"]`);
-        if (link) {
-            link.remove();
-        }
-    });
-    loadedStyles.clear();
-    
-    // Note: JS files are not removed as they may contain needed functions
-    // If you need to remove JS files, you can implement similar logic
+    // Remove dynamically loaded CSS and JS files
+    cleanupStyles();
+    cleanupScripts();
 }
 
 // Handle responsive menu changes

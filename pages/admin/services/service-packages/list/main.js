@@ -1,3 +1,4 @@
+// main.js (list)
 // Sample data for service packages (replace with actual API call)
 const servicePackages = [
     { id: 1, name: "Gói Cơ bản", price: 1000000, duration: "1 tháng", createdAt: "2025-06-01 10:00", createdBy: "Admin1", status: "active" },
@@ -23,7 +24,7 @@ let itemsPerPage = 10;
 function renderTable(data) {
     const tableBody = document.getElementById('servicePackageTableBody');
     if (!tableBody) {
-        console.error('Table body element not found');
+        console.warn('Table body element not found');
         return;
     }
     tableBody.innerHTML = '';
@@ -57,10 +58,10 @@ function renderTable(data) {
                 </td>
                 <td>
                     <div class="action-buttons">
-                        <button class="btn btn-outline-primary btn-sm me-2" onclick="navigateTo('view-service-package', ${pkg.id})">
+                        <button class="btn btn-outline-primary btn-sm me-2" onclick="navigateTo('view-service-package')">
                             <i class="fas fa-eye"></i> Xem
                         </button>
-                        <button class="btn btn-outline-warning btn-sm" onclick="navigateTo('edit-service-package', ${pkg.id})">
+                        <button class="btn btn-outline-warning btn-sm" onclick="navigateTo('edit-service-package')">
                             <i class="fas fa-edit"></i> Sửa
                         </button>
                     </div>
@@ -77,7 +78,7 @@ function renderTable(data) {
 function renderCards(data) {
     const cardBody = document.getElementById('servicePackageCardBody');
     if (!cardBody) {
-        console.error('Card body element not found');
+        console.warn('Card body element not found');
         return;
     }
     cardBody.innerHTML = '';
@@ -105,10 +106,10 @@ function renderCards(data) {
                     </span>
                 </p>
                 <div class="action-buttons">
-                    <button class="btn btn-outline-primary btn-sm me-2" onclick="navigateTo('view-service-package', ${pkg.id})">
+                    <button class="btn btn-outline-primary btn-sm me-2" onclick="navigateTo('view-service-package'">
                         <i class="fas fa-eye"></i> Xem
                     </button>
-                    <button class="btn btn-outline-warning btn-sm" onclick="navigateTo('edit-service-package', ${pkg.id})">
+                    <button class="btn btn-outline-warning btn-sm" onclick="navigateTo('edit-service-package'">
                         <i class="fas fa-edit"></i> Sửa
                     </button>
                 </div>
@@ -131,7 +132,7 @@ function renderPagination(data, paginationId) {
     // Previous button
     const prevLi = document.createElement('li');
     prevLi.className = `page-item ${currentPage === 1 ? 'disabled' : ''}`;
-    prevLi.innerHTML = `<a class="page-link" href="#" onclick="changePage(${currentPage - 1}); return false;">&lt;</a>`;
+    prevLi.innerHTML = `<a class="page-link" Connections to this host have been blocked for security reasons. href="#" onclick="changePage(${currentPage - 1}); return false;"><</a>`;
     pagination.appendChild(prevLi);
 
     // Page numbers
@@ -181,7 +182,7 @@ function renderPagination(data, paginationId) {
     // Next button
     const nextLi = document.createElement('li');
     nextLi.className = `page-item ${currentPage === totalPages ? 'disabled' : ''}`;
-    nextLi.innerHTML = `<a class="page-link" href="#" onclick="changePage(${currentPage + 1}); return false;">&gt;</a>`;
+    nextLi.innerHTML = `<a class="page-link" href="#" onclick="changePage(${currentPage + 1}); return false;">></a>`;
     pagination.appendChild(nextLi);
 }
 
@@ -261,16 +262,12 @@ function resetFiltersMobile() {
     renderCards(servicePackages);
 }
 
-// Navigation function
+// Navigation function (updated to use centralized paths)
 function navigateTo(page, id = null) {
-    const paths = {
-        'add-service-package': '../../pages/admin/service-packages/add.html',
-        'view-service-package': `../../pages/admin/service-packages/view.html?id=${id}`,
-        'edit-service-package': `../../pages/admin/service-packages/edit.html?id=${id}`
-    };
-    if (paths[page]) {
-        window.adminLayout.loadContent(page, { html: paths[page] });
-        window.adminLayout.showNotification(`Chuyển tới trang ${page}`, 'info');
+    const filePaths = window.adminLayout.getFilePaths(page);
+    if (filePaths && filePaths.html) {
+        const path = id ? `${filePaths.html}?id=${id}` : filePaths.html;
+        window.adminLayout.loadContent(page, { html: path });
     } else {
         window.adminLayout.showNotification('Trang không tồn tại', 'danger');
     }
@@ -278,21 +275,47 @@ function navigateTo(page, id = null) {
 
 // Initialize
 function initialize() {
-    if (document.getElementById('servicePackageTableBody') && document.getElementById('servicePackageCardBody')) {
+    const tableBody = document.getElementById('servicePackageTableBody');
+    const cardBody = document.getElementById('servicePackageCardBody');
+    
+    if (tableBody && cardBody) {
         renderTable(servicePackages);
         renderCards(servicePackages);
     } else {
-        console.error('Required DOM elements not found. Retrying...');
-        setTimeout(initialize, 100);
+        console.error('Required DOM elements not found.');
+        let retryCount = 0;
+        const maxRetries = 3;
+        function retryInitialize() {
+            if (retryCount < maxRetries) {
+                retryCount++;
+                console.log(`Retrying initialization... Attempt ${retryCount}/${maxRetries}`);
+                setTimeout(() => {
+                    if (document.getElementById('servicePackageTableBody') && 
+                        document.getElementById('servicePackageCardBody')) {
+                        renderTable(servicePackages);
+                        renderCards(servicePackages);
+                    } else {
+                        retryInitialize();
+                    }
+                }, 100);
+            } else {
+                window.adminLayout.showNotification('Không thể tải giao diện danh sách gói dịch vụ. Vui lòng thử lại.', 'danger');
+            }
+        }
+        retryInitialize();
     }
 }
 
 // Ensure initialization after content is loaded
-document.addEventListener('contentLoaded', () => {
-    initialize();
+document.addEventListener('contentLoaded', (e) => {
+    if (e.detail.contentId === 'service-packages') {
+        initialize();
+    }
 });
 
 // Fallback in case contentLoaded event is missed
 document.addEventListener('DOMContentLoaded', () => {
-    initialize();
+    if (window.location.pathname.includes('service-packages/list')) {
+        initialize();
+    }
 });

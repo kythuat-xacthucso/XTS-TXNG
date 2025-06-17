@@ -1,0 +1,276 @@
+<div class="page-header">
+    <h1 class="page-title">Sửa gói dịch vụ</h1>
+    <p class="page-breadcrumb">Dịch vụ / Gói dịch vụ / Sửa</p>
+</div>
+
+<form id="servicePackageForm" class="service-package-form" novalidate>
+    <!-- Mobile Layout -->
+    <div class="accordion d-md-none mb-4" id="mobileAccordion">
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#packageInfo"
+                    aria-expanded="true">
+                    <i class="fas fa-info-circle me-2"></i>
+                    Thông tin gói dịch vụ
+                </button>
+            </h2>
+            <div id="packageInfo" class="accordion-collapse collapse show" data-bs-parent="#mobileAccordion">
+                <div class="accordion-body">
+                    <div class="package-info-content">
+                        <div class="mb-3">
+                            <label for="packageName" class="form-label">Tên gói <span
+                                    class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="packageName" name="packageName" required>
+                            <div class="invalid-feedback">Vui lòng nhập tên gói dịch vụ</div>
+                        </div>
+
+                        <div class soaps>
+                            <label for="packageCode" class="form-label">Mã gói <span
+                                    class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="packageCode" name="packageCode" required>
+                            <div class="invalid-feedback">Vui lòng nhập mã gói dịch vụ</div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Thời gian <span class="text-danger">*</span></label>
+                            <div class="row">
+                                <div class="col-7">
+                                    <input type="number" class="form-control" id="duration" name="duration" min="1"
+                                        required>
+                                    <div class="invalid-feedback">Vui lòng nhập thời gian</div>
+                                </div>
+                                <div class="col-5">
+                                    <select class="form-select" id="durationUnit" name="durationUnit" required>
+                                        <option value="month">Tháng</option>
+                                        <option value="year">Năm</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="createdAt" class="form-label">Thời gian tạo</label>
+                            <input type="text" class="form-control" id="createdAt" name="createdAt" readonly>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="createdBy" class="form-label">Người tạo</label>
+                            <input type="text" class="form-control" id="createdBy" name="createdBy" readonly>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="status" class="form-label">Trạng thái <span class="text-danger">*</span></label>
+                            <select class="form-select" id="status" name="status" required>
+                                <option value="active">Đang hoạt động</option>
+                                <option value="locked">Khóa</option>
+                            </select>
+                            <div class="invalid-feedback">Vui lòng chọn trạng thái</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#parametersInfo" aria-expanded="false">
+                    <i class="fas fa-sliders-h me-2"></i>
+                    Thông số tham số
+                </button>
+            </h2>
+            <div id="parametersInfo" class="accordion-collapse collapse" data-bs-parent="#mobileAccordion">
+                <div class="accordion-body">
+                    <div class="parameters-content">
+                        <div class="mb-3">
+                            <button type="button" class="btn btn-outline-primary w-100" id="addParameterMobile">
+                                <i class="fas fa-plus me-2"></i>Thêm tham số
+                            </button>
+                        </div>
+
+                        <div id="mobileParametersList" class="mobile-parameters-list">
+                            <!-- Parameter cards will be dynamically added here -->
+                        </div>
+
+                        <div class="cost-summary">
+                            <div class="row mb-2">
+                                <div class="col-6">
+                                    <strong>Chi phí:</strong>
+                                </div>
+                                <div class="col-6 text-end">
+                                    <span id="mobileTotalCost">0</span> VNĐ/thời gian
+                                </div>
+                            </div>
+
+                            <div class="row mb-2">
+                                <div class="col-6">
+                                    <label for="mobileDiscount" class="form-label mb-0">Giảm giá:</label>
+                                </div>
+                                <div class="col-6">
+                                    <input type="number" class="form-control form-control-sm" id="mobileDiscount"
+                                        name="discount" min="0">
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-6">
+                                    <strong class="text-primary">Chi phí phải trả:</strong>
+                                </div>
+                                <div class="col-6 text-end">
+                                    <span id="mobileFinalCost" class="text-primary">0</span> VNĐ/thời gian
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Desktop Layout -->
+    <div class="d-none d-md-block">
+        <!-- Section 1: Thông tin gói dịch vụ -->
+        <div class="content-card mb-4">
+            <h5 class="card-title"><i class="fas fa-info-circle me-4"></i>
+                Thông tin gói dịch vụ
+            </h5>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="packageNameDesktop" class="form-label">Tên gói <span
+                                class="text-danger">*</span></label>
+                        <input type="text" class="form-control" id="packageNameDesktop" name="packageName" required>
+                        <div class="invalid-feedback">Vui lòng nhập tên gói dịch vụ</div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="packageCodeDesktop" class="form-label">Mã gói <span
+                                class="text-danger">*</span></label>
+                        <input type="text" class="form-control" id="packageCodeDesktop" name="packageCode" required>
+                        <div class="invalid-feedback">Vui lòng nhập mã gói dịch vụ</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <label class="form-label">Thời gian <span class="text-danger">*</span>
+                    </label>
+                    <div class="row">
+                        <div class="col-7">
+                            <div>
+                                <input type="number" class="form-control" id="durationDesktop" name="duration" min="1"
+                                    required>
+                                <div class="invalid-feedback">Vui lòng nhập thời gian</div>
+                            </div>
+                            <div class="col-5">
+                                <select class="form-select" id="durationUnitDesktop" name="durationUnit" required>
+                                    <option value="month">Tháng</option>
+                                    <option value="year">Năm</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="createdAtDesktop" class="form-label">Thời gian tạo</label>
+                            <input type="text" class="form-control" id="createdAtDesktop" name="createdAt" readonly>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="createdByDesktop" class="form-label">Người tạo</label>
+                            <input type="text" class="form-control" id="createdByDesktop" name="createdBy" readonly>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="statusDesktop" class="form-label">Trạng thái <span
+                                    class="text-danger">*</span></label>
+                            <select class="form-select" id="statusDesktop" name="status" required>
+                                <option value="active">Đang hoạt động</option>
+                                <option value="locked">Khóa</option>
+                            </select>
+                            <div class="invalid-feedback">Vui lòng chọn trạng thái</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 2: Thông số tham số -->
+            <div class="content-card mb-4">
+                <h5 class="card-title mb-4">
+                    <i class="fas fa-sliders-h me-2"></i>
+                    Thông số tham số
+                </h5>
+
+                <div class="mb-3">
+                    <button type="btn btn-primary" type="button" id="addParameterDesktop">
+                        <i class="fas fa-plus me-2"></i>Thêm tham số
+                    </button>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="parametersTable">
+                        <thead class="table-light">
+                            <tr>
+                                <th width="60">STT</th>
+                                <th>Tham số</th>
+                                <th width="120">Đơn giá</th>
+                                <th width="100">Số lượng</th>
+                                <th width="120">Thành tiền</th>
+                                <th width="40"></th>
+                            </tr>
+                        </thead>
+                        <tbody id="parametersTableBody">
+                            <!-- Parameter rows will be added here -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col-md-6 ms-auto">
+                        <div class="cost-summary-desktop">
+                            <div class="d-flex justify-content-between mb-2">
+                                <span><strong>Chi phí:</strong></span>
+                                <span><strong id="desktopTotalCost">0</strong> VNĐ</span>
+                            </div>
+
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <label for="desktopDiscount" class="form-label mb-0">Giảm giá:</label>
+                                <div class="input-group" style="width: 150px;">
+                                    <input type="number" class="form-control" id="desktopDiscount" name="discount"
+                                        min="0">
+                                    <span class="input-group-text">VNĐ</span>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="d-flex justify-content-between">
+                                <span><strong class="text-primary">Chi phí phải trả:</strong></span>
+                                <span><strong class="text-primary" id="desktopFinalCost">0</strong> VNĐ</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Action Buttons -->
+            <div class="action-buttons sticky-on-mobile">
+                <div class="d-flex gap-3 justify-content-end">
+                    <button type="button" class="btn btn-secondary"
+                        onclick="window.adminLayout.loadContent('service-packages')" type="button">
+                        <i class="fas fa-arrow-left me-2"></i>Quay lại
+                    </button>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save me-2"></i>Xác nhận
+                    </button>
+                </div>
+            </div>
+</form>

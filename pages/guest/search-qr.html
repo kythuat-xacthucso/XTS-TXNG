@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tra cứu tem TXNG - Thông tin sản phẩm</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="style.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Status Header (Sticky) -->
+    <div class="status-header">
+        <div class="container">
+            <div class="d-flex align-items-center">
+                <i id="statusIcon" class="bi bi-check-circle-fill status-icon text-primary"></i>
+                <div class="flex-grow-1">
+                    <p id="statusText" class="status-text mb-0">Tem hợp lệ</p>
+                    <small class="text-muted">Sản phẩm đã được xác thực</small>
+                </div>
+                <button class="btn btn-outline-primary btn-sm rounded-circle" data-bs-toggle="tooltip" data-bs-placement="left" title="Nhấn để xem hướng dẫn">
+                    <i class="bi bi-question"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Warning Alert (if needed) -->
+    <div id="warningAlert" class="container mt-3" style="display: none;">
+        <div class="alert alert-warning alert-dismissible">
+            <div class="d-flex align-items-start">
+                <i class="bi bi-exclamation-triangle-fill me-3 mt-1 fs-5"></i>
+                <div class="flex-grow-1">
+                    <h6 class="mb-1">Thông báo quan trọng</h6>
+                    <p id="warningText" class="mb-2">Tem này chưa được kích hoạt. Vui lòng kiểm tra với người bán/NSXKD.</p>
+                    <div class="d-flex flex-wrap gap-2">
+                        <a href="tel:097.345.6789" class="btn btn-sm btn-outline-warning">
+                            <i class="bi bi-telephone-fill me-1"></i>Hotline: 097.345.6789
+                        </a>
+                        <button class="btn btn-sm btn-warning" onclick="openScanModal()">
+                            <i class="bi bi-qr-code-scan me-1"></i>Quét mã khác
+                        </button>
+                    </div>
+                </div>
+                <button class="btn-close" onclick="closeWarning()"></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container mt-4 pb-5">
+        <div class="row">
+            <!-- Main Content Area -->
+            <div class="col-lg-8">
+                <!-- Block 1: Đơn vị sản phẩm -->
+                <div class="card mb-4 border-start border-4 border-primary" id="productUnitCard">
+                    <div class="card-header bg-white">
+                        <h2 class="card-title h4 mb-0">
+                            ĐƠN VỊ SẢN PHẨM
+                            <button class="btn btn-outline-primary btn-sm rounded-circle ms-2" data-bs-toggle="tooltip" title="Thông tin chi tiết về sản phẩm và mã tem">
+                                <i class="bi bi-question"></i>
+                            </button>
+                        </h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="row mb-3">
+                            <div class="col-sm-3 fw-medium text-dark">Tên sản phẩm:</div>
+                            <div class="col-sm-9" id="productName">Gạo ST25 hữu cơ</div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-sm-3 fw-medium text-dark">Mã tem TXNG:</div>
+                            <div class="col-sm-9">
+                                <span id="traceCode">TXNG123456789</span>
+                                <button class="btn btn-outline-secondary btn-sm ms-2" onclick="copyToClipboard('TXNG123456789')" data-bs-toggle="tooltip" title="Sao chép mã tem">
+                                    <i class="bi bi-clipboard"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-sm-3 fw-medium text-dark">Trạng thái tem:</div>
+                            <div class="col-sm-9">
+                                <span class="badge bg-primary" id="traceStatusBadge">Hợp lệ</span>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-sm-3 fw-medium text-dark">Ảnh sản phẩm:</div>
+                            <div class="col-sm-9">
+                                <img src="https://images.pexels.com/photos/33239/rice-symbol-asia-asian.jpg?auto=compress&cs=tinysrgb&w=300" 
+                                     class="img-thumbnail product-image" alt="Sản phẩm" onclick="showImageModal(this.src)" 
+                                     data-bs-toggle="tooltip" title="Nhấn để phóng to">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-sm-3 fw-medium text-dark">Ngày sản xuất:</div>
+                            <div class="col-sm-9" id="productionDate">01/06/2024</div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-sm-3 fw-medium text-dark">Hạn sử dụng:</div>
+                            <div class="col-sm-9" id="expiryDate">01/06/2025</div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-sm-3 fw-medium text-dark">Số lô/batch:</div>
+                            <div class="col-sm-9" id="batchCode">LOT123</div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-sm-3 fw-medium text-dark">Nhật ký sản xuất:</div>
+                            <div class="col-sm-9">
+                                <div id="productionLog">
+                                    <div>• Gieo trồng: 01/01/2024</div>
+                                    <div>• Thu hoạch: 15/03/2024</div>
+                                </div>
+                                <button class="btn btn-sm btn-outline-primary mt-2" data-bs-toggle="collapse" data-bs-target="#detailedLog">
+                                    <i class="bi bi-eye me-1"></i>Xem chi tiết nhật ký
+                                </button>
+                                <div class="collapse mt-2" id="detailedLog">
+                                    <div class="card card-body">
+                                        <small class="text-muted">
+                                            <strong>Chi tiết quy trình sản xuất:</strong><br>
+                                            1. Chuẩn bị đất: 15/12/2023<br>
+                                            2. Gieo hạt giống: 01/01/2024<br>
+                                            3. Chăm sóc: 15/01 - 10/03/2024<br>
+                                            4. Thu hoạch: 15/03/2024<br>
+                                            5. Sơ chế: 20/03/2024<br>
+                                            6. Đóng gói: 25/03/2024
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Block 2: Sản phẩm -->
+                <div class="card mb-4 border-start border-4 border-primary" id="productCard">
+                    <div class="card-header bg-white">
+                        <h2 class="card-title h4 mb-0">
+                            SẢN PHẨM
+                            <button class="btn btn-outline-primary btn-sm rounded-circle ms-2" data-bs-toggle="tooltip" title="Thông tin chi tiết về loại sản phẩm và quy cách">
+                                <i class="bi bi-question"></i>
+                            </button>
+                        </h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="row mb-3">
+                            <div class="col-sm-3 fw-medium text-dark">Loại sản phẩm:</div>
+                            <div class="col-sm-9" id="productType">Nông sản</div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-sm-3 fw-medium text-dark">Quy cách:</div>
+                            <div class="col-sm-9" id="specification">5kg/túi</div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-sm-3 fw-medium text-dark">Thành phần chính:</div>
+                            <div class="col-sm-9" id="ingredients">Gạo ST25 100%</div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-sm-3 fw-medium text-dark">Ghi chú:</div>
+                            <div class="col-sm-9" id="notes">Sản phẩm được trồng theo tiêu chuẩn hữu cơ, không sử dụng hóa chất</div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-sm-3 fw-medium text-dark">Ảnh minh họa:</div>
+                            <div class="col-sm-9">
+                                <div class="d-flex gap-2 flex-wrap">
+                                    <img src="https://images.pexels.com/photos/1438841/pexels-photo-1438841.jpeg?auto=compress&cs=tinysrgb&w=150" 
+                                         class="img-thumbnail product-image-small" alt="Minh họa 1" onclick="showImageModal(this.src)">
+                                    <img src="https://images.pexels.com/photos/1029009/pexels-photo-1029009.jpeg?auto=compress&cs=tinysrgb&w=150" 
+                                         class="img-thumbnail product-image-small" alt="Minh họa 2" onclick="showImageModal(this.src)">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Block 3: Chứng chỉ chứng nhận -->
+                <div class="card mb-4 border-start border-4 border-primary" id="certificateCard">
+                    <div class="card-header bg-white">
+                        <h2 class="card-title h4 mb-0">
+                            CHỨNG CHỈ CHỨNG NHẬN
+                            <button class="btn btn-outline-primary btn-sm rounded-circle ms-2" data-bs-toggle="tooltip" title="Các chứng chỉ, tiêu chuẩn mà sản phẩm đã đạt được">
+                                <i class="bi bi-question"></i>
+                            </button>
+                        </h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="row mb-3">
+                            <div class="col-sm-3 fw-medium text-dark">Tên chứng chỉ:</div>
+                            <div class="col-sm-9" id="certificateName">Hữu cơ USDA</div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-sm-3 fw-medium text-dark">Số hiệu:</div>
+                            <div class="col-sm-9" id="certificateCode">USDA123</div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-sm-3 fw-medium text-dark">Loại chứng nhận:</div>
+                            <div class="col-sm-9" id="certificateType">Hữu cơ</div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-sm-3 fw-medium text-dark">Hiệu lực đến:</div>
+                            <div class="col-sm-9" id="validUntil">31/12/2025</div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-sm-3 fw-medium text-dark">Tiêu chuẩn:</div>
+                            <div class="col-sm-9">
+                                <span id="standard">USDA Organic Standards</span>
+                                <button class="btn btn-outline-primary btn-sm rounded-circle ms-2" data-bs-toggle="tooltip" title="Tiêu chuẩn hữu cơ USDA đảm bảo sản phẩm không sử dụng hóa chất tổng hợp">
+                                    <i class="bi bi-question"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-sm-3 fw-medium text-dark">Ảnh chứng chỉ:</div>
+                            <div class="col-sm-9">
+                                <img src="https://images.pexels.com/photos/6962023/pexels-photo-6962023.jpeg?auto=compress&cs=tinysrgb&w=200" 
+                                     class="img-thumbnail product-image-medium" alt="Chứng chỉ" onclick="showImageModal(this.src)"
+                                     data-bs-toggle="tooltip" title="Nhấn để phóng to chứng chỉ">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Block 4: Nhà sản xuất/kinh doanh -->
+                <div class="card mb-4 border-start border-4 border-primary" id="manufacturerCard">
+                    <div class="card-header bg-white">
+                        <h2 class="card-title h4 mb-0">
+                            NHÀ SẢN XUẤT/KINH DOANH
+                            <button class="btn btn-outline-primary btn-sm rounded-circle ms-2" data-bs-toggle="tooltip" title="Đơn vị trực tiếp sản xuất/kinh doanh sản phẩm">
+                                <i class="bi bi-question"></i>
+                            </button>
+                        </h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="row mb-3">
+                            <div class="col-sm-3 fw-medium text-dark">Tên NSXKD:</div>
+                            <div class="col-sm-9" id="nsxkdName"><a href="#">Công ty CP Nông Nghiệp Xanh</a></div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-sm-3 fw-medium text-dark">Địa chỉ:</div>
+                            <div class="col-sm-9" id="nsxkdAddress">Q12, TPHCM</div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-sm-3 fw-medium text-dark">Hotline:</div>
+                            <div class="col-sm-9">
+                                <a href="tel:0988123456" class="text-decoration-none" id="nsxkdHotline">
+                                    <i class="bi bi-telephone-fill me-1"></i>0988123456
+                                </a>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-sm-3 fw-medium text-dark">Trạng thái:</div>
+                            <div class="col-sm-9">
+                                <span class="badge bg-primary" id="nsxkdVerified">
+                                    <i class="bi bi-check-circle-fill me-1"></i>Đã xác thực bởi SPC ngày 01/01/2024
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Block 5: Chủ thể chứng nhận -->
+                <div class="card mb-4 border-start border-4 border-primary" id="spcCard">
+                    <div class="card-header bg-white">
+                        <h2 class="card-title h4 mb-0">
+                            CHỦ THỂ CHỨNG NHẬN (SPC)
+                            <button class="btn btn-outline-primary btn-sm rounded-circle ms-2" data-bs-toggle="tooltip" title="Tổ chức xác thực và cấp chứng nhận cho sản phẩm">
+                                <i class="bi bi-question"></i>
+                            </button>
+                        </h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="row mb-3">
+                            <div class="col-sm-3 fw-medium text-dark">Tên SPC:</div>
+                            <div class="col-sm-9" id="spcName"><a href="#">Trung tâm xác thực SPC Việt Nam</a></div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-sm-3 fw-medium text-dark">Logo:</div>
+                            <div class="col-sm-9">
+                                <img src="https://images.pexels.com/photos/7681087/pexels-photo-7681087.jpeg?auto=compress&cs=tinysrgb&w=100" 
+                                     class="img-thumbnail product-image-small" alt="Logo SPC" onclick="showImageModal(this.src)">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-sm-3 fw-medium text-dark">Mô tả:</div>
+                            <div class="col-sm-9" id="spcDescription">Tổ chức uy tín cấp chứng nhận nông sản theo tiêu chuẩn quốc tế</div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-sm-3 fw-medium text-dark">Website:</div>
+                            <div class="col-sm-9">
+                                <a href="https://www.spc.vn" target="_blank" class="text-decoration-none" id="spcWebsite">
+                                    <i class="bi bi-globe me-1"></i>www.spc.vn
+                                </a>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-sm-3 fw-medium text-dark">Liên hệ:</div>
+                            <div class="col-sm-9">
+                                <a href="tel:097.345.6789" class="text-decoration-none" id="spcContact">
+                                    <i class="bi bi-telephone-fill me-1"></i>097.345.6789
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Block 6: Hướng dẫn -->
+                <div class="card mb-4">
+                    <div class="card-body text-center">
+                        <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#helpModal">
+                            <i class="bi bi-question-circle me-2"></i>Hướng dẫn đọc thông tin tem
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar (Desktop only) -->
+            <div class="col-lg-4 d-none d-lg-block">
+                <div class="card position-sticky sidebar-sticky">
+                    <div class="card-body">
+                        <h5 class="mb-3">Tóm tắt trạng thái</h5>
+                        <div class="d-flex align-items-center mb-3">
+                            <i class="bi bi-check-circle-fill text-primary me-2 fs-4"></i>
+                            <div>
+                                <div class="fw-bold">Tem hợp lệ</div>
+                                <small class="text-muted">Sản phẩm được xác thực</small>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="mb-3">
+                            <small class="text-muted d-block mb-1">Hotline hỗ trợ:</small>
+                            <a href="tel:097.345.6789" class="text-decoration-none fw-bold">
+                                <i class="bi bi-telephone-fill me-1"></i>097.345.6789
+                            </a>
+                        </div>
+                        <button class="btn btn-primary w-100" onclick="openScanModal()">
+                            <i class="bi bi-qr-code-scan me-2"></i>Quét mã khác
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Actions (Sticky) -->
+    <div class="footer-actions d-lg-none">
+        <div class="container">
+            <button class="btn btn-primary w-100 btn-lg" onclick="openScanModal()">
+                <i class="bi bi-qr-code-scan me-2"></i>Quét mã khác
+            </button>
+        </div>
+    </div>
+
+    <!-- Help Modal -->
+    <div class="modal fade" id="helpModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <i class="bi bi-question-circle me-2"></i>Hướng dẫn đọc thông tin tem
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <h6><i class="bi bi-1-circle-fill text-primary me-2"></i>Kiểm tra trạng thái tem</h6>
+                        <p class="small text-muted">Nhìn vào phần header màu xanh/vàng/đỏ ở trên cùng để biết tem có hợp lệ hay không.</p>
+                    </div>
+                    <div class="mb-3">
+                        <h6><i class="bi bi-2-circle-fill text-primary me-2"></i>Đọc thông tin sản phẩm</h6>
+                        <p class="small text-muted">Kéo xuống để xem tất cả thông tin về sản phẩm, chứng nhận, và nhà sản xuất.</p>
+                    </div>
+                    <div class="mb-3">
+                        <h6><i class="bi bi-3-circle-fill text-primary me-2"></i>Nhấn dấu "?" để hiểu rõ</h6>
+                        <p class="small text-muted">Nhấn các nút có dấu ? để đọc giải thích chi tiết từng phần.</p>
+                    </div>
+                    <div class="mb-3">
+                        <h6><i class="bi bi-4-circle-fill text-primary me-2"></i>Thông tin minh bạch</h6>
+                        <p class="small text-muted">Tất cả thông tin về trạng thái tem, chứng nhận, và nhà sản xuất được hiển thị minh bạch.</p>
+                    </div>
+                    <div class="alert alert-info">
+                        <small>
+                            <i class="bi bi-info-circle me-1"></i>
+                            <strong>Lưu ý:</strong> Nếu có thông tin nào hiển thị "Chưa cập nhật", có thể nhà sản xuất chưa cung cấp đầy đủ thông tin.
+                        </small>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Đã hiểu</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scan Modal -->
+    <div class="modal fade" id="scanModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <i class="bi bi-qr-code-scan me-2"></i>Tra cứu tem mới
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="text-center mb-4">
+                        <div class="bg-light p-4 rounded-3 mb-3">
+                            <i class="bi bi-camera-fill text-muted" style="font-size: 3rem;"></i>
+                            <p class="mt-2 mb-0 text-muted">Camera sẽ mở để quét mã QR</p>
+                        </div>
+                        <button class="btn btn-primary btn-lg mb-3" onclick="startCamera()">
+                            <i class="bi bi-camera-fill me-2"></i>Mở camera quét QR
+                        </button>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-muted mb-2">Hoặc nhập mã tem thủ công:</p>
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="manualCode" placeholder="Nhập mã tem TXNG...">
+                            <button class="btn btn-outline-primary" onclick="lookupManualCode()">
+                                <span class="spinner-border spinner-border-sm d-none me-2" id="loadingSpinner"></span>
+                                <i class="bi bi-search me-1"></i>Tra cứu
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Image Modal -->
+    <div class="modal fade" id="imageModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Xem ảnh</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <img id="modalImage" src="" class="img-fluid" alt="Ảnh phóng to">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="main.js"></script>
+</body>
+</html>
