@@ -1,7 +1,21 @@
+:root {
+    --primary-color: #007bff;
+    --primary-hover: #0056b3;
+    --secondary-color: #6c757d;
+    --secondary-hover: #5a6268;
+    --warning-color: #ffc107;
+    --warning-hover: #e0a800;
+    --success-color: #28a745;
+    --success-hover: #218838;
+    --dark-color: #343a40;
+    --border-color: #dee2e6;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+}
+
 /* Filter Section */
 .filter-section .card {
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px var(--shadow-color);
 }
 
 .filter-section .form-label {
@@ -49,14 +63,14 @@
 .invoice-card {
     background: white;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px var(--shadow-color);
     padding: 1rem;
     margin-bottom: 1rem;
     cursor: pointer;
 }
 
 .invoice-card:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 8px var(--shadow-color);
 }
 
 .invoice-card .card-title {
@@ -75,6 +89,17 @@
 .action-buttons .btn {
     padding: 0.25rem 0.75rem;
     font-size: 0.875rem;
+}
+
+.btn-outline-success {
+    border-color: var(--success-color);
+    color: var(--success-color);
+}
+
+.btn-outline-success:hover {
+    background-color: var(--success-hover);
+    border-color: var(--success-hover);
+    color: white;
 }
 
 /* Pagination and Items Per Page */
@@ -125,8 +150,70 @@
 }
 
 .pagination .page-item.disabled .page-link {
-    color: #6c757d;
+    color: var(--secondary-color);
     pointer-events: none;
+}
+
+/* Payment Modal */
+.modal-content {
+    border-radius: 8px;
+    box-shadow: 0 4px 8px var(--shadow-color);
+}
+
+.modal-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.modal-title {
+    font-weight: 600;
+    color: var(--dark-color);
+}
+
+.form-label {
+    font-weight: 500;
+    color: var(--dark-color);
+}
+
+.form-control[readonly] {
+    background-color: #e9ecef;
+    cursor: not-allowed;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-hover);
+    border-color: var(--primary-hover);
+}
+
+.btn-secondary {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+}
+
+.btn-secondary:hover {
+    background-color: var(--secondary-hover);
+    border-color: var(--secondary-hover);
+}
+
+.invalid-feedback {
+    font-size: 0.875rem;
+}
+
+#imagePreview {
+    transition: opacity 0.3s ease;
+}
+
+#imagePreview img {
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    padding: 4px;
+    background-color: #fff;
 }
 
 /* Responsive Adjustments */
@@ -151,5 +238,21 @@
     }
     #paginationControls {
         display: flex;
+    }
+}
+
+@media (max-width: 576px) {
+    .modal-dialog {
+        margin: 0.5rem;
+    }
+    .modal-content {
+        font-size: 0.9rem;
+    }
+    .form-label {
+        font-size: 0.85rem;
+    }
+    .btn {
+        font-size: 0.85rem;
+        padding: 0.6rem 1.2rem;
     }
 }

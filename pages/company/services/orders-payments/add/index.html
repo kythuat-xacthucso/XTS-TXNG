@@ -1,0 +1,161 @@
+<div class="page-header">
+    <h1 class="page-title">Mua dịch vụ</h1>
+    <p class="page-breadcrumb">Dịch vụ / Đơn hàng/ Thanh toán / Mua mới</p>
+</div>
+
+<form id="serviceOrderForm" class="service-order-form">
+    <!-- Mobile Layout -->
+    <div class="accordion d-md-none mb-4" id="mobileAccordion">
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#servicesInfo"
+                    aria-expanded="true">
+                    <i class="fas fa-sliders-h me-2"></i>
+                    Danh sách gói dịch vụ
+                </button>
+            </h2>
+            <div id="servicesInfo" class="accordion-collapse collapse show" data-bs-parent="#mobileAccordion">
+                <div class="accordion-body">
+                    <div class="services-content">
+                        <div id="mobileServicesList" class="mobile-services-list">
+                            <!-- Service cards will be dynamically added here -->
+                        </div>
+
+                        <button type="button" class="btn btn-outline-primary w-100 mb-3" id="addServiceMobile">
+                            <i class="fas fa-plus me-2"></i>Thêm gói dịch vụ
+                        </button>
+
+                        <div class="mb-3">
+                            <label for="mobileNotes" class="form-label">Ghi chú</label>
+                            <textarea class="form-control" id="mobileNotes" name="notes" rows="4" placeholder="Nhập ghi chú"></textarea>
+                        </div>
+
+                        <div class="cost-summary">
+                            <div class="row mb-2">
+                                <div class="col-6">
+                                    <strong>Chi phí:</strong>
+                                </div>
+                                <div class="col-6 text-end">
+                                    <span id="mobileTotalCost">0</span> VNĐ
+                                </div>
+                            </div>
+
+                            <div class="row mb-2">
+                                <div class="col-6">
+                                    <label for="mobileDiscount" class="form-label mb-0">Giảm giá:</label>
+                                </div>
+                                <div class="col-6">
+                                    <input type="number" class="form-control form-control-sm" id="mobileDiscount"
+                                        name="discount" min="0" value="0" placeholder="0">
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-6">
+                                    <strong class="text-primary">Chi phí phải trả:</strong>
+                                </div>
+                                <div class="col-6 text-end">
+                                    <strong class="text-primary" id="mobileFinalCost">0</strong> VNĐ
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Desktop Layout -->
+    <div class="d-none d-md-block">
+        <div class="content-card mb-4">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="servicesTable">
+                    <thead class="table-light">
+                        <tr>
+                            <th width="60">STT</th>
+                            <th>Gói dịch vụ</th>
+                            <th width="150">Thời hạn</th>
+                            <th width="120">Giá tiền</th>
+                            <th width="150">Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody id="servicesTableBody">
+                        <!-- Service rows will be dynamically added here -->
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="5" class="text-center">
+                                <button type="button" class="btn btn-outline-primary" id="addServiceDesktop">
+                                    <i class="fas fa-plus me-2"></i>Thêm gói dịch vụ
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="5">
+                                <label for="desktopNotes" class="form-label">Ghi chú</label>
+                                <textarea class="form-control" id="desktopNotes" name="notes" rows="4" placeholder="Nhập ghi chú"></textarea>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+
+            <div class="row mt-4">
+                <div class="col-md-6 ms-auto">
+                    <div class="cost-summary-desktop">
+                        <div class="d-flex justify-content-between mb-2">
+                            <span><strong>Chi phí:</strong></span>
+                            <span><strong id="desktopTotalCost">0</strong> VNĐ</span>
+                        </div>
+
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <label for="desktopDiscount" class="form-label mb-0">Giảm giá:</label>
+                            <div class="input-group" style="width: 150px;">
+                                <input type="number" class="form-control" id="desktopDiscount" name="discount" min="0"
+                                    value="0" placeholder="0">
+                                <span class="input-group-text">VNĐ</span>
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <div class="d-flex justify-content-between">
+                            <span><strong class="text-primary">Chi phí phải trả:</strong></span>
+                            <span><strong class="text-primary" id="desktopFinalCost">0</strong> VNĐ</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Action Buttons - Sticky on mobile -->
+    <div class="action-buttons">
+        <div class="d-flex gap-3 justify-content-end">
+            <button type="button" class="btn btn-secondary" onclick="window.companyLayout.loadContent('orders-payments')">
+                <i class="fas fa-arrow-left me-2"></i>Quay lại
+            </button>
+            <button type="submit" class="btn btn-primary">
+                <i class="fas fa-check me-2"></i>Xác nhận
+            </button>
+        </div>
+    </div>
+
+    <!-- Modal for View Service Details -->
+    <div class="modal fade" id="viewServiceModal" tabindex="-1" aria-labelledby="viewServiceModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="viewServiceModalLabel">Chi tiết gói dịch vụ</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="viewServiceModalBody">
+                    <!-- Content will be loaded dynamically -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
