@@ -2,12 +2,13 @@
     // Fake data for order payment details page (scoped within IIFE)
     const viewOrderPayments = [
         {
-            id: 2,
-            code: 'INV002',
+            id: 3,
+            code: 'INV003',
             amount: 300000,
             createdAt: '2025-06-02 14:30',
             paymentTime: '2025-06-02 15:00',
             approvedTime: '2025-06-02 16:00',
+            approvedBy: 'Admin',
             createdBy: 'User2',
             status: 'approved',
             transactionCode: 'TXN123',
@@ -18,12 +19,13 @@
             ],
         },
         {
-            id: 1,
-            code: 'INV001',
+            id: 2,
+            code: 'INV002',
             amount: 175000,
             createdAt: '2025-06-01 10:00',
             paymentTime: '',
             approvedTime: '',
+            approvedBy: '',
             createdBy: 'User1',
             status: 'pending',
             transactionCode: '',
@@ -35,12 +37,13 @@
             ],
         },
         {
-            id: 3,
-            code: 'INV003',
+            id: 1,
+            code: 'INV001',
             amount: 200000,
             createdAt: '2025-06-03 09:00',
             paymentTime: '2025-06-03 10:00',
             approvedTime: '',
+            approvedBy: '',
             createdBy: 'User3',
             status: 'awaiting',
             transactionCode: 'TXN124',
@@ -62,11 +65,14 @@
 
     // Main initialization function
     const initializeView = () => {
-        const orderPayment = viewOrderPayments[0]; // Default to first order payment
+        // Get paymentId from URL query parameter (e.g., ?id=2)
+        const urlParams = new URLSearchParams(window.location.search);
+        const paymentId = parseInt(urlParams.get('id'));
+        const orderPayment = viewOrderPayments.find(p => p.id === paymentId) || viewOrderPayments[0]; // Fallback to first record
 
         if (!orderPayment) {
-            companyLayout.showNotification('Không có đơn hàng/thanh toán nào để hiển thị', 'danger');
-            setTimeout(() => companyLayout.loadContent('orders-payments'), 2000);
+            adminLayout.showNotification('Không có hóa đơn nào để hiển thị', 'danger');
+            setTimeout(() => adminLayout.loadContent('payments'), 2000);
             return;
         }
 
@@ -76,11 +82,11 @@
     };
 
     // Populate form fields
-    const populateForm = ({ code, amount, createdAt, paymentTime, approvedTime, createdBy, status, transactionCode, transactionImage, note }) => {
+    const populateForm = ({ code, amount, createdAt, paymentTime, approvedTime, approvedBy, createdBy, status, transactionCode, transactionImage, note }) => {
         const statusText = {
             pending: 'Chưa thanh toán',
-            approved: 'Đã thanh toán',
-            awaiting: 'Chờ duyệt',
+            awaiting: 'Đã thanh toán',
+            approved: 'Đã duyệt',
         }[status] || status;
 
         const fields = {
@@ -98,17 +104,24 @@
             noteDesktop: note,
         };
 
+        // Add fields based on status
         if (status !== 'pending') {
-            fields.paymentTime = paymentTime;
-            fields.paymentTimeDesktop = paymentTime;
-            fields.transactionCode = transactionCode;
-            fields.transactionCodeDesktop = transactionCode;
+            fields.paymentTime = paymentTime || '-';
+            fields.paymentTimeDesktop = paymentTime || '-';
+            fields.transactionCode = transactionCode || '-';
+            fields.transactionCodeDesktop = transactionCode || '-';
             fields.transactionImage = transactionImage;
             fields.transactionImageDesktop = transactionImage;
+            fields.approvedBy = approvedBy || '-';
+            fields.approvedByDesktop = approvedBy || '-';
+        } else {
+            fields.approvedBy = '-';
+            fields.approvedByDesktop = '-';
         }
+
         if (status === 'approved') {
-            fields.approvedTime = approvedTime;
-            fields.approvedTimeDesktop = approvedTime;
+            fields.approvedTime = approvedTime || '-';
+            fields.approvedTimeDesktop = approvedTime || '-';
         }
 
         Object.entries(fields).forEach(([id, value]) => {
@@ -124,23 +137,24 @@
         });
 
         // Hide fields based on status
-        ['paymentTimeContainer', 'approvedTimeContainer', 'transactionCodeContainer', 'transactionImageContainer'].forEach(id => {
-            document.getElementById(id).style.display = (status === 'pending' && !['createdAt', 'createdBy', 'status', 'note'].some(field => id.includes(field))) ? 'none' : 'block';
+        ['paymentTimeContainer', 'transactionCodeContainer', 'transactionImageContainer'].forEach(id => {
+            document.getElementById(id).style.display = status === 'pending' ? 'none' : 'block';
         });
-        ['paymentTimeContainerDesktop', 'approvedTimeContainerDesktop', 'transactionCodeContainerDesktop', 'transactionImageContainerDesktop'].forEach(id => {
-            document.getElementById(id).style.display = (status === 'pending' && !['createdAt', 'createdBy', 'status', 'note'].some(field => id.includes(field))) ? 'none' : 'block';
+        ['paymentTimeContainerDesktop', 'transactionCodeContainerDesktop', 'transactionImageContainerDesktop'].forEach(id => {
+            document.getElementById(id).style.display = status === 'pending' ? 'none' : 'block';
         });
-        if (status !== 'approved') {
-            ['approvedTimeContainer', 'approvedTimeContainerDesktop'].forEach(id => {
-                document.getElementById(id).style.display = 'none';
-            });
-        }
+        ['approvedTimeContainer', 'approvedTimeContainerDesktop'].forEach(id => {
+            document.getElementById(id).style.display = status === 'approved' ? 'block' : 'none';
+        });
     };
 
     // Populate packages for desktop and mobile
     const populatePackages = (packages) => {
         const tableBody = document.getElementById('packagesTableBody');
         const mobileList = document.getElementById('mobilePackagesList');
+
+        tableBody.innerHTML = '';
+        mobileList.innerHTML = '';
 
         packages.forEach((pkg, index) => {
             // Desktop table row
@@ -195,30 +209,83 @@
 
     // Update button visibility based on status
     const updateButtonVisibility = (status) => {
-        const editButton = document.getElementById('editButton');
-        const payButton = document.getElementById('payButton');
-        const downloadButton = document.getElementById('downloadButton');
-
-        editButton.style.display = (status === 'pending') ? 'block' : 'none';
-        payButton.style.display = (status === 'pending') ? 'block' : 'none';
-        downloadButton.style.display = (status === 'approved') ? 'block' : 'none';
+        const approveButton = document.getElementById('approveButton');
+        approveButton.style.display = status === 'awaiting' ? 'block' : 'none';
     };
 
     // Format currency
-    const formatCurrency = (amount) => new Intl.NumberFormat('vi-VN').format(amount);
+    const formatCurrency = (amount) => new Intl.NumberFormat('vi-VN').format(amount) + ' VND';
 
-    // Download invoice (placeholder function)
-    const downloadInvoice = () => {
-        companyLayout.showNotification('Đang tải hóa đơn...', 'info');
-        // Implement actual download logic here
+    // Show toast notification
+    const showToast = (message) => {
+        const toastContainer = document.getElementById('toastContainer');
+        if (!toastContainer) {
+            console.warn('Toast container not found');
+            return;
+        }
+
+        const toastId = `toast-${Date.now()}`;
+        const toastHTML = `
+            <div id="${toastId}" class="toast toast-success" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="true" data-bs-delay="3000">
+                <div class="toast-header">
+                    <strong class="me-auto">Thông báo</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+                <div class="toast-body">
+                    ${message}
+                </div>
+            </div>
+        `;
+        toastContainer.innerHTML += toastHTML;
+
+        const toastElement = document.getElementById(toastId);
+        const toast = new bootstrap.Toast(toastElement);
+        toast.show();
+
+        toastElement.addEventListener('hidden.bs.toast', () => {
+            toastElement.remove();
+        });
+    };
+
+    // Approve payment
+    const approvePayment = () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const paymentId = parseInt(urlParams.get('id'));
+        const payment = viewOrderPayments.find(p => p.id === paymentId);
+
+        if (!payment || payment.status !== 'awaiting') {
+            adminLayout.showNotification('Không thể duyệt thanh toán', 'danger');
+            return;
+        }
+
+        const modal = new bootstrap.Modal(document.getElementById('confirmApproveModal'));
+        const confirmCode = document.getElementById('confirmApproveCode');
+        confirmCode.innerHTML = `Mã đơn: ${payment.code}`;
+
+        const confirmButton = document.getElementById('confirmApproveButton');
+        const confirmHandler = () => {
+            payment.status = 'approved';
+            payment.approvedBy = 'Admin';
+            payment.approvedTime = new Date().toLocaleString('vi-VN', { dateStyle: 'short', timeStyle: 'short' });
+            populateForm(payment);
+            updateButtonVisibility(payment.status);
+            modal.hide();
+            showToast(`Thanh toán ${payment.code} đã được duyệt`);
+            confirmButton.removeEventListener('click', confirmHandler);
+        };
+
+        confirmButton.removeEventListener('click', confirmHandler);
+        confirmButton.addEventListener('click', confirmHandler);
+
+        modal.show();
     };
 
     // View package details in modal
     const viewPackageDetails = (packageId) => {
-        console.log('viewPackageDetails called with packageId:', packageId); // Debug log
+        console.log('viewPackageDetails called with packageId:', packageId);
 
-        const filePaths = window.companyLayout.getFilePaths('view-system-service');
-        console.log('filePaths:', filePaths); // Debug log
+        const filePaths = window.adminLayout.getFilePaths('view-service-package');
+        console.log('filePaths:', filePaths);
 
         if (filePaths && filePaths.html) {
             const modalBody = document.getElementById('viewPackageModalBody');
@@ -227,7 +294,6 @@
             const modal = new bootstrap.Modal(document.getElementById('viewPackageModal'));
             modal.show();
 
-            // Load view-system-service content directly
             fetch(filePaths.html)
                 .then(response => {
                     if (!response.ok) {
@@ -238,7 +304,6 @@
                 .then(data => {
                     modalBody.innerHTML = data;
 
-                    // Load CSS if not already loaded
                     if (filePaths.css && !document.querySelector(`link[href="${filePaths.css}"]`)) {
                         const link = document.createElement('link');
                         link.rel = 'stylesheet';
@@ -247,7 +312,6 @@
                         document.head.appendChild(link);
                     }
 
-                    // Load JS if not already loaded
                     if (filePaths.js && !document.querySelector(`script[src="${filePaths.js}"]`)) {
                         const script = document.createElement('script');
                         script.type = 'text/javascript';
@@ -256,11 +320,11 @@
                     }
                 })
                 .catch(error => {
-                    console.error('Error loading view-system-service:', error);
+                    console.error('Error loading view-service-package:', error);
                     modalBody.innerHTML = '<p class="text-danger">Lỗi tải chi tiết gói dịch vụ.</p>';
                 });
         } else {
-            companyLayout.showNotification('Không thể tải trang chi tiết', 'danger');
+            adminLayout.showNotification('Không thể tải trang chi tiết', 'danger');
         }
     };
 
@@ -276,7 +340,7 @@
         }
     });
 
-    // Expose functions to global scope if needed
-    window.downloadInvoice = downloadInvoice;
+    // Expose functions to global scope
+    window.approvePayment = approvePayment;
     window.viewPackageDetails = viewPackageDetails;
 })();

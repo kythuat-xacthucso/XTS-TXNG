@@ -1,5 +1,3 @@
-// admin.js (layout)
-// Menu configuration with file paths
 const menuConfig = {
     overview: {
         title: 'Tổng quan',
@@ -87,7 +85,7 @@ const menuConfig = {
                         files: {
                             html: '../../pages/admin/services/service-packages/detail/index.html',
                             css: '../../pages/admin/services/service-packages/detail/style.css',
-                            js: '../../pages/admin/services/service-packages/detail/main.js'
+                            js: '../../pages/admin/services/service-packages/detail/index.js'
                         }
                     },
                     { 
@@ -110,6 +108,29 @@ const menuConfig = {
         title: 'Thanh toán',
         submenu: [
             { 
+                id: 'payments', 
+                name: 'Thanh toán', 
+                icon: 'fas fa-credit-card',
+                files: {
+                    html: '../../pages/admin/payments/payments/list/index.html',
+                    css: '../../pages/admin/payments/payments/list/style.css',
+                    js: '../../pages/admin/payments/payments/list/main.js'
+                },
+                submenu: [
+                    { 
+                        id: 'view-order-payment', 
+                        name: 'Xem chi tiết', 
+                        icon: 'fas fa-eye',
+                        files: {
+                            html: '../../pages/admin/payments/payments/view/index.html',
+                            css: '../../pages/admin/payments/payments/view/style.css',
+                            js: '../../pages/admin/payments/payments/view/main.js'
+                        }
+                    }
+                ],
+                defaultContent: null
+            },
+            { 
                 id: 'invoices', 
                 name: 'Hóa đơn', 
                 icon: 'fas fa-file-invoice',
@@ -118,19 +139,9 @@ const menuConfig = {
                     css: '../../pages/admin/payments/invoices/style.css',
                     js: '../../pages/admin/payments/invoices/main.js'
                 }
-            },
-            { 
-                id: 'payments', 
-                name: 'Thanh toán', 
-                icon: 'fas fa-credit-card',
-                files: {
-                    html: '../../pages/admin/payments/payments/index.html',
-                    css: '../../pages/admin/payments/payments/style.css',
-                    js: '../../pages/admin/payments/payments/main.js'
-                }
             }
         ],
-        defaultContent: 'invoices'
+        defaultContent: 'payments'
     },
     admin: {
         title: 'Quản trị',

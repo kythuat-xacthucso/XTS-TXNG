@@ -1,0 +1,143 @@
+/* Filter Section */
+.filter-section .card {
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.filter-section .form-label {
+    font-weight: 500;
+    color: var(--dark-color);
+}
+
+.filter-section .form-control,
+.filter-section .form-select {
+    border-radius: 6px;
+}
+
+/* Offcanvas Filter (Tablet/Mobile) */
+#filterOffcanvas {
+    height: auto;
+}
+.offcanvas-bottom {
+    height: auto;
+    max-height: 80vh;
+}
+
+/* Table Styles */
+.table.w-100 th,
+.table.w-100 td {
+    white-space: nowrap;
+}
+
+.table th {
+    font-weight: 600;
+    color: var(--dark-color);
+    text-align: center;
+}
+
+.table td {
+    vertical-align: middle;
+    text-align: left;
+}
+
+.table td:nth-child(1) { /* STT */
+    text-align: center;
+}
+
+/* Card Styles (Tablet/Mobile) */
+.parameter-card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+.parameter-card .card-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--dark-color);
+    margin-bottom: 0.5rem;
+}
+
+.parameter-card .card-text {
+    color: var(--secondary-color);
+    margin-bottom: 0.25rem;
+}
+
+/* Pagination and Items Per Page */
+.pagination-container {
+    margin-right: 32px; /* Cách lề phải 32px */
+    margin-bottom: 16px; /* Cách lề dưới 32px */
+    width: auto; /* Cho phép container tự điều chỉnh */
+}
+
+#paginationControls,
+#mobilePaginationControls {
+    gap: 1rem;
+}
+
+.pagination-info {
+    display: flex;
+    align-items: center;
+    white-space: nowrap; /* Ngăn text bị xuống dòng */
+    min-width: 120px; /* Đảm bảo đủ không gian cho "Số bản ghi:" và select */
+}
+
+.pagination-info span {
+    font-weight: 500;
+    color: var(--dark-color);
+    margin-right: 0.5rem;
+}
+
+.pagination-info select {
+    width: auto; /* Cho phép select tự điều chỉnh */
+    min-width: 70px; /* Đảm bảo select không quá nhỏ */
+    flex-shrink: 0; /* Ngăn select bị co lại */
+}
+
+.pagination {
+    margin: 0;
+    display: flex;
+    align-items: center;
+}
+
+.pagination .page-item .page-link {
+    color: var(--primary-color);
+}
+
+.pagination .page-item.active .page-link {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: white;
+}
+
+.pagination .page-item.disabled .page-link {
+    color: #6c757d;
+    pointer-events: none;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 991.98px) {
+    .parameter-card {
+        margin-bottom: 1.5rem;
+    }
+    #paginationControls {
+        display: none;
+    }
+    #mobilePaginationControls {
+        display: flex;
+    }
+    #mobilePaginationControls .pagination-info {
+        min-width: 110px; /* Điều chỉnh cho mobile */
+    }
+}
+
+@media (min-width: 992px) {
+    #mobilePaginationControls {
+        display: none;
+    }
+    #paginationControls {
+        display: flex;
+    }
+}

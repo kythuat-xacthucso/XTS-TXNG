@@ -1,0 +1,283 @@
+<div class="page-header">
+    <h1 class="page-title">Chi tiết hóa đơn</h1>
+    <p class="page-breadcrumb">Dịch vụ / Thanh toán / Chi tiết</p>
+</div>
+
+<!-- Toast Container -->
+<div id="toastContainer" class="position-fixed top-0 end-0 p-3" style="z-index: 1055;">
+    <!-- Toast will be dynamically added here -->
+</div>
+
+<form id="orderPaymentForm" class="service-package-form">
+    <!-- Section 1: Thông tin hóa đơn (Mobile) -->
+    <div class="accordion d-md-none mb-4" id="mobileAccordion">
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#invoiceInfo"
+                    aria-expanded="true">
+                    <i class="fas fa-info-circle me-2"></i>
+                    Thông tin hóa đơn
+                </button>
+            </h2>
+            <div id="invoiceInfo" class="accordion-collapse collapse show" data-bs-parent="#mobileAccordion">
+                <div class="accordion-body">
+                    <div class="package-info-content">
+                        <div class="mb-3">
+                            <label for="invoiceCode" class="form-label">Mã đơn</label>
+                            <input type="text" class="form-control" id="invoiceCode" name="invoiceCode" readonly>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="amount" class="form-label">Số tiền</label>
+                            <input type="text" class="form-control" id="amount" name="amount" readonly>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="createdAt" class="form-label">Thời gian tạo</label>
+                            <input type="text" class="form-control" id="createdAt" name="createdAt" readonly>
+                        </div>
+
+                        <div class="mb-3" id="paymentTimeContainer">
+                            <label for="paymentTime" class="form-label">Thời gian thanh toán</label>
+                            <input type="text" class="form-control" id="paymentTime" name="paymentTime" readonly>
+                        </div>
+
+                        <div class="mb-3" id="approvedTimeContainer">
+                            <label for="approvedTime" class="form-label">Thời gian duyệt</label>
+                            <input type="text" class="form-control" id="approvedTime" name="approvedTime" readonly>
+                        </div>
+
+                        <div class="mb-3" id="approvedByContainer">
+                            <label for="approvedBy" class="form-label">Người duyệt</label>
+                            <input type="text" class="form-control" id="approvedBy" name="approvedBy" readonly>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="createdBy" class="form-label">Người tạo</label>
+                            <input type="text" class="form-control" id="createdBy" name="createdBy" readonly>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="status" class="form-label">Trạng thái</label>
+                            <input type="text" class="form-control" id="status" name="status" readonly>
+                        </div>
+
+                        <div class="mb-3" id="transactionCodeContainer">
+                            <label for="transactionCode" class="form-label">Mã giao dịch</label>
+                            <input type="text" class="form-control" id="transactionCode" name="transactionCode" readonly>
+                        </div>
+
+                        <div class="mb-3" id="transactionImageContainer">
+                            <label for="transactionImage" class="form-label">Ảnh giao dịch</label>
+                            <div class="transaction-image-preview">
+                                <img id="transactionImage" src="" alt="Ảnh giao dịch" class="img-fluid" style="max-width: 100%; max-height: 200px;">
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="note" class="form-label">Ghi chú</label>
+                            <textarea class="form-control" id="note" name="note" readonly></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#packagesInfo" aria-expanded="false">
+                    <i class="fas fa-list me-2"></i>
+                    Danh sách gói dịch vụ
+                </button>
+            </h2>
+            <div id="packagesInfo" class="accordion-collapse collapse" data-bs-parent="#mobileAccordion">
+                <div class="accordion-body">
+                    <div class="parameters-content">
+                        <div id="mobilePackagesList" class="mobile-parameters-list">
+                            <!-- Package cards will be dynamically added here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Desktop Layout -->
+    <div class="d-none d-md-block">
+        <!-- Section 1: Thông tin hóa đơn -->
+        <div class="content-card mb-4">
+            <h5 class="card-title mb-4">
+                <i class="fas fa-info-circle me-2"></i>
+                Thông tin hóa đơn
+            </h5>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="invoiceCodeDesktop" class="form-label">Mã đơn</label>
+                        <input type="text" class="form-control" id="invoiceCodeDesktop" name="invoiceCode" readonly>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="amountDesktop" class="form-label">Số tiền</label>
+                        <input type="text" class="form-control" id="amountDesktop" name="amount" readonly>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="createdAtDesktop" class="form-label">Thời gian tạo</label>
+                        <input type="text" class="form-control" id="createdAtDesktop" name="createdAt" readonly>
+                    </div>
+                </div>
+
+                <div class="col-md-6" id="paymentTimeContainerDesktop">
+                    <div class="mb-3">
+                        <label for="paymentTimeDesktop" class="form-label">Thời gian thanh toán</label>
+                        <input type="text" class="form-control" id="paymentTimeDesktop" name="paymentTime" readonly>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6" id="approvedTimeContainerDesktop">
+                    <div class="mb-3">
+                        <label for="approvedTimeDesktop" class="form-label">Thời gian duyệt</label>
+                        <input type="text" class="form-control" id="approvedTimeDesktop" name="approvedTime" readonly>
+                    </div>
+                </div>
+
+                <div class="col-md-6" id="approvedByContainerDesktop">
+                    <div class="mb-3">
+                        <label for="approvedByDesktop" class="form-label">Người duyệt</label>
+                        <input type="text" class="form-control" id="approvedByDesktop" name="approvedBy" readonly>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="createdByDesktop" class="form-label">Người tạo</label>
+                        <input type="text" class="form-control" id="createdByDesktop" name="createdBy" readonly>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="statusDesktop" class="form-label">Trạng thái</label>
+                        <input type="text" class="form-control" id="statusDesktop" name="status" readonly>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6" id="transactionCodeContainerDesktop">
+                    <div class="mb-3">
+                        <label for="transactionCodeDesktop" class="form-label">Mã giao dịch</label>
+                        <input type="text" class="form-control" id="transactionCodeDesktop" name="transactionCode" readonly>
+                    </div>
+                </div>
+
+                <div class="col-md-6" id="transactionImageContainerDesktop">
+                    <div class="mb-3">
+                        <label for="transactionImageDesktop" class="form-label">Ảnh giao dịch</label>
+                        <div class="transaction-image-preview">
+                            <img id="transactionImageDesktop" src="" alt="Ảnh giao dịch" class="img-fluid" style="max-width: 100%; max-height: 200px;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="mb-3">
+                        <label for="noteDesktop" class="form-label">Ghi chú</label>
+                        <textarea class="form-control" id="noteDesktop" name="note" readonly></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 2: Danh sách gói dịch vụ -->
+        <div class="content-card mb-4">
+            <h5 class="card-title mb-4">
+                <i class="fas fa-list me-2"></i>
+                Danh sách gói dịch vụ
+            </h5>
+
+            <div class="table-responsive">
+                <table class="table table-bordered" id="packagesTable">
+                    <thead class="table-light">
+                        <tr>
+                            <th width="60">STT</th>
+                            <th>Gói dịch vụ</th>
+                            <th width="150">Thời hạn</th>
+                            <th width="120">Giá tiền</th>
+                            <th width="150">Ngày hết hạn</th>
+                            <th width="120">Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody id="packagesTableBody">
+                        <!-- Package rows will be dynamically added here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Action Buttons - Sticky on mobile -->
+    <div class="action-buttons">
+        <div class="d-flex gap-3 justify-content-end" id="actionButtons">
+            <button type="button" class="btn btn-secondary" onclick="adminLayout.loadContent('payments')">
+                <i class="fas fa-arrow-left me-2"></i>Quay lại
+            </button>
+            <button type="button" class="btn btn-primary" id="approveButton" onclick="approvePayment()">
+                <i class="fas fa-check me-2"></i>Duyệt
+            </button>
+        </div>
+    </div>
+
+    <!-- Modal for View Package Details -->
+    <div class="modal fade" id="viewPackageModal" tabindex="-1" aria-labelledby="viewPackageModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="viewPackageModalLabel">Chi tiết gói dịch vụ</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="viewPackageModalBody">
+                    <!-- Content will be loaded dynamically -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Confirm Approve -->
+    <div class="modal fade" id="confirmApproveModal" tabindex="-1" aria-labelledby="confirmApproveModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmApproveModalLabel">Xác nhận duyệt thanh toán</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Bạn có chắc chắn muốn duyệt thanh toán này không?</p>
+                    <p id="confirmApproveCode"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <button type="button" class="btn btn-primary" id="confirmApproveButton">Xác nhận</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
