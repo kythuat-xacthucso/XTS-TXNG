@@ -416,6 +416,49 @@ const menuConfig = {
         title: 'Nhật ký',
         submenu: [
             { 
+                id: 'logs', 
+                name: 'Nhật ký', 
+                icon: 'fas fa-book',
+                files: {
+                    html: '../../pages/company/logs/logs/list/index.html',
+                    css: '../../pages/company/logs/logs/list/style.css',
+                    js: '../../pages/company/logs/logs/list/main.js'
+                },
+                submenu: [
+                    { 
+                        id: 'add-log', 
+                        name: 'Thêm nhật ký', 
+                        icon: 'fas fa-plus',
+                        files: {
+                            html: '../../pages/company/logs/logs/add/index.html',
+                            css: '../../pages/company/logs/logs/add/style.css',
+                            js: '../../pages/company/logs/logs/add/main.js'
+                        }
+                    },
+                    { 
+                        id: 'view-log', 
+                        name: 'Xem chi tiết nhật ký', 
+                        icon: 'fas fa-eye',
+                        files: {
+                            html: '../../pages/company/logs/logs/view/index.html',
+                            css: '../../pages/company/logs/logs/view/style.css',
+                            js: '../../pages/company/logs/logs/view/main.js'
+                        }
+                    },
+                    { 
+                        id: 'edit-log', 
+                        name: 'Sửa nhật ký', 
+                        icon: 'fas fa-edit',
+                        files: {
+                            html: '../../pages/company/logs/logs/edit/index.html',
+                            css: '../../pages/company/logs/logs/edit/style.css',
+                            js: '../../pages/company/logs/logs/edit/main.js'
+                        }
+                    }
+                ],
+                defaultContent: 'logs'
+            },
+            { 
                 id: 'planting-areas', 
                 name: 'Vùng trồng', 
                 icon: 'fas fa-leaf',
@@ -500,52 +543,9 @@ const menuConfig = {
                     }
                 ],
                 defaultContent: 'processes'
-            },
-            { 
-                id: 'logs', 
-                name: 'Nhật ký', 
-                icon: 'fas fa-book',
-                files: {
-                    html: '../../pages/company/logs/logs/list/index.html',
-                    css: '../../pages/company/logs/logs/list/style.css',
-                    js: '../../pages/company/logs/logs/list/main.js'
-                },
-                submenu: [
-                    { 
-                        id: 'add-log', 
-                        name: 'Thêm nhật ký', 
-                        icon: 'fas fa-plus',
-                        files: {
-                            html: '../../pages/company/logs/logs/add/index.html',
-                            css: '../../pages/company/logs/logs/add/style.css',
-                            js: '../../pages/company/logs/logs/add/main.js'
-                        }
-                    },
-                    { 
-                        id: 'view-log', 
-                        name: 'Xem chi tiết nhật ký', 
-                        icon: 'fas fa-eye',
-                        files: {
-                            html: '../../pages/company/logs/logs/view/index.html',
-                            css: '../../pages/company/logs/logs/view/style.css',
-                            js: '../../pages/company/logs/logs/view/main.js'
-                        }
-                    },
-                    { 
-                        id: 'edit-log', 
-                        name: 'Sửa nhật ký', 
-                        icon: 'fas fa-edit',
-                        files: {
-                            html: '../../pages/company/logs/logs/edit/index.html',
-                            css: '../../pages/company/logs/logs/edit/style.css',
-                            js: '../../pages/company/logs/logs/edit/main.js'
-                        }
-                    }
-                ],
-                defaultContent: 'logs'
             }
         ],
-        defaultContent: 'planting-areas'
+        defaultContent: 'logs'
     },
     admin: {
         title: 'Quản trị',
