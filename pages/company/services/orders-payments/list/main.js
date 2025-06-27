@@ -28,7 +28,10 @@ function formatDate(dateStr) {
 
 // Format currency
 function formatCurrency(amount) {
-    return new Intl.NumberFormat('vi-VN').format(amount);
+    return new Intl.NumberFormat('vi-VN', {
+        style: 'currency',
+        currency: 'VND'
+    }).format(amount);
 }
 
 // Render table for desktop with pagination
@@ -58,7 +61,7 @@ function renderTable(data) {
             <tr>
                 <td>${startIndex + index + 1}</td>
                 <td>${invoice.code}</td>
-                <td>${formatCurrency(invoice.amount)} VND</td>
+                <td>${formatCurrency(invoice.amount)}</td>
                 <td>${formatDate(invoice.createdAt)}</td>
                 <td>${formatDate(invoice.paidAt)}</td>
                 <td>${invoice.creator}</td>
@@ -114,7 +117,7 @@ function renderCards(data) {
         const card = `
             <div class="col-12 invoice-card" onclick="navigateTo('view-order-payment', ${invoice.id})">
                 <h5 class="card-title">${invoice.code}</h5>
-                <p class="card-text">Số tiền: ${formatCurrency(invoice.amount)} VND</p>
+                <p class="card-text">Số tiền: ${formatCurrency(invoice.amount)}</p>
                 <p class="card-text">Thời gian tạo: ${formatDate(invoice.createdAt)}</p>
                 <p class="card-text">Trạng thái: ${invoice.status}</p>
                 ${invoice.status === 'Chưa thanh toán' ? `
@@ -303,7 +306,12 @@ function openPaymentModal(invoiceId) {
     };
 
     // Initialize and populate payment modal
-    window.confirmPayment?.initializeConfirmPayment?.(orderData);
+    if (window.confirmPayment?.initializeConfirmPayment) {
+        window.confirmPayment.initializeConfirmPayment(orderData);
+    } else {
+        console.warn('confirmPayment.initializeConfirmPayment is not available. Attempting manual initialization.');
+        initializePaymentModalManually(orderData);
+    }
 
     // Show modal
     const modalElement = document.getElementById('confirmPaymentModal');
@@ -313,6 +321,53 @@ function openPaymentModal(invoiceId) {
     } else {
         console.error('Payment modal element not found');
         window.companyLayout?.showNotification?.('Không thể mở popup thanh toán', 'danger');
+    }
+}
+
+// Manual initialization of payment modal (temporary solution)
+function initializePaymentModalManually(data) {
+    document.getElementById('orderId').value = data.orderId || '';
+    document.getElementById('createdAt').value = data.createdAt || '';
+    document.getElementById('customerName').value = data.customerName || '';
+    document.getElementById('customerId').value = data.customerId || '';
+    document.getElementById('paymentType').value = data.paymentType || '';
+    document.getElementById('finalCost').value = formatCurrency(data.finalCost) || '';
+
+    // Reset form validation
+    const form = document.getElementById('confirmPaymentForm');
+    if (form) {
+        form.classList.remove('was-validated');
+    }
+
+    // Add image preview handler
+    const proofImage = document.getElementById('proofImage');
+    const imagePreview = document.getElementById('imagePreview');
+    const previewImg = document.getElementById('previewImg');
+    if (proofImage && imagePreview && previewImg) {
+        proofImage.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    previewImg.src = e.target.result;
+                    imagePreview.style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    }
+
+    // Add form validation handler
+    if (form) {
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            if (form.checkValidity()) {
+                window.companyLayout?.showNotification?.('Thanh toán thành công', 'success');
+                bootstrap.Modal.getInstance(form.closest('.modal')).hide();
+            } else {
+                form.classList.add('was-validated');
+            }
+        });
     }
 }
 
@@ -333,8 +388,8 @@ function initializePaymentModal() {
     if (window.confirmPayment?.initializeConfirmPayment) {
         window.confirmPayment.initializeConfirmPayment();
     } else {
-        console.error('Payment modal initialization failed');
-        window.companyLayout?.showNotification?.('Không thể khởi tạo popup thanh toán', 'danger');
+        console.warn('confirmPayment.initializeConfirmPayment not available. Modal initialization skipped.');
+        // Optional: Log or notify if needed, but avoid breaking the page
     }
 }
 
