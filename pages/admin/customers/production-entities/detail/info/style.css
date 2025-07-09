@@ -1,0 +1,53 @@
+.label-bold {
+    font-weight: 600;
+}
+
+.info-box {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 20px;
+}
+
+.section-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid #dee2e6;
+    padding-bottom: 4px;
+}
+
+.avatar-img, .logo-img, .dkkd-img, .other-img {
+    width: 100%;
+    border-radius: 8px;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+.img-grid > div {
+    margin-bottom: 12px;
+}
+
+#previewImage {
+    max-width: 100%;
+    max-height: 70vh;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 991.98px) {
+    .info-box {
+        padding: 12px;
+    }
+
+    .section-title {
+        font-size: 1rem;
+    }
+
+    .avatar-img {
+        max-width: 120px;
+    }
+
+    .logo-img, .dkkd-img, .other-img {
+        max-height: 100px;
+    }
+}

@@ -1,0 +1,110 @@
+<!-- Section 1: Company Name and Status -->
+<div class="content-card">
+    <div class="page-header d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h3 class="page-title" id="entityName">Tên công ty</h3>
+            <p class="page-breadcrumb mb-0">Dịch vụ / Chủ thể sản xuất / Chi tiết</p>
+        </div>
+        <div>
+            <span id="entityStatus" class="badge bg-success">Đang hoạt động</span>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div id="toastContainer" class="position-fixed top-0 end-0 p-3" style="z-index: 1055;">
+        <!-- Toast will be dynamically added here -->
+    </div>
+
+    <!-- Section 2: Tabs -->
+    <ul class="nav nav-tabs mb-4" id="entityTabs" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="entity-info-tab" data-bs-toggle="tab" data-tab-id="entity-info" type="button" role="tab" aria-controls="entity-info" aria-selected="true">Thông tin chủ thể</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="users-tab" data-bs-toggle="tab" data-tab-id="users" type="button" role="tab" aria-controls="users" aria-selected="false">Người dùng</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="products-tab" data-bs-toggle="tab" data-tab-id="products" type="button" role="tab" aria-controls="products" aria-selected="false">Sản phẩm</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="services-tab" data-bs-toggle="tab" data-tab-id="services" type="button" role="tab" aria-controls="services" aria-selected="false">Dịch vụ</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="labels-tab" data-bs-toggle="tab" data-tab-id="labels" type="button" role="tab" aria-controls="labels" aria-selected="false">Tem và mã</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="payments-tab" data-bs-toggle="tab" data-tab-id="payments" type="button" role="tab" aria-controls="payments" aria-selected="false">Thanh toán</button>
+        </li>
+    </ul>
+
+    <!-- Tab Content -->
+    <div class="tab-content" id="entityTabContent">
+        <div class="tab-pane fade show active" id="entity-info" role="tabpanel" aria-labelledby="entity-info-tab">
+            <!-- Content will be loaded dynamically -->
+        </div>
+        <div class="tab-pane fade" id="users" role="tabpanel" aria-labelledby="users-tab">
+            <!-- Content will be loaded dynamically -->
+        </div>
+        <div class="tab-pane fade" id="products" role="tabpanel" aria-labelledby="products-tab">
+            <!-- Content will be loaded dynamically -->
+        </div>
+        <div class="tab-pane fade" id="services" role="tabpanel" aria-labelledby="services-tab">
+            <!-- Content will be loaded dynamically -->
+        </div>
+        <div class="tab-pane fade" id="labels" role="tabpanel" aria-labelledby="labels-tab">
+            <!-- Content will be loaded dynamically -->
+        </div>
+        <div class="tab-pane fade" id="payments" role="tabpanel" aria-labelledby="payments-tab">
+            <!-- Content will be loaded dynamically -->
+        </div>
+    </div>
+</div>
+
+<!-- Action Buttons (Pinned to Bottom) -->
+<div class="fixed-bottom action-bar bg-white p-3 border-top">
+    <div class="container">
+        <div class="d-flex gap-2 justify-content-end">
+            <button class="btn btn-secondary" onclick="window.adminLayout.loadContent('production-entities-list')">Quay lại</button>
+            <button class="btn btn-warning" onclick="editEntity()">Sửa</button>
+            <button id="lockButton" class="btn btn-danger" onclick="toggleLockEntity()">Khóa</button>
+        </div>
+    </div>
+</div>
+
+<!-- Lock Confirmation Modal -->
+<div class="modal fade" id="confirmLockModal" tabindex="-1" aria-labelledby="confirmLockModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmLockModalLabel">Xác nhận khóa chủ thể</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Bạn có chắc chắn muốn khóa chủ thể <strong id="confirmLockEntityName"></strong>?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                <button type="button" id="confirmLockButton" class="btn btn-danger">Khóa</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Unlock Confirmation Modal -->
+<div class="modal fade" id="confirmUnlockModal" tabindex="-1" aria-labelledby="confirmUnlockModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmUnlockModalLabel">Xác nhận mở khóa chủ thể</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Bạn có chắc chắn muốn mở khóa chủ thể <strong id="confirmUnlockEntityName"></strong>?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                <button type="button" id="confirmUnlockButton" class="btn btn-success">Mở khóa</button>
+            </div>
+        </div>
+    </div>
+</div>

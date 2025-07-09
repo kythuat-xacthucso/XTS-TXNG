@@ -1,0 +1,84 @@
+/* Users Container */
+.users-container {
+    padding: 1rem;
+}
+
+/* Table Styles */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table th,
+.table td {
+    padding: 0.75rem;
+    vertical-align: middle;
+    text-align: left;
+}
+
+.table th {
+    background-color: #f8f9fa;
+    font-weight: 600;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: #f8f9fa;
+}
+
+/* Card Styles (Tablet/Mobile) */
+.user-card {
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    padding: 1rem;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.user-card .card-title {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.user-card .card-text {
+    margin-bottom: 0.25rem;
+}
+
+.user-card .action-btn {
+    font-size: 1rem;
+    padding: 0.25rem;
+}
+
+/* Action Buttons */
+.action-btn.unlink {
+    color: #dc3545;
+}
+
+.action-btn.link {
+    color: #28a745;
+}
+
+/* Modal Styles */
+#addUserModal .modal-body {
+    padding: 1.5rem;
+}
+
+#addUserModal .form-check {
+    margin-bottom: 0.5rem;
+}
+
+/* Responsive Design */
+@media (max-width: 767.98px) {
+    .table-responsive {
+        display: none;
+    }
+
+    .user-card {
+        margin-bottom: 1rem;
+    }
+}
+
+@media (min-width: 768px) {
+    #usersCardContainer {
+        display: none;
+    }
+}

@@ -1,0 +1,129 @@
+<div class="row">
+    <!-- Cột Thông tin -->
+    <div class="col-md-7">
+        <!-- Thông tin Chủ thể -->
+        <div class="info-box">
+            <div class="section-title">Thông tin Chủ thể</div>
+            <div class="row">
+                <div class="col-md-6 mb-3"><span class="label-bold">Mã chủ thể:</span> <span id="entityCode">CT001</span></div>
+                <div class="col-md-6 mb-3"><span class="label-bold">Tên chủ thể:</span> <span id="entityName">Công ty ABC</span></div>
+                <div class="col-md-6 mb-3"><span class="label-bold">Số điện thoại:</span> <span id="entityPhone">0901234567</span></div>
+                <div class="col-md-6 mb-3"><span class="label-bold">Email:</span> <span id="entityEmail">info@abc.com</span></div>
+                <div class="col-md-6 mb-3"><span class="label-bold">Tên đầy đủ:</span> <span id="entityFullName">Công ty TNHH ABC</span></div>
+                <div class="col-md-6 mb-3"><span class="label-bold">Tên tiếng Anh:</span> <span id="entityEnglishName">ABC Ltd.</span></div>
+                <div class="col-md-6 mb-3"><span class="label-bold">Tên viết tắt:</span> <span id="entityShortName">ABC</span></div>
+                <div class="col-md-6 mb-3"><span class="label-bold">Mã số thuế:</span> <span id="entityTaxCode">123456789</span></div>
+                <div class="col-md-6 mb-3"><span class="label-bold">Ngày ĐKKD:</span> <span id="entityRegDate">01/01/2020</span></div>
+                <div class="col-md-6 mb-3"><span class="label-bold">Mã GCP:</span> <span id="entityGcpCode">GCP123456</span></div>
+                <div class="col-md-6 mb-3"><span class="label-bold">Nơi cấp ĐKKD:</span> <span id="entityRegPlace">Hà Nội</span></div>
+                <div class="col-md-12 mb-3"><span class="label-bold">Địa chỉ ĐKKD:</span> <span id="entityRegAddress">123 Đường ABC, Quận XYZ, Hà Nội</span></div>
+                <div class="col-md-6 mb-3">
+                    <span class="label-bold">Website:</span> 
+                    <a id="entityWebsite" href="https://abc.com" target="_blank">abc.com</a>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <span class="label-bold">Kênh Youtube:</span> 
+                    <a id="entityYoutube" href="https://youtube.com/abc" target="_blank">youtube.com/abc</a>
+                </div>
+                <div class="col-md-12 mb-3">
+                    <span class="label-bold">Tọa độ (Map):</span>
+                    <iframe id="entityMap" src="https://maps.google.com/maps?q=Hanoi&t=&z=13&ie=UTF8&iwloc=&output=embed" 
+                        width="100%" height="200" style="border:0;" allowfullscreen loading="lazy"></iframe>
+                </div>
+                <div class="col-md-12 mb-3">
+                    <span class="label-bold">Mô tả:</span> <span id="entityDescription">Đây là mô tả ngắn về chủ thể...</span>
+                </div>
+                <div class="col-md-6 mb-3"><span class="label-bold">Loại hình:</span> <span id="entityType">Tổ chức</span></div>
+                <div class="col-md-6 mb-3"><span class="label-bold">Trạng thái:</span> <span id="entityStatus">Đang hoạt động</span></div>
+                <div class="col-md-6 mb-3"><span class="label-bold">Ngày tạo:</span> <span id="entityCreatedAt">15/01/2023</span></div>
+                <div class="col-md-6 mb-3"><span class="label-bold">Người tạo:</span> <span id="entityCreatedBy">admin01</span></div>
+            </div>
+        </div>
+
+        <!-- Chủ sở hữu -->
+        <div class="info-box">
+            <div class="section-title">Thông tin Chủ sở hữu</div>
+            <div class="row">
+                <div class="col-md-12 text-center mb-3">
+                    <img id="ownerAvatar" src="https://xacthucso.s3.amazonaws.com/u1220-e87dc337-dddb-48bd-94d0-96067661657b.png" 
+                        alt="Avatar Chủ sở hữu" class="avatar-img" style="max-width: 150px;" data-bs-toggle="modal" data-bs-target="#imagePreviewModal">
+                </div>
+                <div class="col-md-6 mb-3"><span class="label-bold">Tên:</span> <span id="ownerName">Nguyễn Văn A</span></div>
+                <div class="col-md-6 mb-3"><span class="label-bold">SĐT:</span> <span id="ownerPhone">0912345678</span></div>
+                <div class="col-md-6 mb-3"><span class="label-bold">Email:</span> <span id="ownerEmail">nguyenva@example.com</span></div>
+                <div class="col-md-6 mb-3"><span class="label-bold">Địa chỉ:</span> <span id="ownerAddress">99 Đường DEF, TP.HCM</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cột Hình ảnh -->
+    <div class="col-md-5">
+        <div class="info-box">
+            <div class="section-title">Hình ảnh</div>
+
+            <!-- Logo -->
+            <div class="mb-4">
+                <div class="label-bold mb-1">Logo:</div>
+                <img id="entityLogo" src="https://xacthucso.s3.amazonaws.com/u1220-e87dc337-dddb-48bd-94d0-96067661657b.png" 
+                    class="logo-img" alt="Logo" data-bs-toggle="modal" data-bs-target="#imagePreviewModal">
+            </div>
+
+            <!-- Ảnh ĐKKD -->
+            <div class="mb-4">
+                <div class="label-bold mb-1">Ảnh ĐKKD:</div>
+                <div class="row img-grid">
+                    <div class="col-6">
+                        <img id="dkkdImage1" src="https://xacthucso.s3.amazonaws.com/u1220-e87dc337-dddb-48bd-94d0-96067661657b.png" 
+                            class="dkkd-img" alt="DKKD 1" data-bs-toggle="modal" data-bs-target="#imagePreviewModal">
+                    </div>
+                    <div class="col-6">
+                        <img id="dkkdImage2" src="https://xacthucso.s3.amazonaws.com/u1220-e87dc337-dddb-48bd-94d0-96067661657b.png" 
+                            class="dkkd-img" alt="DKKD 2" data-bs-toggle="modal" data-bs-target="#imagePreviewModal">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ảnh khác -->
+            <div>
+                <div class="label-bold mb-1">Ảnh khác:</div>
+                <div class="row img-grid">
+                    <div class="col-4">
+                        <img id="otherImage1" src="https://xacthucso.s3.amazonaws.com/u1220-e87dc337-dddb-48bd-94d0-96067661657b.png" 
+                            class="other-img" alt="Other 1" data-bs-toggle="modal" data-bs-target="#imagePreviewModal">
+                    </div>
+                    <div class="col-4">
+                        <img id="otherImage2" src="https://xacthucso.s3.amazonaws.com/u1220-e87dc337-dddb-48bd-94d0-96067661657b.png" 
+                            class="other-img" alt="Other 2" data-bs-toggle="modal" data-bs-target="#imagePreviewModal">
+                    </div>
+                    <div class="col-4">
+                        <img id="otherImage3" src="https://xacthucso.s3.amazonaws.com/u1220-e87dc337-dddb-48bd-94d0-96067661657b.png" 
+                            class="other-img" alt="Other 3" data-bs-toggle="modal" data-bs-target="#imagePreviewModal">
+                    </div>
+                    <div class="col-4">
+                        <img id="otherImage4" src="https://xacthucso.s3.amazonaws.com/u1220-e87dc337-dddb-48bd-94d0-96067661657b.png" 
+                            class="other-img" alt="Other 4" data-bs-toggle="modal" data-bs-target="#imagePreviewModal">
+                    </div>
+                    <div class="col-4">
+                        <img id="otherImage5" src="https://xacthucso.s3.amazonaws.com/u1220-e87dc337-dddb-48bd-94d0-96067661657b.png" 
+                            class="other-img" alt="Other 5" data-bs-toggle="modal" data-bs-target="#imagePreviewModal">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Image Preview Modal -->
+    <div class="modal fade" id="imagePreviewModal" tabindex="-1" aria-labelledby="imagePreviewModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="imagePreviewModalLabel">Xem trước ảnh</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <img id="previewImage" src="" class="img-fluid" alt="Preview Image">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

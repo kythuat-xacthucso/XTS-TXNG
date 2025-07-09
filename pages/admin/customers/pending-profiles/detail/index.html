@@ -1,0 +1,181 @@
+<div class="content-card">
+    <!-- Page Header -->
+    <div class="page-header d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h3 class="page-title">Chi tiết hồ sơ</h3>
+            <p class="page-breadcrumb mb-0">Khách hàng / Hồ sơ chờ duyệt / Chi tiết hồ sơ</p>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div id="toastContainer" class="position-fixed top-0 end-0 p-3" style="z-index: 1055;">
+        <!-- Toast will be dynamically added here -->
+    </div>
+
+    <!-- Profile Details -->
+    <div class="card mb-4">
+        <div class="card-body">
+            <div class="accordion" id="profileAccordion">
+                <!-- Accordion 1: Thông tin hồ sơ đề nghị -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingOne">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            Thông tin hồ sơ đề nghị
+                        </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#profileAccordion">
+                        <div class="accordion-body">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label class="form-label">Tên pháp nhân</label>
+                                    <p id="legalName" class="form-control-plaintext"></p>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Mã số thuế</label>
+                                    <p id="taxCode" class="form-control-plaintext"></p>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Người đại diện</label>
+                                    <p id="representative" class="form-control-plaintext"></p>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Số điện thoại + Email</label>
+                                    <p id="contactInfo" class="form-control-plaintext"></p>
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label">Địa chỉ trụ sở</label>
+                                    <p id="address" class="form-control-plaintext"></p>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Ngày gửi hồ sơ</label>
+                                    <p id="submittedAt" class="form-control-plaintext"></p>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Ngày duyệt hồ sơ</label>
+                                    <p id="approvedAt" class="form-control-plaintext"></p>
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label">Trạng thái hiện tại</label>
+                                    <p id="status" class="form-control-plaintext"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Accordion 2: Xử lý hồ sơ -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingTwo">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            Xử lý hồ sơ
+                        </button>
+                    </h2>
+                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#profileAccordion">
+                        <div class="accordion-body">
+                            <div class="row g-3">
+                                <div class="col-12">
+                                    <label class="form-label">File đính kèm</label>
+                                    <div id="attachmentPreview" class="d-flex flex-wrap gap-2">
+                                        <!-- File previews will be rendered here -->
+                                    </div>
+                                    <div id="attachmentList" class="mt-2">
+                                        <!-- File list will be rendered here -->
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label">Lý do xử lý</label>
+                                    <textarea class="form-control" id="rejectionReason" rows="4" placeholder="Nhập lý do xử lý"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="d-flex gap-2 justify-content-end mb-4" id="actionButtons">
+        <!-- Buttons will be rendered dynamically by JS -->
+    </div>
+</div>
+
+<!-- Modal for Confirm Approve -->
+<div class="modal fade" id="confirmApproveModal" tabindex="-1" aria-labelledby="confirmApproveModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmApproveModalLabel">Xác nhận duyệt hồ sơ</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Bạn có chắc chắn muốn duyệt hồ sơ này không?</p>
+                <p id="confirmApproveName"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                <button type="button" class="btn btn-primary" id="confirmApproveButton">Xác nhận</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal for Confirm Reject -->
+<div class="modal fade" id="confirmRejectModal" tabindex="-1" aria-labelledby="confirmRejectModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmRejectModalLabel">Xác nhận từ chối hồ sơ</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Bạn có chắc chắn muốn từ chối hồ sơ này không?</p>
+                <p id="confirmRejectName"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                <button type="button" class="btn btn-danger" id="confirmRejectButton">Xác nhận</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal for Create Entity -->
+<div class="modal fade" id="createEntityModal" tabindex="-1" aria-labelledby="createEntityModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="createEntityModalLabel">Tạo chủ thể</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="createEntityForm">
+                    <div class="mb-3">
+                        <label class="form-label">Tên SPC</label>
+                        <input type="text" class="form-control" id="entitySpcName" readonly>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Mã số thuế</label>
+                        <input type="text" class="form-control" id="entityTaxCode" readonly>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Loại chủ thể</label>
+                        <select class="form-select" id="entityType" required>
+                            <option value="">Chọn loại chủ thể</option>
+                            <option value="management">Chủ thể quản lý</option>
+                            <option value="production">Chủ thể sản xuất</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Thông tin bổ sung</label>
+                        <textarea class="form-control" id="entityAdditionalInfo" rows="4" placeholder="Nhập thông tin bổ sung"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                <button type="button" class="btn btn-primary" id="confirmCreateEntityButton">Tạo</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,25 @@
+.process-card {
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.process-card:hover {
+    transform: scale(1.05);
+}
+
+.card-img-top {
+    object-fit: cover;
+    height: 150px;
+}
+
+#processCarousel {
+    margin-bottom: 1rem;
+}
+
+.carousel-item img {
+    object-fit: cover;
+}
+
+#processDescription {
+    margin-top: 1rem;
+}

@@ -17,30 +17,159 @@ const menuConfig = {
                 name: 'Hồ sơ chờ duyệt', 
                 icon: 'fas fa-user-clock',
                 files: {
-                    html: '../../pages/admin/customers/pending-profiles/index.html',
-                    css: '../../pages/admin/customers/pending-profiles/style.css',
-                    js: '../../pages/admin/customers/pending-profiles/main.js'
-                }
+                    html: '../../pages/admin/customers/pending-profiles/list/index.html',
+                    css: '../../pages/admin/customers/pending-profiles/list/style.css',
+                    js: '../../pages/admin/customers/pending-profiles/list/main.js'
+                },
+                submenu: [
+                    { 
+                        id: 'pending-profiles-list', 
+                        name: 'Danh sách', 
+                        icon: 'fas fa-list',
+                        files: {
+                            html: '../../pages/admin/customers/pending-profiles/list/index.html',
+                            css: '../../pages/admin/customers/pending-profiles/list/style.css',
+                            js: '../../pages/admin/customers/pending-profiles/list/main.js'
+                        }
+                    },
+                    { 
+                        id: 'pending-profiles-add', 
+                        name: 'Thêm mới', 
+                        icon: 'fas fa-plus',
+                        files: {
+                            html: '../../pages/admin/customers/pending-profiles/add/index.html',
+                            css: '../../pages/admin/customers/pending-profiles/add/style.css',
+                            js: '../../pages/admin/customers/pending-profiles/add/main.js'
+                        }
+                    },
+                    { 
+                        id: 'pending-profiles-view', 
+                        name: 'Xem chi tiết', 
+                        icon: 'fas fa-eye',
+                        files: {
+                            html: '../../pages/admin/customers/pending-profiles/detail/index.html',
+                            css: '../../pages/admin/customers/pending-profiles/detail/style.css',
+                            js: '../../pages/admin/customers/pending-profiles/detail/main.js'
+                        }
+                    },
+                    { 
+                        id: 'pending-profiles-edit', 
+                        name: 'Sửa', 
+                        icon: 'fas fa-edit',
+                        files: {
+                            html: '../../pages/admin/customers/pending-profiles/edit/index.html',
+                            css: '../../pages/admin/customers/pending-profiles/edit/style.css',
+                            js: '../../pages/admin/customers/pending-profiles/edit/main.js'
+                        }
+                    }
+                ],
+                defaultContent: 'pending-profiles-list'
             },
             { 
                 id: 'manage-entities', 
                 name: 'Chủ thể quản lý', 
                 icon: 'fas fa-building',
                 files: {
-                    html: '../../pages/admin/customers/manage-entities/index.html',
-                    css: '../../pages/admin/customers/manage-entities/style.css',
-                    js: '../../pages/admin/customers/manage-entities/main.js'
-                }
+                    html: '../../pages/admin/customers/manage-entities/list/index.html',
+                    css: '../../pages/admin/customers/manage-entities/list/style.css',
+                    js: '../../pages/admin/customers/manage-entities/list/main.js'
+                },
+                submenu: [
+                    { 
+                        id: 'manage-entities-list', 
+                        name: 'Danh sách', 
+                        icon: 'fas fa-list',
+                        files: {
+                            html: '../../pages/admin/customers/manage-entities/list/index.html',
+                            css: '../../pages/admin/customers/manage-entities/list/style.css',
+                            js: '../../pages/admin/customers/manage-entities/list/main.js'
+                        }
+                    },
+                    { 
+                        id: 'manage-entities-add', 
+                        name: 'Thêm mới', 
+                        icon: 'fas fa-plus',
+                        files: {
+                            html: '../../pages/admin/customers/manage-entities/add/index.html',
+                            css: '../../pages/admin/customers/manage-entities/add/style.css',
+                            js: '../../pages/admin/customers/manage-entities/add/main.js'
+                        }
+                    },
+                    { 
+                        id: 'manage-entities-view', 
+                        name: 'Xem chi tiết', 
+                        icon: 'fas fa-eye',
+                        files: {
+                            html: '../../pages/admin/customers/manage-entities/detail/index.html',
+                            css: '../../pages/admin/customers/manage-entities/detail/style.css',
+                            js: '../../pages/admin/customers/manage-entities/detail/main.js'
+                        }
+                    },
+                    { 
+                        id: 'manage-entities-edit', 
+                        name: 'Sửa', 
+                        icon: 'fas fa-edit',
+                        files: {
+                            html: '../../pages/admin/customers/manage-entities/edit/index.html',
+                            css: '../../pages/admin/customers/manage-entities/edit/style.css',
+                            js: '../../pages/admin/customers/manage-entities/edit/main.js'
+                        }
+                    }
+                ],
+                defaultContent: 'manage-entities-list'
             },
             { 
                 id: 'production-entities', 
                 name: 'Chủ thể sản xuất', 
                 icon: 'fas fa-industry',
                 files: {
-                    html: '../../pages/admin/customers/production-entities/index.html',
-                    css: '../../pages/admin/customers/production-entities/style.css',
-                    js: '../../pages/admin/customers/production-entities/main.js'
-                }
+                    html: '../../pages/admin/customers/production-entities/list/index.html',
+                    css: '../../pages/admin/customers/production-entities/list/style.css',
+                    js: '../../pages/admin/customers/production-entities/list/main.js'
+                },
+                submenu: [
+                    { 
+                        id: 'production-entities-list', 
+                        name: 'Danh sách', 
+                        icon: 'fas fa-list',
+                        files: {
+                            html: '../../pages/admin/customers/production-entities/list/index.html',
+                            css: '../../pages/admin/customers/production-entities/list/style.css',
+                            js: '../../pages/admin/customers/production-entities/list/main.js'
+                        }
+                    },
+                    { 
+                        id: 'production-entities-add', 
+                        name: 'Thêm mới', 
+                        icon: 'fas fa-plus',
+                        files: {
+                            html: '../../pages/admin/customers/production-entities/add/index.html',
+                            css: '../../pages/admin/customers/production-entities/add/style.css',
+                            js: '../../pages/admin/customers/production-entities/add/main.js'
+                        }
+                    },
+                    { 
+                        id: 'production-entities-view', 
+                        name: 'Xem chi tiết', 
+                        icon: 'fas fa-eye',
+                        files: {
+                            html: '../../pages/admin/customers/production-entities/detail/index.html',
+                            css: '../../pages/admin/customers/production-entities/detail/style.css',
+                            js: '../../pages/admin/customers/production-entities/detail/main.js'
+                        }
+                    },
+                    { 
+                        id: 'production-entities-edit', 
+                        name: 'Sửa', 
+                        icon: 'fas fa-edit',
+                        files: {
+                            html: '../../pages/admin/customers/production-entities/edit/index.html',
+                            css: '../../pages/admin/customers/production-entities/edit/style.css',
+                            js: '../../pages/admin/customers/production-entities/edit/main.js'
+                        }
+                    }
+                ],
+                defaultContent: 'production-entities-list'
             }
         ],
         defaultContent: 'pending-profiles'
@@ -56,7 +185,50 @@ const menuConfig = {
                     html: '../../pages/admin/services/parameters/index.html',
                     css: '../../pages/admin/services/parameters/style.css',
                     js: '../../pages/admin/services/parameters/main.js'
-                }
+                },
+                submenu: [
+                    { 
+                        id: 'parameters-list', 
+                        name: 'Danh sách', 
+                        icon: 'fas fa-list',
+                        files: {
+                            html: '../../pages/admin/services/parameters/list/index.html',
+                            css: '../../pages/admin/services/parameters/list/style.css',
+                            js: '../../pages/admin/services/parameters/list/main.js'
+                        }
+                    },
+                    { 
+                        id: 'parameters-add', 
+                        name: 'Thêm mới', 
+                        icon: 'fas fa-plus',
+                        files: {
+                            html: '../../pages/admin/services/parameters/add/index.html',
+                            css: '../../pages/admin/services/parameters/add/style.css',
+                            js: '../../pages/admin/services/parameters/add/main.js'
+                        }
+                    },
+                    { 
+                        id: 'parameters-view', 
+                        name: 'Xem chi tiết', 
+                        icon: 'fas fa-eye',
+                        files: {
+                            html: '../../pages/admin/services/parameters/detail/index.html',
+                            css: '../../pages/admin/services/parameters/detail/style.css',
+                            js: '../../pages/admin/services/parameters/detail/main.js'
+                        }
+                    },
+                    { 
+                        id: 'parameters-edit', 
+                        name: 'Sửa', 
+                        icon: 'fas fa-edit',
+                        files: {
+                            html: '../../pages/admin/services/parameters/edit/index.html',
+                            css: '../../pages/admin/services/parameters/edit/style.css',
+                            js: '../../pages/admin/services/parameters/edit/main.js'
+                        }
+                    }
+                ],
+                defaultContent: 'parameters-list'
             },
             { 
                 id: 'service-packages', 
@@ -68,6 +240,16 @@ const menuConfig = {
                     js: '../../pages/admin/services/service-packages/list/main.js'
                 },
                 submenu: [
+                    { 
+                        id: 'service-packages-list', 
+                        name: 'Danh sách', 
+                        icon: 'fas fa-list',
+                        files: {
+                            html: '../../pages/admin/services/service-packages/list/index.html',
+                            css: '../../pages/admin/services/service-packages/list/style.css',
+                            js: '../../pages/admin/services/service-packages/list/main.js'
+                        }
+                    },
                     { 
                         id: 'add-service-package', 
                         name: 'Thêm gói dịch vụ', 
@@ -85,7 +267,7 @@ const menuConfig = {
                         files: {
                             html: '../../pages/admin/services/service-packages/detail/index.html',
                             css: '../../pages/admin/services/service-packages/detail/style.css',
-                            js: '../../pages/admin/services/service-packages/detail/index.js'
+                            js: '../../pages/admin/services/service-packages/detail/main.js'
                         }
                     },
                     { 
@@ -99,7 +281,7 @@ const menuConfig = {
                         }
                     }
                 ],
-                defaultContent: 'service-packages'
+                defaultContent: 'service-packages-list'
             }
         ],
         defaultContent: 'parameters'
@@ -118,6 +300,26 @@ const menuConfig = {
                 },
                 submenu: [
                     { 
+                        id: 'payments-list', 
+                        name: 'Danh sách', 
+                        icon: 'fas fa-list',
+                        files: {
+                            html: '../../pages/admin/payments/payments/list/index.html',
+                            css: '../../pages/admin/payments/payments/list/style.css',
+                            js: '../../pages/admin/payments/payments/list/main.js'
+                        }
+                    },
+                    { 
+                        id: 'payments-add', 
+                        name: 'Thêm mới', 
+                        icon: 'fas fa-plus',
+                        files: {
+                            html: '../../pages/admin/payments/payments/add/index.html',
+                            css: '../../pages/admin/payments/payments/add/style.css',
+                            js: '../../pages/admin/payments/payments/add/main.js'
+                        }
+                    },
+                    { 
                         id: 'view-order-payment', 
                         name: 'Xem chi tiết', 
                         icon: 'fas fa-eye',
@@ -126,19 +328,72 @@ const menuConfig = {
                             css: '../../pages/admin/payments/payments/view/style.css',
                             js: '../../pages/admin/payments/payments/view/main.js'
                         }
+                    },
+                    { 
+                        id: 'payments-edit', 
+                        name: 'Sửa', 
+                        icon: 'fas fa-edit',
+                        files: {
+                            html: '../../pages/admin/payments/payments/edit/index.html',
+                            css: '../../pages/admin/payments/payments/edit/style.css',
+                            js: '../../pages/admin/payments/payments/edit/main.js'
+                        }
                     }
                 ],
-                defaultContent: null
+                defaultContent: 'payments-list'
             },
             { 
                 id: 'invoices', 
                 name: 'Hóa đơn', 
                 icon: 'fas fa-file-invoice',
                 files: {
-                    html: '../../pages/admin/payments/invoices/index.html',
-                    css: '../../pages/admin/payments/invoices/style.css',
-                    js: '../../pages/admin/payments/invoices/main.js'
-                }
+                    html: '../../pages/admin/payments/invoices/list/index.html',
+                    css: '../../pages/admin/payments/invoices/list/style.css',
+                    js: '../../pages/admin/payments/invoices/list/main.js'
+                },
+                submenu: [
+                    { 
+                        id: 'invoices-list', 
+                        name: 'Danh sách', 
+                        icon: 'fas fa-list',
+                        files: {
+                            html: '../../pages/admin/payments/invoices/list/index.html',
+                            css: '../../pages/admin/payments/invoices/list/style.css',
+                            js: '../../pages/admin/payments/invoices/list/main.js'
+                        }
+                    },
+                    { 
+                        id: 'invoices-add', 
+                        name: 'Thêm mới', 
+                        icon: 'fas fa-plus',
+                        files: {
+                            html: '../../pages/admin/payments/invoices/add/index.html',
+                            css: '../../pages/admin/payments/invoices/add/style.css',
+                            js: '../../pages/admin/payments/invoices/add/main.js'
+                        }
+                    },
+                    { 
+                        id: 'invoices-view', 
+                        name: 'Xem chi tiết', 
+                        icon: 'fas fa-eye',
+                        files: {
+                            html: '../../pages/admin/payments/invoices/detail/index.html',
+                            css: '../../pages/admin/payments/invoices/detail/style.css',
+                            js: '../../pages/admin/payments/invoices/detail/main.js'
+                        }
+                    },
+                    { 
+                        id: 'invoices-edit', 
+                        name: 'Sửa', 
+                        icon: 'fas fa-edit',
+                        files: {
+                            html: '../../pages/admin/payments/invoices/edit/index.html',
+                            css: '../../pages/admin/payments/invoices/edit/style.css',
+                            js: '../../pages/admin/payments/invoices/edit/main.js'
+                        }
+                    }
+                ],
+                defaultContent: 'invoices-list'
             }
         ],
         defaultContent: 'payments'
@@ -151,30 +406,159 @@ const menuConfig = {
                 name: 'Thông tin', 
                 icon: 'fas fa-info-circle',
                 files: {
-                    html: '../../pages/admin/admin/company-info/index.html',
-                    css: '../../pages/admin/admin/company-info/style.css',
-                    js: '../../pages/admin/admin/company-info/main.js'
-                }
+                    html: '../../pages/admin/admin/company-info/list/index.html',
+                    css: '../../pages/admin/admin/company-info/list/style.css',
+                    js: '../../pages/admin/admin/company-info/list/main.js'
+                },
+                submenu: [
+                    { 
+                        id: 'company-info-list', 
+                        name: 'Danh sách', 
+                        icon: 'fas fa-list',
+                        files: {
+                            html: '../../pages/admin/admin/company-info/list/index.html',
+                            css: '../../pages/admin/admin/company-info/list/style.css',
+                            js: '../../pages/admin/admin/company-info/list/main.js'
+                        }
+                    },
+                    { 
+                        id: 'company-info-add', 
+                        name: 'Thêm mới', 
+                        icon: 'fas fa-plus',
+                        files: {
+                            html: '../../pages/admin/admin/company-info/add/index.html',
+                            css: '../../pages/admin/admin/company-info/add/style.css',
+                            js: '../../pages/admin/admin/company-info/add/main.js'
+                        }
+                    },
+                    { 
+                        id: 'company-info-view', 
+                        name: 'Xem chi tiết', 
+                        icon: 'fas fa-eye',
+                        files: {
+                            html: '../../pages/admin/admin/company-info/detail/index.html',
+                            css: '../../pages/admin/admin/company-info/detail/style.css',
+                            js: '../../pages/admin/admin/company-info/detail/main.js'
+                        }
+                    },
+                    { 
+                        id: 'company-info-edit', 
+                        name: 'Sửa', 
+                        icon: 'fas fa-edit',
+                        files: {
+                            html: '../../pages/admin/admin/company-info/edit/index.html',
+                            css: '../../pages/admin/admin/company-info/edit/style.css',
+                            js: '../../pages/admin/admin/company-info/edit/main.js'
+                        }
+                    }
+                ],
+                defaultContent: 'company-info-list'
             },
             { 
                 id: 'user-groups', 
                 name: 'Nhóm quyền', 
                 icon: 'fas fa-users-cog',
                 files: {
-                    html: '../../pages/admin/admin/user-groups/index.html',
-                    css: '../../pages/admin/admin/user-groups/style.css',
-                    js: '../../pages/admin/admin/user-groups/main.js'
-                }
+                    html: '../../pages/admin/admin/user-groups/list/index.html',
+                    css: '../../pages/admin/admin/user-groups/list/style.css',
+                    js: '../../pages/admin/admin/user-groups/list/main.js'
+                },
+                submenu: [
+                    { 
+                        id: 'user-groups-list', 
+                        name: 'Danh sách', 
+                        icon: 'fas fa-list',
+                        files: {
+                            html: '../../pages/admin/admin/user-groups/list/index.html',
+                            css: '../../pages/admin/admin/user-groups/list/style.css',
+                            js: '../../pages/admin/admin/user-groups/list/main.js'
+                        }
+                    },
+                    { 
+                        id: 'user-groups-add', 
+                        name: 'Thêm mới', 
+                        icon: 'fas fa-plus',
+                        files: {
+                            html: '../../pages/admin/admin/user-groups/add/index.html',
+                            css: '../../pages/admin/admin/user-groups/add/style.css',
+                            js: '../../pages/admin/admin/user-groups/add/main.js'
+                        }
+                    },
+                    { 
+                        id: 'user-groups-view', 
+                        name: 'Xem chi tiết', 
+                        icon: 'fas fa-eye',
+                        files: {
+                            html: '../../pages/admin/admin/user-groups/detail/index.html',
+                            css: '../../pages/admin/admin/user-groups/detail/style.css',
+                            js: '../../pages/admin/admin/user-groups/detail/main.js'
+                        }
+                    },
+                    { 
+                        id: 'user-groups-edit', 
+                        name: 'Sửa', 
+                        icon: 'fas fa-edit',
+                        files: {
+                            html: '../../pages/admin/admin/user-groups/edit/index.html',
+                            css: '../../pages/admin/admin/user-groups/edit/style.css',
+                            js: '../../pages/admin/admin/user-groups/edit/main.js'
+                        }
+                    }
+                ],
+                defaultContent: 'user-groups-list'
             },
             { 
                 id: 'employees', 
                 name: 'Nhân viên', 
                 icon: 'fas fa-user-tie',
                 files: {
-                    html: '../../pages/admin/admin/employees/index.html',
-                    css: '../../pages/admin/admin/employees/style.css',
-                    js: '../../pages/admin/admin/employees/main.js'
-                }
+                    html: '../../pages/admin/admin/employees/list/index.html',
+                    css: '../../pages/admin/admin/employees/list/style.css',
+                    js: '../../pages/admin/admin/employees/list/main.js'
+                },
+                submenu: [
+                    { 
+                        id: 'employees-list', 
+                        name: 'Danh sách', 
+                        icon: 'fas fa-list',
+                        files: {
+                            html: '../../pages/admin/admin/employees/list/index.html',
+                            css: '../../pages/admin/admin/employees/list/style.css',
+                            js: '../../pages/admin/admin/employees/list/main.js'
+                        }
+                    },
+                    { 
+                        id: 'employees-add', 
+                        name: 'Thêm mới', 
+                        icon: 'fas fa-plus',
+                        files: {
+                            html: '../../pages/admin/admin/employees/add/index.html',
+                            css: '../../pages/admin/admin/employees/add/style.css',
+                            js: '../../pages/admin/admin/employees/add/main.js'
+                        }
+                    },
+                    { 
+                        id: 'employees-view', 
+                        name: 'Xem chi tiết', 
+                        icon: 'fas fa-eye',
+                        files: {
+                            html: '../../pages/admin/admin/employees/detail/index.html',
+                            css: '../../pages/admin/admin/employees/detail/style.css',
+                            js: '../../pages/admin/admin/employees/detail/main.js'
+                        }
+                    },
+                    { 
+                        id: 'employees-edit', 
+                        name: 'Sửa', 
+                        icon: 'fas fa-edit',
+                        files: {
+                            html: '../../pages/admin/admin/employees/edit/index.html',
+                            css: '../../pages/admin/admin/employees/edit/style.css',
+                            js: '../../pages/admin/admin/employees/edit/main.js'
+                        }
+                    }
+                ],
+                defaultContent: 'employees-list'
             }
         ],
         defaultContent: 'company-info'
@@ -194,13 +578,11 @@ const loadingSpinner = document.getElementById('loadingSpinner');
 
 // Initialize the application
 document.addEventListener('DOMContentLoaded', function() {
-    // Load default content
     switchMainMenu(document.querySelector('[data-menu="overview"]'), 'overview');
 });
 
 // Switch main menu
 function switchMainMenu(element, menuKey) {
-    // Update active state for main menu
     document.querySelectorAll('.main-nav .nav-link').forEach(link => {
         link.classList.remove('active');
     });
@@ -209,22 +591,17 @@ function switchMainMenu(element, menuKey) {
     currentMainMenu = menuKey;
     const menuData = menuConfig[menuKey];
     
-    // Update sidebar
     updateSidebar(menuData);
-    
-    // Load default content for this menu
     loadContent(menuData.defaultContent);
 }
 
 // Update sidebar based on current menu
 function updateSidebar(menuData) {
     if (!menuData.submenu) {
-        // No submenu (like overview)
         desktopSidebarContent.innerHTML = '';
         return;
     }
     
-    // Create submenu HTML
     const submenuHTML = `
         <nav class="sidebar-nav">
             <ul class="sidebar-menu nav flex-column">
@@ -242,7 +619,6 @@ function updateSidebar(menuData) {
     
     desktopSidebarContent.innerHTML = submenuHTML;
     
-    // Set first item as active
     const firstLink = desktopSidebarContent.querySelector('.nav-link');
     if (firstLink) {
         firstLink.classList.add('active');
@@ -253,81 +629,55 @@ function updateSidebar(menuData) {
 // Load content dynamically from external files
 async function loadContent(contentId, options = {}) {
     try {
-        // Show loading spinner
         showLoading(true);
         
-        // Update active state in sidebar
         updateSidebarActive(contentId);
-        
-        // Update mobile nav active state
         updateMobileNavActive(contentId);
         
-        // Get file paths for the content
         const filePaths = getFilePaths(contentId);
-        
         if (!filePaths) {
             throw new Error(`No file configuration found for content: ${contentId}`);
         }
         
-        // Clean up previously loaded scripts and styles
         cleanupScripts();
         cleanupStyles();
         
-        // Load HTML content
         let htmlContent = '';
         const htmlPath = options.html || filePaths.html;
         if (htmlPath) {
-            try {
-                console.log(`Loading HTML: ${htmlPath}`); // Debug log
-                const htmlResponse = await fetch(htmlPath);
-                if (htmlResponse.ok) {
-                    htmlContent = await htmlResponse.text();
-                } else {
-                    throw new Error(`HTML file not found: ${htmlPath}`);
-                }
-            } catch (error) {
-                console.warn(`Error loading HTML file: ${htmlPath}`, error);
-                throw error;
+            console.log(`Loading HTML: ${htmlPath}`);
+            const htmlResponse = await fetch(htmlPath);
+            if (htmlResponse.ok) {
+                htmlContent = await htmlResponse.text();
+            } else {
+                throw new Error(`HTML file not found: ${htmlPath}`);
             }
         } else {
             throw new Error(`No HTML file path configured for content: ${contentId}`);
         }
         
-        // Load CSS file
         if (filePaths.css && !loadedStyles.has(filePaths.css)) {
-            try {
-                console.log(`Loading CSS: ${filePaths.css}`); // Debug log
-                await loadCSS(filePaths.css);
-                loadedStyles.add(filePaths.css);
-            } catch (error) {
-                console.warn(`Error loading CSS file: ${filePaths.css}`, error);
-            }
+            console.log(`Loading CSS: ${filePaths.css}`);
+            await loadCSS(filePaths.css);
+            loadedStyles.add(filePaths.css);
         }
         
-        // Update content area
         contentArea.innerHTML = htmlContent;
         contentArea.classList.add('fade-in');
         
-        // Load and execute JS file
         if (filePaths.js && !loadedScripts.has(filePaths.js)) {
-            try {
-                console.log(`Loading JS: ${filePaths.js}`); // Debug log
-                await loadJS(filePaths.js);
-                loadedScripts.add(filePaths.js);
-            } catch (error) {
-                console.warn(`Error loading JS file: ${filePaths.js}`, error);
-            }
+            console.log(`Loading JS: ${filePaths.js}`);
+            await loadJS(filePaths.js);
+            loadedScripts.add(filePaths.js);
         }
         
-        // Hide loading spinner
         showLoading(false);
         
         currentSubMenu = contentId;
         
-        // Trigger custom event for content loaded
-        console.log(`Triggering contentLoaded event for: ${contentId}`); // Debug log
+        console.log(`Triggering contentLoaded event for: ${contentId}`);
         document.dispatchEvent(new CustomEvent('contentLoaded', { 
-            detail: { contentId, filePaths } 
+            detail: { contentId, filePaths: { ...filePaths, ...options } } 
         }));
         
     } catch (error) {
@@ -345,19 +695,16 @@ async function loadContent(contentId, options = {}) {
 
 // Get file paths for a content ID
 function getFilePaths(contentId) {
-    // Check if it's a main menu item
     for (const [menuKey, menuData] of Object.entries(menuConfig)) {
         if (menuData.defaultContent === contentId && menuData.files) {
             return menuData.files;
         }
         
-        // Check submenu items
         if (menuData.submenu) {
             const submenuItem = menuData.submenu.find(item => item.id === contentId);
             if (submenuItem && submenuItem.files) {
                 return submenuItem.files;
             }
-            // Check nested submenu (e.g., service-packages submenu)
             if (menuData.submenu.some(item => item.submenu)) {
                 for (const subItem of menuData.submenu) {
                     if (subItem.submenu) {
@@ -370,14 +717,12 @@ function getFilePaths(contentId) {
             }
         }
     }
-    
     return null;
 }
 
 // Load CSS file dynamically
 function loadCSS(cssPath) {
     return new Promise((resolve, reject) => {
-        // Check if CSS is already loaded
         const existingLink = document.querySelector(`link[href="${cssPath}"]`);
         if (existingLink) {
             resolve();
@@ -399,7 +744,6 @@ function loadCSS(cssPath) {
 // Load JS file dynamically
 function loadJS(jsPath) {
     return new Promise((resolve, reject) => {
-        // Check if script is already loaded
         const existingScript = document.querySelector(`script[src="${jsPath}"]`);
         if (existingScript) {
             resolve();
@@ -411,7 +755,7 @@ function loadJS(jsPath) {
         script.src = jsPath;
         
         script.onload = () => {
-            console.log(`JS loaded successfully: ${jsPath}`); // Debug log
+            console.log(`JS loaded successfully: ${jsPath}`);
             resolve();
         };
         script.onerror = () => reject(new Error(`Failed to load JS: ${jsPath}`));
@@ -424,9 +768,7 @@ function loadJS(jsPath) {
 function cleanupScripts() {
     loadedScripts.forEach(scriptPath => {
         const script = document.querySelector(`script[src="${scriptPath}"]`);
-        if (script) {
-            script.remove();
-        }
+        if (script) script.remove();
     });
     loadedScripts.clear();
 }
@@ -435,9 +777,7 @@ function cleanupScripts() {
 function cleanupStyles() {
     loadedStyles.forEach(cssPath => {
         const link = document.querySelector(`link[href="${cssPath}"]`);
-        if (link) {
-            link.remove();
-        }
+        if (link) link.remove();
     });
     loadedStyles.clear();
 }
@@ -479,7 +819,6 @@ function showLoading(show) {
 
 // Utility functions
 function showNotification(message, type = 'info') {
-    // Create notification element
     const notification = document.createElement('div');
     notification.className = `alert alert-${type} alert-dismissible fade show position-fixed`;
     notification.style.cssText = 'top: 90px; right: 20px; z-index: 9999; min-width: 300px;';
@@ -490,33 +829,25 @@ function showNotification(message, type = 'info') {
     
     document.body.appendChild(notification);
     
-    // Auto remove after 5 seconds
     setTimeout(() => {
-        if (notification.parentNode) {
-            notification.remove();
-        }
+        if (notification.parentNode) notification.remove();
     }, 5000);
 }
 
 // Clean up loaded resources when needed
 function cleanupResources() {
-    // Remove dynamically loaded CSS and JS files
     cleanupStyles();
     cleanupScripts();
 }
 
 // Handle responsive menu changes
 window.addEventListener('resize', function() {
-    // Close mobile menu when switching to desktop
     if (window.innerWidth >= 992) {
         const offcanvas = bootstrap.Offcanvas.getInstance(document.getElementById('mobileSidebar'));
-        if (offcanvas) {
-            offcanvas.hide();
-        }
+        if (offcanvas) offcanvas.hide();
     }
 });
 
-// Export functions for external use
 window.adminLayout = {
     loadContent,
     showNotification,

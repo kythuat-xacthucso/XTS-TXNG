@@ -1,0 +1,117 @@
+:root {
+    --primary-color: #ff4d4d;
+    --secondary-color: #333;
+    --success-color: #28a745;
+    --info-color: #17a2b8;
+    --warning-color: #ffc107;
+    --danger-color: #dc3545;
+    --light-color: #f8f9fa;
+    --dark-color: #343a40;
+    --header-height: 70px;
+}
+
+/* General Styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f5f6fa;
+    line-height: 1.6;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+/* Header Styles */
+.header-main {
+    height: var(--header-height);
+    border-bottom: 1px solid #e9ecef;
+    z-index: 1030;
+}
+
+.company-name {
+    color: var(--primary-color) !important;
+    transition: color 0.2s ease;
+}
+
+.company-name:hover {
+    color: var(--dark-color) !important;
+}
+
+/* Main Content */
+.main-content {
+    margin-top: 0;
+    min-height: calc(100vh - var(--header-height));
+}
+
+.nav-tabs .nav-link {
+    color: var(--dark-color);
+    font-weight: 500;
+    border-bottom: 3px solid transparent;
+    transition: all 0.2s ease;
+}
+
+.nav-tabs .nav-link.active {
+    color: var(--primary-color);
+    background-color: transparent;
+    border-bottom-color: var(--primary-color);
+}
+
+.nav-tabs .nav-link:hover {
+    color: var(--primary-color);
+    background-color: transparent;
+}
+
+/* Content Card */
+.content-card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Search Section */
+.search-section .card {
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+}
+
+.search-section .input-group-text {
+    background-color: #fff;
+    border-right: none;
+}
+
+.search-section .form-control {
+    border-left: none;
+    border-radius: 0;
+}
+
+.search-section #cameraBtn {
+    border-left: none;
+    border-radius: 0 4px 4px 0;
+}
+
+.search-section .btn-primary {
+    width: 100%;
+}
+
+/* Loading States */
+.loading-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+}
+
+@media (max-width: 767.98px) {
+    .content-card {
+        margin-bottom: 1rem;
+        padding: 1rem;
+    }
+}

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Truy Xuất Nguồn Gốc - Người Vãng Lai</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="../assets/css/guest.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header-main bg-white shadow-sm">
+        <div class="container-fluid h-100">
+            <div class="row h-100 align-items-center ps-0">
+                <div class="col-12 d-flex justify-content-start">
+                    <div class="d-flex align-items-center">
+                        <img src="https://xacthucso.s3.ap-southeast-1.amazonaws.com/e303274f-45da-11f0-9602-f2202b293748" width="40" height="40" alt="Logo" class="me-2">
+                        <span class="company-name fw-bold fs-4 text-primary cursor-pointer" onclick="loadContent('product-profile')">
+                            Gold Field
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container-fluid">
+            <!-- Tabs -->
+            <ul class="nav nav-tabs justify-content-center" id="mainTabs">
+                <li class="nav-item" style="width: 50%;">
+                    <a class="nav-link active text-center py-3" href="#" data-tab="product" onclick="switchTab(this, 'product')">Sản phẩm</a>
+                </li>
+                <li class="nav-item" style="width: 50%;">
+                    <a class="nav-link text-center py-3" href="#" data-tab="company" onclick="switchTab(this, 'company')">Doanh nghiệp</a>
+                </li>
+            </ul>
+
+            <!-- Sub Tabs -->
+            <ul class="nav nav-tabs justify-content-center mb-4" id="subTabs">
+                <li class="nav-item" style="width: 25%;">
+                    <a class="nav-link active text-center py-3" href="#" data-subtab="profile" onclick="loadContent('product-profile')" style="padding-left: 0; padding-right: 0; padding-top: 0.75rem; padding-bottom: 0.75rem;">Hồ sơ</a>
+                </li>
+                <li class="nav-item" style="width: 25%;">
+                    <a class="nav-link text-center py-3" href="#" data-subtab="intro" onclick="loadContent('product-intro')" style="padding-left: 0; padding-right: 0; padding-top: 0.75rem; padding-bottom: 0.75rem;">Giới thiệu</a>
+                </li>
+                <li class="nav-item" style="width: 25%;">
+                    <a class="nav-link text-center py-3" href="#" data-subtab="import" onclick="loadContent('product-import')" style="padding-left: 0; padding-right: 0; padding-top: 0.75rem; padding-bottom: 0.75rem;">NKĐT</a>
+                </li>
+                <li class="nav-item" style="width: 25%;">
+                    <a class="nav-link text-center py-3" href="#" data-subtab="store" onclick="loadContent('product-store')" style="padding-left: 0; padding-right: 0; padding-top: 0.75rem; padding-bottom: 0.75rem;">Điểm bán</a>
+                </li>
+            </ul>
+
+            <!-- Loading Spinner -->
+            <div id="loadingSpinner" class="text-center py-5 d-none">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Đang tải...</span>
+                </div>
+                <div class="mt-2">Đang tải nội dung...</div>
+            </div>
+
+            <!-- Content Area -->
+            <div id="contentArea" class="content-card">
+                <!-- Nội dung sẽ được load động vào đây -->
+            </div>
+
+            <!-- Search Section -->
+            <div class="search-section mt-4">
+                <div class="card p-3">
+                    <h5 class="card-title mb-3">Tra cứu tem khác</h5>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fas fa-qrcode"></i></span>
+                        <input type="text" class="form-control" id="searchCode" placeholder="Nhập hoặc quét mã tem khác">
+                        <button class="btn btn-outline-secondary" type="button" id="cameraBtn">
+                            <i class="fas fa-camera"></i>
+                        </button>
+                    </div>
+                    <button class="btn btn-primary mt-3" onclick="searchCode()">Tra Cứu</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/guest.js"></script>
+</body>
+</html>

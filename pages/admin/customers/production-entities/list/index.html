@@ -1,0 +1,168 @@
+<div class="content-card">
+    <!-- Page Header -->
+    <div class="page-header d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h3 class="page-title">Danh sách chủ thể sản xuất</h3>
+            <p class="page-breadcrumb mb-0">Dịch vụ / Chủ thể sản xuất</p>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div id="toastContainer" class="position-fixed top-0 end-0 p-3" style="z-index: 1055;">
+        <!-- Toast will be dynamically added here -->
+    </div>
+
+    <!-- Filter Section (Desktop) -->
+    <div class="filter-section mb-4 d-none d-lg-block">
+        <div class="card">
+            <div class="card-body">
+                <form id="filterFormDesktop">
+                    <div class="row g-3">
+                        <div class="col-md-3">
+                            <label class="form-label">Mã chủ thể</label>
+                            <input type="text" class="form-control" id="filterEntityCode" placeholder="Nhập mã chủ thể">
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label">Tên chủ thể</label>
+                            <input type="text" class="form-control" id="filterEntityName" placeholder="Nhập tên chủ thể">
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label">Mã số thuế</label>
+                            <input type="text" class="form-control" id="filterTaxCode" placeholder="Nhập mã số thuế">
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label">Trạng thái</label>
+                            <select class="form-select" id="filterStatus">
+                                <option value="">Tất cả</option>
+                                <option value="active">Đang hoạt động</option>
+                                <option value="locked">Khóa</option>
+                            </select>
+                        </div>
+                        <div class="col-12 text-end">
+                            <button type="button" class="btn btn-primary" onclick="applyFilters()">Tìm kiếm</button>
+                            <button type="button" class="btn btn-outline-secondary ms-2" onclick="resetFilters()">Đặt lại</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Filter Button (Tablet/Mobile) -->
+    <button class="btn btn-primary d-lg-none position-fixed bottom-0 start-0 m-3" data-bs-toggle="offcanvas" data-bs-target="#filterOffcanvas">
+        <i class="fas fa-filter"></i> Bộ lọc
+    </button>
+
+    <!-- Filter Offcanvas (Tablet/Mobile) -->
+    <div class="offcanvas offcanvas-bottom" tabindex="-1" id="filterOffcanvas">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title">Bộ lọc</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+        </div>
+        <div class="offcanvas-body">
+            <form id="filterFormMobile">
+                <div class="mb-3">
+                    <label class="form-label">Mã chủ thể</label>
+                    <input type="text" class="form-control" id="filterEntityCodeMobile" placeholder="Nhập mã chủ thể">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Tên chủ thể</label>
+                    <input type="text" class="form-control" id="filterEntityNameMobile" placeholder="Nhập tên chủ thể">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Mã số thuế</label>
+                    <input type="text" class="form-control" id="filterTaxCodeMobile" placeholder="Nhập mã số thuế">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Trạng thái</label>
+                    <select class="form-select" id="filterStatusMobile">
+                        <option value="">Tất cả</option>
+                        <option value="active">Đang hoạt động</option>
+                        <option value="locked">Khóa</option>
+                    </select>
+                </div>
+                <div class="text-end">
+                    <button type="button" class="btn btn-primary" onclick="applyFiltersMobile()" data-bs-dismiss="offcanvas">Tìm kiếm</button>
+                    <button type="button" class="btn btn-outline-secondary ms-2" onclick="resetFiltersMobile()" data-bs-dismiss="offcanvas">Đặt lại</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Table (Desktop) -->
+    <div class="table-responsive d-none d-lg-block">
+        <table class="table table-hover w-100">
+            <thead>
+                <tr>
+                    <th>STT</th>
+                    <th>Mã chủ thể</th>
+                    <th>Tên chủ thể</th>
+                    <th>Mã số thuế</th>
+                    <th>Số điện thoại</th>
+                    <th>Trạng thái</th>
+                    <th>Hành động</th>
+                </tr>
+            </thead>
+            <tbody id="entityTableBody">
+                <!-- Dữ liệu sẽ được render động bằng JS -->
+            </tbody>
+        </table>
+        <!-- Pagination and Items Per Page -->
+        <div class="d-flex justify-content-end align-items-center mt-3 pagination-container flex-nowrap" id="paginationControls">
+            <div class="d-flex align-items-center me-3 pagination-info">
+                <span class="me-2">Số bản ghi:</span>
+                <select id="itemsPerPage" class="form-select form-select-sm" onchange="changeItemsPerPage()">
+                    <option value="10">10</option>
+                    <option value="20">20</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                </select>
+            </div>
+            <nav aria-label="Page navigation">
+                <ul class="pagination" id="pagination">
+                    <!-- Phân trang sẽ được render động bằng JS -->
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Cards (Tablet/Mobile) -->
+    <div class="row d-lg-none" id="entityCardBody">
+        <!-- Dữ liệu sẽ được render động bằng JS -->
+    </div>
+    <!-- Pagination for Mobile -->
+    <div class="d-lg-none mt-3 text-end pagination-container flex-nowrap" id="mobilePaginationControls">
+        <div class="d-flex align-items-center me-3 pagination-info">
+            <span class="me-2">Số bản ghi:</span>
+            <select id="mobileItemsPerPage" class="form-select form-select-sm" onchange="changeItemsPerPage()">
+                <option value="10">10</option>
+                <option value="20">20</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
+            </select>
+        </div>
+        <nav aria-label="Page navigation">
+            <ul class="pagination" id="mobilePagination">
+                <!-- Phân trang sẽ được render động bằng JS -->
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Modal for View Entity Details -->
+    <div class="modal fade" id="viewEntityModal" tabindex="-1" aria-labelledby="viewEntityModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="viewEntityModalLabel">Chi tiết chủ thể</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="viewEntityModalBody">
+                    <!-- Content will be loaded dynamically -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

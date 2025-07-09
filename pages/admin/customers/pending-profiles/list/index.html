@@ -1,0 +1,244 @@
+<div class="content-card">
+    <!-- Page Header -->
+    <div class="page-header d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h3 class="page-title">Hồ sơ chờ duyệt</h3>
+            <p class="page-breadcrumb mb-0">Khách hàng / Hồ sơ chờ duyệt</p>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div id="toastContainer" class="position-fixed top-0 end-0 p-3" style="z-index: 1055;">
+        <!-- Toast will be dynamically added here -->
+    </div>
+
+    <!-- Filter Section (Desktop) -->
+    <div class="filter-section mb-4 d-none d-lg-block">
+        <div class="card">
+            <div class="card-body">
+                <form id="filterFormDesktop">
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <label class="form-label">Tên SPC</label>
+                            <input type="text" class="form-control" id="filterSpcName" placeholder="Nhập tên SPC">
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Mã số thuế</label>
+                            <input type="text" class="form-control" id="filterTaxCode" placeholder="Nhập mã số thuế">
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Trạng thái</label>
+                            <select class="form-select" id="filterStatus">
+                                <option value="">Tất cả</option>
+                                <option value="pending">Chờ duyệt</option>
+                                <option value="approved">Đã duyệt</option>
+                                <option value="rejected">Từ chối</option>
+                                <option value="entity_created">Đã tạo chủ thể</option>
+                            </select>
+                        </div>
+                        <div class="col-12 text-end">
+                            <button type="button" class="btn btn-primary" onclick="applyFilters()">Tìm kiếm</button>
+                            <button type="button" class="btn btn-outline-secondary ms-2" onclick="resetFilters()">Đặt lại</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Filter Button (Tablet/Mobile) -->
+    <button class="btn btn-primary d-lg-none position-fixed bottom-0 start-0 m-3" data-bs-toggle="offcanvas" data-bs-target="#filterOffcanvas">
+        <i class="fas fa-filter"></i> Bộ lọc
+    </button>
+
+    <!-- Filter Offcanvas (Tablet/Mobile) -->
+    <div class="offcanvas offcanvas-bottom" tabindex="-1" id="filterOffcanvas">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title">Bộ lọc</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+        </div>
+        <div class="offcanvas-body">
+            <form id="filterFormMobile">
+                <div class="mb-3">
+                    <label class="form-label">Tên SPC</label>
+                    <input type="text" class="form-control" id="filterSpcNameMobile" placeholder="Nhập tên SPC">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Mã số thuế</label>
+                    <input type="text" class="form-control" id="filterTaxCodeMobile" placeholder="Nhập mã số thuế">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Trạng thái</label>
+                    <select class="form-select" id="filterStatusMobile">
+                        <option value="">Tất cả</option>
+                        <option value="pending">Chờ duyệt</option>
+                        <option value="approved">Đã duyệt</option>
+                        <option value="rejected">Từ chối</option>
+                        <option value="entity_created">Đã tạo chủ thể</option>
+                    </select>
+                </div>
+                <div class="text-end">
+                    <button type="button" class="btn btn-primary" onclick="applyFiltersMobile()" data-bs-dismiss="offcanvas">Tìm kiếm</button>
+                    <button type="button" class="btn btn-outline-secondary ms-2" onclick="resetFiltersMobile()" data-bs-dismiss="offcanvas">Đặt lại</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Table (Desktop) -->
+    <div class="table-responsive d-none d-lg-block">
+        <table class="table table-hover w-100">
+            <thead>
+                <tr>
+                    <th>STT</th>
+                    <th>Tên SPC</th>
+                    <th>Mã số thuế</th>
+                    <th>Email</th>
+                    <th>Ngày gửi</th>
+                    <th>Trạng thái</th>
+                    <th>Hành động</th>
+                </tr>
+            </thead>
+            <tbody id="profileTableBody">
+                <!-- Dữ liệu sẽ được render động bằng JS -->
+            </tbody>
+        </table>
+        <!-- Page Navigation and Items Per Page -->
+        <div class="d-flex justify-content-between align-items-center mt-3 pagination-container">
+            <nav aria-label="Page navigation">
+                <ul class="pagination" id="pagination">
+                    <!-- Phân trang sẽ được render động bằng JS -->
+                </ul>
+            </nav>
+            <div class="d-flex align-items-center pagination-info">
+                <span class="me-2">Số bản ghi:</span>
+                <select id="itemsPerPage" class="form-select form-select-sm" onchange="changeItemsPerPage()">
+                    <option value="10">10</option>
+                    <option value="20">20</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cards (Tablet/Mobile) -->
+    <div class="row d-lg-none" id="profileCardBody">
+        <!-- Dữ liệu sẽ được render động bằng JS -->
+    </div>
+    <!-- Page Navigation for Mobile -->
+    <div class="d-lg-none mt-3 d-flex justify-content-between align-items-center pagination-container">
+        <nav aria-label="Page navigation">
+            <ul class="pagination" id="mobilePagination">
+                <!-- Phân trang sẽ được render động bằng JS -->
+            </ul>
+        </nav>
+        <div class="d-flex align-items-center pagination-info">
+            <span class="me-2">Số bản ghi:</span>
+            <select id="mobileItemsPerPage" class="form-select form-select-sm" onchange="changeItemsPerPage()">
+                <option value="10">10</option>
+                <option value="20">20</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- Modal for View Profile Details -->
+    <div class="modal fade" id="viewProfileModal" tabindex="-1" aria-labelledby="viewProfileModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="viewProfileModalLabel">Chi tiết hồ sơ</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="viewProfileModalBody">
+                    <!-- Content will be loaded dynamically -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Confirm Approve -->
+    <div class="modal fade" id="confirmApproveModal" tabindex="-1" aria-labelledby="confirmApproveModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmApproveModalLabel">Xác nhận duyệt hồ sơ</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Bạn có chắc chắn muốn duyệt hồ sơ này không?</p>
+                    <p id="confirmApproveName"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <button type="button" class="btn btn-primary" id="confirmApproveButton">Xác nhận</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Confirm Reject -->
+    <div class="modal fade" id="confirmRejectModal" tabindex="-1" aria-labelledby="confirmRejectModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmRejectModalLabel">Xác nhận từ chối hồ sơ</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Bạn có chắc chắn muốn từ chối hồ sơ này không?</p>
+                    <p id="confirmRejectName"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <button type="button" class="btn btn-danger" id="confirmRejectButton">Xác nhận</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Create Entity -->
+    <div class="modal fade" id="createEntityModal" tabindex="-1" aria-labelledby="createEntityModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="createEntityModalLabel">Tạo chủ thể</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="createEntityForm">
+                        <div class="mb-3">
+                            <label class="form-label">Tên SPC</label>
+                            <input type="text" class="form-control" id="entitySpcName" readonly>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Mã số thuế</label>
+                            <input type="text" class="form-control" id="entityTaxCode" readonly>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Loại chủ thể</label>
+                            <select class="form-select" id="entityType" required>
+                                <option value="">Chọn loại chủ thể</option>
+                                <option value="management">Chủ thể quản lý</option>
+                                <option value="production">Chủ thể sản xuất</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Thông tin bổ sung</label>
+                            <textarea class="form-control" id="entityAdditionalInfo" rows="4" placeholder="Nhập thông tin bổ sung"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <button type="button" class="btn btn-primary" id="confirmCreateEntityButton">Tạo</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
