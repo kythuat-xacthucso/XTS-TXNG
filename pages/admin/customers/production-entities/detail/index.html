@@ -1,12 +1,14 @@
-<!-- Section 1: Company Name and Status -->
 <div class="content-card">
+    <!-- Section 1: Company Name and Status -->
     <div class="page-header d-flex justify-content-between align-items-center mb-4">
         <div>
-            <h3 class="page-title" id="entityName">Tên công ty</h3>
-            <p class="page-breadcrumb mb-0">Dịch vụ / Chủ thể sản xuất / Chi tiết</p>
+            <h3 class="page-title" id="companyName">Công ty ABC</h3>
+            <span class="badge bg-success" id="companyStatus">Đang hoạt động</span>
         </div>
         <div>
-            <span id="entityStatus" class="badge bg-success">Đang hoạt động</span>
+            <button class="btn btn-secondary me-2" onclick="goBack()">Quay lại</button>
+            <button class="btn btn-primary me-2" onclick="editEntity()">Sửa</button>
+            <button class="btn btn-danger" id="lockButton" onclick="toggleLock()">Khóa</button>
         </div>
     </div>
 
@@ -17,93 +19,765 @@
 
     <!-- Section 2: Tabs -->
     <ul class="nav nav-tabs mb-4" id="entityTabs" role="tablist">
-        <li class="nav-item" role="presentation">
-            <button class="nav-link active" id="entity-info-tab" data-bs-toggle="tab" data-tab-id="entity-info" type="button" role="tab" aria-controls="entity-info" aria-selected="true">Thông tin chủ thể</button>
+        <li class="nav-item">
+            <a class="nav-link active" id="info-tab" data-bs-toggle="tab" href="#info" role="tab" aria-controls="info" aria-selected="true">Thông tin chủ thể</a>
         </li>
-        <li class="nav-item" role="presentation">
-            <button class="nav-link" id="users-tab" data-bs-toggle="tab" data-tab-id="users" type="button" role="tab" aria-controls="users" aria-selected="false">Người dùng</button>
+        <li class="nav-item">
+            <a class="nav-link" id="users-tab" data-bs-toggle="tab" href="#users" role="tab" aria-controls="users" aria-selected="false">Người dùng</a>
         </li>
-        <li class="nav-item" role="presentation">
-            <button class="nav-link" id="products-tab" data-bs-toggle="tab" data-tab-id="products" type="button" role="tab" aria-controls="products" aria-selected="false">Sản phẩm</button>
+        <li class="nav-item">
+            <a class="nav-link" id="products-tab" data-bs-toggle="tab" href="#products" role="tab" aria-controls="products" aria-selected="false">Sản phẩm</a>
         </li>
-        <li class="nav-item" role="presentation">
-            <button class="nav-link" id="services-tab" data-bs-toggle="tab" data-tab-id="services" type="button" role="tab" aria-controls="services" aria-selected="false">Dịch vụ</button>
+        <li class="nav-item">
+            <a class="nav-link" id="services-tab" data-bs-toggle="tab" href="#services" role="tab" aria-controls="services" aria-selected="false">Dịch vụ</a>
         </li>
-        <li class="nav-item" role="presentation">
-            <button class="nav-link" id="labels-tab" data-bs-toggle="tab" data-tab-id="labels" type="button" role="tab" aria-controls="labels" aria-selected="false">Tem và mã</button>
+        <li class="nav-item">
+            <a class="nav-link" id="stamps-tab" data-bs-toggle="tab" href="#stamps" role="tab" aria-controls="stamps" aria-selected="false">Tem và mã</a>
         </li>
-        <li class="nav-item" role="presentation">
-            <button class="nav-link" id="payments-tab" data-bs-toggle="tab" data-tab-id="payments" type="button" role="tab" aria-controls="payments" aria-selected="false">Thanh toán</button>
+        <li class="nav-item">
+            <a class="nav-link" id="payments-tab" data-bs-toggle="tab" href="#payments" role="tab" aria-controls="payments" aria-selected="false">Thanh toán</a>
         </li>
     </ul>
 
     <!-- Tab Content -->
-    <div class="tab-content" id="entityTabContent">
-        <div class="tab-pane fade show active" id="entity-info" role="tabpanel" aria-labelledby="entity-info-tab">
-            <!-- Content will be loaded dynamically -->
+    <div class="tab-content">
+        <!-- Tab: Thông tin chủ thể -->
+        <div class="tab-pane fade show active" id="info" role="tabpanel" aria-labelledby="info-tab">
+            <div class="row">
+                <!-- Cột Thông tin -->
+                <div class="col-md-7">
+                    <div class="info-box">
+                        <div class="row">
+                            <div class="col-md-6 mb-3"><span class="label-bold">Mã chủ thể:</span> <span id="entityCode">CT001</span></div>
+                            <div class="col-md-6 mb-3"><span class="label-bold">Tên chủ thể:</span> <span id="entityName">Công ty ABC</span></div>
+                            <div class="col-md-6 mb-3"><span class="label-bold">Số điện thoại:</span> <span id="entityPhone">0901234567</span></div>
+                            <div class="col-md-6 mb-3"><span class="label-bold">Email:</span> <span id="entityEmail">info@abc.com</span></div>
+                            <div class="col-md-6 mb-3"><span class="label-bold">Tên đầy đủ:</span> <span id="entityFullName">Công ty TNHH ABC</span></div>
+                            <div class="col-md-6 mb-3"><span class="label-bold">Tên tiếng Anh:</span> <span id="entityEnglishName">ABC Ltd.</span></div>
+                            <div class="col-md-6 mb-3"><span class="label-bold">Tên viết tắt:</span> <span id="entityShortName">ABC</span></div>
+                            <div class="col-md-6 mb-3"><span class="label-bold">Mã số thuế:</span> <span id="entityTaxCode">123456789</span></div>
+                            <div class="col-md-6 mb-3"><span class="label-bold">Ngày ĐKKD:</span> <span id="entityRegDate">01/01/2020</span></div>
+                            <div class="col-md-6 mb-3"><span class="label-bold">Mã GCP:</span> <span id="entityGCP">GCP123456</span></div>
+                            <div class="col-md-6 mb-3"><span class="label-bold">Nơi cấp ĐKKD:</span> <span id="entityRegPlace">Hà Nội</span></div>
+                            <div class="col-md-12 mb-3"><span class="label-bold">Địa chỉ ĐKKD:</span> <span id="entityRegAddress">123 Đường ABC, Quận XYZ, Hà Nội</span></div>
+                            <div class="col-md-6 mb-3">
+                                <span class="label-bold">Website:</span> 
+                                <a href="https://abc.com" target="_blank" id="entityWebsite">abc.com</a>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <span class="label-bold">Kênh Youtube:</span> 
+                                <a href="https://youtube.com/abc" target="_blank" id="entityYoutube">youtube.com/abc</a>
+                            </div>
+                            <div class="col-md-12 mb-3">
+                                <span class="label-bold">Tọa độ (Map):</span>
+                                <iframe src="https://maps.google.com/maps?q=Hanoi&t=&z=13&ie=UTF8&iwloc=&output=embed" 
+                                    width="100%" height="200" style="border:0;" allowfullscreen loading="lazy" id="entityMap"></iframe>
+                            </div>
+                            <div class="col-md-12 mb-3"><span class="label-bold">Mô tả:</span> <span id="entityDescription">Đây là mô tả ngắn về chủ thể...</span></div>
+                            <div class="col-md-6 mb-3"><span class="label-bold">Loại hình:</span> <span id="entityType">Tổ chức</span></div>
+                            <div class="col-md-6 mb-3"><span class="label-bold">Ngày tạo:</span> <span id="entityCreatedAt">15/01/2023</span></div>
+                            <div class="col-md-6 mb-3"><span class="label-bold">Người tạo:</span> <span id="entityCreatedBy">admin01</span></div>
+                        </div>
+                    </div>
+
+                    <!-- Chủ sở hữu -->
+                    <div class="info-box">
+                        <div class="section-title">Thông tin Chủ sở hữu</div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3"><span class="label-bold">Tên:</span> <span id="ownerName">Nguyễn Văn A</span></div>
+                            <div class="col-md-6 mb-3"><span class="label-bold">SĐT:</span> <span id="ownerPhone">0912345678</span></div>
+                            <div class="col-md-6 mb-3"><span class="label-bold">Email:</span> <span id="ownerEmail">nguyenva@example.com</span></div>
+                            <div class="col-md-6 mb-3"><span class="label-bold">Địa chỉ:</span> <span id="ownerAddress">99 Đường DEF, TP.HCM</span></div>
+                            <div class="col-md-12 text-center mb-3">
+                                <img src="https://xacthucso.s3.amazonaws.com/u1220-e87dc337-dddb-48bd-94d0-96067661657b.png" 
+                                    alt="Avatar Chủ sở hữu" class="avatar-img" style="max-width: 150px;" data-bs-toggle="modal" data-bs-target="#imagePreviewModal" data-img-src="https://xacthucso.s3.amazonaws.com/u1220-e87dc337-dddb-48bd-94d0-96067661657b.png">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cột Hình ảnh -->
+                <div class="col-md-5">
+                    <div class="info-box">
+                        <div class="section-title">Hình ảnh</div>
+                        <!-- Logo -->
+                        <div class="mb-4">
+                            <div class="label-bold mb-1">Logo:</div>
+                            <img src="https://xacthucso.s3.amazonaws.com/u1220-e87dc337-dddb-48bd-94d0-96067661657b.png" 
+                                class="logo-img" alt="Logo" data-bs-toggle="modal" data-bs-target="#imagePreviewModal" data-img-src="https://xacthucso.s3.amazonaws.com/u1220-e87dc337-dddb-48bd-94d0-96067661657b.png">
+                        </div>
+                        <!-- Ảnh ĐKKD -->
+                        <div class="mb-4">
+                            <div class="label-bold mb-1">Ảnh ĐKKD:</div>
+                            <div class="row img-grid">
+                                <div class="col-6">
+                                    <img src="https://xacthucso.s3.amazonaws.com/u1220-e87dc337-dddb-48bd-94d0-96067661657b.png" 
+                                        class="dkkd-img" alt="DKKD 1" data-bs-toggle="modal" data-bs-target="#imagePreviewModal" data-img-src="https://xacthucso.s3.amazonaws.com/u1220-e87dc337-dddb-48bd-94d0-96067661657b.png">
+                                </div>
+                                <div class="col-6">
+                                    <img src="https://xacthucso.s3.amazonaws.com/u1220-e87dc337-dddb-48bd-94d0-96067661657b.png" 
+                                        class="dkkd-img" alt="DKKD 2" data-bs-toggle="modal" data-bs-target="#imagePreviewModal" data-img-src="https://xacthucso.s3.amazonaws.com/u1220-e87dc337-dddb-48bd-94d0-96067661657b.png">
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Ảnh khác -->
+                        <div>
+                            <div class="label-bold mb-1">Ảnh khác:</div>
+                            <div class="row img-grid">
+                                <div class="col-4">
+                                    <img src="https://xacthucso.s3.amazonaws.com/u1220-e87dc337-dddb-48bd-94d0-96067661657b.png" 
+                                        class="other-img" alt="Ảnh khác 1" data-bs-toggle="modal" data-bs-target="#imagePreviewModal" data-img-src="https://xacthucso.s3.amazonaws.com/u1220-e87dc337-dddb-48bd-94d0-96067661657b.png">
+                                </div>
+                                <div class="col-4">
+                                    <img src="https://xacthucso.s3.amazonaws.com/u1220-e87dc337-dddb-48bd-94d0-96067661657b.png" 
+                                        class="other-img" alt="Ảnh khác 2" data-bs-toggle="modal" data-bs-target="#imagePreviewModal" data-img-src="https://xacthucso.s3.amazonaws.com/u1220-e87dc337-dddb-48bd-94d0-96067661657b.png">
+                                </div>
+                                <div class="col-4">
+                                    <img src="https://xacthucso.s3.amazonaws.com/u1220-e87dc337-dddb-48bd-94d0-96067661657b.png" 
+                                        class="other-img" alt="Ảnh khác 3" data-bs-toggle="modal" data-bs-target="#imagePreviewModal" data-img-src="https://xacthucso.s3.amazonaws.com/u1220-e87dc337-dddb-48bd-94d0-96067661657b.png">
+                                </div>
+                                <div class="col-4">
+                                    <img src="https://xacthucso.s3.amazonaws.com/u1220-e87dc337-dddb-48bd-94d0-96067661657b.png" 
+                                        class="other-img" alt="Ảnh khác 4" data-bs-toggle="modal" data-bs-target="#imagePreviewModal" data-img-src="https://xacthucso.s3.amazonaws.com/u1220-e87dc337-dddb-48bd-94d0-96067661657b.png">
+                                </div>
+                                <div class="col-4">
+                                    <img src="https://xacthucso.s3.amazonaws.com/u1220-e87dc337-dddb-48bd-94d0-96067661657b.png" 
+                                        class="other-img" alt="Ảnh khác 5" data-bs-toggle="modal" data-bs-target="#imagePreviewModal" data-img-src="https://xacthucso.s3.amazonaws.com/u1220-e87dc337-dddb-48bd-94d0-96067661657b.png">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+
+        <!-- Tab: Người dùng -->
         <div class="tab-pane fade" id="users" role="tabpanel" aria-labelledby="users-tab">
-            <!-- Content will be loaded dynamically -->
+            <div class="mb-3 text-end">
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addUserModal">Thêm mới</button>
+            </div>
+            <!-- Table (Desktop) -->
+            <div class="table-responsive d-none d-lg-block">
+                <table class="table table-hover w-100">
+                    <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th>Tên người dùng</th>
+                            <th>Số điện thoại</th>
+                            <th>Email</th>
+                            <th>Địa chỉ</th>
+                            <th>Trạng thái</th>
+                            <th>Hành động</th>
+                        </tr>
+                    </thead>
+                    <tbody id="userTableBody">
+                        <!-- Dữ liệu sẽ được render động bằng JS -->
+                    </tbody>
+                </table>
+                <!-- Pagination -->
+                <div class="d-flex justify-content-end align-items-center mt-3 pagination-container flex-nowrap" id="userPaginationControls">
+                    <div class="d-flex align-items-center me-3 pagination-info">
+                        <span class="me-2">Số bản ghi:</span>
+                        <select id="userItemsPerPage" class="form-select form-select-sm" onchange="changeUserItemsPerPage()">
+                            <option value="10">10</option>
+                            <option value="20">20</option>
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                        </select>
+                    </div>
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination" id="userPagination">
+                            <!-- Phân trang sẽ được render động bằng JS -->
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <!-- Cards (Tablet/Mobile) -->
+            <div class="row d-lg-none" id="userCardBody">
+                <!-- Dữ liệu sẽ được render động bằng JS -->
+            </div>
+            <!-- Pagination for Mobile -->
+            <div class="d-lg-none mt-3 text-end pagination-container flex-nowrap" id="userMobilePaginationControls">
+                <div class="d-flex align-items-center me-3 pagination-info">
+                    <span class="me-2">Số bản ghi:</span>
+                    <select id="userMobileItemsPerPage" class="form-select form-select-sm" onchange="changeUserItemsPerPage()">
+                        <option value="10">10</option>
+                        <option value="20">20</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                    </select>
+                </div>
+                <nav aria-label="Page navigation">
+                    <ul class="pagination" id="userMobilePagination">
+                        <!-- Phân trang sẽ được render động bằng JS -->
+                    </ul>
+                </nav>
+            </div>
         </div>
+
+        <!-- Tab: Sản phẩm -->
         <div class="tab-pane fade" id="products" role="tabpanel" aria-labelledby="products-tab">
-            <!-- Content will be loaded dynamically -->
+            <!-- Table (Desktop) -->
+            <div class="table-responsive d-none d-lg-block">
+                <table class="table table-hover w-100">
+                    <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th>Mã sản phẩm</th>
+                            <th>Tên sản phẩm</th>
+                            <th>Mã GTIN</th>
+                            <th>Trạng thái tra cứu</th>
+                            <th>Trạng thái</th>
+                            <th>Hành động</th>
+                        </tr>
+                    </thead>
+                    <tbody id="productTableBody">
+                        <!-- Dữ liệu sẽ được render động bằng JS -->
+                    </tbody>
+                </table>
+                <!-- Pagination -->
+                <div class="d-flex justify-content-end align-items-center mt-3 pagination-container flex-nowrap" id="productPaginationControls">
+                    <div class="d-flex align-items-center me-3 pagination-info">
+                        <span class="me-2">Số bản ghi:</span>
+                        <select id="productItemsPerPage" class="form-select form-select-sm" onchange="changeProductItemsPerPage()">
+                            <option value="10">10</option>
+                            <option value="20">20</option>
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                        </select>
+                    </div>
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination" id="productPagination">
+                            <!-- Phân trang sẽ được render động bằng JS -->
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <!-- Cards (Tablet/Mobile) -->
+            <div class="row d-lg-none" id="productCardBody">
+                <!-- Dữ liệu sẽ được render động bằng JS -->
+            </div>
+            <!-- Pagination for Mobile -->
+            <div class="d-lg-none mt-3 text-end pagination-container flex-nowrap" id="productMobilePaginationControls">
+                <div class="d-flex align-items-center me-3 pagination-info">
+                    <span class="me-2">Số bản ghi:</span>
+                    <select id="productMobileItemsPerPage" class="form-select form-select-sm" onchange="changeProductItemsPerPage()">
+                        <option value="10">10</option>
+                        <option value="20">20</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                    </select>
+                </div>
+                <nav aria-label="Page navigation">
+                    <ul class="pagination" id="productMobilePagination">
+                        <!-- Phân trang sẽ được render động bằng JS -->
+                    </ul>
+                </nav>
+            </div>
         </div>
+
+        <!-- Tab: Dịch vụ -->
         <div class="tab-pane fade" id="services" role="tabpanel" aria-labelledby="services-tab">
-            <!-- Content will be loaded dynamically -->
+            <!-- Table (Desktop) -->
+            <div class="table-responsive d-none d-lg-block">
+                <table class="table table-hover w-100">
+                    <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th>Tên gói dịch vụ</th>
+                            <th>Giá tiền</th>
+                            <th>Thời gian</th>
+                            <th>Thời gian mua</th>
+                            <th>Thời gian hết hạn</th>
+                            <th>Trạng thái</th>
+                        </tr>
+                    </thead>
+                    <tbody id="serviceTableBody">
+                        <!-- Dữ liệu sẽ được render động bằng JS -->
+                    </tbody>
+                </table>
+                <!-- Pagination -->
+                <div class="d-flex justify-content-end align-items-center mt-3 pagination-container flex-nowrap" id="servicePaginationControls">
+                    <div class="d-flex align-items-center me-3 pagination-info">
+                        <span class="me-2">Số bản ghi:</span>
+                        <select id="serviceItemsPerPage" class="form-select form-select-sm" onchange="changeServiceItemsPerPage()">
+                            <option value="10">10</option>
+                            <option value="20">20</option>
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                        </select>
+                    </div>
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination" id="servicePagination">
+                            <!-- Phân trang sẽ được render động bằng JS -->
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <!-- Cards (Tablet/Mobile) -->
+            <div class="row d-lg-none" id="serviceCardBody">
+                <!-- Dữ liệu sẽ được render động bằng JS -->
+            </div>
+            <!-- Pagination for Mobile -->
+            <div class="d-lg-none mt-3 text-end pagination-container flex-nowrap" id="serviceMobilePaginationControls">
+                <div class="d-flex align-items-center me-3 pagination-info">
+                    <span class="me-2">Số bản ghi:</span>
+                    <select id="serviceMobileItemsPerPage" class="form-select form-select-sm" onchange="changeServiceItemsPerPage()">
+                        <option value="10">10</option>
+                        <option value="20">20</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                    </select>
+                </div>
+                <nav aria-label="Page navigation">
+                    <ul class="pagination" id="serviceMobilePagination">
+                        <!-- Phân trang sẽ được render động bằng JS -->
+                    </ul>
+                </nav>
+            </div>
         </div>
-        <div class="tab-pane fade" id="labels" role="tabpanel" aria-labelledby="labels-tab">
-            <!-- Content will be loaded dynamically -->
+
+        <!-- Tab: Tem và mã -->
+        <div class="tab-pane fade" id="stamps" role="tabpanel" aria-labelledby="stamps-tab">
+            <div class="mb-3 text-end">
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addStampModal">Thêm mới</button>
+            </div>
+            <!-- Table (Desktop) -->
+            <div class="table-responsive d-none d-lg-block">
+                <table class="table table-hover w-100">
+                    <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th>Số lượng</th>
+                            <th>Từ số</th>
+                            <th>Đến số</th>
+                            <th>Thời gian in</th>
+                            <th>Người in</th>
+                            <th>Trạng thái</th>
+                            <th>Hành động</th>
+                        </tr>
+                    </thead>
+                    <tbody id="stampTableBody">
+                        <!-- Dữ liệu sẽ được render động bằng JS -->
+                    </tbody>
+                </table>
+                <!-- Pagination -->
+                <div class="d-flex justify-content-end align-items-center mt-3 pagination-container flex-nowrap" id="stampPaginationControls">
+                    <div class="d-flex align-items-center me-3 pagination-info">
+                        <span class="me-2">Số bản ghi:</span>
+                        <select id="stampItemsPerPage" class="form-select form-select-sm" onchange="changeStampItemsPerPage()">
+                            <option value="10">10</option>
+                            <option value="20">20</option>
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                        </select>
+                    </div>
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination" id="stampPagination">
+                            <!-- Phân trang sẽ được render động bằng JS -->
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <!-- Cards (Tablet/Mobile) -->
+            <div class="row d-lg-none" id="stampCardBody">
+                <!-- Dữ liệu sẽ được render động bằng JS -->
+            </div>
+            <!-- Pagination for Mobile -->
+            <div class="d-lg-none mt-3 text-end pagination-container flex-nowrap" id="stampMobilePaginationControls">
+                <div class="d-flex align-items-center me-3 pagination-info">
+                    <span class="me-2">Số bản ghi:</span>
+                    <select id="stampMobileItemsPerPage" class="form-select form-select-sm" onchange="changeStampItemsPerPage()">
+                        <option value="10">10</option>
+                        <option value="20">20</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                    </select>
+                </div>
+                <nav aria-label="Page navigation">
+                    <ul class="pagination" id="stampMobilePagination">
+                        <!-- Phân trang sẽ được render động bằng JS -->
+                    </ul>
+                </nav>
+            </div>
         </div>
+
+        <!-- Tab: Thanh toán -->
         <div class="tab-pane fade" id="payments" role="tabpanel" aria-labelledby="payments-tab">
-            <!-- Content will be loaded dynamically -->
+            <!-- Table (Desktop) -->
+            <div class="table-responsive d-none d-lg-block">
+                <table class="table table-hover w-100">
+                    <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th>Mã đơn</th>
+                            <th>Số tiền</th>
+                            <th>Thời gian tạo</th>
+                            <th>Thời gian thanh toán</th>
+                            <th>Người duyệt</th>
+                            <th>Trạng thái</th>
+                            <th>Hành động</th>
+                        </tr>
+                    </thead>
+                    <tbody id="paymentTableBody">
+                        <!-- Dữ liệu sẽ được render động bằng JS -->
+                    </tbody>
+                </table>
+                <!-- Pagination -->
+                <div class="d-flex justify-content-end align-items-center mt-3 pagination-container flex-nowrap" id="paymentPaginationControls">
+                    <div class="d-flex align-items-center me-3 pagination-info">
+                        <span class="me-2">Số bản ghi:</span>
+                        <select id="paymentItemsPerPage" class="form-select form-select-sm" onchange="changePaymentItemsPerPage()">
+                            <option value="10">10</option>
+                            <option value="20">20</option>
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                        </select>
+                    </div>
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination" id="paymentPagination">
+                            <!-- Phân trang sẽ được render động bằng JS -->
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <!-- Cards (Tablet/Mobile) -->
+            <div class="row d-lg-none" id="paymentCardBody">
+                <!-- Dữ liệu sẽ được render động bằng JS -->
+            </div>
+            <!-- Pagination for Mobile -->
+            <div class="d-lg-none mt-3 text-end pagination-container flex-nowrap" id="paymentMobilePaginationControls">
+                <div class="d-flex align-items-center me-3 pagination-info">
+                    <span class="me-2">Số bản ghi:</span>
+                    <select id="paymentMobileItemsPerPage" class="form-select form-select-sm" onchange="changePaymentItemsPerPage()">
+                        <option value="10">10</option>
+                        <option value="20">20</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                    </select>
+                </div>
+                <nav aria-label="Page navigation">
+                    <ul class="pagination" id="paymentMobilePagination">
+                        <!-- Phân trang sẽ được render động bằng JS -->
+                    </ul>
+                </nav>
+            </div>
         </div>
     </div>
-</div>
 
-<!-- Action Buttons (Pinned to Bottom) -->
-<div class="fixed-bottom action-bar bg-white p-3 border-top">
-    <div class="container">
-        <div class="d-flex gap-2 justify-content-end">
-            <button class="btn btn-secondary" onclick="window.adminLayout.loadContent('production-entities-list')">Quay lại</button>
-            <button class="btn btn-warning" onclick="editEntity()">Sửa</button>
-            <button id="lockButton" class="btn btn-danger" onclick="toggleLockEntity()">Khóa</button>
-        </div>
-    </div>
-</div>
-
-<!-- Lock Confirmation Modal -->
-<div class="modal fade" id="confirmLockModal" tabindex="-1" aria-labelledby="confirmLockModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="confirmLockModalLabel">Xác nhận khóa chủ thể</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                Bạn có chắc chắn muốn khóa chủ thể <strong id="confirmLockEntityName"></strong>?
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-                <button type="button" id="confirmLockButton" class="btn btn-danger">Khóa</button>
+    <!-- Modal: Image Preview -->
+    <div class="modal fade" id="imagePreviewModal" tabindex="-1" aria-labelledby="imagePreviewModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="imagePreviewModalLabel">Xem trước ảnh</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <img id="previewImage" src="" alt="Preview" style="max-width: 100%; max-height: 500px;">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<!-- Unlock Confirmation Modal -->
-<div class="modal fade" id="confirmUnlockModal" tabindex="-1" aria-labelledby="confirmUnlockModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="confirmUnlockModalLabel">Xác nhận mở khóa chủ thể</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <!-- Modal: Confirm Lock -->
+    <div class="modal fade" id="confirmLockModal" tabindex="-1" aria-labelledby="confirmLockModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmLockModalLabel">Xác nhận khóa</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Bạn có chắc chắn muốn khóa chủ thể <span id="confirmLockEntityName"></span>?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <button type="button" class="btn btn-danger" id="confirmLockButton">Khóa</button>
+                </div>
             </div>
-            <div class="modal-body">
-                Bạn có chắc chắn muốn mở khóa chủ thể <strong id="confirmUnlockEntityName"></strong>?
+        </div>
+    </div>
+
+    <!-- Modal: Confirm Unlock -->
+    <div class="modal fade" id="confirmUnlockModal" tabindex="-1" aria-labelledby="confirmUnlockModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmUnlockModalLabel">Xác nhận mở khóa</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Bạn có chắc chắn muốn mở khóa chủ thể <span id="confirmUnlockEntityName"></span>?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <button type="button" class="btn btn-success" id="confirmUnlockButton">Mở khóa</button>
+                </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-                <button type="button" id="confirmUnlockButton" class="btn btn-success">Mở khóa</button>
+        </div>
+    </div>
+
+    <!-- Modal: Add User -->
+    <div class="modal fade" id="addUserModal" tabindex="-1" aria-labelledby="addUserModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addUserModalLabel">Thêm mới liên kết người dùng</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="userSearchType" id="searchByPhone" value="phone" checked>
+                            <label class="form-check-label" for="searchByPhone">Số điện thoại</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="userSearchType" id="searchByEmail" value="email">
+                            <label class="form-check-label" for="searchByEmail">Email</label>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="userSearchInput" class="form-label">Số điện thoại hoặc Email</label>
+                        <input type="text" class="form-control" id="userSearchInput" placeholder="Nhập số điện thoại hoặc email">
+                    </div>
+                    <div id="userInfo" class="d-none">
+                        <div class="mb-3">
+                            <label class="form-label">Tên người dùng</label>
+                            <input type="text" class="form-control" id="userName" disabled>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Số điện thoại</label>
+                            <input type="text" class="form-control" id="userPhone" disabled>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Email</label>
+                            <input type="text" class="form-control" id="userEmail" disabled>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Địa chỉ</label>
+                            <input type="text" class="form-control" id="userAddress" disabled>
+                        </div>
+                    </div>
+                    <div id="userWarning" class="d-none text-danger mb-3"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                    <button type="button" class="btn btn-primary" id="checkUserButton">Kiểm tra</button>
+                    <button type="button" class="btn btn-success d-none" id="linkUserButton">Liên kết</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Confirm Link User -->
+    <div class="modal fade" id="confirmLinkUserModal" tabindex="-1" aria-labelledby="confirmLinkUserModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmLinkUserModalLabel">Xác nhận liên kết</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Bạn có chắc chắn muốn liên kết người dùng <span id="confirmLinkUserName"></span> với chủ thể này?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <button type="button" class="btn btn-success" id="confirmLinkUserButton">Liên kết</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Confirm Unlink User -->
+    <div class="modal fade" id="confirmUnlinkUserModal" tabindex="-1" aria-labelledby="confirmUnlinkUserModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmUnlinkUserModalLabel">Xác nhận hủy liên kết</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Bạn có chắc chắn muốn hủy liên kết người dùng <span id="confirmUnlinkUserName"></span> với chủ thể này?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <button type="button" class="btn btn-danger" id="confirmUnlinkUserButton">Hủy liên kết</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Add Stamp -->
+    <div class="modal fade" id="addStampModal" tabindex="-1" aria-labelledby="addStampModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addStampModalLabel">Thêm mới tem</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="stampQuantity" class="form-label">Số lượng</label>
+                        <input type="number" class="form-control" id="stampQuantity" placeholder="Nhập số lượng tem">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <button type="button" class="btn btn-primary" id="confirmAddStampButton">Xác nhận</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Confirm Add Stamp -->
+    <div class="modal fade" id="confirmAddStampModal" tabindex="-1" aria-labelledby="confirmAddStampModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmAddStampModalLabel">Xác nhận lấy file excel</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Bạn có chắc chắn muốn tạo và lấy file excel cho <span id="confirmAddStampQuantity"></span> tem?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <button type="button" class="btn btn-primary" id="confirmAddStampExcelButton">Xác nhận</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Stamp Details -->
+    <div class="modal fade" id="stampDetailModal" tabindex="-1" aria-labelledby="stampDetailModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="stampDetailModalLabel">Chi tiết lượt in tem</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="info-box mb-4">
+                        <div class="section-title">Thông tin lượt in</div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3"><span class="label-bold">Số lượng:</span> <span id="stampDetailQuantity"></span></div>
+                            <div class="col-md-6 mb-3"><span class="label-bold">Từ số:</span> <span id="stampDetailFrom"></span></div>
+                            <div class="col-md-6 mb-3"><span class="label-bold">Đến số:</span> <span id="stampDetailTo"></span></div>
+                            <div class="col-md-6 mb-3"><span class="label-bold">Thời gian in:</span> <span id="stampDetailPrintedAt"></span></div>
+                            <div class="col-md-6 mb-3"><span class="label-bold">Người in:</span> <span id="stampDetailPrintedBy"></span></div>
+                            <div class="col-md-6 mb-3"><span class="label-bold">Trạng thái:</span> <span id="stampDetailStatus"></span></div>
+                        </div>
+                    </div>
+                    <div class="info-box">
+                        <div class="section-title">Danh sách tem</div>
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Số thứ tự tem</th>
+                                        <th>Mã định danh</th>
+                                        <th>Trạng thái</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="stampDetailTableBody">
+                                    <!-- Dữ liệu sẽ được render động bằng JS -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Payment Details -->
+    <div class="modal fade" id="paymentDetailModal" tabindex="-1" aria-labelledby="paymentDetailModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="paymentDetailModalLabel">Chi tiết thanh toán</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="info-box mb-4">
+                        <div class="section-title">Thông tin thanh toán</div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3"><span class="label-bold">Mã đơn:</span> <span id="paymentDetailOrderCode"></span></div>
+                            <div class="col-md-6 mb-3"><span class="label-bold">Số tiền:</span> <span id="paymentDetailAmount"></span></div>
+                            <div class="col-md-6 mb-3"><span class="label-bold">Thời gian tạo:</span> <span id="paymentDetailCreatedAt"></span></div>
+                            <div class="col-md-6 mb-3"><span class="label-bold">Thời gian thanh toán:</span> <span id="paymentDetailPaidAt"></span></div>
+                            <div class="col-md-6 mb-3"><span class="label-bold">Người duyệt:</span> <span id="paymentDetailApprovedBy"></span></div>
+                            <div class="col-md-6 mb-3"><span class="label-bold">Trạng thái:</span> <span id="paymentDetailStatus"></span></div>
+                        </div>
+                    </div>
+                    <div class="info-box">
+                        <div class="section-title">Danh sách gói dịch vụ</div>
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>STT</th>
+                                        <th>Gói dịch vụ</th>
+                                        <th>Thời hạn</th>
+                                        <th>Giá tiền</th>
+                                        <th>Ngày hết hạn</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="paymentDetailServiceTableBody">
+                                    <!-- Dữ liệu sẽ được render động bằng JS -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Confirm Allow Lookup -->
+    <div class="modal fade" id="confirmAllowLookupModal" tabindex="-1" aria-labelledby="confirmAllowLookupModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmAllowLookupModalLabel">Xác nhận cho phép tra cứu</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Bạn có chắc chắn muốn cho phép tra cứu sản phẩm <span id="confirmAllowLookupProductName"></span>?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <button type="button" class="btn btn-success" id="confirmAllowLookupButton">Cho phép</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Confirm Disallow Lookup -->
+    <div class="modal fade" id="confirmDisallowLookupModal" tabindex="-1" aria-labelledby="confirmDisallowLookupModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmDisallowLookupModalLabel">Xác nhận không cho phép tra cứu</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Bạn có chắc chắn muốn không cho phép tra cứu sản phẩm <span id="confirmDisallowLookupProductName"></span>?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <button type="button" class="btn btn-danger" id="confirmDisallowLookupButton">Không cho phép</button>
+                </div>
             </div>
         </div>
     </div>
