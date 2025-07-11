@@ -204,7 +204,7 @@
 
     <!-- Modal for Create Entity -->
     <div class="modal fade" id="createEntityModal" tabindex="-1" aria-labelledby="createEntityModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
+        <div class="modal-dialog modal-xl">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="createEntityModalLabel">Tạo chủ thể</h5>
@@ -212,31 +212,137 @@
                 </div>
                 <div class="modal-body">
                     <form id="createEntityForm">
-                        <div class="mb-3">
-                            <label class="form-label">Tên SPC</label>
-                            <input type="text" class="form-control" id="entitySpcName" readonly>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Mã số thuế</label>
-                            <input type="text" class="form-control" id="entityTaxCode" readonly>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Loại chủ thể</label>
-                            <select class="form-select" id="entityType" required>
-                                <option value="">Chọn loại chủ thể</option>
-                                <option value="management">Chủ thể quản lý</option>
-                                <option value="production">Chủ thể sản xuất</option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Thông tin bổ sung</label>
-                            <textarea class="form-control" id="entityAdditionalInfo" rows="4" placeholder="Nhập thông tin bổ sung"></textarea>
+                        <div class="row accordion accordion-flush d-lg-flex" id="createEntityAccordion">
+                            <!-- Section 1: Profile Information -->
+                            <div class="col-lg-7 accordion-item">
+                                <h2 class="accordion-header" id="profileInfoHeading">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#profileInfoCollapse" aria-expanded="true" aria-controls="profileInfoCollapse">
+                                        Thông tin hồ sơ
+                                    </button>
+                                </h2>
+                                <div id="profileInfoCollapse" class="accordion-collapse collapse show" aria-labelledby="profileInfoHeading" data-bs-parent="#createEntityAccordion">
+                                    <div class="accordion-body">
+                                        <div class="mb-3">
+                                            <label class="form-label">Tên tổ chức</label>
+                                            <input type="text" class="form-control" id="entitySpcName" readonly>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Mã số thuế</label>
+                                            <input type="text" class="form-control" id="entityTaxCode" readonly>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Số điện thoại</label>
+                                            <input type="text" class="form-control" id="entityPhone" readonly>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Email</label>
+                                            <input type="text" class="form-control" id="entityEmail" readonly>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Người đại diện</label>
+                                            <div class="d-flex align-items-center">
+                                                <img id="entityAvatar" src="" alt="Avatar" class="rounded-circle me-2" style="width: 40px; height: 40px;">
+                                                <div>
+                                                    <p class="mb-0" id="entityRepresentativeName"></p>
+                                                    <p class="mb-0 text-muted" id="entityRepresentativePhone"></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Địa chỉ</label>
+                                            <input type="text" class="form-control" id="entityAddress" readonly>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Ngày gửi hồ sơ</label>
+                                            <input type="text" class="form-control" id="entitySubmittedAt" readonly>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">File đính kèm</label>
+                                            <div id="entityFilePreview" class="border p-2 text-center">
+                                                <a href="#" id="entityFileLink" target="_blank">Xem file PDF</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Section 2: Additional Information -->
+                            <div class="col-lg-5 accordion-item">
+                                <h2 class="accordion-header" id="additionalInfoHeading">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#additionalInfoCollapse" aria-expanded="true" aria-controls="additionalInfoCollapse">
+                                        Thông tin bổ sung
+                                    </button>
+                                </h2>
+                                <div id="additionalInfoCollapse" class="accordion-collapse collapse show" aria-labelledby="additionalInfoHeading" data-bs-parent="#createEntityAccordion">
+                                    <div class="accordion-body">
+                                        <div class="mb-3">
+                                            <label class="form-label">Slogan</label>
+                                            <input type="text" class="form-control" id="entitySlogan" placeholder="Nhập slogan">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Bài viết giới thiệu</label>
+                                            <textarea class="form-control" id="entityIntroduction" rows="4" placeholder="Nhập bài viết giới thiệu"></textarea>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Logo</label>
+                                            <input type="file" class="form-control" id="entityLogo" accept="image/*">
+                                            <div id="logoPreview" class="mt-2 position-relative d-none">
+                                                <img id="logoImage" src="" alt="Logo Preview" style="max-width: 100%; max-height: 150px;">
+                                                <button type="button" class="btn btn-danger btn-sm position-absolute top-0 end-0" id="removeLogoButton" title="Xóa logo">
+                                                    <i class="fas fa-times"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Mã tổ chức</label>
+                                            <input type="text" class="form-control" id="entityOrgCode" placeholder="Nhập mã tổ chức">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="createEntityLaterButton">Tạo hồ sơ sau</button>
+                    <button type="button" class="btn btn-primary" id="confirmCreateEntityButton">Tạo hồ sơ chính thức</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Confirm Create Entity -->
+    <div class="modal fade" id="confirmCreateEntityModal" tabindex="-1" aria-labelledby="confirmCreateEntityModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmCreateEntityModalLabel">Xác nhận tạo chủ thể</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Bạn có chắc chắn muốn tạo chủ thể cho hồ sơ này không?</p>
+                    <p id="confirmCreateEntityName"></p>
+                </div>
+                <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-                    <button type="button" class="btn btn-primary" id="confirmCreateEntityButton">Tạo</button>
+                    <button type="button" class="btn btn-primary" id="finalCreateEntityButton">Xác nhận</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Fullscreen PDF Preview -->
+    <div class="modal fade" id="pdfPreviewModal" tabindex="-1" aria-labelledby="pdfPreviewModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="pdfPreviewModalLabel">Xem trước file PDF</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <iframe id="pdfPreviewIframe" src="" style="width: 100%; height: 500px;"></iframe>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
                 </div>
             </div>
         </div>

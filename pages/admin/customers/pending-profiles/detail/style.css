@@ -97,6 +97,65 @@
     font-size: 0.875rem;
 }
 
+/* Create Entity Modal */
+#createEntityModal .modal-body {
+    padding: 1.5rem;
+}
+
+#createEntityAccordion .accordion-item {
+    border: none;
+}
+
+#createEntityAccordion .accordion-button {
+    font-weight: 600;
+    background-color: #f8f9fa;
+}
+
+#entityFilePreview a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+#entityFilePreview a:hover {
+    text-decoration: underline;
+}
+
+#logoPreview .btn-danger {
+    padding: 0.25rem;
+    width: 24px;
+    height: 24px;
+}
+
+/* Desktop Layout */
+@media (min-width: 992px) {
+    #createEntityAccordion {
+        flex-direction: row;
+    }
+
+    #createEntityAccordion .accordion-item {
+        flex: 1;
+        border: 1px solid #dee2e6;
+        border-radius: 8px;
+        margin: 0 0.5rem;
+    }
+
+    #createEntityAccordion .accordion-item:first-child {
+        flex: 6;
+    }
+
+    #createEntityAccordion .accordion-item:last-child {
+        flex: 4;
+    }
+
+    #createEntityAccordion .accordion-button {
+        display: none; /* Hide accordion button on desktop */
+    }
+
+    #createEntityAccordion .accordion-collapse {
+        display: block !important; /* Always show content on desktop */
+    }
+}
+
 /* Responsive Adjustments */
 @media (max-width: 767.98px) {
     #actionButtons {
@@ -105,5 +164,13 @@
     }
     #actionButtons .btn {
         width: 100%;
+    }
+
+    #createEntityAccordion .accordion-item {
+        margin-bottom: 1rem;
+    }
+
+    #createEntityAccordion .accordion-button {
+        display: block;
     }
 }

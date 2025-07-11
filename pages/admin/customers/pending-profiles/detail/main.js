@@ -4,23 +4,34 @@
         id: 1,
         legalName: "Công ty A",
         taxCode: "1234567890",
-        representative: "Nguyễn Văn A",
-        contactInfo: "0901234567 | contact@a.com",
+        representative: {
+            name: "Nguyễn Văn A",
+            phone: "0901234567",
+            avatar: "https://via.placeholder.com/40"
+        },
+        contactInfo: {
+            phone: "0901234567",
+            email: "contact@a.com"
+        },
         address: "123 Đường ABC, Quận 1, TP.HCM",
         submittedAt: "2025-07-01 10:00",
         approvedAt: null,
         status: "pending",
         attachments: [
-            { name: "file1.pdf", url: "path/to/file1.pdf", type: "application/pdf" },
-            { name: "file2.jpg", url: "path/to/file2.jpg", type: "image/jpeg" }
+            { name: "file1.pdf", url: "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf", type: "application/pdf" },
+            { name: "file2.jpg", url: "https://via.placeholder.com/150", type: "image/jpeg" }
         ]
     };
+
+    let currentLogoFile = null;
 
     // Initialize page
     function initialize() {
         const legalName = document.getElementById('legalName');
         const taxCode = document.getElementById('taxCode');
-        const representative = document.getElementById('representative');
+        const representativeName = document.getElementById('representativeName');
+        const representativePhone = document.getElementById('representativePhone');
+        const representativeAvatar = document.getElementById('representativeAvatar');
         const contactInfo = document.getElementById('contactInfo');
         const address = document.getElementById('address');
         const submittedAt = document.getElementById('submittedAt');
@@ -30,7 +41,7 @@
         const attachmentList = document.getElementById('attachmentList');
         const actionButtons = document.getElementById('actionButtons');
 
-        if (legalName && taxCode && representative && contactInfo && address && submittedAt && approvedAt && status && attachmentPreview && attachmentList && actionButtons) {
+        if (legalName && taxCode && representativeName && representativePhone && representativeAvatar && contactInfo && address && submittedAt && approvedAt && status && attachmentPreview && attachmentList && actionButtons) {
             console.log('Initializing with profile data:', profile); // Debug log
             renderProfileDetails();
             renderActionButtons();
@@ -44,7 +55,8 @@
                     console.log(`Retrying initialization... Attempt ${retryCount}/${maxRetries}`);
                     setTimeout(() => {
                         if (document.getElementById('legalName') && document.getElementById('taxCode') && 
-                            document.getElementById('representative') && document.getElementById('contactInfo') && 
+                            document.getElementById('representativeName') && document.getElementById('representativePhone') && 
+                            document.getElementById('representativeAvatar') && document.getElementById('contactInfo') && 
                             document.getElementById('address') && document.getElementById('submittedAt') && 
                             document.getElementById('approvedAt') && document.getElementById('status') && 
                             document.getElementById('attachmentPreview') && document.getElementById('attachmentList') && 
@@ -67,8 +79,10 @@
     function renderProfileDetails() {
         document.getElementById('legalName').textContent = profile.legalName;
         document.getElementById('taxCode').textContent = profile.taxCode;
-        document.getElementById('representative').textContent = profile.representative;
-        document.getElementById('contactInfo').textContent = profile.contactInfo;
+        document.getElementById('representativeName').textContent = profile.representative.name;
+        document.getElementById('representativePhone').textContent = profile.representative.phone;
+        document.getElementById('representativeAvatar').src = profile.representative.avatar;
+        document.getElementById('contactInfo').textContent = `${profile.contactInfo.phone} | ${profile.contactInfo.email}`;
         document.getElementById('address').textContent = profile.address;
         document.getElementById('submittedAt').textContent = profile.submittedAt;
         document.getElementById('approvedAt').textContent = profile.approvedAt || "Chưa duyệt";
@@ -115,7 +129,9 @@
         if (type.startsWith('image/')) {
             window.open(url, '_blank');
         } else if (type === 'application/pdf') {
-            window.open(url, '_blank');
+            const pdfModal = new bootstrap.Modal(document.getElementById('pdfPreviewModal'));
+            document.getElementById('pdfPreviewIframe').src = url;
+            pdfModal.show();
         }
     }
 
@@ -182,6 +198,8 @@
             applyChanges();
             modal.hide();
             showToast(`Hồ sơ ${profile.legalName} đã được duyệt`, 'success');
+            // Immediately show create entity modal
+            showCreateEntityModal();
             confirmButton.removeEventListener('click', confirmHandler);
         };
 
@@ -205,6 +223,7 @@
             }
             profile.status = 'rejected';
             profile.approvedAt = new Date().toLocaleString('vi-VN', { timeZone: 'Asia/Ho_Chi_Minh' });
+            profile.rejectionReason = reason;
             applyChanges();
             modal.hide();
             showToast(`Hồ sơ ${profile.legalName} đã bị từ chối`, 'success');
@@ -222,19 +241,97 @@
         const modal = new bootstrap.Modal(document.getElementById('createEntityModal'));
         document.getElementById('entitySpcName').value = profile.legalName;
         document.getElementById('entityTaxCode').value = profile.taxCode;
+        document.getElementById('entityPhone').value = profile.contactInfo.phone;
+        document.getElementById('entityEmail').value = profile.contactInfo.email;
+        document.getElementById('entityAvatar').src = profile.representative.avatar;
+        document.getElementById('entityRepresentativeName').textContent = profile.representative.name;
+        document.getElementById('entityRepresentativePhone').textContent = profile.representative.phone;
+        document.getElementById('entityAddress').value = profile.address;
+        document.getElementById('entitySubmittedAt').value = profile.submittedAt;
+        document.getElementById('entityFileLink').href = profile.attachments.find(a => a.type === 'application/pdf')?.url || '#';
 
+        // Reset additional info fields
+        document.getElementById('entitySlogan').value = '';
+        document.getElementById('entityIntroduction').value = '';
+        document.getElementById('entityOrgCode').value = '';
+        document.getElementById('entityLogo').value = '';
+        document.getElementById('logoPreview').classList.add('d-none');
+        currentLogoFile = null;
+
+        // Handle file preview click
+        const fileLink = document.getElementById('entityFileLink');
+        fileLink.onclick = (e) => {
+            e.preventDefault();
+            const pdfUrl = profile.attachments.find(a => a.type === 'application/pdf')?.url;
+            if (pdfUrl) {
+                const pdfModal = new bootstrap.Modal(document.getElementById('pdfPreviewModal'));
+                document.getElementById('pdfPreviewIframe').src = pdfUrl;
+                pdfModal.show();
+            }
+        };
+
+        // Handle logo upload
+        const logoInput = document.getElementById('entityLogo');
+        logoInput.onchange = (e) => {
+            const file = e.target.files[0];
+            if (file && file.type.startsWith('image/')) {
+                currentLogoFile = file;
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                    document.getElementById('logoImage').src = event.target.result;
+                    document.getElementById('logoPreview').classList.remove('d-none');
+                    logoInput.classList.add('d-none');
+                };
+                reader.readAsDataURL(file);
+            } else {
+                showToast('Vui lòng chọn file hình ảnh hợp lệ', 'error');
+            }
+        };
+
+        // Handle logo removal
+        const removeLogoButton = document.getElementById('removeLogoButton');
+        removeLogoButton.onclick = () => {
+            document.getElementById('entityLogo').value = '';
+            document.getElementById('logoPreview').classList.add('d-none');
+            logoInput.classList.remove('d-none');
+            currentLogoFile = null;
+        };
+
+        // Handle create entity confirmation
         const confirmButton = document.getElementById('confirmCreateEntityButton');
         const confirmHandler = () => {
-            const entityType = document.getElementById('entityType').value;
-            if (!entityType) {
-                showToast('Vui lòng chọn loại chủ thể', 'error');
-                return;
-            }
-            profile.status = 'entity_created';
-            applyChanges();
-            modal.hide();
-            showToast(`Chủ thể ${profile.legalName} đã được tạo`, 'success');
-            confirmButton.removeEventListener('click', confirmHandler);
+            const confirmModal = new bootstrap.Modal(document.getElementById('confirmCreateEntityModal'));
+            document.getElementById('confirmCreateEntityName').innerHTML = `Tên SPC: ${profile.legalName}`;
+
+            const finalCreateButton = document.getElementById('finalCreateEntityButton');
+            const finalCreateHandler = () => {
+                const slogan = document.getElementById('entitySlogan').value;
+                const introduction = document.getElementById('entityIntroduction').value;
+                const orgCode = document.getElementById('entityOrgCode').value;
+
+                if (!orgCode) {
+                    showToast('Vui lòng nhập mã tổ chức', 'error');
+                    confirmModal.hide();
+                    return;
+                }
+
+                profile.status = 'entity_created';
+                profile.slogan = slogan;
+                profile.introduction = introduction;
+                profile.orgCode = orgCode;
+                profile.logo = currentLogoFile ? URL.createObjectURL(currentLogoFile) : null;
+
+                applyChanges();
+                modal.hide();
+                confirmModal.hide();
+                showToast(`Chủ thể ${profile.legalName} đã được tạo`, 'success');
+                finalCreateButton.removeEventListener('click', finalCreateHandler);
+            };
+
+            finalCreateButton.removeEventListener('click', finalCreateHandler);
+            finalCreateButton.addEventListener('click', finalCreateHandler);
+
+            confirmModal.show();
         };
 
         confirmButton.removeEventListener('click', confirmHandler);
@@ -245,8 +342,8 @@
 
     // View entity details
     function viewEntityDetails() {
-        window.adminLayout.loadContent('manage-entities');
-        history.pushState(null, '', '/manage-entities?id=' + profile.id);
+        window.adminLayout.loadContent('manage-entities-view');
+        history.pushState(null, '', '/manage-entities-view?id=' + profile.id);
     }
 
     // Apply changes and re-render
@@ -293,7 +390,8 @@
             console.log('DOMContentLoaded triggered, initializing...'); // Debug log
             initialize();
         } else if (document.getElementById('legalName') && document.getElementById('taxCode') && 
-                   document.getElementById('representative') && document.getElementById('contactInfo') && 
+                   document.getElementById('representativeName') && document.getElementById('representativePhone') && 
+                   document.getElementById('representativeAvatar') && document.getElementById('contactInfo') && 
                    document.getElementById('address') && document.getElementById('submittedAt') && 
                    document.getElementById('approvedAt') && document.getElementById('status') && 
                    document.getElementById('attachmentPreview') && document.getElementById('attachmentList') && 

@@ -41,7 +41,8 @@
 }
 
 .table td:nth-child(1), /* STT */
-.table td:nth-child(7) /* Hành động */ {
+.table td:nth-child(6), /* Người quản trị */
+.table td:nth-child(8) /* Hành động */ {
     text-align: center;
 }
 
@@ -91,6 +92,12 @@
     background-color: #d4edda;
     border-color: #c3e6cb;
     color: #155724;
+}
+
+.toast-error {
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    color: #721c24;
 }
 
 .toast-header {
@@ -152,6 +159,13 @@
 .pagination .page-item.disabled .page-link {
     color: #6c757d;
     pointer-events: none;
+}
+
+/* Assign Admin Modal */
+#assignAdminModal .form-control-plaintext {
+    background-color: #f8f9fa;
+    padding: 0.375rem 0.75rem;
+    border-radius: 0.25rem;
 }
 
 /* Responsive Adjustments */
