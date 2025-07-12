@@ -1,106 +1,124 @@
 <main class="container-fluid py-4">
-    <h2 class="mb-4">Dashboard</h2>
-    
-    <!-- Trạng thái xác thực -->
-    <div class="row mb-4">
-      <div class="col-12">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">Trạng thái xác thực</h5>
-            <p class="card-text fs-5" id="authStatus">Chưa xác thực</p>
+  <!-- Vùng chào mừng -->
+  <h1 class="display-4 mb-4 text-center" style="font-family: 'Roboto', sans-serif;">Chào <span id="userName">Nguyễn Văn A</span>!</h1>
+
+  <!-- Card Gói Cộng đồng -->
+  <div class="row mb-4">
+    <div class="col-md-12">
+      <div class="card shadow-sm">
+        <div class="card-body text-center">
+          <h5 class="card-title mb-4">Gói Cộng đồng</h5>
+          <!-- Thanh tiến trình: Lượt kích hoạt -->
+          <div class="mb-3">
+            <p class="mb-1">Lượt kích hoạt</p>
+            <div class="progress" style="height: 20px; position: relative;">
+              <div id="activationProgress" class="progress-bar" role="progressbar" style="width: 50%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+              <span id="activationText" class="progress-text">50/100</span>
+            </div>
+          </div>
+          <!-- Thanh tiến trình: Dung lượng -->
+          <div class="mb-3">
+            <p class="mb-1">Dung lượng</p>
+            <div class="progress" style="height: 20px; position: relative;">
+              <div id="storageProgress" class="progress-bar" role="progressbar" style="width: 40%;" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
+              <span id="storageText" class="progress-text">2GB/5GB</span>
+            </div>
+          </div>
+          <!-- Ngày làm mới gói -->
+          <p class="text-muted mb-3">Làm mới vào <span id="renewalDate">01/08/2025</span></p>
+          <!-- Nút Nâng cấp Gói -->
+          <button class="btn btn-success rounded-pill px-4" onclick="window.companyLayout.loadContent('system-services')">Nâng cấp Gói</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Thông tin sản phẩm -->
+  <div class="row mb-4">
+    <div class="col-md-12">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title">Thông tin sản phẩm</h5>
+          <div class="row text-center">
+            <div class="col-md-4 mb-3">
+              <p class="mb-1">Tổng số sản phẩm</p>
+              <p class="fs-4 fw-bold" id="totalProducts">150</p>
+            </div>
+            <div class="col-md-4 mb-3">
+              <p class="mb-1">Sản phẩm hoạt động</p>
+              <p class="fs-4 fw-bold" id="activeProducts">120</p>
+            </div>
+            <div class="col-md-4 mb-3">
+              <p class="mb-1">Sản phẩm khóa</p>
+              <p class="fs-4 fw-bold" id="lockedProducts">30</p>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  
-    <!-- Thông tin sản phẩm -->
-    <div class="row mb-4">
-      <div class="col-md-4 mb-3">
-        <div class="card text-center">
-          <div class="card-body">
-            <h5 class="card-title">Tổng số sản phẩm</h5>
-            <p class="card-text display-6" id="totalProducts">0</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4 mb-3">
-        <div class="card text-center">
-          <div class="card-body">
-            <h5 class="card-title">Sản phẩm hoạt động</h5>
-            <p class="card-text display-6" id="activeProducts">0</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4 mb-3">
-        <div class="card text-center">
-          <div class="card-body">
-            <h5 class="card-title">Sản phẩm khóa</h5>
-            <p class="card-text display-6" id="lockedProducts">0</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  
-    <!-- Thông tin tem -->
-    <div class="row mb-4">
-      <div class="col-md-12">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">Thông tin tem</h5>
-            <div class="row">
-              <div class="col-md-3 mb-3">
-                <div class="text-center">
-                  <p class="mb-1">Tổng số tem đã in</p>
-                  <p class="fs-4 fw-bold" id="totalStamps">0</p>
-                </div>
+  </div>
+
+  <!-- Thông tin tem -->
+  <div class="row mb-4">
+    <div class="col-md-12">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title">Thông tin tem</h5>
+          <div class="row">
+            <div class="col-md-3 mb-3">
+              <div class="text-center">
+                <p class="mb-1">Tổng số tem đã in</p>
+                <p class="fs-4 fw-bold" id="totalStamps">10000</p>
               </div>
-              <div class="col-md-3 mb-3">
-                <div class="text-center">
-                  <p class="mb-1">Số tem trắng</p>
-                  <p class="fs-4 fw-bold" id="whiteStamps">0</p>
-                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+              <div class="text-center">
+                <p class="mb-1">Số tem trắng</p>
+                <p class="fs-4 fw-bold" id="whiteStamps">3000</p>
               </div>
-              <div class="col-md-3 mb-3">
-                <div class="text-center">
-                  <p class="mb-1">Số tem đã kích hoạt</p>
-                  <p class="fs-4 fw-bold" id="activatedStamps">0</p>
-                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+              <div class="text-center">
+                <p class="mb-1">Số tem đã kích hoạt</p>
+                <p class="fs-4 fw-bold" id="activatedStamps">5000</p>
               </div>
-              <div class="col-md-3 mb-3">
-                <div class="text-center">
-                  <p class="mb-1">Số tem đã bán</p>
-                  <p class="fs-4 fw-bold" id="soldStamps">0</p>
-                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+              <div class="text-center">
+                <p class="mb-1">Số tem đã bán</p>
+                <p class="fs-4 fw-bold" id="soldStamps">1500</p>
               </div>
-              <div class="col-md-3 mb-3">
-                <div class="text-center">
-                  <p class="mb-1">Số tem đã hủy</p>
-                  <p class="fs-4 fw-bold" id="canceledStamps">0</p>
-                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+              <div class="text-center">
+                <p class="mb-1">Số tem đã hủy</p>
+                <p class="fs-4 fw-bold" id="canceledStamps">500</p>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  
-    <!-- Thông tin người dùng -->
-    <div class="row">
-      <div class="col-md-6 mb-3">
-        <div class="card text-center">
-          <div class="card-body">
-            <h5 class="card-title">Số người dùng nội bộ</h5>
-            <p class="card-text display-6" id="internalUsers">0</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-6 mb-3">
-        <div class="card text-center">
-          <div class="card-body">
-            <h5 class="card-title">Số người dùng đã mời</h5>
-            <p class="card-text display-6" id="invitedUsers">0</p>
+  </div>
+
+  <!-- Thông tin người dùng -->
+  <div class="row mb-4">
+    <div class="col-md-12">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title">Thông tin người dùng</h5>
+          <div class="row text-center">
+            <div class="col-md-6 mb-3">
+              <p class="mb-1">Số người dùng nội bộ</p>
+              <p class="fs-4 fw-bold" id="internalUsers">25</p>
+            </div>
+            <div class="col-md-6 mb-3">
+              <p class="mb-1">Số người dùng đã mời</p>
+              <p class="fs-4 fw-bold" id="invitedUsers">50</p>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </main>
+  </div>
+</main>

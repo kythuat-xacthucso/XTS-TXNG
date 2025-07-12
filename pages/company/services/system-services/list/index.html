@@ -1,137 +1,120 @@
-<div class="content-card">
-    <!-- Page Header -->
-    <div class="page-header d-flex justify-content-between align-items-center mb-4">
-        <div>
-            <h3 class="page-title">Danh sách gói dịch vụ</h3>
-            <p class="page-breadcrumb mb-0">Dịch vụ / Gói dịch vụ</p>
-        </div>
-    </div>
+<main class="container-fluid py-4">
+    <h2 class="text-center mb-5">Lựa chọn Gói Dịch vụ</h2>
 
-    <!-- Filter Section (Desktop) -->
-    <div class="filter-section mb-4 d-none d-lg-block">
-        <div class="card">
-            <div class="card-body">
-                <form id="filterFormDesktop">
-                    <div class="row g-3">
-                        <div class="col-md-4">
-                            <label class="form-label">Tên gói</label>
-                            <input type="text" class="form-control" id="filterName" placeholder="Nhập tên gói">
-                        </div>
-                        <div class="col-md-4">
-                            <label class="form-label">Giá tiền</label>
-                            <input type="number" class="form-control" id="filterPrice" placeholder="Nhập giá tiền">
-                        </div>
-                        <div class="col-md-4">
-                            <label class="form-label">Kỳ hạn</label>
-                            <select class="form-select" id="filterDuration">
-                                <option value="">Tất cả</option>
-                                <option value="3 tháng">3 tháng</option>
-                                <option value="6 tháng">6 tháng</option>
-                                <option value="1 năm">1 năm</option>
-                            </select>
-                        </div>
-                        <div class="col-12 text-end">
-                            <button type="button" class="btn btn-primary" onclick="applyFilters()">Tìm kiếm</button>
-                            <button type="button" class="btn btn-outline-secondary ms-2" onclick="resetFilters()">Đặt lại</button>
-                        </div>
-                    </div>
-                </form>
+    <!-- Danh sách gói trả phí -->
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 justify-content-center">
+        <!-- Gói Phát triển -->
+        <div class="col">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body text-center">
+                    <h4 class="card-title">Gói Phát triển</h4>
+                    <p class="card-text display-6 fw-bold text-success">1.200.000 VNĐ/năm</p>
+                    <ul class="list-unstyled mb-4">
+                        <li>500 lượt kích hoạt</li>
+                        <li>10GB dung lượng</li>
+                    </ul>
+                    <button class="btn btn-success rounded-pill px-4" data-bs-toggle="modal" data-bs-target="#upgradeModal">Nâng cấp</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Gói Chuyên nghiệp -->
+        <div class="col">
+            <div class="card h-100 shadow-sm position-relative">
+                <div class="ribbon ribbon-top-right"><span>Phổ biến</span></div>
+                <div class="card-body text-center">
+                    <h4 class="card-title">Gói Chuyên nghiệp</h4>
+                    <p class="card-text display-6 fw-bold text-success">2.500.000 VNĐ/năm</p>
+                    <ul class="list-unstyled mb-4">
+                        <li>1000 lượt kích hoạt</li>
+                        <li>25GB dung lượng</li>
+                    </ul>
+                    <button class="btn btn-success rounded-pill px-4" data-bs-toggle="modal" data-bs-target="#upgradeModal">Nâng cấp</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Gói Doanh nghiệp (thêm ví dụ) -->
+        <div class="col">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body text-center">
+                    <h4 class="card-title">Gói Doanh nghiệp</h4>
+                    <p class="card-text display-6 fw-bold text-success">5.000.000 VNĐ/năm</p>
+                    <ul class="list-unstyled mb-4">
+                        <li>2500 lượt kích hoạt</li>
+                        <li>50GB dung lượng</li>
+                    </ul>
+                    <button class="btn btn-success rounded-pill px-4" data-bs-toggle="modal" data-bs-target="#upgradeModal">Nâng cấp</button>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- Filter Button (Tablet/Mobile) -->
-    <button class="btn btn-primary d-lg-none position-fixed bottom-0 start-0 m-3" data-bs-toggle="offcanvas" data-bs-target="#filterOffcanvas">
-        <i class="fas fa-filter"></i> Bộ lọc
-    </button>
-
-    <!-- Filter Offcanvas (Tablet/Mobile) -->
-    <div class="offcanvas offcanvas-bottom" tabindex="-1" id="filterOffcanvas">
-        <div class="offcanvas-header">
-            <h5 class="offcanvas-title">Bộ lọc</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
-        </div>
-        <div class="offcanvas-body">
-            <form id="filterFormMobile">
-                <div class="mb-3">
-                    <label class="form-label">Tên gói</label>
-                    <input type="text" class="form-control" id="filterNameMobile" placeholder="Nhập tên gói">
+    <!-- Card Gói Hỗ trợ Cao cấp -->
+    <div class="row mt-5">
+        <div class="col-12">
+            <div class="card shadow-sm">
+                <div class="card-body text-center">
+                    <h4 class="card-title">Gói Hỗ trợ Cao cấp</h4>
+                    <ul class="list-unstyled text-start mx-auto" style="max-width: 400px;">
+                        <li>✓ Chuyên gia cấu hình sản phẩm từ A-Z</li>
+                        <li>✓ Đào tạo riêng cho đội ngũ của bạn</li>
+                        <li>✓ Hỗ trợ kỹ thuật ưu tiên</li>
+                    </ul>
                 </div>
-                <div class="mb-3">
-                    <label class="form-label">Giá tiền</label>
-                    <input type="number" class="form-control" id="filterPriceMobile" placeholder="Nhập giá tiền">
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Kỳ hạn</label>
-                    <select class="form-select" id="filterDurationMobile">
-                        <option value="">Tất cả</option>
-                        <option value="3 tháng">3 tháng</option>
-                        <option value="6 tháng">6 tháng</option>
-                        <option value="1 năm">1 năm</option>
-                    </select>
-                </div>
-                <div class="text-end">
-                    <button type="button" class="btn btn-primary" onclick="applyFiltersMobile()" data-bs-dismiss="offcanvas">Tìm kiếm</button>
-                    <button type="button" class="btn btn-outline-secondary ms-2" onclick="resetFiltersMobile()" data-bs-dismiss="offcanvas">Đặt lại</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- Table (Desktop) -->
-    <div class="table-responsive d-none d-lg-block">
-        <table class="table table-hover w-100">
-            <thead>
-                <tr>
-                    <th>STT</th>
-                    <th>Tên gói dịch vụ</th>
-                    <th>Giá tiền</th>
-                    <th>Kỳ hạn</th>
-                    <th>Hành động</th>
-                </tr>
-            </thead>
-            <tbody id="servicePackageTableBody">
-                <!-- Dữ liệu sẽ được render động bằng JS -->
-            </tbody>
-        </table>
-        <!-- Pagination and Items Per Page -->
-        <div class="d-flex justify-content-end align-items-center mt-3 pagination-container flex-nowrap" id="paginationControls">
-            <div class="d-flex align-items-center me-3 pagination-info">
-                <span class="me-2">Số bản ghi:</span>
-                <select id="itemsPerPage" class="form-select form-select-sm" onchange="changeItemsPerPage()">
-                    <option value="10">10</option>
-                    <option value="20">20</option>
-                    <option value="50">50</option>
-                    <option value="100">100</option>
-                </select>
             </div>
-            <nav aria-label="Page navigation">
-                <ul class="pagination" id="pagination">
-                    <!-- Phân trang sẽ được render động bằng JS -->
-                </ul>
-            </nav>
         </div>
     </div>
 
-    <!-- Cards (Tablet/Mobile) -->
-    <div class="row d-lg-none" id="servicePackageCardBody">
-        <!-- Dữ liệu sẽ được render động bằng JS -->
-    </div>
-    <!-- Pagination for Mobile -->
-    <div class="d-lg-none mt-3 text-end pagination-container flex-nowrap" id="mobilePaginationControls">
-        <div class="d-flex align-items-center me-3 pagination-info">
-            <span class="me-2">Số bản ghi:</span>
-            <select id="mobileItemsPerPage" class="form-select form-select-sm" onchange="changeItemsPerPage()">
-                <option value="10">10</option>
-                <option value="20">20</option>
-                <option value="50">50</option>
-                <option value="100">100</option>
-            </select>
+    <!-- Box thông tin đối tác -->
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="card shadow-sm">
+                <div class="card-body text-center">
+                    <p class="mb-1"><span style="font-size: 1.5em;">🤝</span></p>
+                    <h5 class="card-title">Cung cấp bởi các Đối tác Ủy quyền</h5>
+                    <p class="card-text text-muted">Dịch vụ hỗ trợ bởi <strong>VinaTech Solutions</strong>, đã được kiểm tra và chứng nhận. Thanh toán qua hệ thống của chúng tôi.</p>
+                    <button class="btn btn-success rounded-pill px-4" data-bs-toggle="modal" data-bs-target="#supportModal">Mua Gói Hỗ trợ: 2.000.000 VNĐ</button>
+                </div>
+            </div>
         </div>
-        <nav aria-label="Page navigation">
-            <ul class="pagination" id="mobilePagination">
-                <!-- Phân trang sẽ được render động bằng JS -->
-            </ul>
-        </nav>
     </div>
-</div>
+
+    <!-- Modal xác nhận Nâng cấp -->
+    <div class="modal fade" id="upgradeModal" tabindex="-1" aria-labelledby="upgradeModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="upgradeModalLabel">Xác nhận Nâng cấp</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Bạn có chắc chắn muốn nâng cấp gói dịch vụ? Vui lòng kiểm tra thông tin thanh toán trước khi xác nhận.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <button type="button" class="btn btn-success">Xác nhận Thanh toán</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal xác nhận Mua Gói Hỗ trợ -->
+    <div class="modal fade" id="supportModal" tabindex="-1" aria-labelledby="supportModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="supportModalLabel">Xác nhận Mua Gói Hỗ trợ</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Bạn có chắc chắn muốn mua Gói Hỗ trợ Cao cấp với giá 2.000.000 VNĐ? Vui lòng kiểm tra thông tin thanh toán trước khi xác nhận.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <button type="button" class="btn btn-success">Xác nhận Thanh toán</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

@@ -1,7 +1,47 @@
-/* Chỉ thêm CSS tối thiểu nếu cần */
 .card {
-    transition: transform 0.2s;
-  }
-  .card:hover {
-    transform: translateY(-5px);
-  }
+  transition: transform 0.2s;
+  border: none;
+  border-radius: 10px;
+}
+.card:hover {
+  transform: translateY(-5px);
+}
+.progress {
+  position: relative;
+  height: 20px;
+}
+.progress-bar {
+  transition: width 0.3s ease-in-out;
+  background-color: #28a745;
+}
+.progress-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #000; /* Mặc định là đen */
+  z-index: 1;
+}
+.progress-bar.bg-success {
+  background-color: #28a745 !important;
+}
+.progress-bar.bg-danger {
+  background-color: #dc3545 !important;
+}
+.btn-success {
+  background-color: #28a745;
+  border: none;
+  font-weight: 500;
+}
+.btn-success:hover {
+  background-color: #218838;
+}
+/* Thay đổi màu chữ dựa trên vị trí */
+.progress .progress-bar + .progress-text {
+  color: #fff; /* Màu trắng trên nền xanh */
+}
+.progress .progress-text {
+  color: #000; /* Màu đen trên nền xám */
+}
