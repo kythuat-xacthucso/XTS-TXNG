@@ -6,11 +6,11 @@ document.addEventListener('contentLoaded', function() {
 
 // Sample services data (in real app, this would come from API)
 const availableServices = [
-    { id: 1, name: 'Gói Cơ bản', duration: '3 tháng', price: 1000000 },
-    { id: 2, name: 'Gói Nâng cao', duration: '6 tháng', price: 3000000 },
-    { id: 3, name: 'Gói Doanh nghiệp', duration: '1 năm', price: 6000000 },
-    { id: 4, name: 'Gói VIP', duration: '1 năm', price: 12000000 },
-    { id: 5, name: 'Gói Starter', duration: '3 tháng', price: 500000 }
+    { id: 1, name: 'Gói Cơ bản', duration: '3 tháng', price: 1000000, type: 'Gói chính' },
+    { id: 2, name: 'Gói Nâng cao', duration: '6 tháng', price: 3000000, type: 'Gói chính' },
+    { id: 3, name: 'Gói Doanh nghiệp', duration: '1 năm', price: 6000000, type: 'Gói chính' },
+    { id: 4, name: 'Gói VIP', duration: '1 năm', price: 12000000, type: 'Gói bổ sung' },
+    { id: 5, name: 'Gói Starter', duration: '3 tháng', price: 500000, type: 'Gói bổ sung' }
 ];
 
 let serviceCounter = 0;
@@ -26,23 +26,19 @@ function initializeServiceOrderAdd() {
     // Initialize cost calculation
     initializeCostCalculation();
     
-    // Sync notes between mobile and desktop
-    initializeFieldSync();
-    
     // Add first service row by default
     addService();
 }
 
 function initializeFormValidation() {
-    const form = document.getElementById('serviceOrderForm');
-    
-    form.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        if (validateForm()) {
-            submitForm();
-        }
-    });
+    const confirmButton = document.getElementById('confirmButton');
+    if (confirmButton) {
+        confirmButton.addEventListener('click', function() {
+            if (validateForm()) {
+                showConfirmPurchaseModal();
+            }
+        });
+    }
 }
 
 function initializeServiceManagement() {
@@ -54,28 +50,7 @@ function initializeServiceManagement() {
 }
 
 function initializeCostCalculation() {
-    // Discount input change handlers
-    document.getElementById('desktopDiscount').addEventListener('input', calculateCosts);
-    document.getElementById('mobileDiscount').addEventListener('input', function() {
-        // Sync discount values
-        document.getElementById('desktopDiscount').value = this.value;
-        calculateCosts();
-    });
-    
-    document.getElementById('desktopDiscount').addEventListener('input', function() {
-        document.getElementById('mobileDiscount').value = this.value;
-        calculateCosts();
-    });
-}
-
-function initializeFieldSync() {
-    // Sync notes
-    document.getElementById('mobileNotes').addEventListener('input', function() {
-        document.getElementById('desktopNotes').value = this.value;
-    });
-    document.getElementById('desktopNotes').addEventListener('input', function() {
-        document.getElementById('mobileNotes').value = this.value;
-    });
+    // No discount or total cost section, just table footer total
 }
 
 function addService() {
@@ -92,7 +67,9 @@ function addService() {
     services.push({
         id: serviceId,
         serviceId: null,
-        price: 0
+        price: 0,
+        quantity: 1,
+        type: 'Gói chính' // Default to main package
     });
     
     calculateCosts();
@@ -110,19 +87,23 @@ function addServiceToTable(serviceId) {
         <td class="text-center">${rowIndex}</td>
         <td>
             <select class="form-select service-select" name="service_${serviceId}" required>
-                <option value="">Chọn gói dịch vụ</option>
+                <option value="">Chọn tên gói</option>
                 ${availableServices.map(service => 
-                    `<option value="${service.id}" data-duration="${service.duration}" data-price="${service.price}">${service.name}</option>`
+                    `<option value="${service.id}" data-duration="${service.duration}" data-price="${service.price}" data-type="${service.type}">${service.name}</option>`
                 ).join('')}
             </select>
         </td>
         <td>
-            <input type="text" class="form-control duration-input" name="duration_${serviceId}" 
-                   readonly placeholder="-">
+            <input type="text" class="form-control type-input" name="type_${serviceId}" readonly>
         </td>
         <td>
-            <input type="text" class="form-control price-input" name="price_${serviceId}" 
-                   readonly placeholder="0">
+            <input type="number" class="form-control quantity-input" name="quantity_${serviceId}" min="1" value="1" ${availableServices.some(s => s.id === 1 && s.type === 'Gói chính') ? 'readonly' : ''}>
+        </td>
+        <td>
+            <input type="text" class="form-control duration-input" name="duration_${serviceId}" readonly placeholder="-">
+        </td>
+        <td>
+            <input type="text" class="form-control price-input" name="price_${serviceId}" readonly placeholder="0">
         </td>
         <td class="text-center">
             <button type="button" class="btn-view me-1" onclick="viewServiceDetails('${serviceId}')">
@@ -170,25 +151,33 @@ function addServiceToMobile(serviceId) {
         </div>
         
         <div class="mb-3">
-            <label class="form-label">Gói dịch vụ <span class="text-danger">*</span></label>
+            <label class="form-label">Tên gói <span class="text-danger">*</span></label>
             <select class="form-select service-select" name="service_${serviceId}" required>
-                <option value="">Chọn gói dịch vụ</option>
+                <option value="">Chọn tên gói</option>
                 ${availableServices.map(service => 
-                    `<option value="${service.id}" data-duration="${service.duration}" data-price="${service.price}">${service.name}</option>`
+                    `<option value="${service.id}" data-duration="${service.duration}" data-price="${service.price}" data-type="${service.type}">${service.name}</option>`
                 ).join('')}
             </select>
         </div>
         
         <div class="row mb-3">
             <div class="col-6">
+                <label class="form-label">Loại gói</label>
+                <input type="text" class="form-control type-input" name="type_${serviceId}" readonly>
+            </div>
+            <div class="col-6">
+                <label class="form-label">Số lượng</label>
+                <input type="number" class="form-control quantity-input" name="quantity_${serviceId}" min="1" value="1" ${availableServices.some(s => s.id === 1 && s.type === 'Gói chính') ? 'readonly' : ''}>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-6">
                 <label class="form-label">Thời hạn</label>
-                <input type="text" class="form-control duration-input" name="duration_${serviceId}" 
-                       readonly placeholder="-">
+                <input type="text" class="form-control duration-input" name="duration_${serviceId}" readonly placeholder="-">
             </div>
             <div class="col-6">
                 <label class="form-label">Giá tiền</label>
-                <input type="text" class="form-control price-input" name="price_${serviceId}" 
-                       readonly placeholder="0">
+                <input type="text" class="form-control price-input" name="price_${serviceId}" readonly placeholder="0">
             </div>
         </div>
     `;
@@ -217,13 +206,27 @@ function updateServiceDetails(serviceId, selectElement) {
     const selectedOption = selectElement.selectedOptions[0];
     const duration = selectedOption ? selectedOption.dataset.duration || '-' : '-';
     const price = selectedOption ? parseInt(selectedOption.dataset.price) || 0 : 0;
+    const type = selectedOption ? selectedOption.dataset.type || 'Gói chính' : 'Gói chính';
+    const isMainPackage = type === 'Gói chính';
     
-    // Update duration and price inputs
+    // Update type, duration, and price inputs
+    const typeInputs = document.querySelectorAll(`input[name="type_${serviceId}"]`);
+    typeInputs.forEach(input => {
+        input.value = type;
+    });
+
     const durationInputs = document.querySelectorAll(`input[name="duration_${serviceId}"]`);
     durationInputs.forEach(input => {
-        input.value = duration;
+        input.value = isMainPackage ? duration : '-';
+        input.readOnly = !isMainPackage;
     });
-    
+
+    const quantityInputs = document.querySelectorAll(`input[name="quantity_${serviceId}"]`);
+    quantityInputs.forEach(input => {
+        input.readOnly = isMainPackage;
+        if (isMainPackage) input.value = 1;
+    });
+
     const priceInputs = document.querySelectorAll(`input[name="price_${serviceId}"]`);
     priceInputs.forEach(input => {
         input.value = price > 0 ? formatCurrency(price) : '';
@@ -234,6 +237,8 @@ function updateServiceDetails(serviceId, selectElement) {
     if (serviceIndex !== -1) {
         services[serviceIndex].serviceId = selectedOption ? selectedOption.value : null;
         services[serviceIndex].price = price;
+        services[serviceIndex].quantity = isMainPackage ? 1 : parseInt(quantityInputs[0].value) || 1;
+        services[serviceIndex].type = type;
     }
     
     calculateCosts();
@@ -325,17 +330,10 @@ function updateMobileCardNumbers() {
 }
 
 function calculateCosts() {
-    const totalCost = services.reduce((sum, service) => sum + service.price, 0);
-    const discount = parseInt(document.getElementById('desktopDiscount').value) || 0;
-    const finalCost = Math.max(0, totalCost - discount);
+    const totalCost = services.reduce((sum, service) => sum + (service.price * service.quantity), 0);
     
-    // Update desktop display
-    document.getElementById('desktopTotalCost').textContent = formatCurrency(totalCost);
-    document.getElementById('desktopFinalCost').textContent = formatCurrency(finalCost);
-    
-    // Update mobile display
-    document.getElementById('mobileTotalCost').textContent = formatCurrency(totalCost);
-    document.getElementById('mobileFinalCost').textContent = formatCurrency(finalCost);
+    // Update desktop table footer
+    document.getElementById('totalCostFooter').textContent = formatCurrency(totalCost);
 }
 
 function formatCurrency(amount) {
@@ -343,8 +341,6 @@ function formatCurrency(amount) {
 }
 
 function validateForm() {
-    const form = document.getElementById('serviceOrderForm');
-    
     if (services.length === 0) {
         window.companyLayout.showNotification('Vui lòng thêm ít nhất một gói dịch vụ', 'danger');
         return false;
@@ -353,52 +349,157 @@ function validateForm() {
     // Check if all services are selected
     const unselectedServices = services.filter(s => !s.serviceId);
     if (unselectedServices.length > 0) {
-        window.companyLayout.showNotification('Vui lòng chọn gói dịch vụ cho tất cả các dòng', 'danger');
+        window.companyLayout.showNotification('Vui lòng chọn tên gói cho tất cả các dòng', 'danger');
         return false;
     }
     
-    form.classList.add('was-validated');
     return true;
 }
 
-function submitForm() {
-    const formData = {
-        services: services.filter(s => s.serviceId),
-        notes: document.getElementById('desktopNotes').value.trim(),
-        discount: parseInt(document.getElementById('desktopDiscount').value) || 0,
-        totalCost: services.reduce((sum, service) => sum + service.price, 0),
-        finalCost: Math.max(0, services.reduce((sum, service) => sum + service.price, 0) - (parseInt(document.getElementById('desktopDiscount').value) || 0))
-    };
-    
-    console.log('Form data to submit:', formData);
-    
-    // Show loading state
-    const submitBtn = document.querySelector('button[type="submit"]');
-    const originalText = submitBtn.innerHTML;
-    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Đang xử lý...';
-    submitBtn.disabled = true;
-    
-    // Simulate API call
-    setTimeout(() => {
-        window.companyLayout.showNotification('Đơn hàng đã được tạo thành công!', 'success');
-        
-        // Reset button
-        submitBtn.innerHTML = originalText;
-        submitBtn.disabled = false;
-        
-        // Redirect to list page
-        setTimeout(() => {
-            window.companyLayout.loadContent('orders-payments');
-        }, 1000);
-    }, 2000);
+function showConfirmPurchaseModal() {
+    if (validateForm()) {
+        const totalCost = parseInt(document.getElementById('totalCostFooter').textContent.replace(/\D/g, '')) || 0;
+        document.getElementById('confirmPurchaseTotal').textContent = formatCurrency(totalCost);
+
+        const modalElement = document.getElementById('confirmPurchaseModal');
+        if (modalElement) {
+            const modal = new bootstrap.Modal(modalElement);
+            modal.show();
+
+            const confirmPurchaseButton = document.getElementById('confirmPurchaseButton');
+            if (confirmPurchaseButton) {
+                confirmPurchaseButton.addEventListener('click', function() {
+                    modal.hide();
+                    openPaymentModal();
+                }, { once: true });
+            }
+        }
+    }
 }
 
-// Export functions for external use
+function openPaymentModal() {
+    const orderData = {
+        orderId: `DH${Math.floor(Math.random() * 1000).toString().padStart(3, '0')}`, // Random order ID
+        createdAt: new Date().toLocaleString('vi-VN'),
+        customerName: 'Nguyễn Văn A', // Replace with actual user data
+        customerId: 'KH001', // Replace with actual user data
+        paymentType: 'Mua mới',
+        finalCost: parseInt(document.getElementById('totalCostFooter').textContent.replace(/\D/g, '')) || 0
+    };
+
+    // Initialize and populate payment modal
+    initializePaymentModalManually(orderData);
+
+    // Show modal
+    const modalElement = document.getElementById('confirmPaymentModal');
+    if (modalElement) {
+        const modal = new bootstrap.Modal(modalElement);
+        modal.show();
+    }
+
+    modalElement.addEventListener('shown.bs.modal', function () {
+        initializePaymentModalManually(orderData);
+    }, { once: true });
+}
+
+function initializePaymentModalManually(data) {
+    document.getElementById('orderId').value = data.orderId || '';
+    document.getElementById('createdAt').value = data.createdAt || '';
+    document.getElementById('customerName').value = data.customerName || '';
+    document.getElementById('customerId').value = data.customerId || '';
+    document.getElementById('paymentType').value = data.paymentType || '';
+    document.getElementById('finalCost').value = formatCurrency(data.finalCost) || '';
+
+    // Reset form validation
+    const form = document.getElementById('confirmPaymentForm');
+    if (form) {
+        form.classList.remove('was-validated');
+    }
+
+    // Add image preview handler
+    const proofImage = document.getElementById('proofImage');
+    const imagePreview = document.getElementById('imagePreview');
+    const previewImg = document.getElementById('previewImg');
+    if (proofImage && imagePreview && previewImg) {
+        proofImage.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    previewImg.src = e.target.result;
+                    imagePreview.style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    }
+
+    // Add payment confirmation popup
+    const confirmPaymentButton = document.getElementById('confirmPaymentButton');
+    if (confirmPaymentButton) {
+        confirmPaymentButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            if (form) {
+                if (form.checkValidity()) {
+                    showConfirmPaymentPopup(data.orderId);
+                } else {
+                    form.classList.add('was-validated');
+                }
+            } else {
+                console.error('Form with id "confirmPaymentForm" not found!');
+            }
+        });
+    }
+}
+
+function showConfirmPaymentPopup(orderId) {
+    if (confirm('Bạn có chắc chắn muốn xác nhận thanh toán cho đơn hàng ' + orderId + '?')) {
+        completePayment();
+    }
+}
+
+function completePayment() {
+    const form = document.getElementById('confirmPaymentForm');
+    const modal = bootstrap.Modal.getInstance(form.closest('.modal'));
+    if (modal) {
+        modal.hide();
+    }
+
+    // Simulate success and redirect
+    setTimeout(() => {
+        navigateTo('view-order-payment', document.getElementById('orderId').value);
+        showSuccessToast();
+    }, 500);
+}
+
+function navigateTo(page, id = null) {
+    const filePaths = window.companyLayout.getFilePaths(page);
+    if (filePaths && filePaths.html) {
+        const path = id ? `${filePaths.html}?id=${id}` : filePaths.html;
+        window.companyLayout.loadContent(page, { html: path });
+    } else {
+        window.companyLayout.showNotification('Trang không tồn tại', 'danger');
+    }
+}
+
+function showSuccessToast() {
+    const toastElement = document.getElementById('successToast');
+    const toast = new bootstrap.Toast(toastElement, { delay: 3000 });
+    toast.show();
+}
+
 window.serviceOrderAdd = {
     addService,
     removeService,
     viewServiceDetails,
     calculateCosts,
     validateForm,
-    submitForm
+    redirectToListPage: () => window.companyLayout.loadContent('orders-payments')
+};
+
+// Mock layout functions
+window.companyLayout = {
+    showNotification: (message, type) => console.log(`Notification: ${message} (${type})`),
+    loadContent: (contentId, options) => console.log(`Loading content: ${contentId}`, options),
+    getFilePaths: () => ({ html: '/view-system-service.html', css: '/view-system-service.css', js: '/view-system-service.js' })
 };

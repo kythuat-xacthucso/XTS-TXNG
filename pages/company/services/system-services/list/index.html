@@ -1,80 +1,144 @@
 <main class="container-fluid py-4">
     <h2 class="text-center mb-5">Lựa chọn Gói Dịch vụ</h2>
 
-    <!-- Danh sách gói trả phí -->
-    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 justify-content-center">
-        <!-- Gói Phát triển -->
-        <div class="col">
-            <div class="card h-100 shadow-sm">
-                <div class="card-body text-center">
-                    <h4 class="card-title">Gói Phát triển</h4>
-                    <p class="card-text display-6 fw-bold text-success">1.200.000 VNĐ/năm</p>
-                    <ul class="list-unstyled mb-4">
-                        <li>500 lượt kích hoạt</li>
-                        <li>10GB dung lượng</li>
-                    </ul>
-                    <button class="btn btn-success rounded-pill px-4" data-bs-toggle="modal" data-bs-target="#upgradeModal">Nâng cấp</button>
+    <!-- Danh sách gói trả phí với carousel -->
+    <div id="packageCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <div class="row row-cols-1 row-cols-md-3 g-4 justify-content-center">
+                    <div class="col">
+                        <div class="card h-100 shadow-sm">
+                            <div class="card-body text-center">
+                                <h4 class="card-title">Gói Phát triển</h4>
+                                <p class="card-text display-6 fw-bold text-success">1.200.000 VNĐ/năm</p>
+                                <ul class="list-unstyled mb-4">
+                                    <li>500 lượt kích hoạt</li>
+                                    <li>10GB dung lượng</li>
+                                </ul>
+                                <button class="btn btn-success rounded-pill px-4" data-bs-toggle="modal" data-bs-target="#upgradeModal">Nâng cấp</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100 shadow-sm position-relative">
+                            <div class="ribbon ribbon-top-right"><span>Phổ biến</span></div>
+                            <div class="card-body text-center">
+                                <h4 class="card-title">Gói Chuyên nghiệp</h4>
+                                <p class="card-text display-6 fw-bold text-success">2.500.000 VNĐ/năm</p>
+                                <ul class="list-unstyled mb-4">
+                                    <li>1000 lượt kích hoạt</li>
+                                    <li>25GB dung lượng</li>
+                                </ul>
+                                <button class="btn btn-success rounded-pill px-4" data-bs-toggle="modal" data-bs-target="#upgradeModal">Nâng cấp</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100 shadow-sm">
+                            <div class="card-body text-center">
+                                <h4 class="card-title">Gói Doanh nghiệp</h4>
+                                <p class="card-text display-6 fw-bold text-success">5.000.000 VNĐ/năm</p>
+                                <ul class="list-unstyled mb-4">
+                                    <li>2500 lượt kích hoạt</li>
+                                    <li>50GB dung lượng</li>
+                                </ul>
+                                <button class="btn btn-success rounded-pill px-4" data-bs-toggle="modal" data-bs-target="#upgradeModal">Nâng cấp</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="row row-cols-1 row-cols-md-3 g-4 justify-content-center">
+                    <div class="col">
+                        <div class="card h-100 shadow-sm">
+                            <div class="card-body text-center">
+                                <h4 class="card-title">Gói Cao cấp</h4>
+                                <p class="card-text display-6 fw-bold text-success">7.500.000 VNĐ/năm</p>
+                                <ul class="list-unstyled mb-4">
+                                    <li>5000 lượt kích hoạt</li>
+                                    <li>100GB dung lượng</li>
+                                </ul>
+                                <button class="btn btn-success rounded-pill px-4" data-bs-toggle="modal" data-bs-target="#upgradeModal">Nâng cấp</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-
-        <!-- Gói Chuyên nghiệp -->
-        <div class="col">
-            <div class="card h-100 shadow-sm position-relative">
-                <div class="ribbon ribbon-top-right"><span>Phổ biến</span></div>
-                <div class="card-body text-center">
-                    <h4 class="card-title">Gói Chuyên nghiệp</h4>
-                    <p class="card-text display-6 fw-bold text-success">2.500.000 VNĐ/năm</p>
-                    <ul class="list-unstyled mb-4">
-                        <li>1000 lượt kích hoạt</li>
-                        <li>25GB dung lượng</li>
-                    </ul>
-                    <button class="btn btn-success rounded-pill px-4" data-bs-toggle="modal" data-bs-target="#upgradeModal">Nâng cấp</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Gói Doanh nghiệp (thêm ví dụ) -->
-        <div class="col">
-            <div class="card h-100 shadow-sm">
-                <div class="card-body text-center">
-                    <h4 class="card-title">Gói Doanh nghiệp</h4>
-                    <p class="card-text display-6 fw-bold text-success">5.000.000 VNĐ/năm</p>
-                    <ul class="list-unstyled mb-4">
-                        <li>2500 lượt kích hoạt</li>
-                        <li>50GB dung lượng</li>
-                    </ul>
-                    <button class="btn btn-success rounded-pill px-4" data-bs-toggle="modal" data-bs-target="#upgradeModal">Nâng cấp</button>
-                </div>
-            </div>
-        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#packageCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#packageCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
     </div>
 
-    <!-- Card Gói Hỗ trợ Cao cấp -->
+    <!-- Gói hỗ trợ của đối tác -->
     <div class="row mt-5">
         <div class="col-12">
             <div class="card shadow-sm">
                 <div class="card-body text-center">
-                    <h4 class="card-title">Gói Hỗ trợ Cao cấp</h4>
-                    <ul class="list-unstyled text-start mx-auto" style="max-width: 400px;">
-                        <li>✓ Chuyên gia cấu hình sản phẩm từ A-Z</li>
-                        <li>✓ Đào tạo riêng cho đội ngũ của bạn</li>
-                        <li>✓ Hỗ trợ kỹ thuật ưu tiên</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Box thông tin đối tác -->
-    <div class="row mt-4">
-        <div class="col-12">
-            <div class="card shadow-sm">
-                <div class="card-body text-center">
-                    <p class="mb-1"><span style="font-size: 1.5em;">🤝</span></p>
-                    <h5 class="card-title">Cung cấp bởi các Đối tác Ủy quyền</h5>
-                    <p class="card-text text-muted">Dịch vụ hỗ trợ bởi <strong>VinaTech Solutions</strong>, đã được kiểm tra và chứng nhận. Thanh toán qua hệ thống của chúng tôi.</p>
-                    <button class="btn btn-success rounded-pill px-4" data-bs-toggle="modal" data-bs-target="#supportModal">Mua Gói Hỗ trợ: 2.000.000 VNĐ</button>
+                    <h4 class="card-title">Gói hỗ trợ của đối tác</h4>
+                    <div id="supportCarousel" class="carousel slide mt-3" data-bs-ride="carousel" data-bs-interval="5000">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <div class="row row-cols-1 row-cols-md-3 g-4 justify-content-center">
+                                    <div class="col">
+                                        <div class="card h-100 shadow-sm">
+                                            <div class="card-body text-center">
+                                                <h5 class="card-title">Cấu hình thông tin</h5>
+                                                <ul class="list-unstyled mb-4">
+                                                    <li>5 sản phẩm</li>
+                                                    <li>Thông tin chủ thể</li>
+                                                </ul>
+                                                <p class="card-text fw-bold text-primary">1.000.000 VNĐ</p>
+                                                <button class="btn btn-primary rounded-pill px-4" data-bs-toggle="modal" data-bs-target="#supportModal">Mua</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="card h-100 shadow-sm">
+                                            <div class="card-body text-center">
+                                                <h5 class="card-title">Đào tạo</h5>
+                                                <ul class="list-unstyled mb-4">
+                                                    <li>Sử dụng hệ thống</li>
+                                                    <li>Cài đặt & Cấu hình máy in</li>
+                                                </ul>
+                                                <p class="card-text fw-bold text-primary">1.000.000 VNĐ</p>
+                                                <button class="btn btn-primary rounded-pill px-4" data-bs-toggle="modal" data-bs-target="#supportModal">Mua</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="card h-100 shadow-sm">
+                                            <div class="card-body text-center">
+                                                <h5 class="card-title">Hỗ trợ</h5>
+                                                <ul class="list-unstyled mb-4">
+                                                    <li>Thời gian hỗ trợ: Xuyên suốt kỳ dịch vụ</li>
+                                                    <li>Hỗ trợ sử dụng hệ thống</li>
+                                                    <li>Hỗ trợ cài đặt máy in nếu gặp sự cố</li>
+                                                </ul>
+                                                <p class="card-text fw-bold text-primary">300.000 VNĐ</p>
+                                                <button class="btn btn-primary rounded-pill px-4" data-bs-toggle="modal" data-bs-target="#supportModal">Mua</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#supportCarousel" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#supportCarousel" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                    <button class="btn btn-primary rounded-pill px-4 mt-4" data-bs-toggle="modal" data-bs-target="#supportModal">Mua tất cả: 2.300.000 VNĐ</button>
                 </div>
             </div>
         </div>
@@ -82,18 +146,20 @@
 
     <!-- Modal xác nhận Nâng cấp -->
     <div class="modal fade" id="upgradeModal" tabindex="-1" aria-labelledby="upgradeModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-gray">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="upgradeModalLabel">Xác nhận Nâng cấp</h5>
+                    <h5 class="modal-title" id="upgradeModalLabel">Xác nhận Nâng cấp Gói</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-                    Bạn có chắc chắn muốn nâng cấp gói dịch vụ? Vui lòng kiểm tra thông tin thanh toán trước khi xác nhận.
+                <div class="modal-body text-center">
+                    <p>Ưu đãi nâng cấp lần đầu: Các chỉ tiêu còn lại sẽ được cộng dồn vào gói mới.</p>
+                    <p>Tổng hạn mức của bạn sẽ là: <strong>1000 lượt kích hoạt, 25GB</strong>.</p>
+                    <p>Kỳ hạn dịch vụ mới: <strong>15/08/2025</strong>.</p>
                 </div>
-                <div class="modal-footer">
+                <div class="modal-footer justify-content-center">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-                    <button type="button" class="btn btn-success">Xác nhận Thanh toán</button>
+                    <button type="button" class="btn btn-success rounded-pill px-4" onclick="window.companyLayout.loadContent('add-order-payment')">Xác nhận & Thanh toán</button>
                 </div>
             </div>
         </div>
@@ -108,7 +174,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    Bạn có chắc chắn muốn mua Gói Hỗ trợ Cao cấp với giá 2.000.000 VNĐ? Vui lòng kiểm tra thông tin thanh toán trước khi xác nhận.
+                    Bạn có chắc chắn muốn mua gói hỗ trợ? Vui lòng kiểm tra thông tin thanh toán trước khi xác nhận.
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
