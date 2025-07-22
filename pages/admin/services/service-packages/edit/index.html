@@ -3,8 +3,8 @@
     <p class="page-breadcrumb">Dịch vụ / Gói dịch vụ / Sửa</p>
 </div>
 
-<form id="servicePackageForm" class="service-package-form" novalidate>
-    <!-- Mobile Layout -->
+<form id="servicePackageForm" class="service-package-form">
+    <!-- Section 1: Thông tin gói dịch vụ (Mobile) -->
     <div class="accordion d-md-none mb-4" id="mobileAccordion">
         <div class="accordion-item">
             <h2 class="accordion-header">
@@ -18,108 +18,106 @@
                 <div class="accordion-body">
                     <div class="package-info-content">
                         <div class="mb-3">
-                            <label for="packageName" class="form-label">Tên gói <span
-                                    class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="packageName" name="packageName" required>
+                            <label for="packageName" class="form-label">
+                                Tên gói <span class="text-danger">*</span>
+                            </label>
+                            <input type="text" class="form-control" id="packageName" name="packageName" maxlength="128"
+                                required placeholder="Nhập tên gói dịch vụ" value="">
+                            <div class="form-text">Tối đa 128 ký tự</div>
                             <div class="invalid-feedback">Vui lòng nhập tên gói dịch vụ</div>
                         </div>
 
-                        <div class soaps>
-                            <label for="packageCode" class="form-label">Mã gói <span
-                                    class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="packageCode" name="packageCode" required>
-                            <div class="invalid-feedback">Vui lòng nhập mã gói dịch vụ</div>
+                        <div class="mb-3">
+                            <label for="packageCode" class="form-label">
+                                Mã gói <span class="text-danger">*</span>
+                            </label>
+                            <input type="text" class="form-control" id="packageCode" name="packageCode" maxlength="16"
+                                required placeholder="Nhập mã gói" pattern="[A-Za-z0-9]+" value="">
+                            <div class="form-text">Tối đa 16 ký tự, chỉ chữ và số</div>
+                            <div class="invalid-feedback">Mã gói chỉ được chứa chữ và số, tối đa 16 ký tự</div>
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label">Thời gian <span class="text-danger">*</span></label>
-                            <div class="row">
-                                <div class="col-7">
-                                    <input type="number" class="form-control" id="duration" name="duration" min="1"
-                                        required>
-                                    <div class="invalid-feedback">Vui lòng nhập thời gian</div>
+                            <label for="duration" class="form-label">
+                                Thời gian <span class="text-danger">*</span>
+                            </label>
+                            <input type="text" class="form-control" id="duration" name="duration" readonly value="12 tháng">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="parameter" class="form-label">
+                                Tham số <span class="text-danger">*</span>
+                            </label>
+                            <select class="form-select" id="parameter" name="parameter" required>
+                                <option value="">Chọn tham số</option>
+                                <!-- Options will be dynamically populated via JS -->
+                            </select>
+                            <div class="invalid-feedback">Vui lòng chọn tham số</div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="price" class="form-label">
+                                Đơn giá
+                            </label>
+                            <input type="text" class="form-control" id="price" name="price" readonly placeholder="0 VNĐ" value="">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="quantity" class="form-label">
+                                Số lượng <span class="text-danger">*</span>
+                            </label>
+                            <input type="number" class="form-control" id="quantity" name="quantity" min="1" value="1" required>
+                            <div class="invalid-feedback">Số lượng phải lớn hơn hoặc bằng 1</div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="total" class="form-label">
+                                Thành tiền
+                            </label>
+                            <input type="text" class="form-control" id="total" name="total" readonly placeholder="0 VNĐ" value="">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="mobileDiscount" class="form-label">
+                                Chiết khấu
+                            </label>
+                            <input type="number" class="form-control" id="mobileDiscount" name="discount" min="0" value="0" placeholder="0">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="mobileFinalCost" class="form-label">
+                                Chi phí phải trả
+                            </label>
+                            <input type="text" class="form-control" id="mobileFinalCost" name="finalCost" readonly placeholder="0 VNĐ" value="">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Trạng thái <span class="text-danger">*</span></label>
+                            <div class="d-flex gap-3">
+                                <div class="form-check">
+                                    <input type="radio" class="form-check-input" id="statusActive" name="status" value="active" required>
+                                    <label class="form-check-label" for="statusActive">Đang hoạt động</label>
                                 </div>
-                                <div class="col-5">
-                                    <select class="form-select" id="durationUnit" name="durationUnit" required>
-                                        <option value="month">Tháng</option>
-                                        <option value="year">Năm</option>
-                                    </select>
+                                <div class="form-check">
+                                    <input type="radio" class="form-check-input" id="statusLocked" name="status" value="locked">
+                                    <label class="form-check-label" for="statusLocked">Khóa</label>
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="createdAt" class="form-label">Thời gian tạo</label>
-                            <input type="text" class="form-control" id="createdAt" name="createdAt" readonly>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="createdBy" class="form-label">Người tạo</label>
-                            <input type="text" class="form-control" id="createdBy" name="createdBy" readonly>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="status" class="form-label">Trạng thái <span class="text-danger">*</span></label>
-                            <select class="form-select" id="status" name="status" required>
-                                <option value="active">Đang hoạt động</option>
-                                <option value="locked">Khóa</option>
-                            </select>
                             <div class="invalid-feedback">Vui lòng chọn trạng thái</div>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
 
-        <div class="accordion-item">
-            <h2 class="accordion-header">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#parametersInfo" aria-expanded="false">
-                    <i class="fas fa-sliders-h me-2"></i>
-                    Thông số tham số
-                </button>
-            </h2>
-            <div id="parametersInfo" class="accordion-collapse collapse" data-bs-parent="#mobileAccordion">
-                <div class="accordion-body">
-                    <div class="parameters-content">
                         <div class="mb-3">
-                            <button type="button" class="btn btn-outline-primary w-100" id="addParameterMobile">
-                                <i class="fas fa-plus me-2"></i>Thêm tham số
-                            </button>
+                            <label for="createdBy" class="form-label">
+                                Người tạo
+                            </label>
+                            <input type="text" class="form-control" id="createdBy" name="createdBy" readonly value="">
                         </div>
 
-                        <div id="mobileParametersList" class="mobile-parameters-list">
-                            <!-- Parameter cards will be dynamically added here -->
-                        </div>
-
-                        <div class="cost-summary">
-                            <div class="row mb-2">
-                                <div class="col-6">
-                                    <strong>Chi phí:</strong>
-                                </div>
-                                <div class="col-6 text-end">
-                                    <span id="mobileTotalCost">0</span> VNĐ/thời gian
-                                </div>
-                            </div>
-
-                            <div class="row mb-2">
-                                <div class="col-6">
-                                    <label for="mobileDiscount" class="form-label mb-0">Giảm giá:</label>
-                                </div>
-                                <div class="col-6">
-                                    <input type="number" class="form-control form-control-sm" id="mobileDiscount"
-                                        name="discount" min="0">
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-6">
-                                    <strong class="text-primary">Chi phí phải trả:</strong>
-                                </div>
-                                <div class="col-6 text-end">
-                                    <span id="mobileFinalCost" class="text-primary">0</span> VNĐ/thời gian
-                                </div>
-                            </div>
+                        <div class="mb-3">
+                            <label for="createdAt" class="form-label">
+                                Thời gian tạo
+                            </label>
+                            <input type="text" class="form-control" id="createdAt" name="createdAt" readonly value="">
                         </div>
                     </div>
                 </div>
@@ -127,150 +125,164 @@
         </div>
     </div>
 
-    <!-- Desktop Layout -->
+    <!-- Section 1: Thông tin gói dịch vụ (Desktop) -->
     <div class="d-none d-md-block">
-        <!-- Section 1: Thông tin gói dịch vụ -->
         <div class="content-card mb-4">
-            <h5 class="card-title"><i class="fas fa-info-circle me-4"></i>
+            <h5 class="card-title mb-4">
+                <i class="fas fa-info-circle me-2"></i>
                 Thông tin gói dịch vụ
             </h5>
 
             <div class="row">
                 <div class="col-md-6">
                     <div class="mb-3">
-                        <label for="packageNameDesktop" class="form-label">Tên gói <span
-                                class="text-danger">*</span></label>
-                        <input type="text" class="form-control" id="packageNameDesktop" name="packageName" required>
+                        <label for="packageNameDesktop" class="form-label">
+                            Tên gói <span class="text-danger">*</span>
+                        </label>
+                        <input type="text" class="form-control" id="packageNameDesktop" name="packageName" maxlength="128"
+                            required placeholder="Nhập tên gói dịch vụ" value="">
+                        <div class="form-text">Tối đa 128 ký tự</div>
                         <div class="invalid-feedback">Vui lòng nhập tên gói dịch vụ</div>
                     </div>
                 </div>
 
                 <div class="col-md-6">
                     <div class="mb-3">
-                        <label for="packageCodeDesktop" class="form-label">Mã gói <span
-                                class="text-danger">*</span></label>
-                        <input type="text" class="form-control" id="packageCodeDesktop" name="packageCode" required>
-                        <div class="invalid-feedback">Vui lòng nhập mã gói dịch vụ</div>
+                        <label for="packageCodeDesktop" class="form-label">
+                            Mã gói <span class="text-danger">*</span>
+                        </label>
+                        <input type="text" class="form-control" id="packageCodeDesktop" name="packageCode" maxlength="16"
+                            required placeholder="Nhập mã gói" pattern="[A-Za-z0-9]+" value="">
+                        <div class="form-text">Tối đa 16 ký tự, chỉ chữ và số</div>
+                        <div class="invalid-feedback">Mã gói chỉ được chứa chữ và số, tối đa 16 ký tự</div>
                     </div>
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-md-6">
-                    <label class="form-label">Thời gian <span class="text-danger">*</span>
-                    </label>
-                    <div class="row">
-                        <div class="col-7">
-                            <div>
-                                <input type="number" class="form-control" id="durationDesktop" name="duration" min="1"
-                                    required>
-                                <div class="invalid-feedback">Vui lòng nhập thời gian</div>
-                            </div>
-                            <div class="col-5">
-                                <select class="form-select" id="durationUnitDesktop" name="durationUnit" required>
-                                    <option value="month">Tháng</option>
-                                    <option value="year">Năm</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6">
-                        <div class="mb-3">
-                            <label for="createdAtDesktop" class="form-label">Thời gian tạo</label>
-                            <input type="text" class="form-control" id="createdAtDesktop" name="createdAt" readonly>
-                        </div>
+                    <div class="mb-3">
+                        <label for="durationDesktop" class="form-label">
+                            Thời gian <span class="text-danger">*</span>
+                        </label>
+                        <input type="text" class="form-control" id="durationDesktop" name="duration" readonly value="12 tháng">
                     </div>
                 </div>
 
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="mb-3">
-                            <label for="createdByDesktop" class="form-label">Người tạo</label>
-                            <input type="text" class="form-control" id="createdByDesktop" name="createdBy" readonly>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6">
-                        <div class="mb-3">
-                            <label for="statusDesktop" class="form-label">Trạng thái <span
-                                    class="text-danger">*</span></label>
-                            <select class="form-select" id="statusDesktop" name="status" required>
-                                <option value="active">Đang hoạt động</option>
-                                <option value="locked">Khóa</option>
-                            </select>
-                            <div class="invalid-feedback">Vui lòng chọn trạng thái</div>
-                        </div>
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="parameterDesktop" class="form-label">
+                            Tham số <span class="text-danger">*</span>
+                        </label>
+                        <select class="form-select" id="parameterDesktop" name="parameter" required>
+                            <option value="">Chọn tham số</option>
+                            <!-- Options will be dynamically populated via JS -->
+                        </select>
+                        <div class="invalid-feedback">Vui lòng chọn tham số</div>
                     </div>
                 </div>
             </div>
 
-            <!-- Section 2: Thông số tham số -->
-            <div class="content-card mb-4">
-                <h5 class="card-title mb-4">
-                    <i class="fas fa-sliders-h me-2"></i>
-                    Thông số tham số
-                </h5>
-
-                <div class="mb-3">
-                    <button type="btn btn-primary" type="button" id="addParameterDesktop">
-                        <i class="fas fa-plus me-2"></i>Thêm tham số
-                    </button>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="priceDesktop" class="form-label">
+                            Đơn giá
+                        </label>
+                        <input type="text" class="form-control" id="priceDesktop" name="price" readonly placeholder="0 VNĐ" value="">
+                    </div>
                 </div>
 
-                <div class="table-responsive">
-                    <table class="table table-bordered" id="parametersTable">
-                        <thead class="table-light">
-                            <tr>
-                                <th width="60">STT</th>
-                                <th>Tham số</th>
-                                <th width="120">Đơn giá</th>
-                                <th width="100">Số lượng</th>
-                                <th width="120">Thành tiền</th>
-                                <th width="40"></th>
-                            </tr>
-                        </thead>
-                        <tbody id="parametersTableBody">
-                            <!-- Parameter rows will be added here -->
-                        </tbody>
-                    </table>
-                </div>
-
-                <div class="row mt-4">
-                    <div class="col-md-6 ms-auto">
-                        <div class="cost-summary-desktop">
-                            <div class="d-flex justify-content-between mb-2">
-                                <span><strong>Chi phí:</strong></span>
-                                <span><strong id="desktopTotalCost">0</strong> VNĐ</span>
-                            </div>
-
-                            <div class="d-flex justify-content-between align-items-center mb-2">
-                                <label for="desktopDiscount" class="form-label mb-0">Giảm giá:</label>
-                                <div class="input-group" style="width: 150px;">
-                                    <input type="number" class="form-control" id="desktopDiscount" name="discount"
-                                        min="0">
-                                    <span class="input-group-text">VNĐ</span>
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="d-flex justify-content-between">
-                                <span><strong class="text-primary">Chi phí phải trả:</strong></span>
-                                <span><strong class="text-primary" id="desktopFinalCost">0</strong> VNĐ</span>
-                            </div>
-                        </div>
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="quantityDesktop" class="form-label">
+                            Số lượng <span class="text-danger">*</span>
+                        </label>
+                        <input type="number" class="form-control" id="quantityDesktop" name="quantity" min="1" value="1" required>
+                        <div class="invalid-feedback">Số lượng phải lớn hơn hoặc bằng 1</div>
                     </div>
                 </div>
             </div>
-            <!-- Action Buttons -->
-            <div class="action-buttons sticky-on-mobile">
-                <div class="d-flex gap-3 justify-content-end">
-                    <button type="button" class="btn btn-secondary"
-                        onclick="window.adminLayout.loadContent('service-packages')" type="button">
-                        <i class="fas fa-arrow-left me-2"></i>Quay lại
-                    </button>
-                    <button type="submit" class="btn btn-primary">
-                        <i class="fas fa-save me-2"></i>Xác nhận
-                    </button>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="totalDesktop" class="form-label">
+                            Thành tiền
+                        </label>
+                        <input type="text" class="form-control" id="totalDesktop" name="total" readonly placeholder="0 VNĐ" value="">
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="desktopDiscount" class="form-label">
+                            Chiết khấu
+                        </label>
+                        <input type="number" class="form-control" id="desktopDiscount" name="discount" min="0" value="0" placeholder="0">
+                    </div>
                 </div>
             </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="desktopFinalCost" class="form-label">
+                            Chi phí phải trả
+                        </label>
+                        <input type="text" class="form-control" id="desktopFinalCost" name="finalCost" readonly placeholder="0 VNĐ" value="">
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label class="form-label">Trạng thái <span class="text-danger">*</span></label>
+                        <div class="d-flex gap-3">
+                            <div class="form-check">
+                                <input type="radio" class="form-check-input" id="statusActiveDesktop" name="status" value="active" required>
+                                <label class="form-check-label" for="statusActiveDesktop">Đang hoạt động</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="radio" class="form-check-input" id="statusLockedDesktop" name="status" value="locked">
+                                <label class="form-check-label" for="statusLockedDesktop">Khóa</label>
+                            </div>
+                        </div>
+                        <div class="invalid-feedback">Vui lòng chọn trạng thái</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="createdByDesktop" class="form-label">
+                            Người tạo
+                        </label>
+                        <input type="text" class="form-control" id="createdByDesktop" name="createdBy" readonly value="">
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="createdAtDesktop" class="form-label">
+                            Thời gian tạo
+                        </label>
+                        <input type="text" class="form-control" id="createdAtDesktop" name="createdAt" readonly value="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Action Buttons - Sticky on mobile -->
+    <div class="action-buttons">
+        <div class="d-flex gap-3 justify-content-end">
+            <button type="button" class="btn btn-secondary" onclick="window.adminLayout.loadContent('service-packages')">
+                <i class="fas fa-arrow-left me-2"></i>Quay lại
+            </button>
+            <button type="submit" class="btn btn-primary">
+                <i class="fas fa-check me-2"></i>Lưu
+            </button>
+        </div>
+    </div>
 </form>

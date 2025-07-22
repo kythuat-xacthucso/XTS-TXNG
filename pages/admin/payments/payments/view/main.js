@@ -12,7 +12,7 @@
             createdBy: 'User2',
             status: 'approved',
             transactionCode: 'TXN123',
-            transactionImage: 'https://via.placeholder.com/150',
+            transactionImage: 'https://thebank.vn/uploads/2023/04/24/thebank_hinhanhbillchuyentienvietcombankvacachtaobill2_1682330269.jpg',
             note: 'Hóa đơn cho gói nâng cao',
             packages: [
                 { id: 3, name: 'Gói Cao cấp', duration: '6 tháng', price: 300000, expiryDate: '2025-12-02' },
@@ -47,7 +47,7 @@
             createdBy: 'User3',
             status: 'awaiting',
             transactionCode: 'TXN124',
-            transactionImage: 'https://via.placeholder.com/150',
+            transactionImage: 'https://thebank.vn/uploads/2023/04/24/thebank_hinhanhbillchuyentienvietcombankvacachtaobill2_1682330269.jpg',
             note: 'Hóa đơn chờ duyệt',
             packages: [
                 { id: 4, name: 'Gói Tiêu chuẩn', duration: '2 tháng', price: 200000, expiryDate: '2025-08-03' },
@@ -55,20 +55,11 @@
         },
     ];
 
-    // Fake data for package details modal (kept for reference, not used in viewPackageDetails)
-    const packageDetailsData = {
-        1: { name: 'Gói Cơ bản', description: 'Gói dịch vụ cơ bản cho người dùng mới.', duration: '1 tháng', price: 100000, expiryDate: '2025-07-01', features: ['Hỗ trợ cơ bản', 'Truy cập hạn chế'] },
-        2: { name: 'Gói Nâng cao', description: 'Gói nâng cao với nhiều tính năng bổ sung.', duration: '3 tháng', price: 75000, expiryDate: '2025-09-01', features: ['Hỗ trợ nâng cao', 'Truy cập mở rộng'] },
-        3: { name: 'Gói Cao cấp', description: 'Gói cao cấp dành cho doanh nghiệp lớn.', duration: '6 tháng', price: 300000, expiryDate: '2025-12-02', features: ['Hỗ trợ 24/7', 'Tất cả tính năng'] },
-        4: { name: 'Gói Tiêu chuẩn', description: 'Gói tiêu chuẩn với hiệu suất tốt.', duration: '2 tháng', price: 200000, expiryDate: '2025-08-03', features: ['Hỗ trợ tiêu chuẩn', 'Truy cập trung bình'] },
-    };
-
     // Main initialization function
     const initializeView = () => {
-        // Get paymentId from URL query parameter (e.g., ?id=2)
         const urlParams = new URLSearchParams(window.location.search);
         const paymentId = parseInt(urlParams.get('id'));
-        const orderPayment = viewOrderPayments.find(p => p.id === paymentId) || viewOrderPayments[0]; // Fallback to first record
+        const orderPayment = viewOrderPayments.find(p => p.id === paymentId) || viewOrderPayments[0];
 
         if (!orderPayment) {
             adminLayout.showNotification('Không có hóa đơn nào để hiển thị', 'danger');
@@ -84,9 +75,10 @@
     // Populate form fields
     const populateForm = ({ code, amount, createdAt, paymentTime, approvedTime, approvedBy, createdBy, status, transactionCode, transactionImage, note }) => {
         const statusText = {
-            pending: 'Chưa thanh toán',
-            awaiting: 'Đã thanh toán',
+            pending: 'Mới tạo',
+            awaiting: 'Chờ duyệt',
             approved: 'Đã duyệt',
+            rejected: 'Từ chối',
         }[status] || status;
 
         const fields = {
@@ -104,47 +96,44 @@
             noteDesktop: note,
         };
 
-        // Add fields based on status
         if (status !== 'pending') {
             fields.paymentTime = paymentTime || '-';
             fields.paymentTimeDesktop = paymentTime || '-';
             fields.transactionCode = transactionCode || '-';
             fields.transactionCodeDesktop = transactionCode || '-';
-            fields.transactionImage = transactionImage;
-            fields.transactionImageDesktop = transactionImage;
-            fields.approvedBy = approvedBy || '-';
-            fields.approvedByDesktop = approvedBy || '-';
-        } else {
-            fields.approvedBy = '-';
-            fields.approvedByDesktop = '-';
         }
 
-        if (status === 'approved') {
+        if (status === 'approved' || status === 'rejected') {
             fields.approvedTime = approvedTime || '-';
             fields.approvedTimeDesktop = approvedTime || '-';
+            fields.approvedBy = approvedBy || '-';
+            fields.approvedByDesktop = approvedBy || '-';
         }
 
         Object.entries(fields).forEach(([id, value]) => {
             const element = document.getElementById(id);
-            if (element) {
-                if (id.includes('Image')) {
-                    element.src = value || '';
-                    element.parentElement.style.display = value ? 'block' : 'none';
-                } else {
-                    element.value = value || '';
-                }
-            }
+            if (element) element.textContent = value || '';
         });
 
-        // Hide fields based on status
+        // Handle transaction image
+        const transactionImageMobile = document.getElementById('transactionImageMobile');
+        const transactionImageDesktop = document.getElementById('transactionImageDesktop');
+        if (transactionImage && status !== 'pending') {
+            transactionImageMobile.innerHTML = `<img src="${transactionImage}" alt="Ảnh giao dịch" class="img-fluid">`;
+            transactionImageDesktop.innerHTML = `<img src="${transactionImage}" alt="Ảnh giao dịch" class="img-fluid">`;
+        } else {
+            transactionImageMobile.innerHTML = '<p>Không có ảnh</p>';
+            transactionImageDesktop.innerHTML = '<p>Không có ảnh</p>';
+        }
+
         ['paymentTimeContainer', 'transactionCodeContainer', 'transactionImageContainer'].forEach(id => {
             document.getElementById(id).style.display = status === 'pending' ? 'none' : 'block';
         });
         ['paymentTimeContainerDesktop', 'transactionCodeContainerDesktop', 'transactionImageContainerDesktop'].forEach(id => {
             document.getElementById(id).style.display = status === 'pending' ? 'none' : 'block';
         });
-        ['approvedTimeContainer', 'approvedTimeContainerDesktop'].forEach(id => {
-            document.getElementById(id).style.display = status === 'approved' ? 'block' : 'none';
+        ['approvedTimeContainer', 'approvedTimeContainerDesktop', 'approvedByContainer', 'approvedByContainerDesktop'].forEach(id => {
+            document.getElementById(id).style.display = (status === 'approved' || status === 'rejected') ? 'block' : 'none';
         });
     };
 
@@ -162,12 +151,12 @@
             row.className = 'package-row';
             row.innerHTML = `
                 <td class="text-center">${index + 1}</td>
-                <td><input type="text" class="form-control" value="${pkg.name}" readonly></td>
-                <td><input type="text" class="form-control" value="${pkg.duration}" readonly></td>
-                <td><input type="text" class="form-control" value="${formatCurrency(pkg.price)}" readonly></td>
-                <td><input type="text" class="form-control" value="${pkg.expiryDate}" readonly></td>
+                <td>${pkg.name}</td>
+                <td>${pkg.duration}</td>
+                <td>${formatCurrency(pkg.price)}</td>
+                <td>${pkg.expiryDate}</td>
                 <td class="text-center">
-                    <button type="button" class="btn-view me-1" onclick="viewPackageDetails(${pkg.id})">
+                    <button type="button" class="btn btn-outline-primary btn-sm me-1" onclick="viewPackageDetails(${pkg.id})">
                         <i class="fas fa-eye"></i>
                     </button>
                 </td>
@@ -181,27 +170,15 @@
                 <div class="card-header">
                     <div class="card-title">Gói ${index + 1}</div>
                     <div>
-                        <button type="button" class="view-btn me-2" onclick="viewPackageDetails(${pkg.id})">
+                        <button type="button" class="btn btn-outline-primary btn-sm me-2" onclick="viewPackageDetails(${pkg.id})">
                             <i class="fas fa-eye"></i>
                         </button>
                     </div>
                 </div>
-                <div class="mb-3">
-                    <label class="form-label">Gói dịch vụ</label>
-                    <input type="text" class="form-control" value="${pkg.name}" readonly>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Thời hạn</label>
-                    <input type="text" class="form-control" value="${pkg.duration}" readonly>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Giá tiền</label>
-                    <input type="text" class="form-control" value="${formatCurrency(pkg.price)}" readonly>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Ngày hết hạn</label>
-                    <input type="text" class="form-control" value="${pkg.expiryDate}" readonly>
-                </div>
+                <div class="mb-3"><label class="form-label">Gói dịch vụ:</label> <p>${pkg.name}</p></div>
+                <div class="mb-3"><label class="form-label">Thời hạn:</label> <p>${pkg.duration}</p></div>
+                <div class="mb-3"><label class="form-label">Giá tiền:</label> <p>${formatCurrency(pkg.price)}</p></div>
+                <div class="mb-3"><label class="form-label">Ngày hết hạn:</label> <p>${pkg.expiryDate}</p></div>
             `;
             mobileList.appendChild(card);
         });
@@ -210,7 +187,14 @@
     // Update button visibility based on status
     const updateButtonVisibility = (status) => {
         const approveButton = document.getElementById('approveButton');
+        const rejectButton = document.getElementById('rejectButton');
+        const viewInvoiceButton = document.getElementById('viewInvoiceButton');
+        const reapproveButton = document.getElementById('reapproveButton');
+
         approveButton.style.display = status === 'awaiting' ? 'block' : 'none';
+        rejectButton.style.display = status === 'awaiting' ? 'block' : 'none';
+        viewInvoiceButton.style.display = status === 'approved' ? 'block' : 'none';
+        reapproveButton.style.display = status === 'rejected' ? 'block' : 'none';
     };
 
     // Format currency
@@ -219,10 +203,7 @@
     // Show toast notification
     const showToast = (message) => {
         const toastContainer = document.getElementById('toastContainer');
-        if (!toastContainer) {
-            console.warn('Toast container not found');
-            return;
-        }
+        if (!toastContainer) return;
 
         const toastId = `toast-${Date.now()}`;
         const toastHTML = `
@@ -231,9 +212,7 @@
                     <strong class="me-auto">Thông báo</strong>
                     <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
                 </div>
-                <div class="toast-body">
-                    ${message}
-                </div>
+                <div class="toast-body">${message}</div>
             </div>
         `;
         toastContainer.innerHTML += toastHTML;
@@ -242,9 +221,7 @@
         const toast = new bootstrap.Toast(toastElement);
         toast.show();
 
-        toastElement.addEventListener('hidden.bs.toast', () => {
-            toastElement.remove();
-        });
+        toastElement.addEventListener('hidden.bs.toast', () => toastElement.remove());
     };
 
     // Approve payment
@@ -259,8 +236,7 @@
         }
 
         const modal = new bootstrap.Modal(document.getElementById('confirmApproveModal'));
-        const confirmCode = document.getElementById('confirmApproveCode');
-        confirmCode.innerHTML = `Mã đơn: ${payment.code}`;
+        document.getElementById('confirmApproveCode').textContent = `Mã đơn: ${payment.code}`;
 
         const confirmButton = document.getElementById('confirmApproveButton');
         const confirmHandler = () => {
@@ -276,17 +252,84 @@
 
         confirmButton.removeEventListener('click', confirmHandler);
         confirmButton.addEventListener('click', confirmHandler);
-
         modal.show();
+    };
+
+    // Reject payment
+    const rejectPayment = () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const paymentId = parseInt(urlParams.get('id'));
+        const payment = viewOrderPayments.find(p => p.id === paymentId);
+
+        if (!payment || payment.status !== 'awaiting') {
+            adminLayout.showNotification('Không thể từ chối thanh toán', 'danger');
+            return;
+        }
+
+        const modal = new bootstrap.Modal(document.getElementById('confirmRejectModal'));
+        document.getElementById('confirmRejectCode').textContent = `Mã đơn: ${payment.code}`;
+
+        const confirmButton = document.getElementById('confirmRejectButton');
+        const confirmHandler = () => {
+            const reason = document.getElementById('rejectReason').value;
+            if (!reason) {
+                adminLayout.showNotification('Vui lòng nhập lý do từ chối', 'warning');
+                return;
+            }
+            payment.status = 'rejected';
+            payment.note = `${payment.note ? payment.note + '\n' : ''}Lý do từ chối: ${reason}`;
+            populateForm(payment);
+            updateButtonVisibility(payment.status);
+            modal.hide();
+            showToast(`Thanh toán ${payment.code} đã bị từ chối`);
+            confirmButton.removeEventListener('click', confirmHandler);
+        };
+
+        confirmButton.removeEventListener('click', confirmHandler);
+        confirmButton.addEventListener('click', confirmHandler);
+        modal.show();
+    };
+
+    // Reapprove payment
+    const reapprovePayment = () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const paymentId = parseInt(urlParams.get('id'));
+        const payment = viewOrderPayments.find(p => p.id === paymentId);
+
+        if (!payment || payment.status !== 'rejected') {
+            adminLayout.showNotification('Không thể duyệt lại thanh toán', 'danger');
+            return;
+        }
+
+        const modal = new bootstrap.Modal(document.getElementById('confirmReapproveModal'));
+        document.getElementById('confirmReapproveCode').textContent = `Mã đơn: ${payment.code}`;
+
+        const confirmButton = document.getElementById('confirmReapproveButton');
+        const confirmHandler = () => {
+            payment.status = 'approved';
+            payment.approvedBy = 'Admin';
+            payment.approvedTime = new Date().toLocaleString('vi-VN', { dateStyle: 'short', timeStyle: 'short' });
+            populateForm(payment);
+            updateButtonVisibility(payment.status);
+            modal.hide();
+            showToast(`Thanh toán ${payment.code} đã được duyệt lại`);
+            confirmButton.removeEventListener('click', confirmHandler);
+        };
+
+        confirmButton.removeEventListener('click', confirmHandler);
+        confirmButton.addEventListener('click', confirmHandler);
+        modal.show();
+    };
+
+    // View invoice PDF
+    const viewInvoice = () => {
+        window.open('../../../../assets/pdf/invoice.pdf', '_blank');
     };
 
     // View package details in modal
     const viewPackageDetails = (packageId) => {
         console.log('viewPackageDetails called with packageId:', packageId);
-
         const filePaths = window.adminLayout.getFilePaths('view-service-package');
-        console.log('filePaths:', filePaths);
-
         if (filePaths && filePaths.html) {
             const modalBody = document.getElementById('viewPackageModalBody');
             modalBody.innerHTML = '<div class="text-center"><i class="fas fa-spinner fa-spin"></i> Đang tải...</div>';
@@ -295,30 +338,8 @@
             modal.show();
 
             fetch(filePaths.html)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error(`Failed to load HTML: ${filePaths.html}`);
-                    }
-                    return response.text();
-                })
-                .then(data => {
-                    modalBody.innerHTML = data;
-
-                    if (filePaths.css && !document.querySelector(`link[href="${filePaths.css}"]`)) {
-                        const link = document.createElement('link');
-                        link.rel = 'stylesheet';
-                        link.type = 'text/css';
-                        link.href = filePaths.css;
-                        document.head.appendChild(link);
-                    }
-
-                    if (filePaths.js && !document.querySelector(`script[src="${filePaths.js}"]`)) {
-                        const script = document.createElement('script');
-                        script.type = 'text/javascript';
-                        script.src = filePaths.js;
-                        document.body.appendChild(script);
-                    }
-                })
+                .then(response => response.text())
+                .then(data => modalBody.innerHTML = data)
                 .catch(error => {
                     console.error('Error loading view-service-package:', error);
                     modalBody.innerHTML = '<p class="text-danger">Lỗi tải chi tiết gói dịch vụ.</p>';
@@ -330,17 +351,16 @@
 
     // Run initialization when the DOM is fully loaded and content is loaded
     document.addEventListener('DOMContentLoaded', () => {
-        if (document.getElementById('orderPaymentForm')) {
-            initializeView();
-        }
+        if (document.querySelector('.service-package-form')) initializeView();
     });
     document.addEventListener('contentLoaded', (e) => {
-        if (e.detail.contentId === 'view-order-payment' && document.getElementById('orderPaymentForm')) {
-            initializeView();
-        }
+        if (e.detail.contentId === 'view-order-payment' && document.querySelector('.service-package-form')) initializeView();
     });
 
     // Expose functions to global scope
     window.approvePayment = approvePayment;
+    window.rejectPayment = rejectPayment;
+    window.reapprovePayment = reapprovePayment;
+    window.viewInvoice = viewInvoice;
     window.viewPackageDetails = viewPackageDetails;
 })();

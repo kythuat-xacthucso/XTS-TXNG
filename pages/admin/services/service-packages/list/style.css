@@ -41,7 +41,7 @@
 }
 
 .table td:nth-child(1), /* STT */
-.table td:nth-child(8) /* Hành động */ {
+.table td:nth-child(7) /* Hành động */ {
     text-align: center;
 }
 

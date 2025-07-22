@@ -23,8 +23,8 @@
                             <input type="text" class="form-control" id="filterCode" placeholder="Nhập mã đơn">
                         </div>
                         <div class="col-md-3">
-                            <label class="form-label">Tên khách hàng</label>
-                            <input type="text" class="form-control" id="filterCustomerName" placeholder="Nhập tên khách hàng">
+                            <label class="form-label">Chủ thể</label>
+                            <input type="text" class="form-control" id="filterCustomerName" placeholder="Nhập chủ thể">
                         </div>
                         <div class="col-md-3">
                             <label class="form-label">Số tiền</label>
@@ -34,9 +34,10 @@
                             <label class="form-label">Trạng thái</label>
                             <select class="form-select" id="filterStatus">
                                 <option value="">Tất cả</option>
-                                <option value="pending">Chưa thanh toán</option>
-                                <option value="paid">Đã thanh toán</option>
+                                <option value="new">Mới tạo</option>
+                                <option value="awaiting">Chờ duyệt</option>
                                 <option value="approved">Đã duyệt</option>
+                                <option value="rejected">Từ chối</option>
                             </select>
                         </div>
                         <div class="col-12 text-end">
@@ -67,8 +68,8 @@
                     <input type="text" class="form-control" id="filterCodeMobile" placeholder="Nhập mã đơn">
                 </div>
                 <div class="mb-3">
-                    <label class="form-label">Tên khách hàng</label>
-                    <input type="text" class="form-control" id="filterCustomerNameMobile" placeholder="Nhập tên khách hàng">
+                    <label class="form-label">Chủ thể</label>
+                    <input type="text" class="form-control" id="filterCustomerNameMobile" placeholder="Nhập chủ thể">
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Số tiền</label>
@@ -78,9 +79,10 @@
                     <label class="form-label">Trạng thái</label>
                     <select class="form-select" id="filterStatusMobile">
                         <option value="">Tất cả</option>
-                        <option value="pending">Chưa thanh toán</option>
-                        <option value="paid">Đã thanh toán</option>
+                        <option value="new">Mới tạo</option>
+                        <option value="awaiting">Chờ duyệt</option>
                         <option value="approved">Đã duyệt</option>
+                        <option value="rejected">Từ chối</option>
                     </select>
                 </div>
                 <div class="text-end">
@@ -98,7 +100,7 @@
                 <tr>
                     <th>STT</th>
                     <th>Mã đơn</th>
-                    <th>Tên khách hàng</th>
+                    <th>Chủ thể</th>
                     <th>Số tiền</th>
                     <th>Thời gian tạo</th>
                     <th>Thời gian thanh toán</th>

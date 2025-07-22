@@ -63,17 +63,13 @@
     display: block;
 }
 
-/* Mobile Package Cards within Parameter */
-.package-list {
-    margin-top: 1rem;
-}
-
+/* Mobile Service Package Cards */
 .package-card {
     background: white;
     border: 1px solid #e9ecef;
     border-radius: 8px;
-    padding: 0.75rem;
-    margin-bottom: 0.5rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
     transition: all 0.3s ease;
 }
 
@@ -86,43 +82,51 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.75rem;
     flex-wrap: wrap;
     gap: 0.5rem;
 }
 
 .package-name {
-    font-size: 1rem;
+    font-size: 1.1rem;
     font-weight: 600;
     color: var(--dark-color);
     margin: 0;
     flex: 1;
 }
 
+.status-badge {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 12px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.status-active {
+    background-color: rgba(40, 167, 69, 0.1);
+    color: var(--success-color);
+}
+
+.status-expiring {
+    background-color: rgba(255, 193, 7, 0.1);
+    color: var(--warning-color);
+}
+
+.status-expired {
+    background-color: rgba(220, 53, 69, 0.1);
+    color: var(--danger-color);
+}
+
 .package-info {
-    margin-bottom: 0.5rem;
+    margin-bottom: 1rem;
 }
 
 .package-duration {
-    font-size: 0.8rem;
+    font-size: 0.875rem;
     color: var(--secondary-color);
     margin: 0;
-}
-
-.package-stats {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-top: 0.25rem;
-}
-
-.package-stat-item {
-    font-size: 0.75rem;
-    color: var(--secondary-color);
-}
-
-.package-stat-item strong {
-    color: var(--dark-color);
 }
 
 .package-actions {
@@ -249,72 +253,6 @@
     border-radius: 5px;
 }
 
-/* Desktop Package Cards within Parameter */
-.package-list {
-    margin-top: 1rem;
-}
-
-.package-card-desktop {
-    background: white;
-    border: 1px solid #e9ecef;
-    border-radius: 8px;
-    padding: 0.75rem;
-    margin-bottom: 0.5rem;
-    transition: all 0.3s ease;
-}
-
-.package-card-desktop:hover {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    transform: translateY(-2px);
-}
-
-.package-header-desktop {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 0.5rem;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-}
-
-.package-name-desktop {
-    font-size: 1rem;
-    font-weight: 600;
-    color: var(--dark-color);
-    margin: 0;
-    flex: 1;
-}
-
-.package-info-desktop {
-    margin-bottom: 0.5rem;
-}
-
-.package-duration-desktop {
-    font-size: 0.875rem;
-    color: var(--secondary-color);
-    margin: 0;
-}
-
-.package-stats-desktop {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-top: 0.25rem;
-}
-
-.package-stat-item {
-    font-size: 0.8rem;
-    color: var(--secondary-color);
-}
-
-.package-stat-item strong {
-    color: var(--dark-color);
-}
-
-.package-actions-desktop {
-    text-align: right;
-}
-
 /* Tab Navigation */
 .nav-tabs {
     border-bottom: 2px solid #e9ecef;
@@ -381,31 +319,26 @@
 /* Responsive Adjustments */
 @media (max-width: 767.98px) {
     .parameter-card,
-    .package-card {
+    .package-card,
+    .history-item {
         margin-bottom: 0.75rem;
         padding: 0.75rem;
     }
     
     .parameter-name,
-    .package-name {
+    .package-name,
+    .history-package {
         font-size: 1rem;
     }
     
     .parameter-desc,
-    .package-duration {
+    .package-duration,
+    .history-date {
         font-size: 0.8rem;
     }
     
     .progress {
         height: 6px;
-    }
-    
-    .package-stats {
-        gap: 0.25rem;
-    }
-    
-    .package-stat-item {
-        font-size: 0.7rem;
     }
     
     .btn-sm {
@@ -425,18 +358,6 @@
     
     .stat-item {
         font-size: 0.8rem;
-    }
-    
-    .package-name-desktop {
-        font-size: 0.9rem;
-    }
-    
-    .package-duration-desktop {
-        font-size: 0.8rem;
-    }
-    
-    .package-stat-item {
-        font-size: 0.75rem;
     }
 }
 

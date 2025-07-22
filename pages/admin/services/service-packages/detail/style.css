@@ -4,100 +4,37 @@
 }
 
 /* Package Info Section */
-.package-info-content .form-control,
-.package-info-content .form-select {
+.package-info-content .form-control-static {
     border-radius: 8px;
     border: 1px solid #e0e6ed;
     background-color: #f8f9fa;
     color: #495057;
-}
-
-.package-info-content .form-control:disabled,
-.package-info-content .form-select:disabled {
-    background-color: #f8f9fa;
-    opacity: 1;
-}
-
-/* Parameters Table */
-#parametersTable {
-    border-radius: 8px;
-    overflow: hidden;
-}
-
-#parametersTable th {
-    background-color: #f8f9fa;
-    font-weight: 600;
-    border-bottom: 2px solid #dee2e6;
-}
-
-#parametersTable td {
-    vertical-align: middle;
-}
-
-.parameter-row .form-control,
-.parameter-row .form-select {
-    border-radius: 6px;
-    border: 1px solid #e0e6ed;
-    background-color: #f8f9fa;
-    color: #495057;
-}
-
-/* Cost Summary */
-.cost-summary-desktop {
-    background-color: #f8f9fa;
-    padding: 1.5rem;
-    border-radius: 8px;
-    border: 1px solid #e9ecef;
-}
-
-.cost-summary {
-    background-color: #f8f9fa;
-    padding: 1rem;
-    border-radius: 8px;
-    border: 1px solid #e9ecef;
-}
-
-/* Mobile Parameter Cards */
-.mobile-parameters-list {
-    margin-bottom: 1rem;
-}
-
-.parameter-card {
-    background: white;
-    border: 1px solid #e9ecef;
-    border-radius: 8px;
-    padding: 1rem;
-    margin-bottom: 1rem;
-}
-
-.parameter-card .card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 1px solid #e9ecef;
-}
-
-.parameter-card .card-title {
-    font-size: 0.9rem;
-    font-weight: 600;
+    padding: 0.375rem 0.75rem;
+    min-height: 38px;
     margin: 0;
-    color: var(--primary-color);
 }
 
-.parameter-card .form-label {
-    font-size: 0.875rem;
+.package-info-content .form-label {
     font-weight: 500;
-    margin-bottom: 0.25rem;
+    margin-bottom: 0;
 }
 
-.parameter-card .form-control,
-.parameter-card .form-select {
-    font-size: 0.875rem;
-    border-radius: 6px;
-    background-color: #f8f9fa;
-    color: #495057;
+/* Desktop layout adjustments */
+.d-none.d-md-block .mb-3 {
+    display: flex;
+    align-items: center;
+    gap: 1rem; /* Khoảng cách giữa label và text */
+}
+
+.d-none.d-md-block .mb-3 .form-label {
+    flex: 0 0 auto; /* Giữ label cố định */
+    width: 120px; /* Độ rộng cố định cho label, có thể điều chỉnh */
+    text-align: right; /* Căn phải để đẹp hơn */
+}
+
+.d-none.d-md-block .mb-3 .form-control-static {
+    flex: 1 1 auto; /* Text sẽ chiếm phần còn lại */
+    margin: 0;
 }
 
 /* Action Buttons */
@@ -145,25 +82,5 @@
     
     .main-content {
         padding-bottom: 80px;
-    }
-    
-    .parameter-card {
-        margin-bottom: 0.75rem;
-        padding: 0.75rem;
-    }
-    
-    .cost-summary {
-        font-size: 0.875rem;
-    }
-}
-
-@media (min-width: 768px) {
-    .parameter-row td {
-        padding: 0.75rem 0.5rem;
-    }
-    
-    .parameter-row .form-control,
-    .parameter-row .form-select {
-        font-size: 0.875rem;
     }
 }

@@ -1,19 +1,19 @@
 (function () {
     // Sample data for service packages (replace with actual API call)
     const servicePackages = [
-        { id: 1, name: "Gói Cơ bản", price: 1000000, duration: "1 tháng", createdAt: "2025-06-01 10:00", createdBy: "Admin1", status: "active" },
-        { id: 2, name: "Gói Nâng cao", price: 3000000, duration: "3 tháng", createdAt: "2025-06-02 14:30", createdBy: "Admin2", status: "locked" },
-        { id: 3, name: "Gói Doanh nghiệp", price: 6000000, duration: "6 tháng", createdAt: "2025-06-03 09:15", createdBy: "Admin3", status: "active" },
-        { id: 4, name: "Gói VIP", price: 12000000, duration: "12 tháng", createdAt: "2025-06-04 11:00", createdBy: "Admin4", status: "active" },
-        { id: 5, name: "Gói Starter", price: 500000, duration: "1 tháng", createdAt: "2025-06-05 13:00", createdBy: "Admin5", status: "locked" },
-        { id: 6, name: "Gói Pro", price: 8000000, duration: "9 tháng", createdAt: "2025-06-06 15:00", createdBy: "Admin6", status: "active" },
-        { id: 7, name: "Gói Lite", price: 2000000, duration: "2 tháng", createdAt: "2025-06-07 09:00", createdBy: "Admin7", status: "locked" },
-        { id: 8, name: "Gói Premium", price: 15000000, duration: "12 tháng", createdAt: "2025-06-08 10:30", createdBy: "Admin8", status: "active" },
-        { id: 9, name: "Gói Basic Plus", price: 2500000, duration: "3 tháng", createdAt: "2025-06-09 14:00", createdBy: "Admin9", status: "active" },
-        { id: 10, name: "Gói Elite", price: 18000000, duration: "12 tháng", createdAt: "2025-06-10 11:15", createdBy: "Admin10", status: "locked" },
-        { id: 11, name: "Gói Starter Plus", price: 700000, duration: "1 tháng", createdAt: "2025-06-11 13:00", createdBy: "Admin11", status: "active" },
-        { id: 12, name: "Gói Advanced", price: 4000000, duration: "4 tháng", createdAt: "2025-06-12 09:45", createdBy: "Admin12", status: "locked" },
-        { id: 13, name: "Gói Ultimate", price: 20000000, duration: "12 tháng", createdAt: "2025-06-13 15:30", createdBy: "Admin13", status: "active" }
+        { id: 1, name: "Gói Cơ bản", parameters: "Dung lượng", quantity: 100, price: 1000000, status: "active" },
+        { id: 2, name: "Gói Nâng cao", parameters: "Dung lượng", quantity: 50, price: 3000000, status: "locked" },
+        { id: 3, name: "Gói Doanh nghiệp", parameters: "Dung lượng", quantity: 30, price: 6000000, status: "active" },
+        { id: 4, name: "Gói VIP", parameters: "Mã tem", quantity: 20, price: 12000000, status: "active" },
+        { id: 5, name: "Gói Starter", parameters: "Mã tem", quantity: 200, price: 500000, status: "locked" },
+        { id: 6, name: "Gói Pro", parameters: "Mã truyền thông", quantity: 25, price: 8000000, status: "active" },
+        { id: 7, name: "Gói Lite", parameters: "Mã tem", quantity: 80, price: 2000000, status: "locked" },
+        { id: 8, name: "Gói Premium", parameters: "Mã truyền thông", quantity: 15, price: 15000000, status: "active" },
+        { id: 9, name: "Gói Basic Plus", parameters: "Mã truyền thông", quantity: 60, price: 2500000, status: "active" },
+        { id: 10, name: "Gói Elite", parameters: "Mã truyền thông", quantity: 10, price: 18000000, status: "locked" },
+        { id: 11, name: "Gói Starter Plus", parameters: "Mã truyền thông", quantity: 150, price: 700000, status: "active" },
+        { id: 12, name: "Gói Advanced", parameters: "Mã truyền thông", quantity: 40, price: 4000000, status: "locked" },
+        { id: 13, name: "Gói Ultimate", parameters: "Mã truyền thông", quantity: 5, price: 20000000, status: "active" }
     ];
 
     // State for pagination
@@ -38,7 +38,7 @@
         const paginatedData = data.slice(startIndex, endIndex);
 
         if (paginatedData.length === 0) {
-            tableBody.innerHTML = '<tr><td colspan="8" class="text-center">Không có dữ liệu</td></tr>';
+            tableBody.innerHTML = '<tr><td colspan="7" class="text-center">Không có dữ liệu</td></tr>';
             if (pagination) pagination.innerHTML = '';
             return;
         }
@@ -48,10 +48,9 @@
                 <tr>
                     <td>${startIndex + index + 1}</td>
                     <td>${pkg.name}</td>
+                    <td>${pkg.parameters}</td>
+                    <td>${pkg.quantity}</td>
                     <td>${pkg.price.toLocaleString('vi-VN')} VND</td>
-                    <td>${pkg.duration}</td>
-                    <td>${pkg.createdAt}</td>
-                    <td>${pkg.createdBy}</td>
                     <td>
                         <span class="badge ${pkg.status === 'active' ? 'bg-success' : 'bg-danger'}">
                             ${pkg.status === 'active' ? 'Đang hoạt động' : 'Khóa'}
@@ -96,8 +95,9 @@
             const card = `
                 <div class="col-12 service-package-card">
                     <h5 class="card-title">${pkg.name}</h5>
+                    <p class="card-text">Tham số: ${pkg.parameters}</p>
+                    <p class="card-text">Số lượng: ${pkg.quantity}</p>
                     <p class="card-text">Giá: ${pkg.price.toLocaleString('vi-VN')} VND</p>
-                    <p class="card-text">Thời gian: ${pkg.duration}</p>
                     <p class="card-text">
                         <span class="badge ${pkg.status === 'active' ? 'bg-success' : 'bg-danger'}">
                             ${pkg.status === 'active' ? 'Đang hoạt động' : 'Khóa'}
@@ -129,7 +129,7 @@
         // Previous button
         const prevLi = document.createElement('li');
         prevLi.className = `page-item ${currentPage === 1 ? 'disabled' : ''}`;
-        prevLi.innerHTML = `<a class="page-link" href="#" onclick="changePage(${currentPage - 1}); return false;">&lt;</a>`;
+        prevLi.innerHTML = `<a class="page-link" href="#" onclick="changePage(${currentPage - 1}); return false;"><</a>`;
         paginationElement.appendChild(prevLi);
 
         // Page numbers
@@ -177,7 +177,7 @@
         // Next button
         const nextLi = document.createElement('li');
         nextLi.className = `page-item ${currentPage === totalPages ? 'disabled' : ''}`;
-        nextLi.innerHTML = `<a class="page-link" href="#" onclick="changePage(${currentPage + 1}); return false;">&gt;</a>`;
+        nextLi.innerHTML = `<a class="page-link" href="#" onclick="changePage(${currentPage + 1}); return false;">></a>`;
         paginationElement.appendChild(nextLi);
     }
 
@@ -207,7 +207,7 @@
             return (
                 (!name || pkg.name.toLowerCase().includes(name)) &&
                 (!price || pkg.price === parseInt(price)) &&
-                (!duration || pkg.duration === `${duration} tháng`) &&
+                (!duration || pkg.parameters.includes(`${duration} tháng`)) &&
                 (!status || pkg.status === status)
             );
         });

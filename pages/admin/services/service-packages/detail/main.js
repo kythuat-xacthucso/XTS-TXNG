@@ -1,33 +1,30 @@
 (function () {
-    // Fake data for view page (scoped within IIFE)
+    // Fake data for view page
     const viewServicePackages = [
         {
             id: 1,
             name: 'Gói Cơ bản',
             code: 'BASIC001',
-            duration: 1,
-            durationUnit: 'month',
-            createdAt: '2025-06-01 10:00',
-            createdBy: 'Admin1',
-            status: 'active',
-            parameters: [
-                { id: 1, name: 'Kiểm tra chất lượng', price: 50000, quantity: 2 },
-                { id: 2, name: 'Phân tích thành phần', price: 75000, quantity: 1 },
-            ],
+            duration: '12 tháng',
+            parameter: { id: 1, name: 'Kiểm tra chất lượng', price: 50000 },
+            quantity: 2,
             discount: 50000,
+            status: 'active',
+            createdAt: '2025-06-01 10:00',
+            createdBy: 'Admin1'
         },
         {
             id: 2,
             name: 'Gói Nâng cao',
             code: 'ADV001',
-            duration: 3,
-            durationUnit: 'month',
-            createdAt: '2025-06-02 14:30',
-            createdBy: 'Admin2',
-            status: 'locked',
-            parameters: [{ id: 3, name: 'Kiểm tra an toàn', price: 100000, quantity: 3 }],
+            duration: '12 tháng',
+            parameter: { id: 3, name: 'Kiểm tra an toàn', price: 100000 },
+            quantity: 3,
             discount: 100000,
-        },
+            status: 'locked',
+            createdAt: '2025-06-02 14:30',
+            createdBy: 'Admin2'
+        }
     ];
 
     // Initialize when content is loaded
@@ -40,6 +37,7 @@
 
     // Main initialization function
     const initializeView = () => {
+        // Simulate getting package ID from URL or context
         const pkg = viewServicePackages[0]; // Default to first package
 
         if (!pkg) {
@@ -48,95 +46,56 @@
         }
 
         populateForm(pkg);
-        populateParameters(pkg.parameters);
         calculateCosts(pkg);
     };
 
     // Populate form fields
-    const populateForm = ({ name, code, duration, durationUnit, createdAt, createdBy, status, discount }) => {
+    const populateForm = ({ name, code, duration, parameter, quantity, discount, status, createdAt, createdBy }) => {
         const fields = {
             packageName: name,
             packageCode: code,
-            duration,
-            durationUnit,
-            createdAt,
-            createdBy,
+            duration: duration,
+            parameter: parameter ? parameter.name : '',
+            price: parameter ? formatCurrency(parameter.price) + ' VNĐ' : '',
+            quantity: quantity,
+            total: parameter ? formatCurrency(parameter.price * quantity) + ' VNĐ' : '',
+            mobileDiscount: formatCurrency(discount) + ' VNĐ',
+            mobileFinalCost: formatCurrency(Math.max(0, (parameter ? parameter.price * quantity : 0) - discount)) + ' VNĐ',
             status: status === 'active' ? 'Đang hoạt động' : 'Khóa',
-            mobileDiscount: discount,
+            createdAt: createdAt,
+            createdBy: createdBy,
             packageNameDesktop: name,
             packageCodeDesktop: code,
             durationDesktop: duration,
-            durationUnitDesktop: durationUnit,
-            createdAtDesktop: createdAt,
-            createdByDesktop: createdBy,
+            parameterDesktop: parameter ? parameter.name : '',
+            priceDesktop: parameter ? formatCurrency(parameter.price) + ' VNĐ' : '',
+            quantityDesktop: quantity,
+            totalDesktop: parameter ? formatCurrency(parameter.price * quantity) + ' VNĐ' : '',
+            desktopDiscount: formatCurrency(discount) + ' VNĐ',
+            desktopFinalCost: formatCurrency(Math.max(0, (parameter ? parameter.price * quantity : 0) - discount)) + ' VNĐ',
             statusDesktop: status === 'active' ? 'Đang hoạt động' : 'Khóa',
-            desktopDiscount: discount,
+            createdAtDesktop: createdAt,
+            createdByDesktop: createdBy
         };
 
         Object.entries(fields).forEach(([id, value]) => {
             const element = document.getElementById(id);
-            if (element) element.value = value || '';
-        });
-    };
-
-    // Populate parameters for desktop and mobile
-    const populateParameters = (parameters) => {
-        const tableBody = document.getElementById('parametersTableBody');
-        const mobileList = document.getElementById('mobileParametersList');
-
-        parameters.forEach((param, index) => {
-            // Desktop table row
-            const row = document.createElement('tr');
-            row.className = 'parameter-row';
-            row.innerHTML = `
-          <td class="text-center">${index + 1}</td>
-          <td><input type="text" class="form-control" value="${param.name}" readonly></td>
-          <td><input type="text" class="form-control" value="${formatCurrency(param.price)}" readonly></td>
-          <td><input type="number" class="form-control" value="${param.quantity}" readonly></td>
-          <td><input type="text" class="form-control" value="${formatCurrency(param.price * param.quantity)}" readonly></td>
-        `;
-            tableBody.appendChild(row);
-
-            // Mobile card
-            const card = document.createElement('div');
-            card.className = 'parameter-card';
-            card.innerHTML = `
-          <div class="card-header">
-            <div class="card-title">Tham số ${index + 1}</div>
-          </div>
-          <div class="mb-3">
-            <label class="form-label">Tham số</label>
-            <input type="text" class="form-control" value="${param.name}" readonly>
-          </div>
-          <div class="row mb-3">
-            <div class="col-6">
-              <label class="form-label">Đơn giá</label>
-              <input type="text" class="form-control" value="${formatCurrency(param.price)}" readonly>
-            </div>
-            <div class="col-6">
-              <label class="form-label">Số lượng</label>
-              <input type="number" class="form-control" value="${param.quantity}" readonly>
-            </div>
-          </div>
-          <div class="mb-0">
-            <label class="form-label">Thành tiền</label>
-            <input type="text" class="form-control" value="${formatCurrency(param.price * param.quantity)}" readonly>
-          </div>
-        `;
-            mobileList.appendChild(card);
+            if (element) element.textContent = value || '';
         });
     };
 
     // Calculate and display costs
-    const calculateCosts = ({ parameters, discount }) => {
-        const totalCost = parameters.reduce((sum, param) => sum + param.price * param.quantity, 0);
+    const calculateCosts = ({ parameter, quantity, discount }) => {
+        const totalCost = parameter ? parameter.price * quantity : 0;
         const finalCost = Math.max(0, totalCost - discount);
 
-        ['desktopTotalCost', 'mobileTotalCost'].forEach((id) => {
-            document.getElementById(id).textContent = formatCurrency(totalCost);
+        ['mobileTotalCost', 'desktopTotalCost'].forEach((id) => {
+            const element = document.getElementById(id);
+            if (element) element.textContent = formatCurrency(totalCost) + ' VNĐ';
         });
-        ['desktopFinalCost', 'mobileFinalCost'].forEach((id) => {
-            document.getElementById(id).textContent = formatCurrency(finalCost);
+        ['mobileFinalCost', 'desktopFinalCost'].forEach((id) => {
+            const element = document.getElementById(id);
+            if (element) element.textContent = formatCurrency(finalCost) + ' VNĐ';
         });
     };
 
@@ -144,8 +103,8 @@
     const formatCurrency = (amount) => new Intl.NumberFormat('vi-VN').format(amount);
 
     // Navigate to edit page
-    const navigateToEdit = () => {
-        window.adminLayout.loadContent('edit-service-package');
+    window.navigateTo = (page) => {
+        window.adminLayout.loadContent(page);
     };
 
     // Show error notification

@@ -8,7 +8,7 @@
     <!-- Toast will be dynamically added here -->
 </div>
 
-<form id="orderPaymentForm" class="service-package-form">
+<div class="service-package-form">
     <!-- Section 1: Thông tin hóa đơn (Mobile) -->
     <div class="accordion d-md-none mb-4" id="mobileAccordion">
         <div class="accordion-item">
@@ -22,62 +22,17 @@
             <div id="invoiceInfo" class="accordion-collapse collapse show" data-bs-parent="#mobileAccordion">
                 <div class="accordion-body">
                     <div class="package-info-content">
-                        <div class="mb-3">
-                            <label for="invoiceCode" class="form-label">Mã đơn</label>
-                            <input type="text" class="form-control" id="invoiceCode" name="invoiceCode" readonly>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="amount" class="form-label">Số tiền</label>
-                            <input type="text" class="form-control" id="amount" name="amount" readonly>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="createdAt" class="form-label">Thời gian tạo</label>
-                            <input type="text" class="form-control" id="createdAt" name="createdAt" readonly>
-                        </div>
-
-                        <div class="mb-3" id="paymentTimeContainer">
-                            <label for="paymentTime" class="form-label">Thời gian thanh toán</label>
-                            <input type="text" class="form-control" id="paymentTime" name="paymentTime" readonly>
-                        </div>
-
-                        <div class="mb-3" id="approvedTimeContainer">
-                            <label for="approvedTime" class="form-label">Thời gian duyệt</label>
-                            <input type="text" class="form-control" id="approvedTime" name="approvedTime" readonly>
-                        </div>
-
-                        <div class="mb-3" id="approvedByContainer">
-                            <label for="approvedBy" class="form-label">Người duyệt</label>
-                            <input type="text" class="form-control" id="approvedBy" name="approvedBy" readonly>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="createdBy" class="form-label">Người tạo</label>
-                            <input type="text" class="form-control" id="createdBy" name="createdBy" readonly>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="status" class="form-label">Trạng thái</label>
-                            <input type="text" class="form-control" id="status" name="status" readonly>
-                        </div>
-
-                        <div class="mb-3" id="transactionCodeContainer">
-                            <label for="transactionCode" class="form-label">Mã giao dịch</label>
-                            <input type="text" class="form-control" id="transactionCode" name="transactionCode" readonly>
-                        </div>
-
-                        <div class="mb-3" id="transactionImageContainer">
-                            <label for="transactionImage" class="form-label">Ảnh giao dịch</label>
-                            <div class="transaction-image-preview">
-                                <img id="transactionImage" src="" alt="Ảnh giao dịch" class="img-fluid" style="max-width: 100%; max-height: 200px;">
-                            </div>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="note" class="form-label">Ghi chú</label>
-                            <textarea class="form-control" id="note" name="note" readonly></textarea>
-                        </div>
+                        <div class="mb-3"><label class="form-label">Mã đơn:</label> <p id="invoiceCode" class="d-inline"></p></div>
+                        <div class="mb-3"><label class="form-label">Thời gian tạo:</label> <p id="createdAt" class="d-inline"></p></div>
+                        <div class="mb-3"><label class="form-label">Người tạo:</label> <p id="createdBy" class="d-inline"></p></div>
+                        <div class="mb-3"><label class="form-label">Số tiền:</label> <p id="amount" class="d-inline"></p></div>
+                        <div class="mb-3" id="paymentTimeContainer"><label class="form-label">Thời gian thanh toán:</label> <p id="paymentTime" class="d-inline"></p></div>
+                        <div class="mb-3" id="transactionCodeContainer"><label class="form-label">Mã giao dịch:</label> <p id="transactionCode" class="d-inline"></p></div>
+                        <div class="mb-3" id="transactionImageContainer"><label class="form-label">Ảnh giao dịch:</label> <div id="transactionImageMobile" class="d-inline"></div></div>
+                        <div class="mb-3"><label class="form-label">Trạng thái:</label> <p id="status" class="d-inline"></p></div>
+                        <div class="mb-3"><label class="form-label">Ghi chú:</label> <p id="note" class="d-inline"></p></div>
+                        <div class="mb-3" id="approvedTimeContainer"><label class="form-label">Thời gian duyệt:</label> <p id="approvedTime" class="d-inline"></p></div>
+                        <div class="mb-3" id="approvedByContainer"><label class="form-label">Người duyệt:</label> <p id="approvedBy" class="d-inline"></p></div>
                     </div>
                 </div>
             </div>
@@ -113,94 +68,32 @@
             </h5>
 
             <div class="row">
-                <div class="col-md-6">
-                    <div class="mb-3">
-                        <label for="invoiceCodeDesktop" class="form-label">Mã đơn</label>
-                        <input type="text" class="form-control" id="invoiceCodeDesktop" name="invoiceCode" readonly>
-                    </div>
-                </div>
-
-                <div class="col-md-6">
-                    <div class="mb-3">
-                        <label for="amountDesktop" class="form-label">Số tiền</label>
-                        <input type="text" class="form-control" id="amountDesktop" name="amount" readonly>
-                    </div>
-                </div>
+                <div class="col-md-6"><div class="mb-3"><label class="form-label">Mã đơn:</label> <p id="invoiceCodeDesktop" class="d-inline"></p></div></div>
+                <div class="col-md-6"><div class="mb-3"><label class="form-label">Số tiền:</label> <p id="amountDesktop" class="d-inline"></p></div></div>
             </div>
 
             <div class="row">
-                <div class="col-md-6">
-                    <div class="mb-3">
-                        <label for="createdAtDesktop" class="form-label">Thời gian tạo</label>
-                        <input type="text" class="form-control" id="createdAtDesktop" name="createdAt" readonly>
-                    </div>
-                </div>
-
-                <div class="col-md-6" id="paymentTimeContainerDesktop">
-                    <div class="mb-3">
-                        <label for="paymentTimeDesktop" class="form-label">Thời gian thanh toán</label>
-                        <input type="text" class="form-control" id="paymentTimeDesktop" name="paymentTime" readonly>
-                    </div>
-                </div>
+                <div class="col-md-6"><div class="mb-3"><label class="form-label">Thời gian tạo:</label> <p id="createdAtDesktop" class="d-inline"></p></div></div>
+                <div class="col-md-6" id="paymentTimeContainerDesktop"><div class="mb-3"><label class="form-label">Thời gian thanh toán:</label> <p id="paymentTimeDesktop" class="d-inline"></p></div></div>
             </div>
 
             <div class="row">
-                <div class="col-md-6" id="approvedTimeContainerDesktop">
-                    <div class="mb-3">
-                        <label for="approvedTimeDesktop" class="form-label">Thời gian duyệt</label>
-                        <input type="text" class="form-control" id="approvedTimeDesktop" name="approvedTime" readonly>
-                    </div>
-                </div>
-
-                <div class="col-md-6" id="approvedByContainerDesktop">
-                    <div class="mb-3">
-                        <label for="approvedByDesktop" class="form-label">Người duyệt</label>
-                        <input type="text" class="form-control" id="approvedByDesktop" name="approvedBy" readonly>
-                    </div>
-                </div>
+                <div class="col-md-6"><div class="mb-3"><label class="form-label">Người tạo:</label> <p id="createdByDesktop" class="d-inline"></p></div></div>
+                <div class="col-md-6" id="transactionCodeContainerDesktop"><div class="mb-3"><label class="form-label">Mã giao dịch:</label> <p id="transactionCodeDesktop" class="d-inline"></p></div></div>
             </div>
 
             <div class="row">
-                <div class="col-md-6">
-                    <div class="mb-3">
-                        <label for="createdByDesktop" class="form-label">Người tạo</label>
-                        <input type="text" class="form-control" id="createdByDesktop" name="createdBy" readonly>
-                    </div>
-                </div>
-
-                <div class="col-md-6">
-                    <div class="mb-3">
-                        <label for="statusDesktop" class="form-label">Trạng thái</label>
-                        <input type="text" class="form-control" id="statusDesktop" name="status" readonly>
-                    </div>
-                </div>
+                <div class="col-md-6" id="transactionImageContainerDesktop"><div class="mb-3"><label class="form-label">Ảnh giao dịch:</label> <div id="transactionImageDesktop" class="d-inline"></div></div></div>
+                <div class="col-md-6"><div class="mb-3"><label class="form-label">Trạng thái:</label> <p id="statusDesktop" class="d-inline"></p></div></div>
             </div>
 
             <div class="row">
-                <div class="col-md-6" id="transactionCodeContainerDesktop">
-                    <div class="mb-3">
-                        <label for="transactionCodeDesktop" class="form-label">Mã giao dịch</label>
-                        <input type="text" class="form-control" id="transactionCodeDesktop" name="transactionCode" readonly>
-                    </div>
-                </div>
-
-                <div class="col-md-6" id="transactionImageContainerDesktop">
-                    <div class="mb-3">
-                        <label for="transactionImageDesktop" class="form-label">Ảnh giao dịch</label>
-                        <div class="transaction-image-preview">
-                            <img id="transactionImageDesktop" src="" alt="Ảnh giao dịch" class="img-fluid" style="max-width: 100%; max-height: 200px;">
-                        </div>
-                    </div>
-                </div>
+                <div class="col-md-12"><div class="mb-3"><label class="form-label">Ghi chú:</label> <p id="noteDesktop" class="d-inline"></p></div></div>
             </div>
 
             <div class="row">
-                <div class="col-md-12">
-                    <div class="mb-3">
-                        <label for="noteDesktop" class="form-label">Ghi chú</label>
-                        <textarea class="form-control" id="noteDesktop" name="note" readonly></textarea>
-                    </div>
-                </div>
+                <div class="col-md-6" id="approvedTimeContainerDesktop"><div class="mb-3"><label class="form-label">Thời gian duyệt:</label> <p id="approvedTimeDesktop" class="d-inline"></p></div></div>
+                <div class="col-md-6" id="approvedByContainerDesktop"><div class="mb-3"><label class="form-label">Người duyệt:</label> <p id="approvedByDesktop" class="d-inline"></p></div></div>
             </div>
         </div>
 
@@ -240,24 +133,15 @@
             <button type="button" class="btn btn-primary" id="approveButton" onclick="approvePayment()">
                 <i class="fas fa-check me-2"></i>Duyệt
             </button>
-        </div>
-    </div>
-
-    <!-- Modal for View Package Details -->
-    <div class="modal fade" id="viewPackageModal" tabindex="-1" aria-labelledby="viewPackageModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="viewPackageModalLabel">Chi tiết gói dịch vụ</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body" id="viewPackageModalBody">
-                    <!-- Content will be loaded dynamically -->
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                </div>
-            </div>
+            <button type="button" class="btn btn-danger" id="rejectButton" onclick="rejectPayment()">
+                <i class="fas fa-times me-2"></i>Từ chối
+            </button>
+            <button type="button" class="btn btn-success" id="viewInvoiceButton" onclick="viewInvoice()">
+                <i class="fas fa-file-pdf me-2"></i>Xem hóa đơn
+            </button>
+            <button type="button" class="btn btn-warning" id="reapproveButton" onclick="reapprovePayment()">
+                <i class="fas fa-redo me-2"></i>Duyệt lại
+            </button>
         </div>
     </div>
 
@@ -280,4 +164,48 @@
             </div>
         </div>
     </div>
-</form>
+
+    <!-- Modal for Confirm Reject -->
+    <div class="modal fade" id="confirmRejectModal" tabindex="-1" aria-labelledby="confirmRejectModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmRejectModalLabel">Xác nhận từ chối thanh toán</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Bạn có chắc chắn muốn từ chối thanh toán này không?</p>
+                    <div class="mb-3">
+                        <label for="rejectReason" class="form-label">Lý do từ chối:</label>
+                        <textarea class="form-control" id="rejectReason" rows="3" required></textarea>
+                    </div>
+                    <p id="confirmRejectCode"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <button type="button" class="btn btn-danger" id="confirmRejectButton">Xác nhận</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Confirm Reapprove -->
+    <div class="modal fade" id="confirmReapproveModal" tabindex="-1" aria-labelledby="confirmReapproveModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmReapproveModalLabel">Xác nhận duyệt lại thanh toán</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Bạn có chắc chắn muốn duyệt lại thanh toán này không?</p>
+                    <p id="confirmReapproveCode"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <button type="button" class="btn btn-primary" id="confirmReapproveButton">Xác nhận</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

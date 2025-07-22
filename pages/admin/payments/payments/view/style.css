@@ -4,24 +4,26 @@
 }
 
 /* Invoice Info Section */
-.package-info-content .form-control,
-.package-info-content .form-select,
-.package-info-content .transaction-image-preview {
-    border-radius: 8px;
-    border: 1px solid #e0e6ed;
-    background-color: #f8f9fa;
+.package-info-content .form-label {
+    font-weight: 500;
+    color: var(--dark-color);
+    margin-right: 1rem;
+    display: inline-block;
+    width: 150px;
+}
+
+.package-info-content p {
+    display: inline;
+    margin: 0;
     color: #495057;
 }
 
-.package-info-content .form-control:disabled,
-.package-info-content .form-select:disabled {
-    background-color: #f8f9fa;
-    opacity: 1;
-}
-
-.package-info-content textarea {
-    resize: none;
-    height: 100px;
+#transactionImageMobile img,
+#transactionImageDesktop img {
+    max-width: 100px;
+    max-height: 100px;
+    vertical-align: middle;
+    margin-left: 1rem;
 }
 
 /* Packages Table */
@@ -38,14 +40,6 @@
 
 #packagesTable td {
     vertical-align: middle;
-}
-
-.package-row .form-control,
-.package-row .form-select {
-    border-radius: 6px;
-    border: 1px solid #e0e6ed;
-    background-color: #f8f9fa;
-    color: #495057;
 }
 
 /* Mobile Package Cards */
@@ -77,18 +71,10 @@
     color: var(--primary-color);
 }
 
-.package-card .form-label {
+.package-card p {
     font-size: 0.875rem;
-    font-weight: 500;
-    margin-bottom: 0.25rem;
-}
-
-.package-card .form-control,
-.package-card .form-select {
-    font-size: 0.875rem;
-    border-radius: 6px;
-    background-color: #f8f9fa;
     color: #495057;
+    margin: 0;
 }
 
 /* Action Buttons */
@@ -171,12 +157,7 @@
 }
 
 @media (min-width: 768px) {
-    .package-row td {
-        padding: 0.75rem 0.5rem;
-    }
-    
-    .package-row .form-control,
-    .package-row .form-select {
+    .package-card p {
         font-size: 0.875rem;
     }
 }
