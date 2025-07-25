@@ -4,24 +4,31 @@
 }
 
 /* Invoice Info Section */
-.package-info-content .form-control,
-.package-info-content .form-select,
+.package-info-content .text-content {
+    border-radius: 8px;
+    border: 1px solid #e0e6ed;
+    background-color: #f8f9fa;
+    color: #333;
+    padding: 0.375rem 0.75rem;
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+}
+
+.package-info-content .form-label {
+    font-weight: 500;
+    color: #333;
+    padding-top: 0.375rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+}
+
 .package-info-content .transaction-image-preview {
     border-radius: 8px;
     border: 1px solid #e0e6ed;
     background-color: #f8f9fa;
     color: #495057;
-}
-
-.package-info-content .form-control:disabled,
-.package-info-content .form-select:disabled {
-    background-color: #f8f9fa;
-    opacity: 1;
-}
-
-.package-info-content textarea {
-    resize: none;
-    height: 100px;
+    padding: 0.375rem;
 }
 
 /* Packages Table */
@@ -38,14 +45,6 @@
 
 #packagesTable td {
     vertical-align: middle;
-}
-
-.package-row .form-control,
-.package-row .form-select {
-    border-radius: 6px;
-    border: 1px solid #e0e6ed;
-    background-color: #f8f9fa;
-    color: #495057;
 }
 
 /* Mobile Package Cards */
@@ -83,12 +82,14 @@
     margin-bottom: 0.25rem;
 }
 
-.package-card .form-control,
-.package-card .form-select {
+.package-card .text-content {
     font-size: 0.875rem;
     border-radius: 6px;
     background-color: #f8f9fa;
-    color: #495057;
+    color: #333;
+    padding: 0.375rem 0.75rem;
+    display: block;
+    font-family: 'Inter', sans-serif;
 }
 
 /* Action Buttons */
@@ -100,6 +101,101 @@
     border-top: 1px solid #e9ecef;
     margin-top: 2rem;
     z-index: 10;
+}
+
+.action-buttons #actionButtons {
+    margin-right: 32px;
+}
+
+@media (max-width: 767.98px) {
+    .action-buttons {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 1rem;
+        box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+    }
+    
+    .action-buttons #actionButtons {
+        margin-right: 24px;
+    }
+    
+    .action-buttons .btn {
+        flex: 1;
+    }
+    
+    .main-content {
+        padding-bottom: 80px;
+    }
+    
+    .package-card {
+        margin-bottom: 0.75rem;
+        padding: 0.75rem;
+    }
+    
+    .row {
+        flex-direction: column;
+    }
+    .col-8 {
+        width: 100%;
+    }
+    .row .form-label {
+        font-weight: 600;
+        width: 100%;
+    }
+    .row .text-content, .row .transaction-image-preview, .row input {
+        width: 100%;
+    }
+    .modal-footer {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    .modal-footer .btn {
+        width: 47%;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+    .modal-dialog {
+        max-width: 85% !important;
+    }
+    .payment-modal-body .row {
+    }
+    .card {
+        margin-bottom: 1rem;
+        width: 100%;
+    }
+    .form-control-lg {
+        min-height: 46px;
+        font-size: 15px;
+    }
+    .row {
+        align-items: flex-start;
+    }
+    .modal-footer {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    .modal-footer .btn {
+        width: 48%;
+    }
+}
+
+@media (min-width: 992px) {
+    .row {
+        align-items: flex-start;
+    }
+    .payment-modal-body .row {
+        flex-direction: row;
+    }
+    .col-12 {
+        width: 50%;
+    }
+    .payment-modal-body .card {
+        margin-bottom: 0;
+    }
 }
 
 /* Accordion customization for mobile */
@@ -117,40 +213,113 @@
     box-shadow: 0 0 0 0.25rem rgba(0, 123, 255, 0.25);
 }
 
-/* Responsive adjustments */
+/* Payment Modal */
+.payment-modal-body {
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.modal-dialog {
+    max-width: 80% !important;
+    height: 80vh;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 3%;
+}
+
+.modal-content {
+    border-radius: 12px;
+    border: 1px solid #e0e6ed;
+}
+
+.card {
+    border: 1px solid #e0e6ed;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100%;
+}
+
+.card-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 1rem;
+    font-family: 'Inter', sans-serif;
+}
+
+.subtitle {
+    font-size: 14px;
+    font-weight: 500;
+    color: #666;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.form-control-lg {
+    min-height: 44px;
+    font-size: 14px;
+    border-radius: 8px;
+    border-color: #e0e6ed;
+}
+
+.form-control-lg:focus {
+    border-color: #28a745;
+    box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+}
+
+.transaction-image-preview {
+    border-radius: 8px;
+    border: 1px solid #e0e6ed;
+    background-color: #f8f9fa;
+    padding: 0.5rem;
+}
+
+.btn-success {
+    background-color: #28a745;
+    border-color: #28a745;
+}
+
+.btn-success:hover {
+    background-color: #218838;
+    border-color: #1e7e34;
+}
+
+.btn-lg {
+    padding: 0.75rem 1.5rem;
+    font-size: 16px;
+}
+
 @media (max-width: 767.98px) {
-    .action-buttons {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        background: white;
-        padding: 1rem;
-        box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
-        z-index: 1000;
+    .modal-dialog {
+        max-width: 90% !important;
+        margin: auto;
+        margin-top: 5%;
     }
-    
-    .action-buttons .btn {
-        flex: 1;
+    .payment-modal-body .row {
+        flex-direction: column;
     }
-    
-    .main-content {
-        padding-bottom: 80px;
+    .card {
+        margin-bottom: 1rem;
     }
-    
-    .package-card {
-        margin-bottom: 0.75rem;
-        padding: 0.75rem;
+    .form-control-lg {
+        min-height: 48px;
+        font-size: 16px;
+    }
+    .row {
+        align-items: flex-start;
+    }
+    .modal-footer {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    .modal-footer .btn {
+        width: 47%;
     }
 }
 
-@media (min-width: 768px) {
-    .package-row td {
-        padding: 0.75rem 0.5rem;
-    }
-    
-    .package-row .form-control,
-    .package-row .form-select {
-        font-size: 0.875rem;
-    }
+[data-bs-toggle="tooltip"] {
+    position: relative;
 }

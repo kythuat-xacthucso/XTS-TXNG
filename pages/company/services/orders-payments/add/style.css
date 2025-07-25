@@ -265,6 +265,28 @@
     font-size: 0.875rem;
 }
 
+.transaction-image-preview {
+    border-radius: 8px;
+    border: 1px solid #e0e6ed;
+    background-color: #f8f9fa;
+    padding: 0.5rem;
+}
+
+.btn-success {
+    background-color: #28a745;
+    border-color: #28a745;
+}
+
+.btn-success:hover {
+    background-color: #218838;
+    border-color: #1e7e34;
+}
+
+.btn-lg {
+    padding: 0.75rem 1.5rem;
+    font-size: 16px;
+}
+
 #imagePreview {
     transition: opacity 0.3s ease;
 }

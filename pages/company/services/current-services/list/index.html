@@ -3,576 +3,432 @@
     <p class="page-breadcrumb">Dịch vụ / Thông tin dịch vụ hiện tại</p>
 </div>
 
-<!-- Mobile Layout with Accordion -->
-<div class="d-md-none">
-    <div class="accordion" id="mobileServiceAccordion">
-        <!-- Section 1: Parameter Statistics -->
-        <div class="accordion-item">
-            <h2 class="accordion-header">
-                <button class="accordion-button" type="button" data-bs-toggle="collapse" 
-                        data-bs-target="#parameterStats" aria-expanded="true">
-                    <i class="fas fa-chart-bar me-2"></i>
-                    Thống kê mã dịch vụ
-                </button>
-            </h2>
-            <div id="parameterStats" class="accordion-collapse collapse show" 
-                 data-bs-parent="#mobileServiceAccordion">
-                <div class="accordion-body">
-                    <div class="parameter-stats-mobile">
-                        <!-- Parameter Card 1 -->
-                        <div class="parameter-card mb-3">
-                            <div class="parameter-header">
-                                <h6 class="parameter-name">Mã doanh nghiệp</h6>
-                            </div>
-                            <div class="parameter-info">
-                                <span class="parameter-desc">Tổng: 1,000 – Đã sử dụng: 650 – Còn lại: 350</span>
-                            </div>
-                            <div class="progress-container">
-                                <div class="progress">
-                                    <div class="progress-bar bg-warning" role="progressbar" style="width: 65%" 
-                                         aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                                <small class="progress-text">65% đã sử dụng</small>
-                            </div>
+<!-- Desktop Layout with Tabs -->
+<div class="d-none d-md-block">
+    <ul class="nav nav-tabs mb-4" id="serviceTab" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="service-info-tab" data-bs-toggle="tab" data-bs-target="#service-info" type="button" role="tab">
+                <i class="fas fa-info-circle me-2"></i>Thông tin dịch vụ
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="purchase-history-tab" data-bs-toggle="tab" data-bs-target="#purchase-history" type="button" role="tab">
+                <i class="fas fa-history me-2"></i>Lịch sử mua
+            </button>
+        </li>
+    </ul>
+
+    <div class="tab-content" id="serviceTabContent">
+        <!-- Service Info Tab -->
+        <div class="tab-pane fade show active" id="service-info" role="tabpanel">
+            <div class="content-card">
+                <!-- Section 1: Service Parameters -->
+                <div class="mb-4">
+                    <div class="d-flex justify-content-between align-items-center mb-3" id="service-params-header">
+                        <h5 class="card-title mb-0">
+                            <i class="fas fa-chart-bar me-2"></i>
+                            Thông số dịch vụ
+                        </h5>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 mb-3">
+                            <p><strong>Ngày bắt đầu:</strong> 01/07/2024</p>
+                            <p><strong>Ngày hết hạn:</strong> 01/07/2025</p>
+                            <p id="expiration-warning" class="text-danger mt-2" style="display: none;">
+                                <i class="fas fa-exclamation-triangle me-2"></i>Cảnh báo: Dịch vụ sắp hết hạn (01/07/2025). Vui lòng gia hạn để tránh chuyển về gói miễn phí.
+                            </p>
                         </div>
-                        
-                        <!-- Parameter Card 2 -->
-                        <div class="parameter-card mb-3">
-                            <div class="parameter-header">
-                                <h6 class="parameter-name">Mã truyền thông sản phẩm</h6>
-                            </div>
-                            <div class="parameter-info">
-                                <span class="parameter-desc">Tổng: 500 – Đã sử dụng: 120 – Còn lại: 380</span>
-                            </div>
-                            <div class="progress-container">
-                                <div class="progress">
-                                    <div class="progress-bar bg-success" role="progressbar" style="width: 24%" 
-                                         aria-valuenow="24" aria-valuemin="0" aria-valuemax="100"></div>
+                        <div class="col-12">
+                            <div class="parameter-card-desktop">
+                                <div class="parameter-header-desktop">
+                                    <h6 class="parameter-name-desktop">Danh sách các tham số đang sử dụng</h6>
                                 </div>
-                                <small class="progress-text">24% đã sử dụng</small>
-                            </div>
-                        </div>
-                        
-                        <!-- Parameter Card 3 -->
-                        <div class="parameter-card mb-3">
-                            <div class="parameter-header">
-                                <h6 class="parameter-name">Mã định danh sản phẩm</h6>
-                            </div>
-                            <div class="parameter-info">
-                                <span class="parameter-desc">Tổng: 2,000 – Đã sử dụng: 450 – Còn lại: 1,550</span>
-                            </div>
-                            <div class="progress-container">
-                                <div class="progress">
-                                    <div class="progress-bar bg-success" role="progressbar" style="width: 23%" 
-                                         aria-valuenow="23" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="parameter-stats-grid">
+                                    <div class="parameter-item">
+                                        <div class="parameter-label">Mã doanh nghiệp</div>
+                                        <div class="parameter-values">1 / 1</div>
+                                        <div class="progress">
+                                            <div class="progress-bar bg-success" style="width: 100%"></div>
+                                        </div>
+                                    </div>
+                                    <div class="parameter-item">
+                                        <div class="parameter-label">Mã truyền thông sản phẩm</div>
+                                        <div class="parameter-values">10 / 20</div>
+                                        <div class="progress">
+                                            <div class="progress-bar bg-info" style="width: 50%"></div>
+                                        </div>
+                                    </div>
+                                    <div class="parameter-item">
+                                        <div class="parameter-label">Mã định danh</div>
+                                        <div class="parameter-values">20,000 / 100,000</div>
+                                        <div class="progress">
+                                            <div class="progress-bar bg-info" style="width: 20%"></div>
+                                        </div>
+                                    </div>
+                                    <div class="parameter-item">
+                                        <div class="parameter-label">Dung lượng (MB)</div>
+                                        <div class="parameter-values">70 / 100</div>
+                                        <div class="progress">
+                                            <div class="progress-bar bg-warning" style="width: 70%"></div>
+                                        </div>
+                                    </div>
+                                    <div class="parameter-item">
+                                        <div class="parameter-label">Lượt kích hoạt</div>
+                                        <div class="parameter-values">10,000 / 25,000</div>
+                                        <div class="progress">
+                                            <div class="progress-bar bg-primary" style="width: 40%"></div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <small class="progress-text">23% đã sử dụng</small>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        
-        <!-- Section 2: Active Service Packages -->
-        <div class="accordion-item">
-            <h2 class="accordion-header">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" 
-                        data-bs-target="#activePackages" aria-expanded="false">
-                    <i class="fas fa-box me-2"></i>
-                    Gói dịch vụ đang sử dụng
-                </button>
-            </h2>
-            <div id="activePackages" class="accordion-collapse collapse" 
-                 data-bs-parent="#mobileServiceAccordion">
-                <div class="accordion-body">
-                    <div class="mb-3">
-                        <button class="btn btn-primary w-100" onclick="window.companyLayout.loadContent('add-order-payment')">
-                            <i class="fas fa-shopping-cart me-2"></i>Mua thêm gói dịch vụ
+
+                <!-- Section 2: Active Service Packages -->
+                <div>
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h5 class="card-title mb-0">
+                            <i class="fas fa-box me-2"></i>
+                            Danh sách các gói dịch vụ đang sử dụng
+                        </h5>
+                        <button class="btn btn-primary" onclick="window.companyLayout.loadContent('add-order-payment')">
+                            <i class="fas fa-shopping-cart me-2"></i>Mua bổ sung
                         </button>
                     </div>
-                    
-                    <div class="service-packages-mobile">
-                        <!-- Package Card 1 -->
-                        <div class="package-card mb-3">
-                            <div class="package-header">
-                                <h6 class="package-name">Gói Premium</h6>
-                                <span class="status-badge status-active">
-                                    <i class="fas fa-circle"></i> Còn hiệu lực
-                                </span>
-                            </div>
-                            <div class="package-info">
-                                <p class="package-duration">Từ 01/01/2024 đến 31/12/2024</p>
-                            </div>
-                            <div class="package-actions">
-                                <button class="btn btn-outline-primary btn-sm me-2" onclick="window.companyLayout.loadContent('view-system-service')">
-                                    <i class="fas fa-eye me-1"></i>Xem chi tiết
-                                </button>
-                                <button class="btn btn-primary btn-sm" onclick="window.companyLayout.loadContent('add-order-payment')">
-                                    <i class="fas fa-refresh me-1"></i>Gia hạn
-                                </button>
-                            </div>
-                        </div>
-                        
-                        <!-- Package Card 2 -->
-                        <div class="package-card mb-3">
-                            <div class="package-header">
-                                <h6 class="package-name">Gói Standard</h6>
-                                <span class="status-badge status-expiring">
-                                    <i class="fas fa-circle"></i> Sắp hết hạn
-                                </span>
-                            </div>
-                            <div class="package-info">
-                                <p class="package-duration">Từ 15/06/2024 đến 15/01/2025</p>
-                            </div>
-                            <div class="package-actions">
-                                <button class="btn btn-outline-primary btn-sm me-2" onclick="window.companyLayout.loadContent('view-system-service')">
-                                    <i class="fas fa-eye me-1"></i>Xem chi tiết
-                                </button>
-                                <button class="btn btn-warning btn-sm" onclick="window.companyLayout.loadContent('add-order-payment')">
-                                    <i class="fas fa-refresh me-1"></i>Gia hạn
-                                </button>
-                            </div>
-                        </div>
-                        
-                        <!-- Package Card 3 -->
-                        <div class="package-card mb-3">
-                            <div class="package-header">
-                                <h6 class="package-name">Gói Basic</h6>
-                                <span class="status-badge status-active">
-                                    <i class="fas fa-circle"></i> Còn hiệu lực
-                                </span>
-                            </div>
-                            <div class="package-info">
-                                <p class="package-duration">Từ 01/03/2024 đến 30/06/2025</p>
-                            </div>
-                            <div class="package-actions">
-                                <button class="btn btn-outline-primary btn-sm me-2" onclick="window.companyLayout.loadContent('view-system-service')">
-                                    <i class="fas fa-eye me-1"></i>Xem chi tiết
-                                </button>
-                                <button class="btn btn-primary btn-sm" onclick="window.companyLayout.loadContent('add-order-payment')">
-                                    <i class="fas fa-refresh me-1"></i>Gia hạn
-                                </button>
-                            </div>
-                        </div>
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>STT</th>
+                                    <th>Tên gói</th>
+                                    <th>Loại gói</th>
+                                    <th>Tham số</th>
+                                    <th>Số lượng</th>
+                                    <th>Giá tiền</th>
+                                    <th>Ngày bắt đầu</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td><strong>Gói Premium</strong></td>
+                                    <td>Gói chính</td>
+                                    <td>Tất cả</td>
+                                    <td>1</td>
+                                    <td>2,500,000 VNĐ</td>
+                                    <td>01/07/2024</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td><strong>Gói Standard</strong></td>
+                                    <td>Gói bổ sung</td>
+                                    <td>Mã truyền thông</td>
+                                    <td>10</td>
+                                    <td>1,800,000 VNĐ</td>
+                                    <td>15/06/2024</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td><strong>Gói Basic</strong></td>
+                                    <td>Gói bổ sung</td>
+                                    <td>Lượt kích hoạt</td>
+                                    <td>10,000</td>
+                                    <td>1,200,000 VNĐ</td>
+                                    <td>01/03/2024</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
-        
-        <!-- Section 3: Purchase History -->
-        <div class="accordion-item">
-            <h2 class="accordion-header">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" 
-                        data-bs-target="#purchaseHistory" aria-expanded="false">
-                    <i class="fas fa-history me-2"></i>
-                    Lịch sử mua gói dịch vụ
-                </button>
-            </h2>
-            <div id="purchaseHistory" class="accordion-collapse collapse" 
-                 data-bs-parent="#mobileServiceAccordion">
-                <div class="accordion-body">
-                    <div class="purchase-history-mobile">
-                        <!-- History Item 1 -->
-                        <div class="history-item mb-3">
-                            <div class="history-header">
-                                <div class="history-date">15/12/2024</div>
-                                <span class="history-status status-approved">Đã kích hoạt</span>
-                            </div>
-                            <div class="history-info">
-                                <h6 class="history-package">ORD-2024-001</h6>
-                                <p class="history-details">
-                                    <small class="text-muted">Ngày mua: 10/12/2024</small><br>
-                                    <small class="text-muted">Ngày kích hoạt: 15/12/2024</small>
-                                </p>
-                                <p class="history-amount">2,500,000 VNĐ</p>
-                            </div>
-                            <div class="history-actions">
-                                <button class="btn btn-outline-primary btn-sm" onclick="window.companyLayout.loadContent('view-order-payment')">
-                                    <i class="fas fa-eye me-1"></i>Xem chi tiết
-                                </button>
-                            </div>
-                        </div>
-                        
-                        <!-- History Item 2 -->
-                        <div class="history-item mb-3">
-                            <div class="history-header">
-                                <div class="history-date">10/12/2024</div>
-                                <span class="history-status status-pending">Chờ kích hoạt</span>
-                            </div>
-                            <div class="history-info">
-                                <h6 class="history-package">ORD-2024-002</h6>
-                                <p class="history-details">
-                                    <small class="text-muted">Ngày mua: 08/12/2024</small><br>
-                                    <small class="text-muted">Ngày kích hoạt: -</small>
-                                </p>
-                                <p class="history-amount">1,800,000 VNĐ</p>
-                            </div>
-                            <div class="history-actions">
-                                <button class="btn btn-outline-primary btn-sm" onclick="window.companyLayout.loadContent('view-order-payment')">
-                                    <i class="fas fa-eye me-1"></i>Xem chi tiết
-                                </button>
-                            </div>
-                        </div>
-                        
-                        <!-- History Item 3 -->
-                        <div class="history-item mb-3">
-                            <div class="history-header">
-                                <div class="history-date">05/12/2024</div>
-                                <span class="history-status status-approved">Đã kích hoạt</span>
-                            </div>
-                            <div class="history-info">
-                                <h6 class="history-package">ORD-2024-003</h6>
-                                <p class="history-details">
-                                    <small class="text-muted">Ngày mua: 01/12/2024</small><br>
-                                    <small class="text-muted">Ngày kích hoạt: 05/12/2024</small>
-                                </p>
-                                <p class="history-amount">1,200,000 VNĐ</p>
-                            </div>
-                            <div class="history-actions">
-                                <button class="btn btn-outline-primary btn-sm" onclick="window.companyLayout.loadContent('view-order-payment')">
-                                    <i class="fas fa-eye me-1"></i>Xem chi tiết
-                                </button>
-                            </div>
-                        </div>
-                    </div>
+
+        <!-- Purchase History Tab -->
+        <div class="tab-pane fade" id="purchase-history" role="tabpanel">
+            <div class="content-card">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead class="table-light">
+                            <tr>
+                                <th>STT</th>
+                                <th>Mã đơn hàng</th>
+                                <th>Ngày mua</th>
+                                <th>Ngày kích hoạt</th>
+                                <th>Tổng tiền</th>
+                                <th class="text-center">Trạng thái</th>
+                                <th class="text-center">Hành động</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td><i class="fas fa-receipt text-primary me-2"></i><strong>ORD-2024-001</strong></td>
+                                <td>10/12/2024</td>
+                                <td>15/12/2024</td>
+                                <td><strong class="text-success">2,500,000 VNĐ</strong></td>
+                                <td class="text-center">
+                                    <span class="badge bg-success"><i class="fas fa-check me-1"></i>Đã duyệt</span>
+                                </td>
+                                <td class="text-center">
+                                    <button class="btn btn-outline-primary btn-sm" onclick="window.companyLayout.loadContent('view-order-payment')">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td><i class="fas fa-receipt text-warning me-2"></i><strong>ORD-2024-002</strong></td>
+                                <td>08/12/2024</td>
+                                <td>-</td>
+                                <td><strong class="text-warning">1,800,000 VNĐ</strong></td>
+                                <td class="text-center">
+                                    <span class="badge bg-warning"><i class="fas fa-clock me-1"></i>Chưa thanh toán</span>
+                                </td>
+                                <td class="text-center">
+                                    <button class="btn btn-outline-primary btn-sm" onclick="window.companyLayout.loadContent('view-order-payment')">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td><i class="fas fa-receipt text-success me-2"></i><strong>ORD-2024-003</strong></td>
+                                <td>01/12/2024</td>
+                                <td>05/12/2024</td>
+                                <td><strong class="text-success">1,200,000 VNĐ</strong></td>
+                                <td class="text-center">
+                                    <span class="badge bg-success"><i class="fas fa-check me-1"></i>Đã duyệt</span>
+                                </td>
+                                <td class="text-center">
+                                    <button class="btn btn-outline-primary btn-sm" onclick="window.companyLayout.loadContent('view-order-payment')">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td><i class="fas fa-receipt text-success me-2"></i><strong>ORD-2024-004</strong></td>
+                                <td>25/11/2024</td>
+                                <td>28/11/2024</td>
+                                <td><strong class="text-success">2,500,000 VNĐ</strong></td>
+                                <td class="text-center">
+                                    <span class="badge bg-success"><i class="fas fa-check me-1"></i>Đã duyệt</span>
+                                </td>
+                                <td class="text-center">
+                                    <button class="btn btn-outline-primary btn-sm" onclick="window.companyLayout.loadContent('view-order-payment')">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td><i class="fas fa-receipt text-success me-2"></i><strong>ORD-2024-005</strong></td>
+                                <td>10/11/2024</td>
+                                <td>15/11/2024</td>
+                                <td><strong class="text-success">1,800,000 VNĐ</strong></td>
+                                <td class="text-center">
+                                    <span class="badge bg-success"><i class="fas fa-check me-1"></i>Đã duyệt</span>
+                                </td>
+                                <td class="text-center">
+                                    <button class="btn btn-outline-primary btn-sm" onclick="window.companyLayout.loadContent('view-order-payment')">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<!-- Desktop Layout -->
-<div class="d-none d-md-block">
-    <!-- Tab Navigation -->
-    <ul class="nav nav-tabs mb-4" id="statsTab" role="tablist">
-        <li class="nav-item" role="presentation">
-            <button class="nav-link active" id="parameters-tab" data-bs-toggle="tab" 
-                    data-bs-target="#parameters" type="button" role="tab">
-                <i class="fas fa-chart-bar me-2"></i>Thống kê mã dịch vụ
-            </button>
-        </li>
-        <li class="nav-item" role="presentation">
-            <button class="nav-link" id="packages-tab" data-bs-toggle="tab" 
-                    data-bs-target="#packages" type="button" role="tab">
-                <i class="fas fa-box me-2"></i>Gói đang sử dụng
-            </button>
-        </li>
-        <li class="nav-item" role="presentation">
-            <button class="nav-link" id="history-tab" data-bs-toggle="tab" 
-                    data-bs-target="#history" type="button" role="tab">
-                <i class="fas fa-history me-2"></i>Lịch sử mua hàng
-            </button>
-        </li>
-    </ul>
-    
-    <!-- Tab Content -->
-    <div class="tab-content" id="statsTabContent">
-        <!-- Parameters Tab -->
-        <div class="tab-pane fade show active" id="parameters" role="tabpanel">
-            <div class="content-card">
-                <div class="row">
-                    <!-- Parameter Grid -->
-                    <div class="col-lg-4 mb-4">
-                        <div class="parameter-card-desktop">
-                            <div class="parameter-header-desktop">
-                                <h6 class="parameter-name-desktop">Mã doanh nghiệp</h6>
-                                <div class="parameter-stats-desktop">
-                                    <span class="stat-item">
-                                        <strong>Tổng:</strong> 1,000
-                                    </span>
-                                    <span class="stat-item">
-                                        <strong>Đã sử dụng:</strong> 650
-                                    </span>
-                                    <span class="stat-item">
-                                        <strong>Còn lại:</strong> 350
-                                    </span>
-                                </div>
+<!-- Mobile Layout with Accordion -->
+<div class="d-md-none">
+    <div class="accordion" id="mobileServiceAccordion">
+        <!-- Tab: Service Info -->
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#mobile-service-info" aria-expanded="true">
+                    <i class="fas fa-info-circle me-2"></i>Thông tin dịch vụ
+                </button>
+            </h2>
+            <div id="mobile-service-info" class="accordion-collapse collapse show" data-bs-parent="#mobileServiceAccordion">
+                <div class="accordion-body">
+                    <!-- Section 1: Service Parameters -->
+                    <div class="mb-4">
+                        <div class="d-flex justify-content-between align-items-center mb-3" id="mobile-service-params-header">
+                            <h6 class="mb-0"><i class="fas fa-chart-bar me-2"></i>Thông số dịch vụ</h6>
+                        </div>
+                        <p><strong>Ngày bắt đầu:</strong> 01/07/2024</p>
+                        <p><strong>Ngày hết hạn:</strong> 01/07/2025</p>
+                        <p id="mobile-expiration-warning" class="text-danger mt-2" style="display: none;">
+                            <i class="fas fa-exclamation-triangle me-2"></i>Cảnh báo: Dịch vụ sắp hết hạn (01/07/2025). Vui lòng gia hạn để tránh chuyển về gói miễn phí.
+                        </p>
+                        <div class="parameter-card mb-3">
+                            <div class="parameter-header">
+                                <h6 class="parameter-name">Danh sách các tham số đang sử dụng</h6>
                             </div>
-                            <div class="progress-container-desktop">
-                                <div class="progress">
-                                    <div class="progress-bar bg-warning" role="progressbar" style="width: 65%" 
-                                         data-bs-toggle="tooltip" title="65% đã sử dụng"></div>
-                                </div>
-                            </div>
+                            <ul class="parameter-stats-mobile">
+                                <li>
+                                    <div class="parameter-label">Mã doanh nghiệp</div>
+                                    <div class="parameter-values">1 / 1</div>
+                                    <div class="progress">
+                                        <div class="progress-bar bg-success" style="width: 100%"></div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="parameter-label">Mã truyền thông sản phẩm</div>
+                                    <div class="parameter-values">10 / 20</div>
+                                    <div class="progress">
+                                        <div class="progress-bar bg-info" style="width: 50%"></div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="parameter-label">Mã định danh</div>
+                                    <div class="parameter-values">20,000 / 100,000</div>
+                                    <div class="progress">
+                                        <div class="progress-bar bg-info" style="width: 20%"></div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="parameter-label">Dung lượng (MB)</div>
+                                    <div class="parameter-values">70 / 100</div>
+                                    <div class="progress">
+                                        <div class="progress-bar bg-warning" style="width: 70%"></div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="parameter-label">Lượt kích hoạt</div>
+                                    <div class="parameter-values">10,000 / 25,000</div>
+                                    <div class="progress">
+                                        <div class="progress-bar bg-primary" style="width: 40%"></div>
+                                    </div>
+                                </li>
+                            </ul>
                         </div>
                     </div>
-                    
-                    <div class="col-lg-4 mb-4">
-                        <div class="parameter-card-desktop">
-                            <div class="parameter-header-desktop">
-                                <h6 class="parameter-name-desktop">Mã truyền thông sản phẩm</h6>
-                                <div class="parameter-stats-desktop">
-                                    <span class="stat-item">
-                                        <strong>Tổng:</strong> 500
-                                    </span>
-                                    <span class="stat-item">
-                                        <strong>Đã sử dụng:</strong> 120
-                                    </span>
-                                    <span class="stat-item">
-                                        <strong>Còn lại:</strong> 380
-                                    </span>
-                                </div>
-                            </div>
-                            <div class="progress-container-desktop">
-                                <div class="progress">
-                                    <div class="progress-bar bg-success" role="progressbar" style="width: 24%" 
-                                         data-bs-toggle="tooltip" title="24% đã sử dụng"></div>
-                                </div>
-                            </div>
+
+                    <!-- Section 2: Active Service Packages -->
+                    <div class="mb-4">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h6 class="mb-0"><i class="fas fa-box me-2"></i>Danh sách các gói dịch vụ đang sử dụng</h6>
+                            <button class="btn btn-primary btn-sm w-100 mb-2" onclick="window.companyLayout.loadContent('add-order-payment')">
+                                <i class="fas fa-shopping-cart me-2"></i>Mua bổ sung
+                            </button>
                         </div>
-                    </div>
-                    
-                    <div class="col-lg-4 mb-4">
-                        <div class="parameter-card-desktop">
-                            <div class="parameter-header-desktop">
-                                <h6 class="parameter-name-desktop">Mã định danh sản phẩm</h6>
-                                <div class="parameter-stats-desktop">
-                                    <span class="stat-item">
-                                        <strong>Tổng:</strong> 2,000
-                                    </span>
-                                    <span class="stat-item">
-                                        <strong>Đã sử dụng:</strong> 450
-                                    </span>
-                                    <span class="stat-item">
-                                        <strong>Còn lại:</strong> 1,550
-                                    </span>
+                        <div class="service-packages-mobile">
+                            <div class="package-card mb-3">
+                                <div class="package-header">
+                                    <h6 class="package-name">Gói Premium</h6>
+                                </div>
+                                <div class="package-info">
+                                    <p class="package-duration">Loại: Gói chính</p>
+                                    <p class="package-duration">Tham số: Tất cả</p>
+                                    <p class="package-duration">Số lượng: 1</p>
+                                    <p class="package-duration">Giá tiền: 2,500,000 VNĐ</p>
+                                    <p class="package-duration">Ngày bắt đầu: 01/07/2024</p>
                                 </div>
                             </div>
-                            <div class="progress-container-desktop">
-                                <div class="progress">
-                                    <div class="progress-bar bg-success" role="progressbar" style="width: 23%" 
-                                         data-bs-toggle="tooltip" title="23% đã sử dụng"></div>
+                            <div class="package-card mb-3">
+                                <div class="package-header">
+                                    <h6 class="package-name">Gói Standard</h6>
+                                </div>
+                                <div class="package-info">
+                                    <p class="package-duration">Loại: Gói bổ sung</p>
+                                    <p class="package-duration">Tham số: Mã truyền thông</p>
+                                    <p class="package-duration">Số lượng: 10</p>
+                                    <p class="package-duration">Giá tiền: 1,800,000 VNĐ</p>
+                                    <p class="package-duration">Ngày bắt đầu: 15/08/2024</p>
+                                </div>
+                            </div>
+                            <div class="package-card mb-3">
+                                <div class="package-header">
+                                    <h6 class="package-name">Gói Basic</h6>
+                                </div>
+                                <div class="package-info">
+                                    <p class="package-duration">Loại: Gói bổ sung</p>
+                                    <p class="package-duration">Tham số: Lượt kích hoạt</p>
+                                    <p class="package-duration">Số lượng: 10,000</p>
+                                    <p class="package-duration">Giá tiền: 1,200,000 VNĐ</p>
+                                    <p class="package-duration">Ngày bắt đầu: 01/09/2024</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        
-        <!-- Packages Tab -->
-        <div class="tab-pane fade" id="packages" role="tabpanel">
-            <div class="content-card">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h6 class="mb-0">Danh sách gói dịch vụ đang sử dụng</h6>
-                    <button class="btn btn-primary" onclick="window.companyLayout.loadContent('add-order-payment')">
-                        <i class="fas fa-shopping-cart me-2"></i>Mua thêm gói dịch vụ
+
+            <!-- Tab: Purchase History -->
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#mobile-purchase-history" aria-expanded="false">
+                        <i class="fas fa-history me-2"></i>Lịch sử mua
                     </button>
-                </div>
-                
-                <div class="table-responsive">
-                    <table class="table table-hover">
-                        <thead class="table-light">
-                            <tr>
-                                <th>Tên gói</th>
-                                <th>Ngày bắt đầu</th>
-                                <th>Ngày hết hạn</th>
-                                <th class="text-center">Trạng thái</th>
-                                <th class="text-center">Thao tác</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <div class="d-flex align-items-center">
-                                        <i class="fas fa-box text-primary me-2"></i>
-                                        <strong>Gói Premium</strong>
-                                    </div>
-                                </td>
-                                <td>01/01/2024</td>
-                                <td>31/12/2024</td>
-                                <td class="text-center">
-                                    <span class="badge bg-success">
-                                        <i class="fas fa-check-circle me-1"></i>Còn hiệu lực
-                                    </span>
-                                </td>
-                                <td class="text-center">
-                                    <button class="btn btn-outline-primary btn-sm me-1" onclick="window.companyLayout.loadContent('view-system-service')">
-                                        <i class="fas fa-eye me-1"></i>Chi tiết
-                                    </button>
-                                    <button class="btn btn-primary btn-sm" onclick="window.companyLayout.loadContent('add-order-payment')">
-                                        <i class="fas fa-refresh me-1"></i>Gia hạn
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="d-flex align-items-center">
-                                        <i class="fas fa-box text-warning me-2"></i>
-                                        <strong>Gói Standard</strong>
-                                        <i class="fas fa-clock text-warning ms-2" data-bs-toggle="tooltip" 
-                                           title="Sắp hết hạn trong 30 ngày"></i>
-                                    </div>
-                                </td>
-                                <td>15/06/2024</td>
-                                <td>15/01/2025</td>
-                                <td class="text-center">
-                                    <span class="badge bg-warning">
-                                        <i class="fas fa-exclamation-triangle me-1"></i>Sắp hết hạn
-                                    </span>
-                                </td>
-                                <td class="text-center">
-                                    <button class="btn btn-outline-primary btn-sm me-1" onclick="window.companyLayout.loadContent('view-system-service')">
-                                        <i class="fas fa-eye me-1"></i>Chi tiết
-                                    </button>
-                                    <button class="btn btn-warning btn-sm" onclick="window.companyLayout.loadContent('add-order-payment')">
-                                        <i class="fas fa-refresh me-1"></i>Gia hạn
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="d-flex align-items-center">
-                                        <i class="fas fa-box text-success me-2"></i>
-                                        <strong>Gói Basic</strong>
-                                    </div>
-                                </td>
-                                <td>01/03/2024</td>
-                                <td>30/06/2025</td>
-                                <td class="text-center">
-                                    <span class="badge bg-success">
-                                        <i class="fas fa-check-circle me-1"></i>Còn hiệu lực
-                                    </span>
-                                </td>
-                                <td class="text-center">
-                                    <button class="btn btn-outline-primary btn-sm me-1" onclick="window.companyLayout.loadContent('view-system-service')">
-                                        <i class="fas fa-eye me-1"></i>Chi tiết
-                                    </button>
-                                    <button class="btn btn-primary btn-sm" onclick="window.companyLayout.loadContent('add-order-payment')">
-                                        <i class="fas fa-refresh me-1"></i>Gia hạn
-                                    </button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-        
-        <!-- History Tab -->
-        <div class="tab-pane fade" id="history" role="tabpanel">
-            <div class="content-card">
-                <div class="table-responsive">
-                    <table class="table table-hover">
-                        <thead class="table-light">
-                            <tr>
-                                <th>Mã đơn hàng</th>
-                                <th>Ngày mua</th>
-                                <th>Ngày kích hoạt</th>
-                                <th>Tổng tiền</th>
-                                <th class="text-center">Trạng thái</th>
-                                <th class="text-center">Chi tiết</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <div class="d-flex align-items-center">
-                                        <i class="fas fa-receipt text-primary me-2"></i>
-                                        <strong>ORD-2024-001</strong>
-                                    </div>
-                                </td>
-                                <td>10/12/2024</td>
-                                <td>15/12/2024</td>
-                                <td><strong class="text-success">2,500,000 VNĐ</strong></td>
-                                <td class="text-center">
-                                    <span class="badge bg-success">
-                                        <i class="fas fa-check me-1"></i>Đã kích hoạt
-                                    </span>
-                                </td>
-                                <td class="text-center">
+                </h2>
+                <div id="mobile-purchase-history" class="accordion-collapse collapse" data-bs-parent="#mobileServiceAccordion">
+                    <div class="accordion-body">
+                        <div class="purchase-history-mobile">
+                            <div class="history-item mb-3">
+                                <div class="history-header">
+                                    <div class="history-date">15/12/2024</div>
+                                    <span class="history-status status-approved">Đã duyệt</span>
+                                </div>
+                                <div class="history-info">
+                                    <h6 class="history-package">ORD-2024-001</h6>
+                                    <p class="history-details">
+                                        <small class="text-muted">Ngày mua: 10/12/2024</small><br>
+                                        <small class="text-muted">Ngày kích hoạt: 15/12/2024</small>
+                                    </p>
+                                    <p class="history-amount">2,500,000 VNĐ</p>
+                                </div>
+                                <div class="history-actions">
                                     <button class="btn btn-outline-primary btn-sm" onclick="window.companyLayout.loadContent('view-order-payment')">
-                                        <i class="fas fa-eye me-1"></i>Chi tiết
+                                        <i class="fas fa-eye"></i>
                                     </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="d-flex align-items-center">
-                                        <i class="fas fa-receipt text-warning me-2"></i>
-                                        <strong>ORD-2024-002</strong>
-                                    </div>
-                                </td>
-                                <td>08/12/2024</td>
-                                <td>-</td>
-                                <td><strong class="text-warning">1,800,000 VNĐ</strong></td>
-                                <td class="text-center">
-                                    <span class="badge bg-warning">
-                                        <i class="fas fa-clock me-1"></i>Chờ kích hoạt
-                                    </span>
-                                </td>
-                                <td class="text-center">
+                                </div>
+                            </div>
+                            <div class="history-item mb-3">
+                                <div class="history-header">
+                                    <div class="history-date">10/12/2024</div>
+                                    <span class="history-status status-pending">Chưa thanh toán</span>
+                                </div>
+                                <div class="history-info">
+                                    <h6 class="history-package">ORD-2024-002</h6>
+                                    <p class="history-details">
+                                        <small class="text-muted">Ngày mua: 08/12/2024</small><br>
+                                        <small class="text-muted">Ngày kích hoạt: -</small>
+                                    </p>
+                                    <p class="history-amount">1,800,000 VNĐ</p>
+                                </div>
+                                <div class="history-actions">
                                     <button class="btn btn-outline-primary btn-sm" onclick="window.companyLayout.loadContent('view-order-payment')">
-                                        <i class="fas fa-eye me-1"></i>Chi tiết
+                                        <i class="fas fa-eye"></i>
                                     </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="d-flex align-items-center">
-                                        <i class="fas fa-receipt text-success me-2"></i>
-                                        <strong>ORD-2024-003</strong>
-                                    </div>
-                                </td>
-                                <td>01/12/2024</td>
-                                <td>05/12/2024</td>
-                                <td><strong class="text-success">1,200,000 VNĐ</strong></td>
-                                <td class="text-center">
-                                    <span class="badge bg-success">
-                                        <i class="fas fa-check me-1"></i>Đã kích hoạt
-                                    </span>
-                                </td>
-                                <td class="text-center">
+                                </div>
+                            </div>
+                            <div class="history-item mb-3">
+                                <div class="history-header">
+                                    <div class="history-date">05/12/2024</div>
+                                    <span class="history-status status-approved">Đã duyệt</span>
+                                </div>
+                                <div class="history-info">
+                                    <h6 class="history-package">ORD-2024-003</h6>
+                                    <p class="history-details">
+                                        <small class="text-muted">Ngày mua: 01/12/2024</small><br>
+                                        <small class="text-muted">Ngày kích hoạt: 05/12/2024</small>
+                                    </p>
+                                    <p class="history-amount">1,200,000 VNĐ</p>
+                                </div>
+                                <div class="history-actions">
                                     <button class="btn btn-outline-primary btn-sm" onclick="window.companyLayout.loadContent('view-order-payment')">
-                                        <i class="fas fa-eye me-1"></i>Chi tiết
+                                        <i class="fas fa-eye"></i>
                                     </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="d-flex align-items-center">
-                                        <i class="fas fa-receipt text-success me-2"></i>
-                                        <strong>ORD-2024-004</strong>
-                                    </div>
-                                </td>
-                                <td>25/11/2024</td>
-                                <td>28/11/2024</td>
-                                <td><strong class="text-success">2,500,000 VNĐ</strong></td>
-                                <td class="text-center">
-                                    <span class="badge bg-success">
-                                        <i class="fas fa-check me-1"></i>Đã kích hoạt
-                                    </span>
-                                </td>
-                                <td class="text-center">
-                                    <button class="btn btn-outline-primary btn-sm" onclick="window.companyLayout.loadContent('view-order-payment')">
-                                        <i class="fas fa-eye me-1"></i>Chi tiết
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="d-flex align-items-center">
-                                        <i class="fas fa-receipt text-success me-2"></i>
-                                        <strong>ORD-2024-005</strong>
-                                    </div>
-                                </td>
-                                <td>10/11/2024</td>
-                                <td>15/11/2024</td>
-                                <td><strong class="text-success">1,800,000 VNĐ</strong></td>
-                                <td class="text-center">
-                                    <span class="badge bg-success">
-                                        <i class="fas fa-check me-1"></i>Đã kích hoạt
-                                    </span>
-                                </td>
-                                <td class="text-center">
-                                    <button class="btn btn-outline-primary btn-sm" onclick="window.companyLayout.loadContent('view-order-payment')">
-                                        <i class="fas fa-eye me-1"></i>Chi tiết
-                                    </button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

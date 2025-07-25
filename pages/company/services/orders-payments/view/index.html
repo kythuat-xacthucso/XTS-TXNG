@@ -17,56 +17,56 @@
             <div id="invoiceInfo" class="accordion-collapse collapse show" data-bs-parent="#mobileAccordion">
                 <div class="accordion-body">
                     <div class="package-info-content">
-                        <div class="mb-3">
-                            <label for="invoiceCode" class="form-label">Mã hóa đơn</label>
-                            <input type="text" class="form-control" id="invoiceCode" name="invoiceCode" readonly>
+                        <div class="row mb-3">
+                            <label class="col-4 form-label">Mã hóa đơn</label>
+                            <span class="col-8 text-content" id="invoiceCode"></span>
                         </div>
 
-                        <div class="mb-3">
-                            <label for="amount" class="form-label">Số tiền</label>
-                            <input type="text" class="form-control" id="amount" name="amount" readonly>
+                        <div class="row mb-3">
+                            <label class="col-4 form-label">Số tiền</label>
+                            <span class="col-8 text-content" id="amount"></span>
                         </div>
 
-                        <div class="mb-3">
-                            <label for="createdAt" class="form-label">Thời gian tạo</label>
-                            <input type="text" class="form-control" id="createdAt" name="createdAt" readonly>
+                        <div class="row mb-3">
+                            <label class="col-4 form-label">Thời gian tạo</label>
+                            <span class="col-8 text-content" id="createdAt"></span>
                         </div>
 
-                        <div class="mb-3" id="paymentTimeContainer">
-                            <label for="paymentTime" class="form-label">Thời gian thanh toán</label>
-                            <input type="text" class="form-control" id="paymentTime" name="paymentTime" readonly>
+                        <div class="row mb-3" id="paymentTimeContainer">
+                            <label class="col-4 form-label">Thời gian thanh toán</label>
+                            <span class="col-8 text-content" id="paymentTime"></span>
                         </div>
 
-                        <div class="mb-3" id="approvedTimeContainer">
-                            <label for="approvedTime" class="form-label">Thời gian duyệt</label>
-                            <input type="text" class="form-control" id="approvedTime" name="approvedTime" readonly>
+                        <div class="row mb-3" id="approvedTimeContainer">
+                            <label class="col-4 form-label">Thời gian duyệt</label>
+                            <span class="col-8 text-content" id="approvedTime"></span>
                         </div>
 
-                        <div class="mb-3">
-                            <label for="createdBy" class="form-label">Người tạo</label>
-                            <input type="text" class="form-control" id="createdBy" name="createdBy" readonly>
+                        <div class="row mb-3">
+                            <label class="col-4 form-label">Người tạo</label>
+                            <span class="col-8 text-content" id="createdBy"></span>
                         </div>
 
-                        <div class="mb-3">
-                            <label for="status" class="form-label">Trạng thái</label>
-                            <input type="text" class="form-control" id="status" name="status" readonly>
+                        <div class="row mb-3">
+                            <label class="col-4 form-label">Trạng thái</label>
+                            <span class="col-8 text-content" id="status"></span>
                         </div>
 
-                        <div class="mb-3" id="transactionCodeContainer">
-                            <label for="transactionCode" class="form-label">Mã giao dịch</label>
-                            <input type="text" class="form-control" id="transactionCode" name="transactionCode" readonly>
+                        <div class="row mb-3" id="transactionCodeContainer">
+                            <label class="col-4 form-label">Mã giao dịch</label>
+                            <span class="col-8 text-content" id="transactionCode"></span>
                         </div>
 
-                        <div class="mb-3" id="transactionImageContainer">
-                            <label for="transactionImage" class="form-label">Ảnh giao dịch</label>
-                            <div class="transaction-image-preview">
-                                <img id="transactionImage" src="" alt="Ảnh giao dịch" class="img-fluid" style="max-width: 100%; max-height: 200px;">
+                        <div class="row mb-3" id="transactionImageContainer">
+                            <label class="col-4 form-label">Ảnh giao dịch</label>
+                            <div class="col-8 transaction-image-preview">
+                                <img id="transactionImage" src="https://thebank.vn/uploads/2023/04/24/thebank_hinhanhbillchuyentienvietcombankvacachtaobill2_1682330269.jpg" alt="Ảnh giao dịch" class="img-fluid" style="max-width: 100%; max-height: 200px;">
                             </div>
                         </div>
 
-                        <div class="mb-3">
-                            <label for="note" class="form-label">Ghi chú</label>
-                            <textarea class="form-control" id="note" name="note" readonly></textarea>
+                        <div class="row mb-3">
+                            <label class="col-4 form-label">Ghi chú</label>
+                            <span class="col-8 text-content" id="note"></span>
                         </div>
                     </div>
                 </div>
@@ -95,91 +95,137 @@
 
     <!-- Desktop Layout -->
     <div class="d-none d-md-block">
-        <!-- Section 1: Thông tin hóa đơn -->
-        <div class="content-card mb-4">
-            <h5 class="card-title mb-4">
-                <i class="fas fa-info-circle me-2"></i>
-                Thông tin hóa đơn
-            </h5>
+        <!-- Section 1: Thông tin hóa đơn và Thông tin chuyển khoản -->
+        <div class="row g-4 mb-4">
+            <div class="col-12 col-lg-6">
+                <div class="content-card">
+                    <h5 class="card-title mb-4">
+                        <i class="fas fa-info-circle me-2"></i>
+                        Thông tin hóa đơn
+                    </h5>
 
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="mb-3">
-                        <label for="invoiceCodeDesktop" class="form-label">Mã hóa đơn</label>
-                        <input type="text" class="form-control" id="invoiceCodeDesktop" name="invoiceCode" readonly>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <div class="row">
+                                <label class="col-4 form-label">Mã hóa đơn</label>
+                                <span class="col-8 text-content" id="invoiceCodeDesktop"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="row">
+                                <label class="col-4 form-label">Số tiền</label>
+                                <span class="col-8 text-content" id="amountDesktop"></span>
+                            </div>
+                        </div>
                     </div>
-                </div>
 
-                <div class="col-md-6">
-                    <div class="mb-3">
-                        <label for="amountDesktop" class="form-label">Số tiền</label>
-                        <input type="text" class="form-control" id="amountDesktop" name="amount" readonly>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <div class="row">
+                                <label class="col-4 form-label">Thời gian tạo</label>
+                                <span class="col-8 text-content" id="createdAtDesktop"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6" id="paymentTimeContainerDesktop">
+                            <div class="row">
+                                <label class="col-4 form-label">Thời gian thanh toán</label>
+                                <span class="col-8 text-content" id="paymentTimeDesktop"></span>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
 
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="mb-3">
-                        <label for="createdAtDesktop" class="form-label">Thời gian tạo</label>
-                        <input type="text" class="form-control" id="createdAtDesktop" name="createdAt" readonly>
+                    <div class="row mb-3">
+                        <div class="col-md-6" id="approvedTimeContainerDesktop">
+                            <div class="row">
+                                <label class="col-4 form-label">Thời gian duyệt</label>
+                                <span class="col-8 text-content" id="approvedTimeDesktop"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="row">
+                                <label class="col-4 form-label">Người tạo</label>
+                                <span class="col-8 text-content" id="createdByDesktop"></span>
+                            </div>
+                        </div>
                     </div>
-                </div>
 
-                <div class="col-md-6" id="paymentTimeContainerDesktop">
-                    <div class="mb-3">
-                        <label for="paymentTimeDesktop" class="form-label">Thời gian thanh toán</label>
-                        <input type="text" class="form-control" id="paymentTimeDesktop" name="paymentTime" readonly>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <div class="row">
+                                <label class="col-4 form-label">Trạng thái</label>
+                                <span class="col-8 text-content" id="statusDesktop"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6" id="transactionCodeContainerDesktop">
+                            <div class="row">
+                                <label class="col-4 form-label">Mã giao dịch</label>
+                                <span class="col-8 text-content" id="transactionCodeDesktop"></span>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
 
-            <div class="row">
-                <div class="col-md-6" id="approvedTimeContainerDesktop">
-                    <div class="mb-3">
-                        <label for="approvedTimeDesktop" class="form-label">Thời gian duyệt</label>
-                        <input type="text" class="form-control" id="approvedTimeDesktop" name="approvedTime" readonly>
-                    </div>
-                </div>
+                    <div class="row mb-3">
+                        <div class="col-md-6" id="transactionImageContainerDesktop">
+                            <div class="row">
+                                <label class="col-4 form-label">Ảnh giao dịch</label>
+                                <div class="col-8 transaction-image-preview">
+                                    <img id="transactionImageDesktop" src="https://thebank.vn/uploads/2023/04/24/thebank_hinhanhbillchuyentienvietcombankvacachtaobill2_1682330269.jpg" alt="Ảnh giao dịch" class="img-fluid" style="max-width: 100%; max-height: 200px;">
+                                </div>
+                            </div>
+                        </div>
 
-                <div class="col-md-6">
-                    <div class="mb-3">
-                        <label for="createdByDesktop" class="form-label">Người tạo</label>
-                        <input type="text" class="form-control" id="createdByDesktop" name="createdBy" readonly>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="mb-3">
-                        <label for="statusDesktop" class="form-label">Trạng thái</label>
-                        <input type="text" class="form-control" id="statusDesktop" name="status" readonly>
-                    </div>
-                </div>
-
-                <div class="col-md-6" id="transactionCodeContainerDesktop">
-                    <div class="mb-3">
-                        <label for="transactionCodeDesktop" class="form-label">Mã giao dịch</label>
-                        <input type="text" class="form-control" id="transactionCodeDesktop" name="transactionCode" readonly>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-6" id="transactionImageContainerDesktop">
-                    <div class="mb-3">
-                        <label for="transactionImageDesktop" class="form-label">Ảnh giao dịch</label>
-                        <div class="transaction-image-preview">
-                            <img id="transactionImageDesktop" src="" alt="Ảnh giao dịch" class="img-fluid" style="max-width: 100%; max-height: 200px;">
+                        <div class="col-md-6">
+                            <div class="row">
+                                <label class="col-4 form-label">Ghi chú</label>
+                                <span class="col-8 text-content" id="noteDesktop"></span>
+                            </div>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <div class="col-md-6">
-                    <div class="mb-3">
-                        <label for="noteDesktop" class="form-label">Ghi chú</label>
-                        <textarea class="form-control" id="noteDesktop" name="note" readonly></textarea>
+            <div class="col-12 col-lg-6">
+                <div class="content-card">
+                    <h5 class="card-title mb-4">
+                        <i class="fas fa-exchange-alt me-2"></i>
+                        Thông tin chuyển khoản
+                    </h5>
+
+                    <div class="row mb-3">
+                        <label class="col-4 form-label">Mã QR ngân hàng</label>
+                        <div class="col-8 text-center">
+                            <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://xacthucso.vn" alt="QR Code" class="img-fluid">
+                            <p class="text-muted small mt-1">Quét mã để chuyển khoản nhanh</p>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label class="col-4 form-label">Ngân hàng</label>
+                        <span class="col-8 text-content">TMCP Ngoại Thương Việt Nam Vietcombank CN Thành Công</span>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label class="col-4 form-label">Số tài khoản</label>
+                        <span class="col-8 text-content">0451000304571</span>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label class="col-4 form-label">Tên chủ tài khoản</label>
+                        <span class="col-8 text-content">CONG TY CO PHAN CONG NGHE XAC THUC SO</span>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label class="col-4 form-label">Số tiền</label>
+                        <span class="col-8 text-content" id="modalPaymentAmountDesktop"></span>
+                    </div>
+
+                    <div class="row">
+                        <label class="col-4 form-label">Nội dung chuyển khoản</label>
+                        <span class="col-8 text-content" id="modalTransferContentDesktop"></span>
                     </div>
                 </div>
             </div>
@@ -197,10 +243,11 @@
                     <thead class="table-light">
                         <tr>
                             <th width="60">STT</th>
-                            <th>Gói dịch vụ</th>
-                            <th width="150">Thời hạn</th>
-                            <th width="120">Giá tiền</th>
-                            <th width="150">Ngày hết hạn</th>
+                            <th>Tên gói</th>
+                            <th>Loại gói</th>
+                            <th>Tham số</th>
+                            <th>Số lượng</th>
+                            <th>Giá tiền</th>
                             <th width="120">Thao tác</th>
                         </tr>
                     </thead>
@@ -214,25 +261,148 @@
 
     <!-- Action Buttons - Sticky on mobile -->
     <div class="action-buttons">
-        <div class="d-flex gap-3 justify-content-end" id="actionButtons">
+        <div class="d-flex gap-3 justify-content-end" id="actionButtons" style="margin-right: 32px;">
             <button type="button" class="btn btn-secondary" onclick="companyLayout.loadContent('orders-payments')">
                 <i class="fas fa-arrow-left me-2"></i>Quay lại
             </button>
             <button type="button" class="btn btn-warning" id="editButton" onclick="companyLayout.loadContent('edit-order-payment')">
                 <i class="fas fa-edit me-2"></i>Sửa
             </button>
-            <button type="button" class="btn btn-primary" id="payButton" onclick="companyLayout.loadContent('add-order-payment')">
+            <button type="button" class="btn btn-primary" id="payButton" data-bs-toggle="modal" data-bs-target="#paymentModal">
                 <i class="fas fa-money-bill-wave me-2"></i>Thanh toán
             </button>
-            <button type="button" class="btn btn-success" id="downloadButton" onclick="downloadInvoice()">
+            <button type="button" class="btn btn-success" id="downloadButton" onclick="previewInvoice()">
                 <i class="fas fa-download me-2"></i>Tải hóa đơn
             </button>
         </div>
     </div>
 
+    <!-- Modal for Payment -->
+    <div class="modal fade" id="paymentModal" tabindex="-1" aria-labelledby="paymentModalLabel" aria-hidden="true" aria-describedby="paymentModalDesc">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="paymentModalLabel">Thanh toán hóa đơn</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body payment-modal-body">
+                    <div class="row g-4">
+                        <div class="col-12">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h6 class="card-title">Thông tin hóa đơn</h6>
+                                    <div class="mb-3">
+                                        <div class="row mb-2">
+                                            <label class="col-4 form-label">Mã đơn hàng</label>
+                                            <span class="col-8 text-content" id="modalInvoiceCode"></span>
+                                        </div>
+                                        <div class="row mb-2">
+                                            <label class="col-4 form-label">Thời gian tạo đơn</label>
+                                            <span class="col-8 text-content" id="modalCreatedAt"></span>
+                                        </div>
+                                        <div class="row mb-2">
+                                            <label class="col-4 form-label">Tên chủ thể</label>
+                                            <span class="col-8 text-content" id="modalCreatedBy"></span>
+                                        </div>
+                                        <div class="row mb-2">
+                                            <label class="col-4 form-label">Mã chủ thể</label>
+                                            <span class="col-8 text-content" id="modalCustomerId"></span>
+                                        </div>
+                                        <div class="row mb-2">
+                                            <label class="col-4 form-label">Chi phí phải trả</label>
+                                            <span class="col-8 text-content" id="modalAmount"></span>
+                                        </div>
+                                        <h6 class="subtitle mt-3">Thông tin xác nhận đã chuyển khoản</h6>
+                                        <div class="row mb-2">
+                                            <label class="col-4 form-label" data-bs-toggle="tooltip" data-bs-placement="top" title="Nhập mã giao dịch từ ngân hàng">Mã giao dịch <i class="fas fa-info-circle text-info ms-1"></i></label>
+                                            <div class="col-8">
+                                                <input type="text" class="form-control form-control-lg" id="modalTransactionCode" placeholder="Nhập mã giao dịch">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <label class="col-4 form-label" data-bs-toggle="tooltip" data-bs-placement="top" title="Tải ảnh biên lai giao dịch">Ảnh giao dịch <i class="fas fa-info-circle text-info ms-1"></i></label>
+                                            <div class="col-8">
+                                                <input type="file" class="form-control form-control-lg" id="modalTransactionImage" accept="image/*" onchange="previewTransactionImage()">
+                                                <div class="transaction-image-preview mt-2" id="modalTransactionImagePreview">
+                                                    <img id="modalTransactionImagePreviewImg" src="" alt="Preview ảnh giao dịch" class="img-fluid" style="max-width: 100%; max-height: 200px; display: none;">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h6 class="card-title">Thông tin chuyển khoản</h6>
+                                    <div class="mb-3">
+                                        <div class="row mb-2">
+                                            <label class="col-4 form-label">Mã QR ngân hàng</label>
+                                            <div class="col-8 text-center">
+                                                <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://xacthucso.vn" alt="QR Code" class="img-fluid">
+                                                <p class="text-muted small mt-1">Quét mã để chuyển khoản nhanh</p>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-2">
+                                            <label class="col-4 form-label">Ngân hàng</label>
+                                            <span class="col-8 text-content">TMCP Ngoại Thương Việt Nam Vietcombank CN Thành Công</span>
+                                        </div>
+                                        <div class="row mb-2">
+                                            <label class="col-4 form-label">Số tài khoản</label>
+                                            <span class="col-8 text-content">0451000304571</span>
+                                        </div>
+                                        <div class="row mb-2">
+                                            <label class="col-4 form-label">Tên chủ tài khoản</label>
+                                            <span class="col-8 text-content">CONG TY CO PHAN CONG NGHE XAC THUC SO</span>
+                                        </div>
+                                        <div class="row mb-2">
+                                            <label class="col-4 form-label">Số tiền</label>
+                                            <span class="col-8 text-content" id="modalPaymentAmount"></span>
+                                        </div>
+                                        <div class="row">
+                                            <label class="col-4 form-label">Nội dung chuyển khoản</label>
+                                            <span class="col-8 text-content" id="modalTransferContent"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btn-lg" data-bs-dismiss="modal">Hủy</button>
+                    <button type="button" class="btn btn-success btn-lg" id="submitPayment">
+                        <span class="submit-text">Xác nhận</span>
+                        <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Invoice Preview -->
+    <div class="modal fade" id="invoicePreviewModal" tabindex="-1" aria-labelledby="invoicePreviewModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="invoicePreviewModalLabel">Xem trước hóa đơn</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <iframe id="invoicePreview" src="" width="100%" height="500px" style="border: none;"></iframe>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                    <a href="" class="btn btn-primary" id="downloadInvoiceLink" download="invoice.pdf">Tải xuống</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Modal for View Package Details -->
     <div class="modal fade" id="viewPackageModal" tabindex="-1" aria-labelledby="viewPackageModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="viewPackageModalLabel">Chi tiết gói dịch vụ</h5>

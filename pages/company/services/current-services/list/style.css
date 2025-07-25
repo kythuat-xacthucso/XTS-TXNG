@@ -40,29 +40,6 @@
     line-height: 1.4;
 }
 
-.progress-container {
-    margin-bottom: 0.5rem;
-}
-
-.progress {
-    height: 8px;
-    border-radius: 4px;
-    background-color: #e9ecef;
-    margin-bottom: 0.25rem;
-}
-
-.progress-bar {
-    border-radius: 4px;
-    transition: width 0.6s ease;
-}
-
-.progress-text {
-    font-size: 0.75rem;
-    color: var(--secondary-color);
-    text-align: right;
-    display: block;
-}
-
 /* Mobile Service Package Cards */
 .package-card {
     background: white;
@@ -95,30 +72,6 @@
     flex: 1;
 }
 
-.status-badge {
-    font-size: 0.75rem;
-    padding: 0.25rem 0.5rem;
-    border-radius: 12px;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.25rem;
-}
-
-.status-active {
-    background-color: rgba(40, 167, 69, 0.1);
-    color: var(--success-color);
-}
-
-.status-expiring {
-    background-color: rgba(255, 193, 7, 0.1);
-    color: var(--warning-color);
-}
-
-.status-expired {
-    background-color: rgba(220, 53, 69, 0.1);
-    color: var(--danger-color);
-}
-
 .package-info {
     margin-bottom: 1rem;
 }
@@ -127,10 +80,6 @@
     font-size: 0.875rem;
     color: var(--secondary-color);
     margin: 0;
-}
-
-.package-actions {
-    text-align: right;
 }
 
 /* Mobile Purchase History */
@@ -229,28 +178,90 @@
     margin-bottom: 1rem;
 }
 
-.parameter-stats-desktop {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-}
-
-.stat-item {
-    font-size: 0.875rem;
-    color: var(--secondary-color);
-}
-
-.stat-item strong {
-    color: var(--dark-color);
-}
-
-.progress-container-desktop {
+.parameter-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1rem;
     margin-top: 1rem;
 }
 
-.progress-container-desktop .progress {
-    height: 10px;
-    border-radius: 5px;
+.parameter-item {
+    background-color: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    padding: 1rem;
+    transition: all 0.3s ease;
+}
+
+.parameter-item:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    transform: translateY(-2px);
+}
+
+.parameter-label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--dark-color);
+    margin-bottom: 0.25rem;
+}
+
+.parameter-values {
+    font-size: 0.85rem;
+    color: var(--secondary-color);
+    margin-bottom: 0.5rem;
+}
+
+.parameter-item .progress {
+    height: 8px;
+    border-radius: 4px;
+    background-color: #e9ecef;
+    overflow: hidden;
+}
+
+.parameter-item .progress-bar {
+    height: 100%;
+    transition: width 0.6s ease;
+}
+
+.parameter-stats-mobile {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.parameter-stats-mobile li {
+    background-color: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    padding: 1rem;
+}
+
+.parameter-stats-mobile .parameter-label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+    color: var(--dark-color);
+}
+
+.parameter-stats-mobile .parameter-values {
+    font-size: 0.85rem;
+    margin-bottom: 0.5rem;
+    color: var(--secondary-color);
+}
+
+.parameter-stats-mobile .progress {
+    height: 8px;
+    border-radius: 4px;
+    background-color: #e9ecef;
+    overflow: hidden;
+}
+
+.parameter-stats-mobile .progress-bar {
+    height: 100%;
+    transition: width 0.6s ease;
 }
 
 /* Tab Navigation */
@@ -294,16 +305,6 @@
     background-color: rgba(0, 123, 255, 0.05);
 }
 
-/* Badge Styles */
-.badge {
-    font-size: 0.75rem;
-    padding: 0.5rem 0.75rem;
-    border-radius: 6px;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.25rem;
-}
-
 /* Button Styles */
 .btn-sm {
     padding: 0.375rem 0.75rem;
@@ -337,10 +338,6 @@
         font-size: 0.8rem;
     }
     
-    .progress {
-        height: 6px;
-    }
-    
     .btn-sm {
         padding: 0.25rem 0.5rem;
         font-size: 0.8rem;
@@ -354,46 +351,6 @@
     
     .parameter-name-desktop {
         font-size: 1.1rem;
-    }
-    
-    .stat-item {
-        font-size: 0.8rem;
-    }
-}
-
-/* Animation for progress bars */
-@keyframes progressAnimation {
-    from {
-        width: 0%;
-    }
-}
-
-.progress-bar {
-    animation: progressAnimation 1s ease-out;
-}
-
-/* Tooltip customization */
-.tooltip-inner {
-    background-color: var(--dark-color);
-    color: white;
-    font-size: 0.875rem;
-    padding: 0.5rem 0.75rem;
-    border-radius: 6px;
-}
-
-/* Loading states */
-.loading-shimmer {
-    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-    background-size: 200% 100%;
-    animation: shimmer 1.5s infinite;
-}
-
-@keyframes shimmer {
-    0% {
-        background-position: -200% 0;
-    }
-    100% {
-        background-position: 200% 0;
     }
 }
 

@@ -2,7 +2,7 @@
     <!-- Page Header -->
     <div class="page-header d-flex justify-content-between align-items-center mb-4">
         <div>
-            <h3 class="page-title">Danh sách hóa đơn/ thanh toán</h3>
+            <h3 class="page-title">Danh sách đơn hàng/ thanh toán</h3>
             <p class="page-breadcrumb mb-0">Dịch vụ / Đơn hàng/ Thanh toán</p>
         </div>
         <div>
@@ -19,16 +19,17 @@
                 <form id="filterFormDesktop">
                     <div class="row g-3">
                         <div class="col-md-4">
-                            <label class="form-label">Mã hóa đơn</label>
-                            <input type="text" class="form-control" id="filterInvoiceCode" placeholder="Nhập mã hóa đơn">
+                            <label class="form-label">Mã đơn hàng</label>
+                            <input type="text" class="form-control" id="filterInvoiceCode" placeholder="Nhập mã đơn hàng">
                         </div>
                         <div class="col-md-4">
                             <label class="form-label">Trạng thái</label>
                             <select class="form-select" id="filterStatus">
                                 <option value="">Tất cả</option>
-                                <option value="Chưa thanh toán">Chưa thanh toán</option>
-                                <option value="Đã thanh toán">Đã thanh toán</option>
-                                <option value="Đã duyệt">Đã duyệt</option>
+                                <option value="Chờ thanh toán">Chờ thanh toán</option>
+                                <option value="Chờ duyệt">Chờ duyệt</option>
+                                <option value="Đồng ý">Đồng ý</option>
+                                <option value="Từ chối">Từ chối</option>
                             </select>
                         </div>
                         <div class="col-md-4">
@@ -59,16 +60,17 @@
         <div class="offcanvas-body">
             <form id="filterFormMobile">
                 <div class="mb-3">
-                    <label class="form-label">Mã hóa đơn</label>
-                    <input type="text" class="form-control" id="filterInvoiceCodeMobile" placeholder="Nhập mã hóa đơn">
+                    <label class="form-label">Mã đơn hàng</label>
+                    <input type="text" class="form-control" id="filterInvoiceCodeMobile" placeholder="Nhập mã đơn hàng">
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Trạng thái</label>
                     <select class="form-select" id="filterStatusMobile">
                         <option value="">Tất cả</option>
-                        <option value="Chưa thanh toán">Chưa thanh toán</option>
-                        <option value="Đã thanh toán">Đã thanh toán</option>
-                        <option value="Đã duyệt">Đã duyệt</option>
+                        <option value="Chờ thanh toán">Chờ thanh toán</option>
+                        <option value="Chờ duyệt">Chờ duyệt</option>
+                        <option value="Đồng ý">Đồng ý</option>
+                        <option value="Từ chối">Từ chối</option>
                     </select>
                 </div>
                 <div class="mb-3">
@@ -89,7 +91,7 @@
             <thead>
                 <tr>
                     <th>STT</th>
-                    <th>Mã hóa đơn</th>
+                    <th>Mã đơn hàng</th>
                     <th>Số tiền</th>
                     <th>Thời gian tạo</th>
                     <th>Thời gian thanh toán</th>
@@ -141,68 +143,5 @@
                 <!-- Phân trang sẽ được render động bằng JS -->
             </ul>
         </nav>
-    </div>
-
-    <!-- Payment Modal -->
-    <div class="modal fade" id="confirmPaymentModal" tabindex="-1" aria-labelledby="confirmPaymentModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="confirmPaymentModalLabel">Xác nhận thanh toán</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form id="confirmPaymentForm" class="needs-validation" novalidate method="post" action="#">
-                        <div class="row mb-3">
-                            <div class="col-md-6">
-                                <label for="orderId" class="form-label">Mã đơn hàng</label>
-                                <input type="text" class="form-control" id="orderId" readonly>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="createdAt" class="form-label">Thời gian tạo đơn</label>
-                                <input type="text" class="form-control" id="createdAt" readonly>
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col-md-6">
-                                <label for="customerName" class="form-label">Tên khách hàng</label>
-                                <input type="text" class="form-control" id="customerName" readonly>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="customerId" class="form-label">Mã khách hàng</label>
-                                <input type="text" class="form-control" id="customerId" readonly>
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col-md-6">
-                                <label for="paymentType" class="form-label">Loại thanh toán</label>
-                                <input type="text" class="form-control" id="paymentType" readonly>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="finalCost" class="form-label">Chi phí phải trả</label>
-                                <input type="text" class="form-control" id="finalCost" readonly>
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <label for="transactionCode" class="form-label">Mã giao dịch <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="transactionCode" aria-required="true" required>
-                            <div class="invalid-feedback">Vui lòng nhập mã giao dịch hợp lệ.</div>
-                        </div>
-                        <div class="mb-3">
-                            <label for="proofImage" class="form-label">Ảnh chứng minh <span class="text-danger">*</span></label>
-                            <input type="file" class="form-control" id="proofImage" accept="image/*" aria-required="true" required>
-                            <div class="invalid-feedback">Vui lòng chọn ảnh chứng minh.</div>
-                            <div id="imagePreview" class="mt-2" style="display: none;">
-                                <img id="previewImg" src="" alt="Ảnh chứng minh" style="max-width: 100%; max-height: 200px;">
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="window.serviceOrderAdd?.redirectToListPage?.()">Hủy</button>
-                            <button type="submit" class="btn btn-primary">Xác nhận</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
     </div>
 </div>

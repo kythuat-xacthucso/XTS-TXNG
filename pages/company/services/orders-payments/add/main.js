@@ -6,11 +6,11 @@ document.addEventListener('contentLoaded', function() {
 
 // Sample services data (in real app, this would come from API)
 const availableServices = [
-    { id: 1, name: 'Gói Cơ bản', duration: '3 tháng', price: 1000000, type: 'Gói chính' },
-    { id: 2, name: 'Gói Nâng cao', duration: '6 tháng', price: 3000000, type: 'Gói chính' },
-    { id: 3, name: 'Gói Doanh nghiệp', duration: '1 năm', price: 6000000, type: 'Gói chính' },
-    { id: 4, name: 'Gói VIP', duration: '1 năm', price: 12000000, type: 'Gói bổ sung' },
-    { id: 5, name: 'Gói Starter', duration: '3 tháng', price: 500000, type: 'Gói bổ sung' }
+    { id: 1, name: 'Gói Cơ bản', parameter: 'Mã doanh nghiệp', quantity: 5, price: 1000000, type: 'Gói chính' },
+    { id: 2, name: 'Gói Nâng cao', parameter: 'Mã truyền thông sản phẩm', quantity: 10, price: 3000000, type: 'Gói chính' },
+    { id: 3, name: 'Gói Doanh nghiệp', parameter: 'Mã định danh', quantity: 15, price: 6000000, type: 'Gói chính' },
+    { id: 4, name: 'Gói VIP', parameter: 'Dung lượng (MB)', quantity: 100, price: 12000000, type: 'Gói bổ sung' },
+    { id: 5, name: 'Gói Starter', parameter: 'Lượt kích hoạt', quantity: 50, price: 500000, type: 'Gói bổ sung' }
 ];
 
 let serviceCounter = 0;
@@ -89,18 +89,15 @@ function addServiceToTable(serviceId) {
             <select class="form-select service-select" name="service_${serviceId}" required>
                 <option value="">Chọn tên gói</option>
                 ${availableServices.map(service => 
-                    `<option value="${service.id}" data-duration="${service.duration}" data-price="${service.price}" data-type="${service.type}">${service.name}</option>`
+                    `<option value="${service.id}" data-parameter="${service.parameter}" data-quantity="${service.quantity}" data-price="${service.price}" data-type="${service.type}">${service.name}</option>`
                 ).join('')}
             </select>
         </td>
         <td>
-            <input type="text" class="form-control type-input" name="type_${serviceId}" readonly>
+            <input type="text" class="form-control parameter-input" name="parameter_${serviceId}" readonly>
         </td>
         <td>
             <input type="number" class="form-control quantity-input" name="quantity_${serviceId}" min="1" value="1" ${availableServices.some(s => s.id === 1 && s.type === 'Gói chính') ? 'readonly' : ''}>
-        </td>
-        <td>
-            <input type="text" class="form-control duration-input" name="duration_${serviceId}" readonly placeholder="-">
         </td>
         <td>
             <input type="text" class="form-control price-input" name="price_${serviceId}" readonly placeholder="0">
@@ -155,15 +152,15 @@ function addServiceToMobile(serviceId) {
             <select class="form-select service-select" name="service_${serviceId}" required>
                 <option value="">Chọn tên gói</option>
                 ${availableServices.map(service => 
-                    `<option value="${service.id}" data-duration="${service.duration}" data-price="${service.price}" data-type="${service.type}">${service.name}</option>`
+                    `<option value="${service.id}" data-parameter="${service.parameter}" data-quantity="${service.quantity}" data-price="${service.price}" data-type="${service.type}">${service.name}</option>`
                 ).join('')}
             </select>
         </div>
         
         <div class="row mb-3">
             <div class="col-6">
-                <label class="form-label">Loại gói</label>
-                <input type="text" class="form-control type-input" name="type_${serviceId}" readonly>
+                <label class="form-label">Tham số</label>
+                <input type="text" class="form-control parameter-input" name="parameter_${serviceId}" readonly>
             </div>
             <div class="col-6">
                 <label class="form-label">Số lượng</label>
@@ -171,10 +168,6 @@ function addServiceToMobile(serviceId) {
             </div>
         </div>
         <div class="row mb-3">
-            <div class="col-6">
-                <label class="form-label">Thời hạn</label>
-                <input type="text" class="form-control duration-input" name="duration_${serviceId}" readonly placeholder="-">
-            </div>
             <div class="col-6">
                 <label class="form-label">Giá tiền</label>
                 <input type="text" class="form-control price-input" name="price_${serviceId}" readonly placeholder="0">
@@ -204,27 +197,22 @@ function addServiceToMobile(serviceId) {
 
 function updateServiceDetails(serviceId, selectElement) {
     const selectedOption = selectElement.selectedOptions[0];
-    const duration = selectedOption ? selectedOption.dataset.duration || '-' : '-';
+    const parameter = selectedOption ? selectedOption.dataset.parameter || '-' : '-';
+    const quantity = selectedOption ? parseInt(selectedOption.dataset.quantity) || 1 : 1;
     const price = selectedOption ? parseInt(selectedOption.dataset.price) || 0 : 0;
     const type = selectedOption ? selectedOption.dataset.type || 'Gói chính' : 'Gói chính';
     const isMainPackage = type === 'Gói chính';
     
-    // Update type, duration, and price inputs
-    const typeInputs = document.querySelectorAll(`input[name="type_${serviceId}"]`);
-    typeInputs.forEach(input => {
-        input.value = type;
-    });
-
-    const durationInputs = document.querySelectorAll(`input[name="duration_${serviceId}"]`);
-    durationInputs.forEach(input => {
-        input.value = isMainPackage ? duration : '-';
-        input.readOnly = !isMainPackage;
+    // Update parameter, quantity, and price inputs
+    const parameterInputs = document.querySelectorAll(`input[name="parameter_${serviceId}"]`);
+    parameterInputs.forEach(input => {
+        input.value = parameter;
     });
 
     const quantityInputs = document.querySelectorAll(`input[name="quantity_${serviceId}"]`);
     quantityInputs.forEach(input => {
+        input.value = isMainPackage ? quantity : 1;
         input.readOnly = isMainPackage;
-        if (isMainPackage) input.value = 1;
     });
 
     const priceInputs = document.querySelectorAll(`input[name="price_${serviceId}"]`);
@@ -237,7 +225,7 @@ function updateServiceDetails(serviceId, selectElement) {
     if (serviceIndex !== -1) {
         services[serviceIndex].serviceId = selectedOption ? selectedOption.value : null;
         services[serviceIndex].price = price;
-        services[serviceIndex].quantity = isMainPackage ? 1 : parseInt(quantityInputs[0].value) || 1;
+        services[serviceIndex].quantity = isMainPackage ? quantity : parseInt(quantityInputs[0].value) || 1;
         services[serviceIndex].type = type;
     }
     
@@ -387,68 +375,53 @@ function openPaymentModal() {
         finalCost: parseInt(document.getElementById('totalCostFooter').textContent.replace(/\D/g, '')) || 0
     };
 
-    // Initialize and populate payment modal
-    initializePaymentModalManually(orderData);
+    // Populate payment modal
+    document.getElementById('modalInvoiceCode').textContent = orderData.orderId;
+    document.getElementById('modalCreatedAt').textContent = orderData.createdAt;
+    document.getElementById('modalCreatedBy').textContent = orderData.customerName;
+    document.getElementById('modalCustomerId').textContent = orderData.customerId;
+    document.getElementById('modalAmount').textContent = formatCurrency(orderData.finalCost);
+    document.getElementById('modalPaymentAmount').textContent = formatCurrency(orderData.finalCost);
+    document.getElementById('modalTransferContent').textContent = orderData.orderId;
 
     // Show modal
     const modalElement = document.getElementById('confirmPaymentModal');
     if (modalElement) {
         const modal = new bootstrap.Modal(modalElement);
         modal.show();
-    }
 
-    modalElement.addEventListener('shown.bs.modal', function () {
-        initializePaymentModalManually(orderData);
-    }, { once: true });
-}
-
-function initializePaymentModalManually(data) {
-    document.getElementById('orderId').value = data.orderId || '';
-    document.getElementById('createdAt').value = data.createdAt || '';
-    document.getElementById('customerName').value = data.customerName || '';
-    document.getElementById('customerId').value = data.customerId || '';
-    document.getElementById('paymentType').value = data.paymentType || '';
-    document.getElementById('finalCost').value = formatCurrency(data.finalCost) || '';
-
-    // Reset form validation
-    const form = document.getElementById('confirmPaymentForm');
-    if (form) {
-        form.classList.remove('was-validated');
-    }
-
-    // Add image preview handler
-    const proofImage = document.getElementById('proofImage');
-    const imagePreview = document.getElementById('imagePreview');
-    const previewImg = document.getElementById('previewImg');
-    if (proofImage && imagePreview && previewImg) {
-        proofImage.addEventListener('change', function(e) {
-            const file = e.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    previewImg.src = e.target.result;
-                    imagePreview.style.display = 'block';
-                };
-                reader.readAsDataURL(file);
-            }
-        });
-    }
-
-    // Add payment confirmation popup
-    const confirmPaymentButton = document.getElementById('confirmPaymentButton');
-    if (confirmPaymentButton) {
-        confirmPaymentButton.addEventListener('click', function(e) {
-            e.preventDefault();
-            if (form) {
+        // Add event listener for payment confirmation
+        const confirmPaymentButton = document.getElementById('confirmPaymentButton');
+        if (confirmPaymentButton) {
+            confirmPaymentButton.addEventListener('click', function(e) {
+                e.preventDefault();
+                const form = document.getElementById('confirmPaymentModal').querySelector('form');
                 if (form.checkValidity()) {
-                    showConfirmPaymentPopup(data.orderId);
+                    showConfirmPaymentPopup(orderData.orderId);
                 } else {
                     form.classList.add('was-validated');
                 }
-            } else {
-                console.error('Form with id "confirmPaymentForm" not found!');
-            }
-        });
+            }, { once: true });
+        }
+
+        // Add image preview handler
+        const proofImage = document.getElementById('modalTransactionImage');
+        const imagePreview = document.getElementById('modalTransactionImagePreview');
+        const previewImg = document.getElementById('modalTransactionImagePreviewImg');
+        if (proofImage && imagePreview && previewImg) {
+            proofImage.addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        previewImg.src = e.target.result;
+                        previewImg.style.display = 'block';
+                    };
+                    reader.readAsDataURL(file);
+                    imagePreview.style.display = 'block';
+                }
+            });
+        }
     }
 }
 
@@ -459,15 +432,14 @@ function showConfirmPaymentPopup(orderId) {
 }
 
 function completePayment() {
-    const form = document.getElementById('confirmPaymentForm');
-    const modal = bootstrap.Modal.getInstance(form.closest('.modal'));
+    const modal = bootstrap.Modal.getInstance(document.getElementById('confirmPaymentModal'));
     if (modal) {
         modal.hide();
     }
 
     // Simulate success and redirect
     setTimeout(() => {
-        navigateTo('view-order-payment', document.getElementById('orderId').value);
+        navigateTo('view-order-payment', document.getElementById('modalInvoiceCode').textContent);
         showSuccessToast();
     }, 500);
 }

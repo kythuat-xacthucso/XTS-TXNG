@@ -1,18 +1,18 @@
 // Sample data for invoices (replace with actual API call)
 const invoices = [
-    { id: 1, code: "INV001", amount: 1000000, createdAt: "2025-06-01 10:00", paidAt: null, creator: "Nguyễn Văn A", status: "Chưa thanh toán", customerId: "KH001", paymentType: "Mua mới" },
-    { id: 2, code: "INV002", amount: 3000000, createdAt: "2025-06-02 14:30", paidAt: "2025-06-03 09:00", creator: "Trần Thị B", status: "Đã thanh toán", customerId: "KH002", paymentType: "Mua mới" },
-    { id: 3, code: "INV003", amount: 6000000, createdAt: "2025-06-03 16:00", paidAt: "2025-06-04 11:00", creator: "Lê Văn C", status: "Đã duyệt", customerId: "KH003", paymentType: "Gia hạn" },
-    { id: 4, code: "INV004", amount: 12000000, createdAt: "2025-06-04 08:00", paidAt: null, creator: "Phạm Thị D", status: "Chưa thanh toán", customerId: "KH004", paymentType: "Mua mới" },
-    { id: 5, code: "INV005", amount: 500000, createdAt: "2025-06-05 12:00", paidAt: "2025-06-06 15:00", creator: "Hoàng Văn E", status: "Đã thanh toán", customerId: "KH005", paymentType: "Gia hạn" },
-    { id: 6, code: "INV006", amount: 8000000, createdAt: "2025-06-06 09:00", paidAt: "2025-06-07 10:00", creator: "Nguyễn Thị F", status: "Đã duyệt", customerId: "KH006", paymentType: "Mua mới" },
-    { id: 7, code: "INV007", amount: 2000000, createdAt: "2025-06-07 11:00", paidAt: null, creator: "Trần Văn G", status: "Chưa thanh toán", customerId: "KH007", paymentType: "Gia hạn" },
-    { id: 8, code: "INV008", amount: 15000000, createdAt: "2025-06-08 13:00", paidAt: "2025-06-09 14:00", creator: "Lê Thị H", status: "Đã duyệt", customerId: "KH008", paymentType: "Mua mới" },
-    { id: 9, code: "INV009", amount: 2500000, createdAt: "2025-06-09 15:00", paidAt: null, creator: "Phạm Văn I", status: "Chưa thanh toán", customerId: "KH009", paymentType: "Mua mới" },
-    { id: 10, code: "INV010", amount: 18000000, createdAt: "2025-06-10 17:00", paidAt: "2025-06-11 08:00", creator: "Hoàng Thị K", status: "Đã thanh toán", customerId: "KH010", paymentType: "Gia hạn" },
-    { id: 11, code: "INV011", amount: 700000, createdAt: "2025-06-11 10:00", paidAt: null, creator: "Nguyễn Văn L", status: "Chưa thanh toán", customerId: "KH011", paymentType: "Mua mới" },
-    { id: 12, code: "INV012", amount: 4000000, createdAt: "2025-06-12 12:00", paidAt: "2025-06-13 16:00", creator: "Trần Thị M", status: "Đã duyệt", customerId: "KH012", paymentType: "Gia hạn" },
-    { id: 13, code: "INV013", amount: 20000000, createdAt: "2025-06-13 14:00", paidAt: null, creator: "Lê Văn N", status: "Chưa thanh toán", customerId: "KH013", paymentType: "Mua mới" }
+    { id: 1, code: "INV001", amount: 1000000, createdAt: "2025-06-01 10:00", paidAt: null, creator: "Nguyễn Văn A", status: "Chờ thanh toán", customerId: "KH001", paymentType: "Mua mới" },
+    { id: 2, code: "INV002", amount: 3000000, createdAt: "2025-06-02 14:30", paidAt: "2025-06-03 09:00", creator: "Trần Thị B", status: "Chờ duyệt", customerId: "KH002", paymentType: "Mua mới" },
+    { id: 3, code: "INV003", amount: 6000000, createdAt: "2025-06-03 16:00", paidAt: "2025-06-04 11:00", creator: "Lê Văn C", status: "Đồng ý", customerId: "KH003", paymentType: "Gia hạn" },
+    { id: 4, code: "INV004", amount: 12000000, createdAt: "2025-06-04 08:00", paidAt: null, creator: "Phạm Thị D", status: "Chờ thanh toán", customerId: "KH004", paymentType: "Mua mới" },
+    { id: 5, code: "INV005", amount: 500000, createdAt: "2025-06-05 12:00", paidAt: "2025-06-06 15:00", creator: "Hoàng Văn E", status: "Từ chối", customerId: "KH005", paymentType: "Gia hạn" },
+    { id: 6, code: "INV006", amount: 8000000, createdAt: "2025-06-06 09:00", paidAt: "2025-06-07 10:00", creator: "Nguyễn Thị F", status: "Đồng ý", customerId: "KH006", paymentType: "Mua mới" },
+    { id: 7, code: "INV007", amount: 2000000, createdAt: "2025-06-07 11:00", paidAt: null, creator: "Trần Văn G", status: "Chờ thanh toán", customerId: "KH007", paymentType: "Gia hạn" },
+    { id: 8, code: "INV008", amount: 15000000, createdAt: "2025-06-08 13:00", paidAt: "2025-06-09 14:00", creator: "Lê Thị H", status: "Đồng ý", customerId: "KH008", paymentType: "Mua mới" },
+    { id: 9, code: "INV009", amount: 2500000, createdAt: "2025-06-09 15:00", paidAt: null, creator: "Phạm Văn I", status: "Chờ thanh toán", customerId: "KH009", paymentType: "Mua mới" },
+    { id: 10, code: "INV010", amount: 18000000, createdAt: "2025-06-10 17:00", paidAt: "2025-06-11 08:00", creator: "Hoàng Thị K", status: "Chờ duyệt", customerId: "KH010", paymentType: "Gia hạn" },
+    { id: 11, code: "INV011", amount: 700000, createdAt: "2025-06-11 10:00", paidAt: null, creator: "Nguyễn Văn L", status: "Chờ thanh toán", customerId: "KH011", paymentType: "Mua mới" },
+    { id: 12, code: "INV012", amount: 4000000, createdAt: "2025-06-12 12:00", paidAt: "2025-06-13 16:00", creator: "Trần Thị M", status: "Đồng ý", customerId: "KH012", paymentType: "Gia hạn" },
+    { id: 13, code: "INV013", amount: 20000000, createdAt: "2025-06-13 14:00", paidAt: null, creator: "Lê Văn N", status: "Chờ thanh toán", customerId: "KH013", paymentType: "Mua mới" }
 ];
 
 // State for pagination
@@ -57,6 +57,13 @@ function renderTable(data) {
     }
 
     paginatedData.forEach((invoice, index) => {
+        const statusClass = {
+            'Chờ thanh toán': 'status-waiting',
+            'Chờ duyệt': 'status-pending',
+            'Đồng ý': 'status-approved',
+            'Từ chối': 'status-rejected'
+        }[invoice.status] || '';
+
         const row = `
             <tr>
                 <td>${startIndex + index + 1}</td>
@@ -65,22 +72,15 @@ function renderTable(data) {
                 <td>${formatDate(invoice.createdAt)}</td>
                 <td>${formatDate(invoice.paidAt)}</td>
                 <td>${invoice.creator}</td>
-                <td>${invoice.status}</td>
+                <td><span class="${statusClass}">${invoice.status}</span></td>
                 <td>
                     <div class="action-buttons">
-                        <button class="btn btn-outline-primary btn-sm" onclick="navigateTo('view-order-payment', ${invoice.id})">
-                            <i class="fas fa-eye"></i> Xem
+                        <button class="btn btn-outline-primary btn-sm btn-icon" title="Xem chi tiết" onclick="navigateTo('view-order-payment', ${invoice.id})">
+                            <i class="fas fa-eye"></i>
                         </button>
-                        ${invoice.status === 'Chưa thanh toán' ? `
-                            <button class="btn btn-outline-warning btn-sm ms-1" onclick="navigateTo('edit-order-payment', ${invoice.id})">
-                                <i class="fas fa-edit"></i> Sửa
-                            </button>
-                            <button class="btn btn-outline-primary btn-sm ms-1" onclick="openPaymentModal(${invoice.id})">
-                                <i class="fas fa-money-bill-wave"></i> Thanh toán
-                            </button>
-                        ` : invoice.status === 'Đã thanh toán' ? `
-                            <button class="btn btn-outline-success btn-sm ms-1" onclick="downloadInvoice(${invoice.id})">
-                                <i class="fas fa-download"></i> Tải hóa đơn
+                        ${invoice.status === 'Chờ thanh toán' ? `
+                            <button class="btn btn-outline-warning btn-sm btn-icon ms-1" title="Sửa" onclick="navigateTo('edit-order-payment', ${invoice.id})">
+                                <i class="fas fa-edit"></i>
                             </button>
                         ` : ''}
                     </div>
@@ -114,24 +114,29 @@ function renderCards(data) {
     }
 
     paginatedData.forEach(invoice => {
+        const statusClass = {
+            'Chờ thanh toán': 'status-waiting',
+            'Chờ duyệt': 'status-pending',
+            'Đồng ý': 'status-approved',
+            'Từ chối': 'status-rejected'
+        }[invoice.status] || '';
+
         const card = `
             <div class="col-12 invoice-card" onclick="navigateTo('view-order-payment', ${invoice.id})">
                 <h5 class="card-title">${invoice.code}</h5>
                 <p class="card-text">Số tiền: ${formatCurrency(invoice.amount)}</p>
                 <p class="card-text">Thời gian tạo: ${formatDate(invoice.createdAt)}</p>
-                <p class="card-text">Trạng thái: ${invoice.status}</p>
-                ${invoice.status === 'Chưa thanh toán' ? `
-                    <button class="btn btn-outline-warning btn-sm mt-2 me-2" onclick="event.stopPropagation(); navigateTo('edit-order-payment', ${invoice.id})">
-                        <i class="fas fa-edit"></i> Sửa
+                <p class="card-text">Trạng thái: <span class="${statusClass}">${invoice.status}</span></p>
+                <div class="action-buttons">
+                    <button class="btn btn-outline-primary btn-sm btn-icon" title="Xem chi tiết" onclick="event.stopPropagation(); navigateTo('view-order-payment', ${invoice.id})">
+                        <i class="fas fa-eye"></i>
                     </button>
-                    <button class="btn btn-outline-primary btn-sm mt-2" onclick="event.stopPropagation(); openPaymentModal(${invoice.id})">
-                        <i class="fas fa-money-bill-wave"></i> Thanh toán
-                    </button>
-                ` : invoice.status === 'Đã thanh toán' ? `
-                    <button class="btn btn-outline-success btn-sm mt-2" onclick="event.stopPropagation(); downloadInvoice(${invoice.id})">
-                        <i class="fas fa-download"></i> Tải hóa đơn
-                    </button>
-                ` : ''}
+                    ${invoice.status === 'Chờ thanh toán' ? `
+                        <button class="btn btn-outline-warning btn-sm btn-icon ms-1" title="Sửa" onclick="event.stopPropagation(); navigateTo('edit-order-payment', ${invoice.id})">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                    ` : ''}
+                </div>
             </div>
         `;
         cardBody.innerHTML += card;
@@ -288,111 +293,6 @@ function navigateTo(page, id = null) {
     }
 }
 
-// Open payment modal
-function openPaymentModal(invoiceId) {
-    const invoice = invoices.find(inv => inv.id === invoiceId);
-    if (!invoice) {
-        window.companyLayout?.showNotification?.('Hóa đơn không tồn tại', 'danger');
-        return;
-    }
-
-    const orderData = {
-        orderId: invoice.code,
-        createdAt: formatDate(invoice.createdAt),
-        customerName: invoice.creator,
-        customerId: invoice.customerId,
-        paymentType: invoice.paymentType,
-        finalCost: invoice.amount
-    };
-
-    // Initialize and populate payment modal
-    if (window.confirmPayment?.initializeConfirmPayment) {
-        window.confirmPayment.initializeConfirmPayment(orderData);
-    } else {
-        console.warn('confirmPayment.initializeConfirmPayment is not available. Attempting manual initialization.');
-        initializePaymentModalManually(orderData);
-    }
-
-    // Show modal
-    const modalElement = document.getElementById('confirmPaymentModal');
-    if (modalElement) {
-        const modal = new bootstrap.Modal(modalElement);
-        modal.show();
-    } else {
-        console.error('Payment modal element not found');
-        window.companyLayout?.showNotification?.('Không thể mở popup thanh toán', 'danger');
-    }
-}
-
-// Manual initialization of payment modal (temporary solution)
-function initializePaymentModalManually(data) {
-    document.getElementById('orderId').value = data.orderId || '';
-    document.getElementById('createdAt').value = data.createdAt || '';
-    document.getElementById('customerName').value = data.customerName || '';
-    document.getElementById('customerId').value = data.customerId || '';
-    document.getElementById('paymentType').value = data.paymentType || '';
-    document.getElementById('finalCost').value = formatCurrency(data.finalCost) || '';
-
-    // Reset form validation
-    const form = document.getElementById('confirmPaymentForm');
-    if (form) {
-        form.classList.remove('was-validated');
-    }
-
-    // Add image preview handler
-    const proofImage = document.getElementById('proofImage');
-    const imagePreview = document.getElementById('imagePreview');
-    const previewImg = document.getElementById('previewImg');
-    if (proofImage && imagePreview && previewImg) {
-        proofImage.addEventListener('change', function(e) {
-            const file = e.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    previewImg.src = e.target.result;
-                    imagePreview.style.display = 'block';
-                };
-                reader.readAsDataURL(file);
-            }
-        });
-    }
-
-    // Add form validation handler
-    if (form) {
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-            if (form.checkValidity()) {
-                window.companyLayout?.showNotification?.('Thanh toán thành công', 'success');
-                bootstrap.Modal.getInstance(form.closest('.modal')).hide();
-            } else {
-                form.classList.add('was-validated');
-            }
-        });
-    }
-}
-
-// Download invoice
-function downloadInvoice(invoiceId) {
-    const invoice = invoices.find(inv => inv.id === invoiceId);
-    if (!invoice) {
-        window.companyLayout?.showNotification?.('Hóa đơn không tồn tại', 'danger');
-        return;
-    }
-
-    // Open PDF in a new tab
-    window.open('/assets/pdf/invoice.pdf', '_blank');
-}
-
-// Initialize payment modal
-function initializePaymentModal() {
-    if (window.confirmPayment?.initializeConfirmPayment) {
-        window.confirmPayment.initializeConfirmPayment();
-    } else {
-        console.warn('confirmPayment.initializeConfirmPayment not available. Modal initialization skipped.');
-        // Optional: Log or notify if needed, but avoid breaking the page
-    }
-}
-
 // Initialize
 function initialize() {
     const tableBody = document.getElementById('invoiceTableBody');
@@ -401,7 +301,6 @@ function initialize() {
     if (tableBody && cardBody) {
         renderTable(invoices);
         renderCards(invoices);
-        initializePaymentModal();
     } else {
         console.error('Required DOM elements not found.');
         let retryCount = 0;
@@ -415,7 +314,6 @@ function initialize() {
                         document.getElementById('invoiceCardBody')) {
                         renderTable(invoices);
                         renderCards(invoices);
-                        initializePaymentModal();
                     } else {
                         retryInitialize();
                     }

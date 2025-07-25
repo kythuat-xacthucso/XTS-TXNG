@@ -7,6 +7,10 @@
     --warning-hover: #e0a800;
     --success-color: #28a745;
     --success-hover: #218838;
+    --danger-color: #dc3545;
+    --danger-hover: #c82333;
+    --pending-color: #fd7e14;
+    --pending-hover: #e06c12;
     --dark-color: #343a40;
     --border-color: #dee2e6;
     --shadow-color: rgba(0, 0, 0, 0.1);
@@ -59,6 +63,39 @@
     text-align: center;
 }
 
+/* Status Styles */
+.status-waiting {
+    color: var(--warning-color);
+    font-weight: 500;
+    background-color: rgba(255, 193, 7, 0.1);
+    padding: 2px 8px;
+    border-radius: 4px;
+}
+
+.status-pending {
+    color: var(--pending-color);
+    font-weight: 500;
+    background-color: rgba(253, 126, 20, 0.1);
+    padding: 2px 8px;
+    border-radius: 4px;
+}
+
+.status-approved {
+    color: var(--success-color);
+    font-weight: 500;
+    background-color: rgba(40, 167, 69, 0.1);
+    padding: 2px 8px;
+    border-radius: 4px;
+}
+
+.status-rejected {
+    color: var(--danger-color);
+    font-weight: 500;
+    background-color: rgba(220, 53, 69, 0.1);
+    padding: 2px 8px;
+    border-radius: 4px;
+}
+
 /* Card Styles (Tablet/Mobile) */
 .invoice-card {
     background: white;
@@ -86,19 +123,40 @@
 }
 
 /* Action Buttons */
-.action-buttons .btn {
-    padding: 0.25rem 0.75rem;
-    font-size: 0.875rem;
+.action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
 }
 
-.btn-outline-success {
-    border-color: var(--success-color);
-    color: var(--success-color);
+.btn-icon {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
 }
 
-.btn-outline-success:hover {
-    background-color: var(--success-hover);
-    border-color: var(--success-hover);
+.btn-outline-primary {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--primary-hover);
+    border-color: var(--primary-hover);
+    color: white;
+}
+
+.btn-outline-warning {
+    border-color: var(--warning-color);
+    color: var(--warning-color);
+}
+
+.btn-outline-warning:hover {
+    background-color: var(--warning-hover);
+    border-color: var(--warning-hover);
     color: white;
 }
 
@@ -152,68 +210,6 @@
 .pagination .page-item.disabled .page-link {
     color: var(--secondary-color);
     pointer-events: none;
-}
-
-/* Payment Modal */
-.modal-content {
-    border-radius: 8px;
-    box-shadow: 0 4px 8px var(--shadow-color);
-}
-
-.modal-header {
-    background-color: #f8f9fa;
-    border-bottom: 1px solid var(--border-color);
-}
-
-.modal-title {
-    font-weight: 600;
-    color: var(--dark-color);
-}
-
-.form-label {
-    font-weight: 500;
-    color: var(--dark-color);
-}
-
-.form-control[readonly] {
-    background-color: #e9ecef;
-    cursor: not-allowed;
-}
-
-.btn-primary {
-    background-color: var(--primary-color);
-    border-color: var(--primary-color);
-    transition: background-color 0.3s ease, border-color 0.3s ease;
-}
-
-.btn-primary:hover {
-    background-color: var(--primary-hover);
-    border-color: var(--primary-hover);
-}
-
-.btn-secondary {
-    background-color: var(--secondary-color);
-    border-color: var(--secondary-color);
-}
-
-.btn-secondary:hover {
-    background-color: var(--secondary-hover);
-    border-color: var(--secondary-hover);
-}
-
-.invalid-feedback {
-    font-size: 0.875rem;
-}
-
-#imagePreview {
-    transition: opacity 0.3s ease;
-}
-
-#imagePreview img {
-    border: 1px solid var(--border-color);
-    border-radius: 4px;
-    padding: 4px;
-    background-color: #fff;
 }
 
 /* Responsive Adjustments */

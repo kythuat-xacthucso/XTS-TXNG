@@ -39,9 +39,8 @@
                         <tr>
                             <th width="60">STT</th>
                             <th>Tên gói</th>
-                            <th width="120">Loại gói</th>
+                            <th width="200">Tham số</th>
                             <th width="100">Số lượng</th>
-                            <th width="150">Thời hạn</th>
                             <th width="120">Giá tiền</th>
                             <th width="150">Thao tác</th>
                         </tr>
@@ -51,7 +50,7 @@
                     </tbody>
                     <tfoot>
                         <tr>
-                            <td colspan="6" class="text-end">
+                            <td colspan="5" class="text-end">
                                 <strong>Tổng tiền:</strong>
                             </td>
                             <td class="text-end">
@@ -59,7 +58,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="7" class="text-center">
+                            <td colspan="6" class="text-center">
                                 <button type="button" class="btn btn-outline-primary" id="addServiceDesktop">
                                     <i class="fas fa-plus me-2"></i>Thêm gói dịch vụ
                                 </button>
@@ -122,62 +121,105 @@
 
     <!-- Modal for Confirm Payment -->
     <div class="modal fade" id="confirmPaymentModal" tabindex="-1" aria-labelledby="confirmPaymentModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="confirmPaymentModalLabel">Xác nhận thanh toán</h5>
+                    <h5 class="modal-title" id="confirmPaymentModalLabel">Thanh toán hóa đơn</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-                    <form id="confirmPaymentForm" class="needs-validation" novalidate method="post" action="#">
-                        <div class="row mb-3">
-                            <div class="col-md-6">
-                                <label for="orderId" class="form-label">Mã đơn hàng</label>
-                                <input type="text" class="form-control" id="orderId" readonly>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="createdAt" class="form-label">Thời gian tạo đơn</label>
-                                <input type="text" class="form-control" id="createdAt" readonly>
+                <div class="modal-body payment-modal-body">
+                    <div class="row g-4">
+                        <div class="col-12">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h6 class="card-title">Thông tin hóa đơn</h6>
+                                    <div class="mb-3">
+                                        <div class="row mb-2">
+                                            <label class="col-4 form-label">Mã đơn hàng</label>
+                                            <span class="col-8 text-content" id="modalInvoiceCode"></span>
+                                        </div>
+                                        <div class="row mb-2">
+                                            <label class="col-4 form-label">Thời gian tạo đơn</label>
+                                            <span class="col-8 text-content" id="modalCreatedAt"></span>
+                                        </div>
+                                        <div class="row mb-2">
+                                            <label class="col-4 form-label">Tên chủ thể</label>
+                                            <span class="col-8 text-content" id="modalCreatedBy"></span>
+                                        </div>
+                                        <div class="row mb-2">
+                                            <label class="col-4 form-label">Mã chủ thể</label>
+                                            <span class="col-8 text-content" id="modalCustomerId"></span>
+                                        </div>
+                                        <div class="row mb-2">
+                                            <label class="col-4 form-label">Chi phí phải trả</label>
+                                            <span class="col-8 text-content" id="modalAmount"></span>
+                                        </div>
+                                        <h6 class="subtitle mt-3">Thông tin xác nhận đã chuyển khoản</h6>
+                                        <div class="row mb-2">
+                                            <label class="col-4 form-label" data-bs-toggle="tooltip" data-bs-placement="top" title="Nhập mã giao dịch từ ngân hàng">Mã giao dịch <i class="fas fa-info-circle text-info ms-1"></i></label>
+                                            <div class="col-8">
+                                                <input type="text" class="form-control form-control-lg" id="modalTransactionCode" placeholder="Nhập mã giao dịch" required>
+                                                <div class="invalid-feedback">Vui lòng nhập mã giao dịch hợp lệ.</div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <label class="col-4 form-label" data-bs-toggle="tooltip" data-bs-placement="top" title="Tải ảnh biên lai giao dịch">Ảnh giao dịch <i class="fas fa-info-circle text-info ms-1"></i></label>
+                                            <div class="col-8">
+                                                <input type="file" class="form-control form-control-lg" id="modalTransactionImage" accept="image/*" required>
+                                                <div class="invalid-feedback">Vui lòng chọn ảnh chứng minh.</div>
+                                                <div class="transaction-image-preview mt-2" id="modalTransactionImagePreview">
+                                                    <img id="modalTransactionImagePreviewImg" src="" alt="Preview ảnh giao dịch" class="img-fluid" style="max-width: 100%; max-height: 200px; display: none;">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="row mb-3">
-                            <div class="col-md-6">
-                                <label for="customerName" class="form-label">Tên khách hàng</label>
-                                <input type="text" class="form-control" id="customerName" readonly>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="customerId" class="form-label">Mã khách hàng</label>
-                                <input type="text" class="form-control" id="customerId" readonly>
+                        <div class="col-12">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h6 class="card-title">Thông tin chuyển khoản</h6>
+                                    <div class="mb-3">
+                                        <div class="row mb-2">
+                                            <label class="col-4 form-label">Mã QR ngân hàng</label>
+                                            <div class="col-8 text-center">
+                                                <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://xacthucso.vn" alt="QR Code" class="img-fluid">
+                                                <p class="text-muted small mt-1">Quét mã để chuyển khoản nhanh</p>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-2">
+                                            <label class="col-4 form-label">Ngân hàng</label>
+                                            <span class="col-8 text-content">TMCP Ngoại Thương Việt Nam Vietcombank CN Thành Công</span>
+                                        </div>
+                                        <div class="row mb-2">
+                                            <label class="col-4 form-label">Số tài khoản</label>
+                                            <span class="col-8 text-content">0451000304571</span>
+                                        </div>
+                                        <div class="row mb-2">
+                                            <label class="col-4 form-label">Tên chủ tài khoản</label>
+                                            <span class="col-8 text-content">CONG TY CO PHAN CONG NGHE XAC THUC SO</span>
+                                        </div>
+                                        <div class="row mb-2">
+                                            <label class="col-4 form-label">Số tiền</label>
+                                            <span class="col-8 text-content" id="modalPaymentAmount"></span>
+                                        </div>
+                                        <div class="row">
+                                            <label class="col-4 form-label">Nội dung chuyển khoản</label>
+                                            <span class="col-8 text-content" id="modalTransferContent"></span>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="row mb-3">
-                            <div class="col-md-6">
-                                <label for="paymentType" class="form-label">Loại thanh toán</label>
-                                <input type="text" class="form-control" id="paymentType" readonly>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="finalCost" class="form-label">Chi phí phải trả</label>
-                                <input type="text" class="form-control" id="finalCost" readonly>
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <label for="transactionCode" class="form-label">Mã giao dịch <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="transactionCode" aria-required="true" required>
-                            <div class="invalid-feedback">Vui lòng nhập mã giao dịch hợp lệ.</div>
-                        </div>
-                        <div class="mb-3">
-                            <label for="proofImage" class="form-label">Ảnh chứng minh <span class="text-danger">*</span></label>
-                            <input type="file" class="form-control" id="proofImage" accept="image/*" aria-required="true" required>
-                            <div class="invalid-feedback">Vui lòng chọn ảnh chứng minh.</div>
-                            <div id="imagePreview" class="mt-2" style="display: none;">
-                                <img id="previewImg" src="" alt="Ảnh chứng minh" style="max-width: 100%; max-height: 200px;">
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="window.serviceOrderAdd?.redirectToListPage?.()">Hủy</button>
-                            <button type="button" class="btn btn-primary" id="confirmPaymentButton">Xác nhận</button>
-                        </div>
-                    </form>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btn-lg" data-bs-dismiss="modal" onclick="window.serviceOrderAdd?.redirectToListPage?.()">Hủy</button>
+                    <button type="button" class="btn btn-success btn-lg" id="confirmPaymentButton">
+                        <span class="submit-text">Xác nhận</span>
+                        <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                    </button>
                 </div>
             </div>
         </div>
